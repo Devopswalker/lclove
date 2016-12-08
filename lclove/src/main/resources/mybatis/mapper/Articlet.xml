@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="articleDao">
+	<resultMap id="articleBean" type="Article">
+		<result property="id" column="ID"/>
+		<result property="name" column="NAME"/>
+		<result property="type" column="TYPE"/>
+		<result property="content" column="TEXT"/>
+	</resultMap>
+	
+	<select id="findArticle" parameterType="java.util.HashMap" resultMap="articleBean" >
+	select
+		ID,
+		NAME,
+		TYPE,
+		TEXT
+	from 
+		SITE_TEST
+	</select>
+</mapper>
