@@ -26,7 +26,7 @@
 
     <!-- mybatis datasource -->
     <!-- 数据源配置 -->
-    <bean id="dsOriginalsMybatis" class="org.apache.commons.dbcp.BasicDataSource">
+    <bean id="dsLcMybatis" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
         <property name="driverClassName" value="${jdbc.driver}" />
         <property name="url" value="${jdbc.url}" />
         <property name="username" value="${jdbc.username}" />
@@ -46,17 +46,21 @@
     </bean>
 
 
-    <bean id="originalsSQLSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-        <property name="dataSource" ref="dsOriginalsMybatis" />
+    <bean id="lcSQLSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dsLcMybatis" />
         <property name="configLocation" value="${mybatis.mapper.lclove}" />
     </bean>
 
-    <bean id="originalsDBTemplate"  class="org.mybatis.spring.SqlSessionTemplate">
-        <constructor-arg index="0" ref="originalsSQLSessionFactory" />
+    <bean id="lcDBTemplate"  class="org.mybatis.spring.SqlSessionTemplate">
+        <constructor-arg index="0" ref="lcSQLSessionFactory" />
     </bean>
 
-    <bean id="originalsTransactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-        <property name="dataSource" ref="dsOriginalsMybatis"/>
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.lc.dao" />
+    </bean>
+
+    <bean id="lcTransactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dsLcMybatis"/>
     </bean>
 
     <aop:config>
@@ -64,7 +68,7 @@
         <aop:advisor advice-ref="txAdvice" pointcut-ref="serviceMethods"/>
     </aop:config>
 
-    <tx:advice id="txAdvice" transaction-manager="originalsTransactionManager">
+    <tx:advice id="txAdvice" transaction-manager="lcTransactionManager">
         <tx:attributes>
             <tx:method name="delete*" propagation="REQUIRED"/>
             <tx:method name="add*" propagation="REQUIRED"/>
