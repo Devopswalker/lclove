@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lc.dao.QuestionMapper">
+  <resultMap id="BaseResultMap" type="com.lc.model.Question">
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="SURVEY_ID" jdbcType="INTEGER" property="surveyId" />
+    <result column="INPUT_TYPE" jdbcType="INTEGER" property="inputType" />
+    <result column="TITLE" jdbcType="VARCHAR" property="title" />
+    <result column="DESC" jdbcType="VARCHAR" property="desc" />
+    <result column="ORDER" jdbcType="INTEGER" property="order" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, SURVEY_ID, INPUT_TYPE, TITLE, DESC, ORDER
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from question
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from question
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.lc.model.Question">
+    insert into question (ID, SURVEY_ID, INPUT_TYPE, 
+      TITLE, DESC, ORDER)
+    values (#{id,jdbcType=INTEGER}, #{surveyId,jdbcType=INTEGER}, #{inputType,jdbcType=INTEGER}, 
+      #{title,jdbcType=VARCHAR}, #{desc,jdbcType=VARCHAR}, #{order,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lc.model.Question">
+    insert into question
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="surveyId != null">
+        SURVEY_ID,
+      </if>
+      <if test="inputType != null">
+        INPUT_TYPE,
+      </if>
+      <if test="title != null">
+        TITLE,
+      </if>
+      <if test="desc != null">
+        DESC,
+      </if>
+      <if test="order != null">
+        ORDER,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="surveyId != null">
+        #{surveyId,jdbcType=INTEGER},
+      </if>
+      <if test="inputType != null">
+        #{inputType,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="desc != null">
+        #{desc,jdbcType=VARCHAR},
+      </if>
+      <if test="order != null">
+        #{order,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lc.model.Question">
+    update question
+    <set>
+      <if test="surveyId != null">
+        SURVEY_ID = #{surveyId,jdbcType=INTEGER},
+      </if>
+      <if test="inputType != null">
+        INPUT_TYPE = #{inputType,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        TITLE = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="desc != null">
+        DESC = #{desc,jdbcType=VARCHAR},
+      </if>
+      <if test="order != null">
+        ORDER = #{order,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lc.model.Question">
+    update question
+    set SURVEY_ID = #{surveyId,jdbcType=INTEGER},
+      INPUT_TYPE = #{inputType,jdbcType=INTEGER},
+      TITLE = #{title,jdbcType=VARCHAR},
+      DESC = #{desc,jdbcType=VARCHAR},
+      ORDER = #{order,jdbcType=INTEGER}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
