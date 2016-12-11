@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.lc.dao.QuestionOptionMapper">
-  <resultMap id="BaseResultMap" type="com.lc.model.QuestionOption">
+<mapper namespace="com.lcpa.lclove.dao.QuestionOptionMapper">
+  <resultMap id="BaseResultMap" type="com.lcpa.lclove.model.QuestionOption">
     <id column="ID" jdbcType="INTEGER" property="id" />
     <result column="QUESTION_ID" jdbcType="INTEGER" property="questionId" />
     <result column="CONTENT" jdbcType="VARCHAR" property="content" />
@@ -19,13 +19,13 @@
     delete from question_option
     where ID = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.lc.model.QuestionOption">
+  <insert id="insert" parameterType="com.lcpa.lclove.model.QuestionOption">
     insert into question_option (ID, QUESTION_ID, CONTENT
       )
     values (#{id,jdbcType=INTEGER}, #{questionId,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.lc.model.QuestionOption">
+  <insert id="insertSelective" parameterType="com.lcpa.lclove.model.QuestionOption">
     insert into question_option
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -50,7 +50,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.lc.model.QuestionOption">
+  <update id="updateByPrimaryKeySelective" parameterType="com.lcpa.lclove.model.QuestionOption">
     update question_option
     <set>
       <if test="questionId != null">
@@ -62,7 +62,7 @@
     </set>
     where ID = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.lc.model.QuestionOption">
+  <update id="updateByPrimaryKey" parameterType="com.lcpa.lclove.model.QuestionOption">
     update question_option
     set QUESTION_ID = #{questionId,jdbcType=INTEGER},
       CONTENT = #{content,jdbcType=VARCHAR}

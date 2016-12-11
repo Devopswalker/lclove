@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.lc.dao.QuestionMapper">
-  <resultMap id="BaseResultMap" type="com.lc.model.Question">
+<mapper namespace="com.lcpa.lclove.dao.QuestionMapper">
+  <resultMap id="BaseResultMap" type="com.lcpa.lclove.model.Question">
     <id column="ID" jdbcType="INTEGER" property="id" />
     <result column="SURVEY_ID" jdbcType="INTEGER" property="surveyId" />
     <result column="INPUT_TYPE" jdbcType="INTEGER" property="inputType" />
@@ -22,13 +22,13 @@
     delete from question
     where ID = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.lc.model.Question">
+  <insert id="insert" parameterType="com.lcpa.lclove.model.Question">
     insert into question (ID, SURVEY_ID, INPUT_TYPE, 
       TITLE, DESC, ORDER)
     values (#{id,jdbcType=INTEGER}, #{surveyId,jdbcType=INTEGER}, #{inputType,jdbcType=INTEGER}, 
       #{title,jdbcType=VARCHAR}, #{desc,jdbcType=VARCHAR}, #{order,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.lc.model.Question">
+  <insert id="insertSelective" parameterType="com.lcpa.lclove.model.Question">
     insert into question
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -71,7 +71,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.lc.model.Question">
+  <update id="updateByPrimaryKeySelective" parameterType="com.lcpa.lclove.model.Question">
     update question
     <set>
       <if test="surveyId != null">
@@ -92,7 +92,7 @@
     </set>
     where ID = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.lc.model.Question">
+  <update id="updateByPrimaryKey" parameterType="com.lcpa.lclove.model.Question">
     update question
     set SURVEY_ID = #{surveyId,jdbcType=INTEGER},
       INPUT_TYPE = #{inputType,jdbcType=INTEGER},

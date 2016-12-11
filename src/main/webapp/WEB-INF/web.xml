@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <web-app version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
@@ -108,18 +107,23 @@
         <extension>xml</extension>
         <mime-type>text/xml</mime-type>
     </mime-mapping>
+    
+    <error-page>
+        <error-code>400</error-code>
+        <location>/error/400.jsp</location>
+    </error-page>
 
     <error-page>
         <error-code>403</error-code>
-        <location>/error.jsp</location>
+        <location>/error/403.jsp</location>
     </error-page>
     <error-page>
         <error-code>404</error-code>
-        <location>/error.jsp</location>
+        <location>/error/404.jsp</location>
     </error-page>
     <error-page>
         <error-code>500</error-code>
-        <location>/error.jsp</location>
+        <location>/error/500.jsp</location>
     </error-page>
     <error-page>
         <error-code>501</error-code>

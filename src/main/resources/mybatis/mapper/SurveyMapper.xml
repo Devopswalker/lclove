@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.lc.dao.SurveyMapper">
-  <resultMap id="BaseResultMap" type="com.lc.model.Survey">
+<mapper namespace="com.lcpa.lclove.dao.SurveyMapper">
+  <resultMap id="BaseResultMap" type="com.lcpa.lclove.model.Survey">
     <id column="ID" jdbcType="INTEGER" property="id" />
     <result column="TITLE" jdbcType="VARCHAR" property="title" />
     <result column="DESC" jdbcType="VARCHAR" property="desc" />
@@ -22,7 +22,7 @@
     delete from survey
     where ID = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.lc.model.Survey">
+  <insert id="insert" parameterType="com.lcpa.lclove.model.Survey">
     insert into survey (ID, TITLE, DESC, 
       START_TIME, END_TIME, STATUS
       )
@@ -30,7 +30,7 @@
       #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.lc.model.Survey">
+  <insert id="insertSelective" parameterType="com.lcpa.lclove.model.Survey">
     insert into survey
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -73,7 +73,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.lc.model.Survey">
+  <update id="updateByPrimaryKeySelective" parameterType="com.lcpa.lclove.model.Survey">
     update survey
     <set>
       <if test="title != null">
@@ -94,7 +94,7 @@
     </set>
     where ID = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.lc.model.Survey">
+  <update id="updateByPrimaryKey" parameterType="com.lcpa.lclove.model.Survey">
     update survey
     set TITLE = #{title,jdbcType=VARCHAR},
       DESC = #{desc,jdbcType=VARCHAR},

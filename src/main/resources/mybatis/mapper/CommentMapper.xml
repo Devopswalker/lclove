@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.lc.dao.CommentMapper">
-  <resultMap id="BaseResultMap" type="com.lc.model.Comment">
+<mapper namespace="com.lcpa.lclove.dao.CommentMapper">
+  <resultMap id="BaseResultMap" type="com.lcpa.lclove.model.Comment">
     <id column="ID" jdbcType="INTEGER" property="id" />
     <result column="ARTICLE_ID" jdbcType="INTEGER" property="articleId" />
     <result column="NAME" jdbcType="VARCHAR" property="name" />
@@ -21,13 +21,13 @@
     delete from comment
     where ID = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.lc.model.Comment">
+  <insert id="insert" parameterType="com.lcpa.lclove.model.Comment">
     insert into comment (ID, ARTICLE_ID, NAME, 
       EMAIL, COTENT)
     values (#{id,jdbcType=INTEGER}, #{articleId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, 
       #{email,jdbcType=VARCHAR}, #{cotent,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.lc.model.Comment">
+  <insert id="insertSelective" parameterType="com.lcpa.lclove.model.Comment">
     insert into comment
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -64,7 +64,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.lc.model.Comment">
+  <update id="updateByPrimaryKeySelective" parameterType="com.lcpa.lclove.model.Comment">
     update comment
     <set>
       <if test="articleId != null">
@@ -82,7 +82,7 @@
     </set>
     where ID = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.lc.model.Comment">
+  <update id="updateByPrimaryKey" parameterType="com.lcpa.lclove.model.Comment">
     update comment
     set ARTICLE_ID = #{articleId,jdbcType=INTEGER},
       NAME = #{name,jdbcType=VARCHAR},

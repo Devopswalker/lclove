@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.lc.dao.ArticleMapper">
-  <resultMap id="BaseResultMap" type="com.lc.model.Article">
+<mapper namespace="com.lcpa.lclove.dao.ArticleMapper">
+  <resultMap id="BaseResultMap" type="com.lcpa.lclove.model.Article">
     <id column="ID" jdbcType="INTEGER" property="id" />
     <result column="TITLE" jdbcType="VARCHAR" property="title" />
     <result column="PUB_DATE" jdbcType="TIMESTAMP" property="pubDate" />
@@ -9,7 +9,7 @@
     <result column="SCAN_NUM" jdbcType="INTEGER" property="scanNum" />
     <result column="ARTICLE_TYPE" jdbcType="INTEGER" property="articleType" />
   </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.lc.model.Article">
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.lcpa.lclove.model.Article">
     <result column="CONTENT" jdbcType="LONGVARCHAR" property="content" />
   </resultMap>
   <sql id="Base_Column_List">
@@ -30,7 +30,7 @@
     delete from article
     where ID = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.lc.model.Article">
+  <insert id="insert" parameterType="com.lcpa.lclove.model.Article">
     insert into article (ID, TITLE, PUB_DATE, 
       LIKE_NUM, SCAN_NUM, ARTICLE_TYPE, 
       CONTENT)
@@ -38,7 +38,7 @@
       #{likeNum,jdbcType=INTEGER}, #{scanNum,jdbcType=INTEGER}, #{articleType,jdbcType=INTEGER}, 
       #{content,jdbcType=LONGVARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.lc.model.Article">
+  <insert id="insertSelective" parameterType="com.lcpa.lclove.model.Article">
     insert into article
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -87,7 +87,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.lc.model.Article">
+  <update id="updateByPrimaryKeySelective" parameterType="com.lcpa.lclove.model.Article">
     update article
     <set>
       <if test="title != null">
@@ -111,7 +111,7 @@
     </set>
     where ID = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.lc.model.Article">
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.lcpa.lclove.model.Article">
     update article
     set TITLE = #{title,jdbcType=VARCHAR},
       PUB_DATE = #{pubDate,jdbcType=TIMESTAMP},
@@ -121,7 +121,7 @@
       CONTENT = #{content,jdbcType=LONGVARCHAR}
     where ID = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.lc.model.Article">
+  <update id="updateByPrimaryKey" parameterType="com.lcpa.lclove.model.Article">
     update article
     set TITLE = #{title,jdbcType=VARCHAR},
       PUB_DATE = #{pubDate,jdbcType=TIMESTAMP},

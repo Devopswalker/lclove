@@ -25,7 +25,7 @@
 
 	</settings>
 	<typeAliases>
-		<typeAlias type="com.lc.model.Article" alias="Article"/>
+		<typeAlias type="com.lcpa.lclove.model.Article" alias="Article"/>
 
 	</typeAliases>
 	<mappers>
