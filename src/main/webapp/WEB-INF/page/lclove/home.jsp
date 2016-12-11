@@ -243,7 +243,7 @@
 	</div>
 </div>
 
-<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="js/jquery.js"></script>
 <script type="text/javascript" src="js/lc.js"></script>
 </body>
 </html>

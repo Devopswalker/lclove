@@ -1,12 +1,12 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>com.lc</groupId>
+  <groupId>com.lcpa.lclove</groupId>
   <artifactId>lclove</artifactId>
   <packaging>war</packaging>
   <version>1.0-SNAPSHOT</version>
   <name>LcLove Maven Webapp</name>
-  <url>http://maven.apache.org</url>
+  <url>https://mvnrepository.com</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -30,12 +30,23 @@
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-jdbc</artifactId>
-      <version>3.2.4.RELEASE</version>
+      <version>${spring.version}</version>
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-test</artifactId>
       <version>${spring.version}</version>
+    </dependency>
+     <!--支持velocity的依赖-->
+    <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-context</artifactId>
+        <version>${spring.version}</version>
+    </dependency>
+    <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-context-support</artifactId>
+        <version>${spring.version}</version>
     </dependency>
     <dependency>
       <groupId>org.mybatis</groupId>
@@ -47,6 +58,11 @@
       <artifactId>mybatis-spring</artifactId>
       <version>${mybatisspring.version}</version>
     </dependency>
+	<dependency>
+	    <groupId>org.jsoup</groupId>
+	    <artifactId>jsoup</artifactId>
+	    <version>1.8.3</version>
+	</dependency>
     <dependency>
       <groupId>commons-dbcp</groupId>
       <artifactId>commons-dbcp</artifactId>
@@ -73,17 +89,22 @@
       <artifactId>aspectjweaver</artifactId>
       <version>1.8.1</version>
     </dependency>
+	<dependency>
+	    <groupId>javax</groupId>
+	    <artifactId>javaee-api</artifactId>
+	    <version>7.0</version>
+	</dependency>
     <dependency>
       <groupId>javax.servlet</groupId>
       <artifactId>jstl</artifactId>
       <version>1.2</version>
     </dependency>
-    <dependency>
+<!--     <dependency>
       <groupId>javax.servlet</groupId>
       <artifactId>servlet-api</artifactId>
       <version>2.5</version>
       <scope>provided</scope>
-    </dependency>
+    </dependency> -->
     <dependency>
       <groupId>javax.servlet.jsp</groupId>
       <artifactId>jsp-api</artifactId>
@@ -130,11 +151,11 @@
       <artifactId>fastjson</artifactId>
       <version>1.1.41</version>
     </dependency>
-    <dependency>
+<!-- <dependency>
       <groupId>org.codehaus.jackson</groupId>
       <artifactId>jackson-mapper-asl</artifactId>
       <version>1.9.13</version>
-    </dependency>
+    </dependency> -->
 	<dependency>
 	    <groupId>org.apache.velocity</groupId>
 	    <artifactId>velocity</artifactId>
@@ -146,27 +167,21 @@
 	    <version>2.0</version>
 	</dependency>
 
-
-    <!--<dependency>-->
-      <!--<groupId>org.codehaus.jackson</groupId>-->
-      <!--<artifactId>jackson-core-lgpl</artifactId>-->
-      <!--<version>1.9.6</version>-->
-    <!--</dependency>-->
-    <!--<dependency>-->
-      <!--<groupId>org.codehaus.jackson</groupId>-->
-      <!--<artifactId>jackson-core-asl</artifactId>-->
-      <!--<version>1.9.4</version>-->
-    <!--</dependency>-->
-    <!--<dependency>-->
-      <!--<groupId>org.codehaus.jackson</groupId>-->
-      <!--<artifactId>jackson-mapper-asl</artifactId>-->
-      <!--<version>1.9.5</version>-->
-    <!--</dependency>-->
-    <!--<dependency>-->
-      <!--<groupId>org.codehaus.jackson</groupId>-->
-      <!--<artifactId>jackson-mapper-lgpl</artifactId>-->
-      <!--<version>1.9.6</version>-->
-    <!--</dependency>-->
+	<dependency>
+	    <groupId>com.fasterxml.jackson.core</groupId>
+	    <artifactId>jackson-core</artifactId>
+	    <version>2.7.3</version>
+	</dependency>
+	<dependency>
+	    <groupId>com.fasterxml.jackson.core</groupId>
+	    <artifactId>jackson-databind</artifactId>
+	    <version>2.7.3</version>
+	</dependency>
+	<dependency>
+	    <groupId>com.fasterxml.jackson.core</groupId>
+	    <artifactId>jackson-annotations</artifactId>
+	    <version>2.7.3</version>
+	</dependency>
   </dependencies>
 
   <build>
@@ -208,8 +223,8 @@
         <artifactId>maven-compiler-plugin</artifactId>
         <version>2.3.2</version>
         <configuration>
-          <source>1.6</source>
-          <target>1.6</target>
+          <source>1.8</source>
+          <target>1.8</target>
           <debug>true</debug>
           <debuglevel>lines,vars,source</debuglevel>
           <encoding>UTF-8</encoding>

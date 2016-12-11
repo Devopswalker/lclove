@@ -50,6 +50,7 @@
     </bean>
 
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+    	<property name="basePackage" value="com.lcpa.lclove.dao" />
     </bean>
 
     <bean id="lcTransactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
