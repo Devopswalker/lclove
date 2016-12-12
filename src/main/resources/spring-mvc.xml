@@ -18,7 +18,7 @@
     <mvc:default-servlet-handler/>
 
     <!-- 自动扫描该包，使SpringMVC认为包下用了@controller注解的类是控制器 -->
-    <context:component-scan base-package="com.lcpa.lclove.controller" />
+    <context:component-scan base-package="com.lcpa.lclove.web.controller" />
 
     <!--避免IE执行AJAX时，返回JSON出现下载文件 -->
     <!--<bean id="mappingJacksonHttpMessageConverter"-->
@@ -41,7 +41,7 @@
 		<property name="viewNames" value="*.jsp,*.xhtml,*.html"/>
 	</bean>
 	<bean id="velocityConfig" class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
-		<property name="resourceLoaderPath" value="/WEB-INF/template,/WEB-INF/page,/css,/js"/>
+		<property name="resourceLoaderPath" value="/WEB-INF/template,/WEB-INF/page,/css,/images,/js"/>
 		<property name="configLocation" value="classpath:velocity.properties"/>
 	</bean>
 	<bean id="velocityViewResolver" class="org.springframework.web.servlet.view.velocity.VelocityViewResolver">

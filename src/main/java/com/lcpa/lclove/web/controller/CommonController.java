@@ -9,6 +9,12 @@ public class CommonController {
 	
 	@RequestMapping(value = "/admin/index.xhtml")
     public String adminIndex() {
-        return "admin/indexPage.vm";
+		return "admin/indexPage.vm";
+		//return "admin/index.html";
+    }
+	
+	@RequestMapping(value = "/admin/info.xhtml")
+    public String homePage() {
+        return "admin/info.html";
     }
 }
