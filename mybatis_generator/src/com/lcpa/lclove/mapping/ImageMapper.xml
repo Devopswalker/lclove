@@ -5,13 +5,13 @@
     <id column="ID" jdbcType="INTEGER" property="id" />
     <result column="POSITION" jdbcType="INTEGER" property="position" />
     <result column="IMG_SRC" jdbcType="VARCHAR" property="imgSrc" />
-    <result column="ORDER" jdbcType="INTEGER" property="order" />
+    <result column="SEQ" jdbcType="INTEGER" property="seq" />
     <result column="URL" jdbcType="VARCHAR" property="url" />
-    <result column="DESC" jdbcType="VARCHAR" property="desc" />
+    <result column="DESCRIPTION" jdbcType="VARCHAR" property="description" />
     <result column="TOPIC" jdbcType="VARCHAR" property="topic" />
   </resultMap>
   <sql id="Base_Column_List">
-    ID, POSITION, IMG_SRC, ORDER, URL, DESC, TOPIC
+    ID, POSITION, IMG_SRC, SEQ, URL, DESCRIPTION, TOPIC
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -25,11 +25,11 @@
   </delete>
   <insert id="insert" parameterType="com.lcpa.lclove.model.Image">
     insert into image (ID, POSITION, IMG_SRC, 
-      ORDER, URL, DESC, TOPIC
-      )
+      SEQ, URL, DESCRIPTION, 
+      TOPIC)
     values (#{id,jdbcType=INTEGER}, #{position,jdbcType=INTEGER}, #{imgSrc,jdbcType=VARCHAR}, 
-      #{order,jdbcType=INTEGER}, #{url,jdbcType=VARCHAR}, #{desc,jdbcType=VARCHAR}, #{topic,jdbcType=VARCHAR}
-      )
+      #{seq,jdbcType=INTEGER}, #{url,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
+      #{topic,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.lcpa.lclove.model.Image">
     insert into image
@@ -43,14 +43,14 @@
       <if test="imgSrc != null">
         IMG_SRC,
       </if>
-      <if test="order != null">
-        ORDER,
+      <if test="seq != null">
+        SEQ,
       </if>
       <if test="url != null">
         URL,
       </if>
-      <if test="desc != null">
-        DESC,
+      <if test="description != null">
+        DESCRIPTION,
       </if>
       <if test="topic != null">
         TOPIC,
@@ -66,14 +66,14 @@
       <if test="imgSrc != null">
         #{imgSrc,jdbcType=VARCHAR},
       </if>
-      <if test="order != null">
-        #{order,jdbcType=INTEGER},
+      <if test="seq != null">
+        #{seq,jdbcType=INTEGER},
       </if>
       <if test="url != null">
         #{url,jdbcType=VARCHAR},
       </if>
-      <if test="desc != null">
-        #{desc,jdbcType=VARCHAR},
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
       </if>
       <if test="topic != null">
         #{topic,jdbcType=VARCHAR},
@@ -89,14 +89,14 @@
       <if test="imgSrc != null">
         IMG_SRC = #{imgSrc,jdbcType=VARCHAR},
       </if>
-      <if test="order != null">
-        ORDER = #{order,jdbcType=INTEGER},
+      <if test="seq != null">
+        SEQ = #{seq,jdbcType=INTEGER},
       </if>
       <if test="url != null">
         URL = #{url,jdbcType=VARCHAR},
       </if>
-      <if test="desc != null">
-        DESC = #{desc,jdbcType=VARCHAR},
+      <if test="description != null">
+        DESCRIPTION = #{description,jdbcType=VARCHAR},
       </if>
       <if test="topic != null">
         TOPIC = #{topic,jdbcType=VARCHAR},
@@ -108,9 +108,9 @@
     update image
     set POSITION = #{position,jdbcType=INTEGER},
       IMG_SRC = #{imgSrc,jdbcType=VARCHAR},
-      ORDER = #{order,jdbcType=INTEGER},
+      SEQ = #{seq,jdbcType=INTEGER},
       URL = #{url,jdbcType=VARCHAR},
-      DESC = #{desc,jdbcType=VARCHAR},
+      DESCRIPTION = #{description,jdbcType=VARCHAR},
       TOPIC = #{topic,jdbcType=VARCHAR}
     where ID = #{id,jdbcType=INTEGER}
   </update>

@@ -4,14 +4,14 @@
   <resultMap id="BaseResultMap" type="com.lcpa.lclove.model.Survey">
     <id column="ID" jdbcType="INTEGER" property="id" />
     <result column="TITLE" jdbcType="VARCHAR" property="title" />
-    <result column="DESC" jdbcType="VARCHAR" property="desc" />
+    <result column="DESCRIPTION" jdbcType="VARCHAR" property="description" />
     <result column="START_TIME" jdbcType="TIMESTAMP" property="startTime" />
     <result column="END_TIME" jdbcType="TIMESTAMP" property="endTime" />
-    <result column="STATUS" jdbcType="INTEGER" property="status" />
+    <result column="STATE" jdbcType="INTEGER" property="state" />
     <result column="TOPIC" jdbcType="VARCHAR" property="topic" />
   </resultMap>
   <sql id="Base_Column_List">
-    ID, TITLE, DESC, START_TIME, END_TIME, STATUS, TOPIC
+    ID, TITLE, DESCRIPTION, START_TIME, END_TIME, STATE, TOPIC
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -24,11 +24,11 @@
     where ID = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.lcpa.lclove.model.Survey">
-    insert into survey (ID, TITLE, DESC, 
-      START_TIME, END_TIME, STATUS, 
+    insert into survey (ID, TITLE, DESCRIPTION, 
+      START_TIME, END_TIME, STATE, 
       TOPIC)
-    values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{desc,jdbcType=VARCHAR}, 
-      #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}, 
+    values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
+      #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{state,jdbcType=INTEGER}, 
       #{topic,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.lcpa.lclove.model.Survey">
@@ -40,8 +40,8 @@
       <if test="title != null">
         TITLE,
       </if>
-      <if test="desc != null">
-        DESC,
+      <if test="description != null">
+        DESCRIPTION,
       </if>
       <if test="startTime != null">
         START_TIME,
@@ -49,8 +49,8 @@
       <if test="endTime != null">
         END_TIME,
       </if>
-      <if test="status != null">
-        STATUS,
+      <if test="state != null">
+        STATE,
       </if>
       <if test="topic != null">
         TOPIC,
@@ -63,8 +63,8 @@
       <if test="title != null">
         #{title,jdbcType=VARCHAR},
       </if>
-      <if test="desc != null">
-        #{desc,jdbcType=VARCHAR},
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
       </if>
       <if test="startTime != null">
         #{startTime,jdbcType=TIMESTAMP},
@@ -72,8 +72,8 @@
       <if test="endTime != null">
         #{endTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="status != null">
-        #{status,jdbcType=INTEGER},
+      <if test="state != null">
+        #{state,jdbcType=INTEGER},
       </if>
       <if test="topic != null">
         #{topic,jdbcType=VARCHAR},
@@ -86,8 +86,8 @@
       <if test="title != null">
         TITLE = #{title,jdbcType=VARCHAR},
       </if>
-      <if test="desc != null">
-        DESC = #{desc,jdbcType=VARCHAR},
+      <if test="description != null">
+        DESCRIPTION = #{description,jdbcType=VARCHAR},
       </if>
       <if test="startTime != null">
         START_TIME = #{startTime,jdbcType=TIMESTAMP},
@@ -95,8 +95,8 @@
       <if test="endTime != null">
         END_TIME = #{endTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="status != null">
-        STATUS = #{status,jdbcType=INTEGER},
+      <if test="state != null">
+        STATE = #{state,jdbcType=INTEGER},
       </if>
       <if test="topic != null">
         TOPIC = #{topic,jdbcType=VARCHAR},
@@ -107,10 +107,10 @@
   <update id="updateByPrimaryKey" parameterType="com.lcpa.lclove.model.Survey">
     update survey
     set TITLE = #{title,jdbcType=VARCHAR},
-      DESC = #{desc,jdbcType=VARCHAR},
+      DESCRIPTION = #{description,jdbcType=VARCHAR},
       START_TIME = #{startTime,jdbcType=TIMESTAMP},
       END_TIME = #{endTime,jdbcType=TIMESTAMP},
-      STATUS = #{status,jdbcType=INTEGER},
+      STATE = #{state,jdbcType=INTEGER},
       TOPIC = #{topic,jdbcType=VARCHAR}
     where ID = #{id,jdbcType=INTEGER}
   </update>

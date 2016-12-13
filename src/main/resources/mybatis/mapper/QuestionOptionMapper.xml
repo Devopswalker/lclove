@@ -5,11 +5,11 @@
     <id column="ID" jdbcType="INTEGER" property="id" />
     <result column="QUESTION_ID" jdbcType="INTEGER" property="questionId" />
     <result column="CONTENT" jdbcType="VARCHAR" property="content" />
-    <result column="ORDER" jdbcType="INTEGER" property="order" />
+    <result column="SEQ" jdbcType="INTEGER" property="seq" />
     <result column="IMG_SRC" jdbcType="VARCHAR" property="imgSrc" />
   </resultMap>
   <sql id="Base_Column_List">
-    ID, QUESTION_ID, CONTENT, ORDER, IMG_SRC
+    ID, QUESTION_ID, CONTENT, SEQ, IMG_SRC
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -23,9 +23,9 @@
   </delete>
   <insert id="insert" parameterType="com.lcpa.lclove.model.QuestionOption">
     insert into question_option (ID, QUESTION_ID, CONTENT, 
-      ORDER, IMG_SRC)
+      SEQ, IMG_SRC)
     values (#{id,jdbcType=INTEGER}, #{questionId,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR}, 
-      #{order,jdbcType=INTEGER}, #{imgSrc,jdbcType=VARCHAR})
+      #{seq,jdbcType=INTEGER}, #{imgSrc,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.lcpa.lclove.model.QuestionOption">
     insert into question_option
@@ -39,8 +39,8 @@
       <if test="content != null">
         CONTENT,
       </if>
-      <if test="order != null">
-        ORDER,
+      <if test="seq != null">
+        SEQ,
       </if>
       <if test="imgSrc != null">
         IMG_SRC,
@@ -56,8 +56,8 @@
       <if test="content != null">
         #{content,jdbcType=VARCHAR},
       </if>
-      <if test="order != null">
-        #{order,jdbcType=INTEGER},
+      <if test="seq != null">
+        #{seq,jdbcType=INTEGER},
       </if>
       <if test="imgSrc != null">
         #{imgSrc,jdbcType=VARCHAR},
@@ -73,8 +73,8 @@
       <if test="content != null">
         CONTENT = #{content,jdbcType=VARCHAR},
       </if>
-      <if test="order != null">
-        ORDER = #{order,jdbcType=INTEGER},
+      <if test="seq != null">
+        SEQ = #{seq,jdbcType=INTEGER},
       </if>
       <if test="imgSrc != null">
         IMG_SRC = #{imgSrc,jdbcType=VARCHAR},
@@ -86,7 +86,7 @@
     update question_option
     set QUESTION_ID = #{questionId,jdbcType=INTEGER},
       CONTENT = #{content,jdbcType=VARCHAR},
-      ORDER = #{order,jdbcType=INTEGER},
+      SEQ = #{seq,jdbcType=INTEGER},
       IMG_SRC = #{imgSrc,jdbcType=VARCHAR}
     where ID = #{id,jdbcType=INTEGER}
   </update>

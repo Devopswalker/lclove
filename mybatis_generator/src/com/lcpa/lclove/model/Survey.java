@@ -7,13 +7,13 @@ public class Survey {
 
     private String title;
 
-    private String desc;
+    private String description;
 
     private Date startTime;
 
     private Date endTime;
 
-    private Integer status;
+    private Integer state;
 
     private String topic;
 
@@ -33,12 +33,12 @@ public class Survey {
         this.title = title == null ? null : title.trim();
     }
 
-    public String getDesc() {
-        return desc;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc == null ? null : desc.trim();
+    public void setDescription(String description) {
+        this.description = description == null ? null : description.trim();
     }
 
     public Date getStartTime() {
@@ -57,12 +57,12 @@ public class Survey {
         this.endTime = endTime;
     }
 
-    public Integer getStatus() {
-        return status;
+    public Integer getState() {
+        return state;
     }
 
-    public void setStatus(Integer status) {
-        this.status = status;
+    public void setState(Integer state) {
+        this.state = state;
     }
 
     public String getTopic() {

@@ -8,16 +8,17 @@
     <result column="LIKE_NUM" jdbcType="INTEGER" property="likeNum" />
     <result column="SCAN_NUM" jdbcType="INTEGER" property="scanNum" />
     <result column="ARTICLE_TYPE" jdbcType="INTEGER" property="articleType" />
-    <result column="DESC" jdbcType="VARCHAR" property="desc" />
+    <result column="DESCRIPTION" jdbcType="VARCHAR" property="description" />
     <result column="TOPIC" jdbcType="VARCHAR" property="topic" />
     <result column="EDITOR" jdbcType="VARCHAR" property="editor" />
-    <result column="STATUS" jdbcType="INTEGER" property="status" />
+    <result column="STATE" jdbcType="INTEGER" property="state" />
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.lcpa.lclove.model.Article">
     <result column="CONTENT" jdbcType="LONGVARCHAR" property="content" />
   </resultMap>
   <sql id="Base_Column_List">
-    ID, TITLE, PUB_DATE, LIKE_NUM, SCAN_NUM, ARTICLE_TYPE, DESC, TOPIC, EDITOR, STATUS
+    ID, TITLE, PUB_DATE, LIKE_NUM, SCAN_NUM, ARTICLE_TYPE, DESCRIPTION, TOPIC, EDITOR, 
+    STATE
   </sql>
   <sql id="Blob_Column_List">
     CONTENT
@@ -37,12 +38,12 @@
   <insert id="insert" parameterType="com.lcpa.lclove.model.Article">
     insert into article (ID, TITLE, PUB_DATE, 
       LIKE_NUM, SCAN_NUM, ARTICLE_TYPE, 
-      DESC, TOPIC, EDITOR, 
-      STATUS, CONTENT)
+      DESCRIPTION, TOPIC, EDITOR, 
+      STATE, CONTENT)
     values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{pubDate,jdbcType=TIMESTAMP}, 
       #{likeNum,jdbcType=INTEGER}, #{scanNum,jdbcType=INTEGER}, #{articleType,jdbcType=INTEGER}, 
-      #{desc,jdbcType=VARCHAR}, #{topic,jdbcType=VARCHAR}, #{editor,jdbcType=VARCHAR}, 
-      #{status,jdbcType=INTEGER}, #{content,jdbcType=LONGVARCHAR})
+      #{description,jdbcType=VARCHAR}, #{topic,jdbcType=VARCHAR}, #{editor,jdbcType=VARCHAR}, 
+      #{state,jdbcType=INTEGER}, #{content,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.lcpa.lclove.model.Article">
     insert into article
@@ -65,8 +66,8 @@
       <if test="articleType != null">
         ARTICLE_TYPE,
       </if>
-      <if test="desc != null">
-        DESC,
+      <if test="description != null">
+        DESCRIPTION,
       </if>
       <if test="topic != null">
         TOPIC,
@@ -74,8 +75,8 @@
       <if test="editor != null">
         EDITOR,
       </if>
-      <if test="status != null">
-        STATUS,
+      <if test="state != null">
+        STATE,
       </if>
       <if test="content != null">
         CONTENT,
@@ -100,8 +101,8 @@
       <if test="articleType != null">
         #{articleType,jdbcType=INTEGER},
       </if>
-      <if test="desc != null">
-        #{desc,jdbcType=VARCHAR},
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
       </if>
       <if test="topic != null">
         #{topic,jdbcType=VARCHAR},
@@ -109,8 +110,8 @@
       <if test="editor != null">
         #{editor,jdbcType=VARCHAR},
       </if>
-      <if test="status != null">
-        #{status,jdbcType=INTEGER},
+      <if test="state != null">
+        #{state,jdbcType=INTEGER},
       </if>
       <if test="content != null">
         #{content,jdbcType=LONGVARCHAR},
@@ -135,8 +136,8 @@
       <if test="articleType != null">
         ARTICLE_TYPE = #{articleType,jdbcType=INTEGER},
       </if>
-      <if test="desc != null">
-        DESC = #{desc,jdbcType=VARCHAR},
+      <if test="description != null">
+        DESCRIPTION = #{description,jdbcType=VARCHAR},
       </if>
       <if test="topic != null">
         TOPIC = #{topic,jdbcType=VARCHAR},
@@ -144,8 +145,8 @@
       <if test="editor != null">
         EDITOR = #{editor,jdbcType=VARCHAR},
       </if>
-      <if test="status != null">
-        STATUS = #{status,jdbcType=INTEGER},
+      <if test="state != null">
+        STATE = #{state,jdbcType=INTEGER},
       </if>
       <if test="content != null">
         CONTENT = #{content,jdbcType=LONGVARCHAR},
@@ -160,10 +161,10 @@
       LIKE_NUM = #{likeNum,jdbcType=INTEGER},
       SCAN_NUM = #{scanNum,jdbcType=INTEGER},
       ARTICLE_TYPE = #{articleType,jdbcType=INTEGER},
-      DESC = #{desc,jdbcType=VARCHAR},
+      DESCRIPTION = #{description,jdbcType=VARCHAR},
       TOPIC = #{topic,jdbcType=VARCHAR},
       EDITOR = #{editor,jdbcType=VARCHAR},
-      STATUS = #{status,jdbcType=INTEGER},
+      STATE = #{state,jdbcType=INTEGER},
       CONTENT = #{content,jdbcType=LONGVARCHAR}
     where ID = #{id,jdbcType=INTEGER}
   </update>
@@ -174,10 +175,10 @@
       LIKE_NUM = #{likeNum,jdbcType=INTEGER},
       SCAN_NUM = #{scanNum,jdbcType=INTEGER},
       ARTICLE_TYPE = #{articleType,jdbcType=INTEGER},
-      DESC = #{desc,jdbcType=VARCHAR},
+      DESCRIPTION = #{description,jdbcType=VARCHAR},
       TOPIC = #{topic,jdbcType=VARCHAR},
       EDITOR = #{editor,jdbcType=VARCHAR},
-      STATUS = #{status,jdbcType=INTEGER}
+      STATE = #{state,jdbcType=INTEGER}
     where ID = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

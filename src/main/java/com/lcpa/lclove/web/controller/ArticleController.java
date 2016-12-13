@@ -37,13 +37,15 @@ public class ArticleController {
     @RequestMapping(value = "/addArticle", method = RequestMethod.POST)
     public String addArticle(@ModelAttribute("SpringWeb")Article article,
                              ModelMap model) {
-        article.setArticleType(1);
-        article.setLikeNum(0);
         article.setPubDate(new Date());
-        article.setScanNum(1);
-        articleService.addArticle(article);
-        model.addAttribute("title", article.getTitle());
-        model.addAttribute("content", article.getContent());
+        articleService.saveArticle(article);
+        return "detail";
+    }
+
+    @RequestMapping(value = "/getArticleList", method = RequestMethod.GET)
+    public String getArticleList(@ModelAttribute("SpringWeb")Integer pageNo,
+                             ModelMap model) {
+
 
         return "detail";
     }

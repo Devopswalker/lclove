@@ -7,11 +7,11 @@ public class Image {
 
     private String imgSrc;
 
-    private Integer order;
+    private Integer seq;
 
     private String url;
 
-    private String desc;
+    private String description;
 
     private String topic;
 
@@ -39,12 +39,12 @@ public class Image {
         this.imgSrc = imgSrc == null ? null : imgSrc.trim();
     }
 
-    public Integer getOrder() {
-        return order;
+    public Integer getSeq() {
+        return seq;
     }
 
-    public void setOrder(Integer order) {
-        this.order = order;
+    public void setSeq(Integer seq) {
+        this.seq = seq;
     }
 
     public String getUrl() {
@@ -55,12 +55,12 @@ public class Image {
         this.url = url == null ? null : url.trim();
     }
 
-    public String getDesc() {
-        return desc;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc == null ? null : desc.trim();
+    public void setDescription(String description) {
+        this.description = description == null ? null : description.trim();
     }
 
     public String getTopic() {

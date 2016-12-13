@@ -13,7 +13,7 @@ public class Comment {
 
     private String editorReply;
 
-    private Integer status;
+    private Integer commStatus;
 
     private Integer parentId;
 
@@ -69,12 +69,12 @@ public class Comment {
         this.editorReply = editorReply == null ? null : editorReply.trim();
     }
 
-    public Integer getStatus() {
-        return status;
+    public Integer getCommStatus() {
+        return commStatus;
     }
 
-    public void setStatus(Integer status) {
-        this.status = status;
+    public void setCommStatus(Integer commStatus) {
+        this.commStatus = commStatus;
     }
 
     public Integer getParentId() {

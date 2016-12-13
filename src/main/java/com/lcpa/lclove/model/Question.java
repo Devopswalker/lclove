@@ -9,9 +9,9 @@ public class Question {
 
     private String title;
 
-    private String desc;
+    private String description;
 
-    private Integer order;
+    private Integer seq;
 
     public Integer getId() {
         return id;
@@ -45,19 +45,19 @@ public class Question {
         this.title = title == null ? null : title.trim();
     }
 
-    public String getDesc() {
-        return desc;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc == null ? null : desc.trim();
+    public void setDescription(String description) {
+        this.description = description == null ? null : description.trim();
     }
 
-    public Integer getOrder() {
-        return order;
+    public Integer getSeq() {
+        return seq;
     }
 
-    public void setOrder(Integer order) {
-        this.order = order;
+    public void setSeq(Integer seq) {
+        this.seq = seq;
     }
 }

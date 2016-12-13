@@ -7,7 +7,7 @@ public class QuestionOption {
 
     private String content;
 
-    private Integer order;
+    private Integer seq;
 
     private String imgSrc;
 
@@ -35,12 +35,12 @@ public class QuestionOption {
         this.content = content == null ? null : content.trim();
     }
 
-    public Integer getOrder() {
-        return order;
+    public Integer getSeq() {
+        return seq;
     }
 
-    public void setOrder(Integer order) {
-        this.order = order;
+    public void setSeq(Integer seq) {
+        this.seq = seq;
     }
 
     public String getImgSrc() {

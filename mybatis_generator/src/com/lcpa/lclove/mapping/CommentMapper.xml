@@ -8,13 +8,13 @@
     <result column="EMAIL" jdbcType="VARCHAR" property="email" />
     <result column="COTENT" jdbcType="VARCHAR" property="cotent" />
     <result column="EDITOR_REPLY" jdbcType="VARCHAR" property="editorReply" />
-    <result column="STATUS" jdbcType="INTEGER" property="status" />
+    <result column="COMM_STATUS" jdbcType="INTEGER" property="commStatus" />
     <result column="PARENT_ID" jdbcType="INTEGER" property="parentId" />
     <result column="UP_NUM" jdbcType="INTEGER" property="upNum" />
     <result column="DOWN_NUM" jdbcType="INTEGER" property="downNum" />
   </resultMap>
   <sql id="Base_Column_List">
-    ID, ARTICLE_ID, NICK_NAME, EMAIL, COTENT, EDITOR_REPLY, STATUS, PARENT_ID, UP_NUM, 
+    ID, ARTICLE_ID, NICK_NAME, EMAIL, COTENT, EDITOR_REPLY, COMM_STATUS, PARENT_ID, UP_NUM, 
     DOWN_NUM
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -30,11 +30,11 @@
   <insert id="insert" parameterType="com.lcpa.lclove.model.Comment">
     insert into comment (ID, ARTICLE_ID, NICK_NAME, 
       EMAIL, COTENT, EDITOR_REPLY, 
-      STATUS, PARENT_ID, UP_NUM, 
+      COMM_STATUS, PARENT_ID, UP_NUM, 
       DOWN_NUM)
     values (#{id,jdbcType=INTEGER}, #{articleId,jdbcType=INTEGER}, #{nickName,jdbcType=VARCHAR}, 
       #{email,jdbcType=VARCHAR}, #{cotent,jdbcType=VARCHAR}, #{editorReply,jdbcType=VARCHAR}, 
-      #{status,jdbcType=INTEGER}, #{parentId,jdbcType=INTEGER}, #{upNum,jdbcType=INTEGER}, 
+      #{commStatus,jdbcType=INTEGER}, #{parentId,jdbcType=INTEGER}, #{upNum,jdbcType=INTEGER}, 
       #{downNum,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.lcpa.lclove.model.Comment">
@@ -58,8 +58,8 @@
       <if test="editorReply != null">
         EDITOR_REPLY,
       </if>
-      <if test="status != null">
-        STATUS,
+      <if test="commStatus != null">
+        COMM_STATUS,
       </if>
       <if test="parentId != null">
         PARENT_ID,
@@ -90,8 +90,8 @@
       <if test="editorReply != null">
         #{editorReply,jdbcType=VARCHAR},
       </if>
-      <if test="status != null">
-        #{status,jdbcType=INTEGER},
+      <if test="commStatus != null">
+        #{commStatus,jdbcType=INTEGER},
       </if>
       <if test="parentId != null">
         #{parentId,jdbcType=INTEGER},
@@ -122,8 +122,8 @@
       <if test="editorReply != null">
         EDITOR_REPLY = #{editorReply,jdbcType=VARCHAR},
       </if>
-      <if test="status != null">
-        STATUS = #{status,jdbcType=INTEGER},
+      <if test="commStatus != null">
+        COMM_STATUS = #{commStatus,jdbcType=INTEGER},
       </if>
       <if test="parentId != null">
         PARENT_ID = #{parentId,jdbcType=INTEGER},
@@ -144,7 +144,7 @@
       EMAIL = #{email,jdbcType=VARCHAR},
       COTENT = #{cotent,jdbcType=VARCHAR},
       EDITOR_REPLY = #{editorReply,jdbcType=VARCHAR},
-      STATUS = #{status,jdbcType=INTEGER},
+      COMM_STATUS = #{commStatus,jdbcType=INTEGER},
       PARENT_ID = #{parentId,jdbcType=INTEGER},
       UP_NUM = #{upNum,jdbcType=INTEGER},
       DOWN_NUM = #{downNum,jdbcType=INTEGER}
