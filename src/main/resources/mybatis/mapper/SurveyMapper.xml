@@ -8,9 +8,10 @@
     <result column="START_TIME" jdbcType="TIMESTAMP" property="startTime" />
     <result column="END_TIME" jdbcType="TIMESTAMP" property="endTime" />
     <result column="STATUS" jdbcType="INTEGER" property="status" />
+    <result column="TOPIC" jdbcType="VARCHAR" property="topic" />
   </resultMap>
   <sql id="Base_Column_List">
-    ID, TITLE, DESC, START_TIME, END_TIME, STATUS
+    ID, TITLE, DESC, START_TIME, END_TIME, STATUS, TOPIC
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -24,11 +25,11 @@
   </delete>
   <insert id="insert" parameterType="com.lcpa.lclove.model.Survey">
     insert into survey (ID, TITLE, DESC, 
-      START_TIME, END_TIME, STATUS
-      )
+      START_TIME, END_TIME, STATUS, 
+      TOPIC)
     values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{desc,jdbcType=VARCHAR}, 
-      #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}
-      )
+      #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}, 
+      #{topic,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.lcpa.lclove.model.Survey">
     insert into survey
@@ -51,6 +52,9 @@
       <if test="status != null">
         STATUS,
       </if>
+      <if test="topic != null">
+        TOPIC,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -70,6 +74,9 @@
       </if>
       <if test="status != null">
         #{status,jdbcType=INTEGER},
+      </if>
+      <if test="topic != null">
+        #{topic,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -91,6 +98,9 @@
       <if test="status != null">
         STATUS = #{status,jdbcType=INTEGER},
       </if>
+      <if test="topic != null">
+        TOPIC = #{topic,jdbcType=VARCHAR},
+      </if>
     </set>
     where ID = #{id,jdbcType=INTEGER}
   </update>
@@ -100,7 +110,8 @@
       DESC = #{desc,jdbcType=VARCHAR},
       START_TIME = #{startTime,jdbcType=TIMESTAMP},
       END_TIME = #{endTime,jdbcType=TIMESTAMP},
-      STATUS = #{status,jdbcType=INTEGER}
+      STATUS = #{status,jdbcType=INTEGER},
+      TOPIC = #{topic,jdbcType=VARCHAR}
     where ID = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

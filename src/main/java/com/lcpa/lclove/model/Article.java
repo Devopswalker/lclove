@@ -15,6 +15,14 @@ public class Article {
 
     private Integer articleType;
 
+    private String desc;
+
+    private String topic;
+
+    private String editor;
+
+    private Integer status;
+
     private String content;
 
     public Integer getId() {
@@ -63,6 +71,38 @@ public class Article {
 
     public void setArticleType(Integer articleType) {
         this.articleType = articleType;
+    }
+
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc == null ? null : desc.trim();
+    }
+
+    public String getTopic() {
+        return topic;
+    }
+
+    public void setTopic(String topic) {
+        this.topic = topic == null ? null : topic.trim();
+    }
+
+    public String getEditor() {
+        return editor;
+    }
+
+    public void setEditor(String editor) {
+        this.editor = editor == null ? null : editor.trim();
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 
     public String getContent() {

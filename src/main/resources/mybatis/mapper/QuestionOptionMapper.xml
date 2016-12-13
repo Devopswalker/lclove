@@ -5,9 +5,11 @@
     <id column="ID" jdbcType="INTEGER" property="id" />
     <result column="QUESTION_ID" jdbcType="INTEGER" property="questionId" />
     <result column="CONTENT" jdbcType="VARCHAR" property="content" />
+    <result column="ORDER" jdbcType="INTEGER" property="order" />
+    <result column="IMG_SRC" jdbcType="VARCHAR" property="imgSrc" />
   </resultMap>
   <sql id="Base_Column_List">
-    ID, QUESTION_ID, CONTENT
+    ID, QUESTION_ID, CONTENT, ORDER, IMG_SRC
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -20,10 +22,10 @@
     where ID = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.lcpa.lclove.model.QuestionOption">
-    insert into question_option (ID, QUESTION_ID, CONTENT
-      )
-    values (#{id,jdbcType=INTEGER}, #{questionId,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR}
-      )
+    insert into question_option (ID, QUESTION_ID, CONTENT, 
+      ORDER, IMG_SRC)
+    values (#{id,jdbcType=INTEGER}, #{questionId,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR}, 
+      #{order,jdbcType=INTEGER}, #{imgSrc,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.lcpa.lclove.model.QuestionOption">
     insert into question_option
@@ -37,6 +39,12 @@
       <if test="content != null">
         CONTENT,
       </if>
+      <if test="order != null">
+        ORDER,
+      </if>
+      <if test="imgSrc != null">
+        IMG_SRC,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -47,6 +55,12 @@
       </if>
       <if test="content != null">
         #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="order != null">
+        #{order,jdbcType=INTEGER},
+      </if>
+      <if test="imgSrc != null">
+        #{imgSrc,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -59,13 +73,21 @@
       <if test="content != null">
         CONTENT = #{content,jdbcType=VARCHAR},
       </if>
+      <if test="order != null">
+        ORDER = #{order,jdbcType=INTEGER},
+      </if>
+      <if test="imgSrc != null">
+        IMG_SRC = #{imgSrc,jdbcType=VARCHAR},
+      </if>
     </set>
     where ID = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.lcpa.lclove.model.QuestionOption">
     update question_option
     set QUESTION_ID = #{questionId,jdbcType=INTEGER},
-      CONTENT = #{content,jdbcType=VARCHAR}
+      CONTENT = #{content,jdbcType=VARCHAR},
+      ORDER = #{order,jdbcType=INTEGER},
+      IMG_SRC = #{imgSrc,jdbcType=VARCHAR}
     where ID = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

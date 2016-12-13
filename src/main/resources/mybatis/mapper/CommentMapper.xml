@@ -4,12 +4,18 @@
   <resultMap id="BaseResultMap" type="com.lcpa.lclove.model.Comment">
     <id column="ID" jdbcType="INTEGER" property="id" />
     <result column="ARTICLE_ID" jdbcType="INTEGER" property="articleId" />
-    <result column="NAME" jdbcType="VARCHAR" property="name" />
+    <result column="NICK_NAME" jdbcType="VARCHAR" property="nickName" />
     <result column="EMAIL" jdbcType="VARCHAR" property="email" />
     <result column="COTENT" jdbcType="VARCHAR" property="cotent" />
+    <result column="EDITOR_REPLY" jdbcType="VARCHAR" property="editorReply" />
+    <result column="STATUS" jdbcType="INTEGER" property="status" />
+    <result column="PARENT_ID" jdbcType="INTEGER" property="parentId" />
+    <result column="UP_NUM" jdbcType="INTEGER" property="upNum" />
+    <result column="DOWN_NUM" jdbcType="INTEGER" property="downNum" />
   </resultMap>
   <sql id="Base_Column_List">
-    ID, ARTICLE_ID, NAME, EMAIL, COTENT
+    ID, ARTICLE_ID, NICK_NAME, EMAIL, COTENT, EDITOR_REPLY, STATUS, PARENT_ID, UP_NUM, 
+    DOWN_NUM
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -22,10 +28,14 @@
     where ID = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.lcpa.lclove.model.Comment">
-    insert into comment (ID, ARTICLE_ID, NAME, 
-      EMAIL, COTENT)
-    values (#{id,jdbcType=INTEGER}, #{articleId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, 
-      #{email,jdbcType=VARCHAR}, #{cotent,jdbcType=VARCHAR})
+    insert into comment (ID, ARTICLE_ID, NICK_NAME, 
+      EMAIL, COTENT, EDITOR_REPLY, 
+      STATUS, PARENT_ID, UP_NUM, 
+      DOWN_NUM)
+    values (#{id,jdbcType=INTEGER}, #{articleId,jdbcType=INTEGER}, #{nickName,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{cotent,jdbcType=VARCHAR}, #{editorReply,jdbcType=VARCHAR}, 
+      #{status,jdbcType=INTEGER}, #{parentId,jdbcType=INTEGER}, #{upNum,jdbcType=INTEGER}, 
+      #{downNum,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.lcpa.lclove.model.Comment">
     insert into comment
@@ -36,14 +46,29 @@
       <if test="articleId != null">
         ARTICLE_ID,
       </if>
-      <if test="name != null">
-        NAME,
+      <if test="nickName != null">
+        NICK_NAME,
       </if>
       <if test="email != null">
         EMAIL,
       </if>
       <if test="cotent != null">
         COTENT,
+      </if>
+      <if test="editorReply != null">
+        EDITOR_REPLY,
+      </if>
+      <if test="status != null">
+        STATUS,
+      </if>
+      <if test="parentId != null">
+        PARENT_ID,
+      </if>
+      <if test="upNum != null">
+        UP_NUM,
+      </if>
+      <if test="downNum != null">
+        DOWN_NUM,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -53,14 +78,29 @@
       <if test="articleId != null">
         #{articleId,jdbcType=INTEGER},
       </if>
-      <if test="name != null">
-        #{name,jdbcType=VARCHAR},
+      <if test="nickName != null">
+        #{nickName,jdbcType=VARCHAR},
       </if>
       <if test="email != null">
         #{email,jdbcType=VARCHAR},
       </if>
       <if test="cotent != null">
         #{cotent,jdbcType=VARCHAR},
+      </if>
+      <if test="editorReply != null">
+        #{editorReply,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="parentId != null">
+        #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="upNum != null">
+        #{upNum,jdbcType=INTEGER},
+      </if>
+      <if test="downNum != null">
+        #{downNum,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -70,8 +110,8 @@
       <if test="articleId != null">
         ARTICLE_ID = #{articleId,jdbcType=INTEGER},
       </if>
-      <if test="name != null">
-        NAME = #{name,jdbcType=VARCHAR},
+      <if test="nickName != null">
+        NICK_NAME = #{nickName,jdbcType=VARCHAR},
       </if>
       <if test="email != null">
         EMAIL = #{email,jdbcType=VARCHAR},
@@ -79,15 +119,35 @@
       <if test="cotent != null">
         COTENT = #{cotent,jdbcType=VARCHAR},
       </if>
+      <if test="editorReply != null">
+        EDITOR_REPLY = #{editorReply,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        STATUS = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="parentId != null">
+        PARENT_ID = #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="upNum != null">
+        UP_NUM = #{upNum,jdbcType=INTEGER},
+      </if>
+      <if test="downNum != null">
+        DOWN_NUM = #{downNum,jdbcType=INTEGER},
+      </if>
     </set>
     where ID = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.lcpa.lclove.model.Comment">
     update comment
     set ARTICLE_ID = #{articleId,jdbcType=INTEGER},
-      NAME = #{name,jdbcType=VARCHAR},
+      NICK_NAME = #{nickName,jdbcType=VARCHAR},
       EMAIL = #{email,jdbcType=VARCHAR},
-      COTENT = #{cotent,jdbcType=VARCHAR}
+      COTENT = #{cotent,jdbcType=VARCHAR},
+      EDITOR_REPLY = #{editorReply,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=INTEGER},
+      PARENT_ID = #{parentId,jdbcType=INTEGER},
+      UP_NUM = #{upNum,jdbcType=INTEGER},
+      DOWN_NUM = #{downNum,jdbcType=INTEGER}
     where ID = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

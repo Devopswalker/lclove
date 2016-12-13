@@ -7,6 +7,10 @@ public class QuestionOption {
 
     private String content;
 
+    private Integer order;
+
+    private String imgSrc;
+
     public Integer getId() {
         return id;
     }
@@ -29,5 +33,21 @@ public class QuestionOption {
 
     public void setContent(String content) {
         this.content = content == null ? null : content.trim();
+    }
+
+    public Integer getOrder() {
+        return order;
+    }
+
+    public void setOrder(Integer order) {
+        this.order = order;
+    }
+
+    public String getImgSrc() {
+        return imgSrc;
+    }
+
+    public void setImgSrc(String imgSrc) {
+        this.imgSrc = imgSrc == null ? null : imgSrc.trim();
     }
 }

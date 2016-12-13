@@ -15,6 +15,8 @@ public class Survey {
 
     private Integer status;
 
+    private String topic;
+
     public Integer getId() {
         return id;
     }
@@ -61,5 +63,13 @@ public class Survey {
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    public String getTopic() {
+        return topic;
+    }
+
+    public void setTopic(String topic) {
+        this.topic = topic == null ? null : topic.trim();
     }
 }
