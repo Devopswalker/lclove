@@ -17,4 +17,10 @@ public class CommonController {
     public String homePage() {
         return "admin/info.html";
     }
+
+    @RequestMapping(value = "/admin/upload")
+    public String uploadPage() {
+        return "admin/uploadtest.jsp";
+    }
+
 }
