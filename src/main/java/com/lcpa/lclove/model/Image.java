@@ -15,6 +15,8 @@ public class Image {
 
     private String topic;
 
+    private String fileName;
+
     public Integer getId() {
         return id;
     }
@@ -69,5 +71,13 @@ public class Image {
 
     public void setTopic(String topic) {
         this.topic = topic == null ? null : topic.trim();
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
     }
 }
