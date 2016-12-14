@@ -1,5 +1,7 @@
 package com.lcpa.lclove.model;
 
+import java.util.List;
+
 public class Question {
     private Integer id;
 
@@ -12,6 +14,8 @@ public class Question {
     private String description;
 
     private Integer seq;
+
+    private List<QuestionOption> questionOptions;
 
     public Integer getId() {
         return id;
@@ -59,5 +63,13 @@ public class Question {
 
     public void setSeq(Integer seq) {
         this.seq = seq;
+    }
+
+    public List<QuestionOption> getQuestionOptions() {
+        return questionOptions;
+    }
+
+    public void setQuestionOptions(List<QuestionOption> questionOptions) {
+        this.questionOptions = questionOptions;
     }
 }

@@ -1,6 +1,7 @@
 package com.lcpa.lclove.model;
 
 import java.util.Date;
+import java.util.List;
 
 public class Survey {
     private Integer id;
@@ -16,6 +17,8 @@ public class Survey {
     private Integer state;
 
     private String topic;
+
+    private List<Question> questions;
 
     public Integer getId() {
         return id;
@@ -71,5 +74,13 @@ public class Survey {
 
     public void setTopic(String topic) {
         this.topic = topic == null ? null : topic.trim();
+    }
+
+    public List<Question> getQuestions() {
+        return questions;
+    }
+
+    public void setQuestions(List<Question> questions) {
+        this.questions = questions;
     }
 }

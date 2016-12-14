@@ -19,6 +19,13 @@
     from image
     where ID = #{id,jdbcType=INTEGER}
   </select>
+  <select id="selectByPosition" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from image
+    where POSITION = #{position,jdbcType=INTEGER}
+    order by SEQ asc
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from image
     where ID = #{id,jdbcType=INTEGER}
@@ -30,6 +37,18 @@
     values (#{id,jdbcType=INTEGER}, #{position,jdbcType=INTEGER}, #{imgSrc,jdbcType=VARCHAR}, 
       #{seq,jdbcType=INTEGER}, #{url,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
       #{topic,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertImages" parameterType="java.util.List">
+    insert into image (POSITION, IMG_SRC,
+    SEQ, URL, DESCRIPTION,TOPIC) values
+    <foreach collection="list" item="item" index="index" separator=",">
+      (#{item.position,jdbcType=INTEGER},
+      #{item.imgSrc,jdbcType=VARCHAR},
+      #{item.seq,jdbcType=INTEGER},
+      #{item.url,jdbcType=VARCHAR},
+      #{item.description,jdbcType=VARCHAR},
+      #{item.topic,jdbcType=VARCHAR})
+    </foreach>
   </insert>
   <insert id="insertSelective" parameterType="com.lcpa.lclove.model.Image">
     insert into image

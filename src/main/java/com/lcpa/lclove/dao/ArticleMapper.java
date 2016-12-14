@@ -20,6 +20,8 @@ public interface ArticleMapper {
 
     List<Article> selectTopArticlesByType(Integer articleType, Integer startIndex, Integer pageSize);
 
+    List<Article> selectArticlesByKeyWords(String searchText, Integer startIndex, Integer pageSize);
+
     int updateByPrimaryKeySelective(Article record);
 
     int updateByPrimaryKeyWithBLOBs(Article record);

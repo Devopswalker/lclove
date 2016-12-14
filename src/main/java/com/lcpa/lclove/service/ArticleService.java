@@ -47,4 +47,11 @@ public class ArticleService{
         Integer pageSize = 3;
         return articleMapper.selectTopArticlesByType(articleType, startIndex, pageSize);
     }
+
+    public List<Article> getArticlesByKeyWords(String searchText){
+        Integer startIndex = 0;
+        Integer pageSize = 3;
+        searchText = "%"+searchText+"%";
+        return articleMapper.selectArticlesByKeyWords(searchText, startIndex, pageSize);
+    }
 }

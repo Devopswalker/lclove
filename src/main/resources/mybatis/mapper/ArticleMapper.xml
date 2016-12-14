@@ -31,7 +31,7 @@
     from article
     where ID = #{id,jdbcType=INTEGER}
   </select>
-  <select id="selectArticleByType" resultMap="ResultMapWithBLOBs">
+  <select id="selectArticleByType" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from article
@@ -39,14 +39,22 @@
     order by PUB_DATE desc
     LIMIT #{1},#{2}
   </select>
-  <select id="selectHomeArticle" resultMap="ResultMapWithBLOBs">
+  <select id="selectArticlesByKeyWords" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from article
+    where CONTENT like #{0}
+    order by PUB_DATE desc
+    LIMIT #{1},#{2}
+  </select>
+  <select id="selectHomeArticle" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from article
     order by PUB_DATE desc
     LIMIT #{0},#{1}
   </select>
-  <select id="selectTopArticlesByType" resultMap="ResultMapWithBLOBs">
+  <select id="selectTopArticlesByType" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from article
