@@ -9,6 +9,8 @@ public interface ImageMapper {
 
     int insert(Image record);
 
+    int insertUploadImage(Image image);
+
     int updateImageSrc(Image record);
 
     int insertSelective(Image record);
