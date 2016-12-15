@@ -9,15 +9,15 @@
     <result column="URL" jdbcType="VARCHAR" property="url" />
     <result column="DESCRIPTION" jdbcType="VARCHAR" property="description" />
     <result column="TOPIC" jdbcType="VARCHAR" property="topic" />
+    <result column="FILE_NAME" jdbcType="VARCHAR" property="fileName" />
   </resultMap>
   <sql id="Base_Column_List">
-    ID, POSITION, IMG_SRC, SEQ, URL, DESCRIPTION, TOPIC
+    ID, POSITION, IMG_SRC, SEQ, URL, DESCRIPTION, TOPIC,FILE_NAME
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
     <include refid="Base_Column_List" />
     from image
-    where ID = #{id,jdbcType=INTEGER}
   </select>
   <select id="selectByPosition" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select
@@ -30,13 +30,16 @@
     delete from image
     where ID = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.lcpa.lclove.model.Image">
-    insert into image (ID, POSITION, IMG_SRC, 
+  <insert id="insert" parameterType="com.lcpa.lclove.model.Image" useGeneratedKeys="true" keyProperty="id">
+    insert into image (POSITION, IMG_SRC,
       SEQ, URL, DESCRIPTION, 
-      TOPIC)
-    values (#{id,jdbcType=INTEGER}, #{position,jdbcType=INTEGER}, #{imgSrc,jdbcType=VARCHAR}, 
+      TOPIC, FILE_NAME)
+    values (#{position,jdbcType=INTEGER}, #{imgSrc,jdbcType=VARCHAR},
       #{seq,jdbcType=INTEGER}, #{url,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
-      #{topic,jdbcType=VARCHAR})
+      #{topic,jdbcType=VARCHAR}, #{fileName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="updateImageSrc" parameterType="com.lcpa.lclove.model.Image">
+    update image set IMG_SRC = #{imgSrc},URL = #{url}, FILE_NAME = #{fileName} WHERE ID = #{id}
   </insert>
   <insert id="insertImages" parameterType="java.util.List">
     insert into image (POSITION, IMG_SRC,
