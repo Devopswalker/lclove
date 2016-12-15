@@ -8,6 +8,9 @@
     <title>网站信息</title>  
 	<link rel="stylesheet" href="/css/admin/pintuer.css">
 	<link rel="stylesheet" href="/css/admin/admin.css">
+	<script src="/js/plugins/ueditor/ueditor.config.js"></script>
+	<script src="/js/plugins/ueditor/ueditor.all.min.js"></script>
+	<script src="/js/plugins/ueditor/lang/zh-cn/zh-cn.js"></script>
 	<script src="/js/jquery.js"></script>
 	<script src="/js/pintuer.js"></script>
 </head>
@@ -157,8 +160,12 @@
           <label>底部信息：</label>
         </div>
         <div class="field">
-          <textarea name="scopyright" class="input" style="height:120px;"></textarea>
-          <div class="tips"></div>
+        	<script id="container" name="content" type="text/plain" style="width:100%;height:200px;">这里写你的初始化内容</script>
+			<script type="text/javascript">
+				var editor = UE.getEditor('container');
+			</script>
+          <!-- <textarea name="scopyright" class="input" style="height:120px;"></textarea>
+          <div class="tips"></div> -->
         </div>
       </div>
       <div class="form-group">

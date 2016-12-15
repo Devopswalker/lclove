@@ -13,14 +13,18 @@ public class CommonController {
 		//return "admin/index.html";
     }
 	
-	@RequestMapping(value = "/admin/info.xhtml")
+	@RequestMapping(value = "/admin/home.xhtml")
     public String homePage() {
-        return "admin/info.html";
+        return "admin/homePage.vm";
     }
+	
+	@RequestMapping(value = "/admin/pass.xhtml")
+	public String pass() {
+		return "admin/passPage.vm";
+	}
 
     @RequestMapping(value = "/admin/upload")
     public String uploadPage() {
         return "admin/uploadtest.jsp";
     }
-
 }
