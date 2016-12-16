@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="/js/jquery-1.8.3.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="https://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<table class="table table-hover">
+  <caption>已经上传的图片</caption>
+  <thead>
+  <tr>
+    <th>名称</th>
+    <th>Position</th>
+    <th>URL</th>
+    <th>Description</th>
+    <th>custom</th>
+  </tr>
+  </thead>
+  <tbody>
+  	#foreach($img in $images)
+		<tr>
+			#if($VmUtils.eq($img.id,"13"))
+			<td>$img.id "逻辑操作，VmUtils是一个java工具类"</td>
+			#else
+			<td>$img.id</td>
+			#end
+			<td>$img.fileName</td>
+			<td>$img.imgSrc</td>
+			<td>$img.description</td>
+			#set($local="自定义属性的值,各种计算,简单攻略：<a href='http://www.cnblogs.com/likwo/archive/2010/05/13/1734936.html'>Velocity语法</a>")
+			<td>$local</td>
+		</tr>
+	#end
+  </tbody>
+</table>
+
+</body>
+</html> 

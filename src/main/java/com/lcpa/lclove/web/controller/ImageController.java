@@ -3,6 +3,8 @@ package com.lcpa.lclove.web.controller;
 import com.lcpa.lclove.model.Image;
 import com.lcpa.lclove.service.ImageService;
 import com.lcpa.lclove.support.Config;
+
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -37,6 +39,25 @@ public class ImageController {
         List<Image> allImages = imageService.getAllImage();
         model.addAllAttributes(allImages);
         return "admin/uploadtest.jsp";
+
+    }
+    
+    @RequestMapping(value = "/imglist.xhtml")
+    public String imgList(ModelMap model){
+        List<Image> allImages = imageService.getAllImage();
+        //TODO:Only Demo
+        if(CollectionUtils.isEmpty(allImages)){
+        	for (int i = 0; i < 5 ; i++) {
+				Image img = new Image();
+				img.setId(i);
+				img.setFileName("fileName" + i);
+				img.setImgSrc("http://www.src" + i + ".com");
+				img.setDescription("SRC:http://www.src" + i + ".com");
+				allImages.add(img);
+			}
+        }
+        model.put("images", allImages);
+        return "admin/common/imgList.vm";
 
     }
 
