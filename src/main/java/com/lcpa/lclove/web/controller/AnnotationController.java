@@ -72,12 +72,6 @@ public abstract class AnnotationController{
 	protected final String showJsonSuccess(ModelMap model){
 		return showJsonSuccess(model, "");
 	}
-	protected final String showJsonSuccess(ModelMap model, String retval){
-		return showJsonSuccess(model, retval);
-	}
-	protected final String showJsonSuccess(ModelMap model, Map jsonMap){
-		return showJsonSuccess(model, jsonMap);
-	}
 	protected final String showJsonSuccess(ModelMap model, Object object){
 		Map jsonMap = new HashMap();
 		jsonMap.put("success", true);

@@ -355,7 +355,7 @@ public abstract class WebUtils {
 	 * @param clazz
 	 * @return
 	 */
-	public <T> T bindReqParams(HttpServletRequest request, Class<T> clazz) {
+	public static <T> T bindReqParams(HttpServletRequest request, Class<T> clazz) {
 		String encode = "utf-8";
 		BufferedReader in = null;
 		try {

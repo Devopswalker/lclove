@@ -244,6 +244,6 @@
 </div>
 
 <script type="text/javascript" src="js/jquery.js"></script>
-<script type="text/javascript" src="js/lc.js"></script>
+<script type="text/javascript" src="js/lclove-util.js"></script>
 </body>
 </html>

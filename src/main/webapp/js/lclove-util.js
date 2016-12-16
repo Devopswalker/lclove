@@ -160,3 +160,73 @@ function navClickInHome(index){
 	}
 }
 
+
+/* Ajax  */
+$.extend({
+	getRequest : function(url, data, async, type, dataType, successfn, errorfn) {
+        async = (async==null || async==="" || typeof(async)=="undefined")? "true" : async;
+        type = (type==null || type=="" || typeof(type)=="undefined")? "post" : type;
+        dataType = (dataType==null || dataType=="" || typeof(dataType)=="undefined")? "json" : dataType;
+        data = (data==null || data=="" || typeof(data)=="undefined")? {} : data;
+        $.ajax({
+            type: type,
+            async: async,
+            data: data,
+            url: url,
+            dataType: dataType,
+            success: function(r){
+                successfn(r);
+            },
+            error: function(e){
+            	errorfn(e);
+            }
+        });
+    },
+    getData: function(url, data, async, type, dataType, isJsonType, fn_init){
+	   	 var successfn = function(result){
+	   		if(result.success){
+	   			var resultData = null;
+	   			if(isJsonType){
+	   				resultData = eval('(' + result.data + ')');	
+	   			}else{
+	   				resultData = result;
+	   			}
+	   			fn_init(resultData);
+	   		 }else{
+				//$.showPopupMessage({type:"warning",message: result.msg});
+	   			 alert(result.msg);
+	   		}
+	   	 };
+	   	 var errorfn = function(jqXHR, textStatus, errorThrown){
+	   	 };
+	   	 $.getRequest(url, data, async, type, dataType, successfn, errorfn);
+    }
+});
+/* Ajax  */
+
+/*refresh page*/
+function refreshPage(pageUrl){
+	if(typeof pageUrl != "undefined"){
+		document.location.href = pageUrl;
+	}else{
+		var loc="" + document.location.href, idx = loc.indexOf("refresh"), anidx = loc.indexOf("#"), anchor="";
+		if(anidx > 0){
+			anchor = loc.substring(anidx);
+			loc = loc.substring(0, anidx);
+		}
+		if(idx > 0){
+			loc = loc.substring(0, idx - 1);
+		}else{
+			idx = loc.indexOf("?");
+			if(idx > 0){
+				loc=loc+"&refresh=1";
+			}else{
+				loc=loc+"?refresh=1";
+			}
+		}
+		loc += anchor;
+		document.location.href = loc;
+	}
+}
+/*refresh page*/
+

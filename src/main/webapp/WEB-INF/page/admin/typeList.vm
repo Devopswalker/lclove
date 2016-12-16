@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="renderer" content="webkit">
+<title></title>
+<link rel="stylesheet" href="${staticPath}css/admin/pintuer.css">
+<link rel="stylesheet" href="${staticPath}css/admin/admin.css">
+<script src="${staticPath}js/jquery.js"></script>
+<script src="${staticPath}js/pintuer.js"></script>
+<script src="${staticPath}js/lclove-util.js"></script>
+</head>
+<body>
+<div class="panel admin-panel">
+  <div class="panel-head"><strong class="icon-reorder"> 分类列表</strong></div>
+  <div class="padding border-bottom">
+    <button type="button" class="button border-yellow" onclick="addType();"><span class="icon-plus-square-o"></span> 添加分类</button>
+  </div>
+  <table class="table table-hover text-center">
+    <tr>
+      <th width="10%">ID</th>
+      <th width="20%">名称</th>
+      <th width="10%">操作</th>
+    </tr>
+    #foreach($type in $typeList)
+	<tr>
+		<td>$!type.id</td>
+		<td>$!type.name</td>
+		<td>
+	      	<div class="button-group"> 
+	      		<a class="button border-main" onclick="editType($!type.id,'$!type.name');"><span class="icon-edit"></span> 修改</a>
+	      		<a class="button border-red" onclick="delType($!type.id);"><span class="icon-trash-o"></span> 删除</a>
+	      	</div>
+      </td>
+	</tr>
+	#end
+  </table>
+</div>
+<script type="text/javascript">
+
+function addType(){
+	$("#id").val('');
+	$("#name").val('');
+	window.location.href='#doAdd';
+}
+
+function delType(id){
+	if(confirm("您确定要删除吗?")){			
+		var url = '${basePath}admin/delType.xhtml';
+		var values = {"id":id};
+		$.getData(url, values, true, 'get', 'json', false, delCallBack);
+	}
+}
+function delCallBack(r){
+	if(r.success){
+		refreshPage();
+	}else{
+		alert(r.msg);
+	}
+};
+
+function editType(id, name){
+	$("#id").val(id);
+	$("#name").val(name);
+	window.location.href='#doAdd';
+}
+</script>
+<div class="panel admin-panel margin-top">
+  <div class="panel-head" id="doAdd"><strong><span class="icon-pencil-square-o"></span>编辑分类</strong></div>
+  <div class="body-content">
+    <form method="post" class="form-x" action="${basePath}admin/saveType.xhtml">
+      <input type="hidden" id="id" name="id" value=""/>
+      <div class="form-group">
+        <div class="label">
+          <label>分类名称：</label>
+        </div>
+        <div class="field">
+          <input type="text" class="input w50" id="name" name="name" value=""/>
+          <div class="tips"></div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="label">
+          <label>批量添加：</label>
+        </div>
+        <div class="field">
+          <textarea type="text" class="input w50" name="tits" style="height:100px;" placeholder="批量名称请逗号,分隔"></textarea>
+          <div class="tips">批量名称请逗号,分隔</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="label">
+          <label></label>
+        </div>
+        <div class="field">
+          <button class="button bg-main icon-check-square-o" type="submit"> 提交</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+</body>
+</html>

@@ -25,6 +25,22 @@ public class ArticleService{
     public void saveArticle(Article article){
         articleMapper.insert(article);
     }
+    
+    public void saveArticleType(ArticleType type){
+    	articleTypeMapper.insertSelective(type);
+    }
+    
+    public void updateArticleTypeById(ArticleType record){
+    	articleTypeMapper.updateByPrimaryKey(record);
+    }
+    
+    public void delArticleTypeById(Integer id){
+    	articleTypeMapper.deleteByPrimaryKey(id);
+    }
+    
+    public ArticleType getArticleTypeById(Integer id){
+    	return articleTypeMapper.selectByPrimaryKey(id);
+    }
 
     public List<ArticleType> getAllArticleType(){
         return articleTypeMapper.selectAll();
