@@ -6,7 +6,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-import com.lcpa.lclove.util.BaseWebUtils;
+import com.lcpa.lclove.util.WebUtils;
 import com.lcpa.lclove.util.LogTraceUtil.LogTrace;
 
 public class RequestTrace  implements LogTrace{
@@ -16,7 +16,7 @@ public class RequestTrace  implements LogTrace{
 		if(request!=null){
 			String trace = request.getRequestURI();
 			if(!ServletFileUpload.isMultipartContent(request)){
-				trace += ":" + BaseWebUtils.getParamStr(request, true);
+				trace += ":" + WebUtils.getParamStr(request);
 			}
 			return trace;
 		}

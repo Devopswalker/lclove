@@ -1,12 +1,13 @@
 package com.lcpa.lclove.util;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -26,8 +27,9 @@ import org.apache.log4j.Logger;
 
 import com.lcpa.lclove.support.HtmlParser;
 
-public abstract class BaseWebUtils {
-	protected final static transient Logger dbLogger = Logger.getLogger(BaseWebUtils.class);
+public abstract class WebUtils {
+	protected final static transient Logger dbLogger = Logger.getLogger(WebUtils.class);
+	
 	public String checkScript(HttpServletRequest request){
 		String match = "onclick|onfocus|onblur|onload|onerror";
 		for(String[] v: request.getParameterMap().values()){
@@ -74,9 +76,9 @@ public abstract class BaseWebUtils {
 			if(!success){
 				jsonMap.put("msg", retval);
 			}else{
-				jsonMap.put("retval", retval);
+				jsonMap.put("data", retval);
 			}
-			writer.write("var data=" + JsonUtils.writeObjectToJson(jsonMap));
+			writer.write(JsonUtils.writeObjectToJson(jsonMap));
 			res.flushBuffer();
 		} catch (IOException e) {
 		}
@@ -122,27 +124,7 @@ public abstract class BaseWebUtils {
 		}
 		return result;
 	}
-	/**
-	 * 返回Map，但key=“head4”+originalKey
-	 * @param request
-	 * @return
-	 */
-	public static final Map<String, String> getHeaderMapWidthPreKey(HttpServletRequest request){
-		Map<String, String> result = new HashMap<String, String>();
-		Enumeration<String> it = request.getHeaderNames();
-		String key = null;
-		while (it.hasMoreElements()) {
-			key = it.nextElement();
-			String value = request.getHeader(key);
-			//禁止cookie日志打印
-			if(StringUtils.containsIgnoreCase(key, "cookie")){
-				value = "*******";
-			}
-			result.put("head4"+StringUtils.lowerCase(key), value);
-		}
-		return result;
-
-	}
+	
 	/**
 	 * 获取html中图片的url
 	 * 
@@ -151,19 +133,6 @@ public abstract class BaseWebUtils {
 	 */
 	public static final List<String> getPictures(String html) {
 		return HtmlParser.getNodeAttrList(html, "img", "src");
-	}
-	
-	public static final List<String> getNodeAttrList(String html, String nodename, String attrName){
-		return HtmlParser.getNodeAttrList(html, nodename, attrName);
-	}
-	/**
-	 * 获取html中视频的url
-	 * 
-	 * @param html
-	 * @return
-	 */
-	public static final List<String> getVideos(String html) {
-		return HtmlParser.getNodeAttrList(html, "embed", "src");
 	}
 
 	public static final void clearCookie(HttpServletResponse response, String path, String cookieName) {
@@ -232,6 +201,11 @@ public abstract class BaseWebUtils {
 		if (StringUtils.contains(StringUtils.lowerCase(str), "<iframe"))
 			return true;// 验证iframe
 		return false;
+	}
+	
+	public static final String getParamStr(HttpServletRequest request) {
+		Map<String, String> requestMap = getRequestMap(request);
+		return "" + requestMap;
 	}
 
 	public static final Map<String, String> getRequestParams(HttpServletRequest request, String... pnames) {
@@ -367,43 +341,35 @@ public abstract class BaseWebUtils {
 		return contextPath;
 	}
 
-	public static final String getParamStr(HttpServletRequest request, boolean removeSensitive, String... sensitiveKeys) {
-		Map<String, String> requestMap = getRequestMap(request);
-		if(removeSensitive){
-			removeSensitiveInfo(requestMap, sensitiveKeys);
-		}
-		return "" + requestMap;
-	}
-	private static final List<String> DEFAULT_SENSITIVE = Arrays.asList("mobile", "pass", "sign", "encode", "token", "check", "card");
-	private static final List<String> IGNORE_KEYS = Arrays.asList("mobileType");
-	public static final void removeSensitiveInfo(Map<String, String> params, String... keys) {
-		List<String> keyList = null;
-		if(keys!=null){
-			keyList = new ArrayList<String>(DEFAULT_SENSITIVE);
-			keyList.addAll(Arrays.asList(keys));
-		}else{
-			keyList = DEFAULT_SENSITIVE;
-		}
-
-		for(String pname: new ArrayList<String>(params.keySet())){
-			int valueLen = StringUtils.length(params.get(pname));
-			if(valueLen > 1000){
-				params.put(pname, StringUtils.substring(params.get(pname), 1000) + "->LEN:" + valueLen);
-			}
-			if(!IGNORE_KEYS.contains(pname)){
-				for(String key: keyList){
-					if(StringUtils.containsIgnoreCase(pname, key) && StringUtils.isNotBlank(params.get(pname))){
-						params.put(pname, "MG" + StringUtil.md5("kcj3STidSC" + params.get(pname)));
-					}
-				}
-			}
-		}
-	}
 	public static final String getRemotePort(HttpServletRequest request) {//获取请求端口号
 		String port = request.getHeader("x-client-port");
 		if(StringUtils.isBlank(port)){
 			return ""+request.getRemotePort();
 		}
 		return port;
+	}
+	
+	/**
+	 * 用于请求参数绑定
+	 * @param request
+	 * @param clazz
+	 * @return
+	 */
+	public <T> T bindReqParams(HttpServletRequest request, Class<T> clazz) {
+		String encode = "utf-8";
+		BufferedReader in = null;
+		try {
+			in = new BufferedReader(new InputStreamReader(request.getInputStream(), encode));
+			String result = "";
+			String line;
+			while ((line = in.readLine()) != null) {
+				result += line;
+			}
+			in.close();
+			return JsonUtils.readJsonToObject(clazz, result);
+		} catch (IOException e) {
+			dbLogger.error("", e);
+		}
+		return null;
 	}
 }

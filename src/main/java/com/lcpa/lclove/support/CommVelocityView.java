@@ -14,7 +14,7 @@ import org.apache.velocity.tools.view.ParameterTool;
 import org.springframework.web.servlet.view.velocity.VelocityToolboxView;
 import org.springframework.web.util.NestedServletException;
 
-import com.lcpa.lclove.util.BaseWebUtils;
+import com.lcpa.lclove.util.WebUtils;
 import com.lcpa.lclove.util.LogTraceUtil;
 import com.lcpa.lclove.util.ReqLogUtil;
 
@@ -98,7 +98,7 @@ public class CommVelocityView extends VelocityToolboxView{
 					"], method '" + ex.getMethodName() + "'",
 					cause==null ? ex : cause);
 		} catch (Exception e) {
-			log.error("uri:" + request.getRequestURI() + ", params:" + BaseWebUtils.getParamStr(request, true), e);
+			log.error("uri:" + request.getRequestURI() + ", params:" + WebUtils.getParamStr(request), e);
 			throw e;
 		}
 	}
@@ -107,7 +107,7 @@ public class CommVelocityView extends VelocityToolboxView{
 		if(ViewContextDebugger.isDebugEnabled(uri)){
 			String unused = context.getUnUsedProperty();
 			if(StringUtils.isNotBlank(unused)){
-				String params = BaseWebUtils.getParamStr(request, true);
+				String params = WebUtils.getParamStr(request);
 				if(StringUtils.isNotBlank(unused)){
 					log.warn("UNUSED_PROPERTY:" + uri + ":" + unused + ":REQUEST:" + params);
 				}
