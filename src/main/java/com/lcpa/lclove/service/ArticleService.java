@@ -1,5 +1,6 @@
 package com.lcpa.lclove.service;
 
+import com.lcpa.lclove.dao.ArticleContentMapper;
 import com.lcpa.lclove.dao.ArticleMapper;
 import com.lcpa.lclove.dao.ArticleTypeMapper;
 import com.lcpa.lclove.model.Article;
@@ -20,10 +21,23 @@ public class ArticleService{
     public ArticleMapper articleMapper;
 
     @Autowired
+    public ArticleContentMapper articleContentMapper;
+
+    @Autowired
     public ArticleTypeMapper articleTypeMapper;
 
     public void saveArticle(Article article){
         articleMapper.insert(article);
+        articleContentMapper.insert(article);
+    }
+
+    public void updateArticle(Article article){
+        articleMapper.updateByPrimaryKey(article);
+        articleContentMapper.updateByPrimaryKeyWithBLOBs(article);
+    }
+    public  void removeArticle(Integer id){
+        articleMapper.deleteByPrimaryKey(id);
+        articleContentMapper.deleteByPrimaryKey(id);
     }
     
     public void delArticleById(Integer id){
@@ -68,6 +82,12 @@ public class ArticleService{
         Integer startIndex = 0;
         Integer pageSize = pageNo*2;
         return articleMapper.selectHomeArticle(startIndex, pageSize);
+    }
+
+    public Article getArticleContent(Article article){
+        Article content = articleContentMapper.selectByPrimaryKey(article.getId());
+        article.setContent(content.getContent());
+        return article;
     }
 
     public List<Article> getTopArticlesByType(Integer articleType){

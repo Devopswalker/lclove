@@ -18,10 +18,23 @@
     from question
     where ID = #{id,jdbcType=INTEGER}
   </select>
+  <select id="selectSurveyId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from question
+    where SURVEY_ID = #{id,jdbcType=INTEGER}
+    order by SEQ ASC 
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from question
     where ID = #{id,jdbcType=INTEGER}
   </delete>
+  <delete id="deleteBySurveyId" parameterType="java.lang.Integer">
+    delete from question
+    where SURVEY_ID = #{id,jdbcType=INTEGER}
+  </delete>
+
   <insert id="insert" parameterType="com.lcpa.lclove.model.Question">
     insert into question (ID, SURVEY_ID, INPUT_TYPE, 
       TITLE, DESCRIPTION, SEQ
@@ -29,6 +42,17 @@
     values (#{id,jdbcType=INTEGER}, #{surveyId,jdbcType=INTEGER}, #{inputType,jdbcType=INTEGER}, 
       #{title,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{seq,jdbcType=INTEGER}
       )
+  </insert>
+  <insert id="insertQuestions" parameterType="java.util.List" useGeneratedKeys="true" keyProperty="id">
+    insert into question (SURVEY_ID, INPUT_TYPE,
+    TITLE, DESCRIPTION, SEQ
+    )
+    values
+    <foreach collection="list" item="item" index="index" separator="," >
+      (#{item.surveyId,jdbcType=INTEGER}, #{item.inputType,jdbcType=INTEGER},
+      #{item.title,jdbcType=VARCHAR}, #{item.description,jdbcType=VARCHAR}, #{item.seq,jdbcType=INTEGER}
+      )
+    </foreach>
   </insert>
   <insert id="insertSelective" parameterType="com.lcpa.lclove.model.Question">
     insert into question

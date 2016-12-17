@@ -39,6 +39,7 @@ public class ImageService {
             file.transferTo(targetFile);
         } catch (Exception e) {
             e.printStackTrace();
+            //TODO throw a exception, transaction will not commit.delete action is not needed?
             imageMapper.deleteByPrimaryKey(image.getId());
         }
     }
