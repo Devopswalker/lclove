@@ -23,11 +23,11 @@
     delete from survey
     where ID = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.lcpa.lclove.model.Survey">
-    insert into survey (ID, TITLE, DESCRIPTION, 
+  <insert id="insert" parameterType="com.lcpa.lclove.model.Survey" useGeneratedKeys="true" keyProperty="id">
+    insert into survey (TITLE, DESCRIPTION,
       START_TIME, END_TIME, STATE, 
       TOPIC)
-    values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
+    values (#{title,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR},
       #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{state,jdbcType=INTEGER}, 
       #{topic,jdbcType=VARCHAR})
   </insert>

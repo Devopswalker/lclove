@@ -13,21 +13,13 @@
     <result column="EDITOR" jdbcType="VARCHAR" property="editor" />
     <result column="STATE" jdbcType="INTEGER" property="state" />
   </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.lcpa.lclove.model.Article">
-    <result column="CONTENT" jdbcType="LONGVARCHAR" property="content" />
-  </resultMap>
   <sql id="Base_Column_List">
     ID, TITLE, PUB_DATE, LIKE_NUM, SCAN_NUM, ARTICLE_TYPE, DESCRIPTION, TOPIC, EDITOR, 
     STATE
   </sql>
-  <sql id="Blob_Column_List">
-    CONTENT
-  </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
     select 
     <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
     from article
     where ID = #{id,jdbcType=INTEGER}
   </select>
@@ -43,7 +35,7 @@
     select
     <include refid="Base_Column_List" />
     from article
-    where CONTENT like #{0}
+    where TITLE like #{0}
     order by PUB_DATE desc
     LIMIT #{1},#{2}
   </select>
@@ -66,15 +58,15 @@
     delete from article
     where ID = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.lcpa.lclove.model.Article">
+  <insert id="insert" parameterType="com.lcpa.lclove.model.Article" useGeneratedKeys="true" keyProperty="id">
     insert into article (ID, TITLE, PUB_DATE, 
       LIKE_NUM, SCAN_NUM, ARTICLE_TYPE, 
       DESCRIPTION, TOPIC, EDITOR, 
-      STATE, CONTENT)
+      STATE)
     values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{pubDate,jdbcType=TIMESTAMP}, 
       #{likeNum,jdbcType=INTEGER}, #{scanNum,jdbcType=INTEGER}, #{articleType,jdbcType=INTEGER}, 
       #{description,jdbcType=VARCHAR}, #{topic,jdbcType=VARCHAR}, #{editor,jdbcType=VARCHAR}, 
-      #{state,jdbcType=INTEGER}, #{content,jdbcType=LONGVARCHAR})
+      #{state,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.lcpa.lclove.model.Article">
     insert into article
@@ -109,9 +101,6 @@
       <if test="state != null">
         STATE,
       </if>
-      <if test="content != null">
-        CONTENT,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -143,9 +132,6 @@
       </if>
       <if test="state != null">
         #{state,jdbcType=INTEGER},
-      </if>
-      <if test="content != null">
-        #{content,jdbcType=LONGVARCHAR},
       </if>
     </trim>
   </insert>
@@ -179,9 +165,6 @@
       <if test="state != null">
         STATE = #{state,jdbcType=INTEGER},
       </if>
-      <if test="content != null">
-        CONTENT = #{content,jdbcType=LONGVARCHAR},
-      </if>
     </set>
     where ID = #{id,jdbcType=INTEGER}
   </update>
@@ -195,8 +178,7 @@
       DESCRIPTION = #{description,jdbcType=VARCHAR},
       TOPIC = #{topic,jdbcType=VARCHAR},
       EDITOR = #{editor,jdbcType=VARCHAR},
-      STATE = #{state,jdbcType=INTEGER},
-      CONTENT = #{content,jdbcType=LONGVARCHAR}
+      STATE = #{state,jdbcType=INTEGER}
     where ID = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.lcpa.lclove.model.Article">

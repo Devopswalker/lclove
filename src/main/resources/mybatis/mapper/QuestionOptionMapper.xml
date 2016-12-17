@@ -3,6 +3,7 @@
 <mapper namespace="com.lcpa.lclove.dao.QuestionOptionMapper">
   <resultMap id="BaseResultMap" type="com.lcpa.lclove.model.QuestionOption">
     <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="SURVEY_ID" jdbcType="INTEGER" property="surveyId" />
     <result column="QUESTION_ID" jdbcType="INTEGER" property="questionId" />
     <result column="CONTENT" jdbcType="VARCHAR" property="content" />
     <result column="SEQ" jdbcType="INTEGER" property="seq" />
@@ -17,9 +18,21 @@
     from question_option
     where ID = #{id,jdbcType=INTEGER}
   </select>
+  <select id="selectQuestionsId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from question_option
+    where QUESTION_ID = #{id,jdbcType=INTEGER}
+    order by SEQ ASC
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from question_option
     where ID = #{id,jdbcType=INTEGER}
+  </delete>
+
+  <delete id="deleteBySurveyId" parameterType="java.lang.Integer">
+    delete from question_option
+    where SURVEY_ID = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.lcpa.lclove.model.QuestionOption">
     insert into question_option (ID, QUESTION_ID, CONTENT, 
@@ -27,6 +40,16 @@
     values (#{id,jdbcType=INTEGER}, #{questionId,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR}, 
       #{seq,jdbcType=INTEGER}, #{imgSrc,jdbcType=VARCHAR})
   </insert>
+  <insert id="insertOptions" parameterType="java.util.List" useGeneratedKeys="true" keyProperty="id">
+    insert into question_option (ID, QUESTION_ID, CONTENT,
+    SEQ, IMG_SRC)
+    values
+    <foreach collection="list" item="item" index="index" separator="," >
+      (#{item.questionId,jdbcType=INTEGER}, #{item.content,jdbcType=VARCHAR},
+      #{item.seq,jdbcType=INTEGER}, #{item.imgSrc,jdbcType=VARCHAR})
+    </foreach>
+  </insert>
+
   <insert id="insertSelective" parameterType="com.lcpa.lclove.model.QuestionOption">
     insert into question_option
     <trim prefix="(" suffix=")" suffixOverrides=",">
