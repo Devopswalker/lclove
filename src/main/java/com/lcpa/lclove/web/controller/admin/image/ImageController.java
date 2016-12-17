@@ -1,4 +1,4 @@
-package com.lcpa.lclove.web.controller;
+package com.lcpa.lclove.web.controller.admin.image;
 
 import com.lcpa.lclove.model.Image;
 import com.lcpa.lclove.service.ImageService;

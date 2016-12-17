@@ -26,16 +26,28 @@ public class ArticleService{
         articleMapper.insert(article);
     }
     
+    public void delArticleById(Integer id){
+    	articleMapper.deleteByPrimaryKey(id);
+    }
+    
+    public void updateArticleById(Article article){
+    	articleMapper.updateByPrimaryKey(article);
+    }
+    
+    public Article getArticleById(Integer id){
+    	return articleMapper.selectByPrimaryKey(id);
+    }
+    
     public void saveArticleType(ArticleType type){
     	articleTypeMapper.insertSelective(type);
     }
     
-    public void updateArticleTypeById(ArticleType record){
-    	articleTypeMapper.updateByPrimaryKey(record);
-    }
-    
     public void delArticleTypeById(Integer id){
     	articleTypeMapper.deleteByPrimaryKey(id);
+    }
+    
+    public void updateArticleTypeById(ArticleType record){
+    	articleTypeMapper.updateByPrimaryKey(record);
     }
     
     public ArticleType getArticleTypeById(Integer id){

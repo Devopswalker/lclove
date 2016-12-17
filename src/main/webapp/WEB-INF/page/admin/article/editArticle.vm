@@ -6,10 +6,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <meta name="renderer" content="webkit">
 <title></title>
-<link rel="stylesheet" href="../css/admin/pintuer.css">
-<link rel="stylesheet" href="../css/admin/admin.css">
-<script src="../js/jquery.js"></script>
-<script src="../js/pintuer.js"></script>
+	<link rel="stylesheet" href="${staticPath}css/admin/pintuer.css">
+	<link rel="stylesheet" href="${staticPath}css/admin/admin.css">
+	<script src="${staticPath}js/jquery.js"></script>
+	<script src="${staticPath}js/pintuer.js"></script>
+	<script src="${staticPath}js/plugins/layer/laydate/laydate.js"></script>
 </head>
 <body>
 <div class="panel admin-panel">
@@ -30,13 +31,11 @@
           <label>图片：</label>
         </div>
         <div class="field">
-          <input type="text" id="url1" name="img" class="input tips" style="width:25%; float:left;"  value=""  data-toggle="hover" data-place="right" data-image="" />
-          <input type="button" class="button bg-blue margin-left" id="image1" value="+ 浏览上传"  style="float:left;">
-          <div class="tipss">图片尺寸：500*500</div>
+          <input type="text" id="url1" name="topic" class="input tips" style="width:25%; float:left;"  value=""  data-toggle="hover" data-place="right" data-image="" />
+          <input type="button" class="button bg-blue margin-left" id="uploadBtn" value="+ 浏览上传"  style="float:left;">
+          <div class="tipss">图片尺寸：100*80</div>
         </div>
       </div>     
-      
-      <if condition="$iscid eq 1">
         <div class="form-group">
           <div class="label">
             <label>分类标题：</label>
@@ -44,10 +43,9 @@
           <div class="field">
             <select name="cid" class="input w50">
               <option value="">请选择分类</option>
-              <option value="">产品分类</option>
-              <option value="">产品分类</option>
-              <option value="">产品分类</option>
-              <option value="">产品分类</option>
+			  #foreach($type in $typeList)
+              <option value="$type.id" #if($VmUtils.eq($type.id, $article.articleType))selected#end>$type.name</option>
+              #end
             </select>
             <div class="tips"></div>
           </div>
@@ -57,19 +55,16 @@
             <label>其他属性：</label>
           </div>
           <div class="field" style="padding-top:8px;"> 
-            首页 <input id="ishome"  type="checkbox" />
-            推荐 <input id="isvouch"  type="checkbox" />
-            置顶 <input id="istop"  type="checkbox" /> 
-         
+            首页 <input id="tohome" name="tohome" type="checkbox" #if($VmUtils.eq($article.tohome,'Y')) checked="checked" #end/>
+            推荐 <input id="torecom" name="torecom" type="checkbox" #if($VmUtils.eq($article.torecom,'Y')) checked="checked" #end/>
           </div>
         </div>
-      </if>
       <div class="form-group">
         <div class="label">
-          <label>描述：</label>
+          <label>简要说明：</label>
         </div>
         <div class="field">
-          <textarea class="input" name="note" style=" height:90px;"></textarea>
+          <textarea class="input" name="briefnote" style=" height:90px;"></textarea>
           <div class="tips"></div>
         </div>
       </div>

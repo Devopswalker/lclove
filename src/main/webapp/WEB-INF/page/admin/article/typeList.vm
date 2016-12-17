@@ -30,8 +30,8 @@
 		<td>$!type.name</td>
 		<td>
 	      	<div class="button-group"> 
-	      		<a class="button border-main" onclick="editType($!type.id,'$!type.name');"><span class="icon-edit"></span> 修改</a>
-	      		<a class="button border-red" onclick="delType($!type.id);"><span class="icon-trash-o"></span> 删除</a>
+	      		<a class="button border-main" href="javascript:void(0)" onclick="editType($!type.id,'$!type.name');"><span class="icon-edit"></span> 修改</a>
+	      		<a class="button border-red" href="javascript:void(0)" onclick="delType($!type.id);"><span class="icon-trash-o"></span> 删除</a>
 	      	</div>
       </td>
 	</tr>
@@ -48,7 +48,7 @@ function addType(){
 
 function delType(id){
 	if(confirm("您确定要删除吗?")){			
-		var url = '${basePath}admin/delType.xhtml';
+		var url = '${basePath}admin/article/delType.xhtml';
 		var values = {"id":id};
 		$.getData(url, values, true, 'get', 'json', false, delCallBack);
 	}
@@ -70,7 +70,7 @@ function editType(id, name){
 <div class="panel admin-panel margin-top">
   <div class="panel-head" id="doAdd"><strong><span class="icon-pencil-square-o"></span>编辑分类</strong></div>
   <div class="body-content">
-    <form method="post" class="form-x" action="${basePath}admin/saveType.xhtml">
+    <form method="post" class="form-x" action="${basePath}admin/article/saveType.xhtml">
       <input type="hidden" id="id" name="id" value=""/>
       <div class="form-group">
         <div class="label">

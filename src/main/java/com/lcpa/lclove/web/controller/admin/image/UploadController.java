@@ -1,4 +1,4 @@
-package com.lcpa.lclove.web.controller;
+package com.lcpa.lclove.web.controller.admin.image;
 
 import java.io.File;
 import java.io.IOException;
@@ -30,18 +30,18 @@ public class UploadController {
         //将当前上下文初始化给  CommonsMutipartResolver （多部分解析器）
         CommonsMultipartResolver multipartResolver=new CommonsMultipartResolver(
                 request.getSession().getServletContext());
-        //检查form中是否有enctype="multipart/form-data"
+        //�?查form中是否有enctype="multipart/form-data"
         ArrayList fileUrls = new ArrayList<String>();
         if(multipartResolver.isMultipart(request))
         {
             //将request变成多部分request
             MultipartHttpServletRequest multiRequest=(MultipartHttpServletRequest)request;
-            //获取multiRequest 中所有的文件名
+            //获取multiRequest 中所有的文件�?
             Iterator iter=multiRequest.getFileNames();
 
             while(iter.hasNext())
             {
-                //一次遍历所有文件
+                //�?次遍历所有文�?
                 MultipartFile file=multiRequest.getFile(iter.next().toString());
                 if(file!=null)
                 {
@@ -55,7 +55,7 @@ public class UploadController {
 
         }
         long  endTime=System.currentTimeMillis();
-        System.out.println("方法三的运行时间：" + String.valueOf(endTime - startTime) + "ms");
+        System.out.println("方法三的运行时间�?" + String.valueOf(endTime - startTime) + "ms");
         model.addAttribute("fileUrl", fileUrls.get(0));
 
         return "admin/uploadresult.jsp";
