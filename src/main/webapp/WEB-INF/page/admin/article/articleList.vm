@@ -17,7 +17,7 @@
     <div class="panel-head"><strong class="icon-reorder"> 内容列表</strong></div>
     <div class="padding border-bottom">
       <ul class="search" style="padding-left:10px;">
-        <li> <a class="button border-main icon-plus-square-o" href="add.html"> 添加内容</a> </li>
+        <li> <a class="button border-main icon-plus-square-o" href="${basePath}admin/article/editArticle.xhtml"> 添加内容</a> </li>
         <li>搜索：</li>
         <li>首页
           <select name="s_tohome" class="input" onchange="changesearch()" style="width:60px; line-height:17px; display:inline-block">
@@ -77,7 +77,7 @@
           <td><font color="#00CC99">首页</font></td>
           <td>$typeMap.get($article.articleType).name</td>
           <td>$DateUtil.formatTimestamp($!article.pubDate)</td>
-          <td><div class="button-group"> <a class="button border-main" href="add.html"><span class="icon-edit"></span> 修改</a> <a class="button border-red" href="javascript:void(0)" onclick="return del(1,1,1)"><span class="icon-trash-o"></span> 删除</a> </div></td>
+          <td><div class="button-group"> <a class="button border-main" href="${basePath}admin/article/editArticle.xhtml?id=$article.id"><span class="icon-edit"></span> 修改</a> <a class="button border-red" href="javascript:void(0)" onclick="return del(1,1,1)"><span class="icon-trash-o"></span> 删除</a> </div></td>
         </tr>
    		#end
       <tr>

@@ -11,18 +11,23 @@
 	<script src="${staticPath}js/jquery.js"></script>
 	<script src="${staticPath}js/pintuer.js"></script>
 	<script src="${staticPath}js/plugins/layer/laydate/laydate.js"></script>
+	<script src="${staticPath}js/plugins/ueditor/ueditor.config.js"></script>
+	<script src="${staticPath}js/plugins/ueditor/ueditor.all.min.js"></script>
+	<script src="${staticPath}js/plugins/ueditor/lang/zh-cn/zh-cn.js"></script>
 </head>
 <body>
 <div class="panel admin-panel">
   <div class="panel-head" id="add"><strong><span class="icon-pencil-square-o"></span>增加内容</strong></div>
   <div class="body-content">
     <form method="post" class="form-x" action="">  
+      <input type="hidden" id="id" name="id" value="$!{$article.id}"/>
+      <input type="hidden" id="content" name="content" value="$!{$content}"/>
       <div class="form-group">
         <div class="label">
           <label>标题：</label>
         </div>
         <div class="field">
-          <input type="text" class="input w50" value="" name="title" data-validate="required:请输入标题" />
+          <input type="text" class="input w50" id="title" name="title" value="$!article.title" data-validate="required:请输入标题" />
           <div class="tips"></div>
         </div>
       </div>
@@ -55,8 +60,8 @@
             <label>其他属性：</label>
           </div>
           <div class="field" style="padding-top:8px;"> 
-            首页 <input id="tohome" name="tohome" type="checkbox" #if($VmUtils.eq($article.tohome,'Y')) checked="checked" #end/>
-            推荐 <input id="torecom" name="torecom" type="checkbox" #if($VmUtils.eq($article.torecom,'Y')) checked="checked" #end/>
+	            首页 <input id="tohome" name="tohome" type="checkbox" #if($VmUtils.eq($article.tohome,'Y')) checked="checked" #end/>
+	            推荐 <input id="torecom" name="torecom" type="checkbox" #if($VmUtils.eq($article.torecom,'Y')) checked="checked" #end/>
           </div>
         </div>
       <div class="form-group">
@@ -64,7 +69,7 @@
           <label>简要说明：</label>
         </div>
         <div class="field">
-          <textarea class="input" name="briefnote" style=" height:90px;"></textarea>
+          <textarea class="input" id="description" name="description" style=" height:90px;">$!{article.description}</textarea>
           <div class="tips"></div>
         </div>
       </div>
@@ -73,42 +78,20 @@
           <label>内容：</label>
         </div>
         <div class="field">
-          <textarea name="content" class="input" style="height:450px; border:1px solid #ddd;"></textarea>
-          <div class="tips"></div>
+          <script id="container" name="container" type="text/plain" style="width:100%;height:200px;"></script>
+			<script type="text/javascript">
+				var editor = UE.getEditor('container');
+			</script>
         </div>
       </div>
      
       <div class="clear"></div>
       <div class="form-group">
         <div class="label">
-          <label>关键字标题：</label>
-        </div>
-        <div class="field">
-          <input type="text" class="input" name="s_title" value="" />
-        </div>
-      </div>
-      <div class="form-group">
-        <div class="label">
-          <label>内容关键字：</label>
-        </div>
-        <div class="field">
-          <input type="text" class="input" name="s_keywords" value=""/>
-        </div>
-      </div>
-      <div class="form-group">
-        <div class="label">
-          <label>关键字描述：</label>
-        </div>
-        <div class="field">
-          <textarea type="text" class="input" name="s_desc" style="height:80px;"></textarea>
-        </div>
-      </div>
-      <div class="form-group">
-        <div class="label">
           <label>排序：</label>
         </div>
         <div class="field">
-          <input type="text" class="input w50" name="sort" value="0"  data-validate="number:排序必须为数字" />
+          <input type="text" class="input w50" id="sortnum" name="sortnum" value="#if($VmUtils.isNull($article.sortnum))0#else $article.sortnum #end"  data-validate="number:排序必须为数字" />
           <div class="tips"></div>
         </div>
       </div>
@@ -117,8 +100,7 @@
           <label>发布时间：</label>
         </div>
         <div class="field"> 
-          <script src="js/laydate/laydate.js"></script>
-          <input type="text" class="laydate-icon input w50" name="datetime" onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})" value=""  data-validate="required:日期不能为空" style="padding:10px!important; height:auto!important;border:1px solid #ddd!important;" />
+          <input type="text" class="laydate-icon input w50" id="pubDate" name="pubDate" onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})" value="$!DateUtil.formatTimestamp($!article.pubDate)"  data-validate="required:发布时间不能为空" style="padding:10px!important; height:auto!important;border:1px solid #ddd!important;" />
           <div class="tips"></div>
         </div>
       </div>
@@ -127,7 +109,16 @@
           <label>作者：</label>
         </div>
         <div class="field">
-          <input type="text" class="input w50" name="authour" value=""  />
+          <input type="text" class="input w50" id="editor" name="editor" value="$!{article.editor}"  />
+          <div class="tips"></div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="label">
+          <label>点赞次数：</label>
+        </div>
+        <div class="field">
+          <input type="text" class="input w50" id="likeNum" name="likeNum" value="$!{article.likeNum}" data-validate="member:只能为数字"  />
           <div class="tips"></div>
         </div>
       </div>
@@ -136,7 +127,7 @@
           <label>点击次数：</label>
         </div>
         <div class="field">
-          <input type="text" class="input w50" name="views" value="" data-validate="member:只能为数字"  />
+          <input type="text" class="input w50" id="scanNum" name="scanNum" value="$!{article.scanNum}" data-validate="member:只能为数字"  />
           <div class="tips"></div>
         </div>
       </div>
