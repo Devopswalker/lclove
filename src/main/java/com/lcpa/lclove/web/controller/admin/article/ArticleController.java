@@ -1,5 +1,4 @@
 package com.lcpa.lclove.web.controller.admin.article;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,11 +7,7 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.lcpa.lclove.model.Article;
 import com.lcpa.lclove.model.ArticleType;
@@ -27,25 +22,6 @@ public class ArticleController extends AnnotationController{
 
     @Autowired
     private ArticleService articleService;
-
-    @RequestMapping(value="/test",produces="text/html;charset=UTF-8" )
-    @ResponseBody
-    private String getOtherList(){
-        return null;
-    }
-
-    @RequestMapping(value = "/article", method = RequestMethod.GET)
-    public ModelAndView article() {
-        return new ModelAndView("article", "command", new Article());
-    }
-
-    @RequestMapping(value = "/addArticle", method = RequestMethod.POST)
-    public String addArticle(@ModelAttribute("SpringWeb")Article article,
-                             ModelMap model) {
-        article.setPubDate(new Date());
-        articleService.saveArticle(article);
-        return "detail";
-    }
 
     @RequestMapping(value = "/admin/article/typeList.xhtml")
 	public String typeList(ModelMap model){
@@ -117,8 +93,21 @@ public class ArticleController extends AnnotationController{
 	}
     
     @RequestMapping(value = "/admin/article/saveArticle.xhtml")
-	public String saveArticle(ArticleType type, ModelMap model) {
-    	
+	public String saveArticle(Integer id, ModelMap model) {
+    	Article article = null;
+		if(id == null){
+			article = new Article();
+			this.bindParams(article);
+			articleService.saveArticle(article);
+		}else{
+			article = articleService.getArticleById(id);
+			if(article == null){
+				return this.showJsonError(model, "ÎÄÕÂ²»´æÔÚ!");
+			}
+			
+			this.bindParams(article, new String[]{"id"});
+			articleService.updateArticle(article);
+		}
     	return "redirect:/admin/article/articleList.xhtml";
     }
     

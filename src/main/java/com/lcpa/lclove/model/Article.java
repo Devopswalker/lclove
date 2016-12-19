@@ -1,13 +1,13 @@
 package com.lcpa.lclove.model;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 public class Article {
     private Integer id;
 
     private String title;
 
-    private Date pubDate;
+    private Timestamp pubDate;
 
     private Integer likeNum;
 
@@ -41,11 +41,11 @@ public class Article {
         this.title = title == null ? null : title.trim();
     }
 
-    public Date getPubDate() {
+    public Timestamp getPubDate() {
         return pubDate;
     }
 
-    public void setPubDate(Date pubDate) {
+    public void setPubDate(Timestamp pubDate) {
         this.pubDate = pubDate;
     }
 

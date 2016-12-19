@@ -23,8 +23,10 @@ import org.springframework.util.ObjectUtils;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
+import com.lcpa.lclove.util.BindUtils;
 import com.lcpa.lclove.util.DateUtil;
 import com.lcpa.lclove.util.JsonUtils;
+import com.lcpa.lclove.util.WebUtils;
 
 /**
  * »ù´¡·þÎñ
@@ -241,5 +243,18 @@ public abstract class AnnotationController{
 		return (value != null && BeanUtils.isSimpleValueType(value.getClass()));
 	}
 	
+
+	protected void bindParams(Object bean){
+		this.bindParams(bean, null);
+	}
+	
+	protected void bindParams(Object bean, String[] exclued){
+		Map<String, String> params = this.getParameterMap();
+		BindUtils.bindData(bean, params, null, exclued);
+	}
+	
+	protected Map<String, String> getParameterMap() {
+		return WebUtils.getRequestMap(this.getRequest());
+	}
 
 }
