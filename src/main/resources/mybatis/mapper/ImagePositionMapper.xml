@@ -1,37 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.lcpa.lclove.dao.ImageMapper">
-  <resultMap id="BaseResultMap" type="com.lcpa.lclove.model.Image">
+<mapper namespace="com.lcpa.lclove.dao.ImagePositionMapper">
+  <resultMap id="BaseResultMap" type="com.lcpa.lclove.model.ImagePosition">
     <id column="ID" jdbcType="INTEGER" property="id" />
     <result column="NAME" jdbcType="VARCHAR" property="name" />
-    <result column="URL" jdbcType="VARCHAR" property="url" />
+    <result column="DESCRIPTION" jdbcType="VARCHAR" property="description" />
   </resultMap>
   <sql id="Base_Column_List">
-    ID, NAME, URL
+    ID, NAME, DESCRIPTION
   </sql>
-  <select id="selectAll" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List" />
-    from image
-  </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from image
+    from image_position
     where ID = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from image
+    delete from image_position
     where ID = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.lcpa.lclove.model.Image" useGeneratedKeys="true" keyProperty="id">
-    insert into image (ID, NAME
+  <insert id="insert" parameterType="com.lcpa.lclove.model.ImagePosition">
+    insert into image_position (ID, NAME, DESCRIPTION
       )
-    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.lcpa.lclove.model.Image">
-    insert into image
+  <insert id="insertSelective" parameterType="com.lcpa.lclove.model.ImagePosition">
+    insert into image_position
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         ID,
@@ -39,8 +34,8 @@
       <if test="name != null">
         NAME,
       </if>
-      <if test="url != null">
-        URL,
+      <if test="description != null">
+        DESCRIPTION,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -50,32 +45,27 @@
       <if test="name != null">
         #{name,jdbcType=VARCHAR},
       </if>
-      <if test="url != null">
-        #{url,jdbcType=VARCHAR},
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.lcpa.lclove.model.Image">
-    update image
+  <update id="updateByPrimaryKeySelective" parameterType="com.lcpa.lclove.model.ImagePosition">
+    update image_position
     <set>
       <if test="name != null">
         NAME = #{name,jdbcType=VARCHAR},
       </if>
-      <if test="url != null">
-        URL = #{url,jdbcType=VARCHAR},
+      <if test="description != null">
+        DESCRIPTION = #{description,jdbcType=VARCHAR},
       </if>
     </set>
     where ID = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.lcpa.lclove.model.Image">
-    update image
+  <update id="updateByPrimaryKey" parameterType="com.lcpa.lclove.model.ImagePosition">
+    update image_position
     set NAME = #{name,jdbcType=VARCHAR},
-      URL = #{url,jdbcType=VARCHAR}
-    where ID = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateUrl" parameterType="com.lcpa.lclove.model.Image">
-    update image
-    set URL = #{url,jdbcType=VARCHAR}
+      DESCRIPTION = #{description,jdbcType=VARCHAR}
     where ID = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

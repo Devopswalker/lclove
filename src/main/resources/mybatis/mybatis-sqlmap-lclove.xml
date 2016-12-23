@@ -27,8 +27,11 @@
 	<typeAliases>
 		<typeAlias type="com.lcpa.lclove.model.Article" alias="Article"/>
 		<typeAlias type="com.lcpa.lclove.model.ArticleType" alias="ArticleType"/>
+		<typeAlias type="com.lcpa.lclove.model.ArticleContent" alias="ArticleContent"/>
 		<typeAlias type="com.lcpa.lclove.model.Comment" alias="Comment"/>
 		<typeAlias type="com.lcpa.lclove.model.Image" alias="Image"/>
+		<typeAlias type="com.lcpa.lclove.model.ImagePosition" alias="ImagePosition"/>
+		<typeAlias type="com.lcpa.lclove.model.ImageRecommend" alias="ImageRecommend"/>
 		<typeAlias type="com.lcpa.lclove.model.Question" alias="Question"/>
 		<typeAlias type="com.lcpa.lclove.model.QuestionInputType" alias="QuestionInputType"/>
 		<typeAlias type="com.lcpa.lclove.model.QuestionOption" alias="QuestionOption"/>
@@ -39,10 +42,13 @@
 
 	</typeAliases>
 	<mappers>
+		<mapper resource="mybatis/mapper/ArticleContentMapper.xml"/>
 		<mapper resource="mybatis/mapper/ArticleMapper.xml"/>
 		<mapper resource="mybatis/mapper/ArticleTypeMapper.xml"/>
 		<mapper resource="mybatis/mapper/CommentMapper.xml"/>
 		<mapper resource="mybatis/mapper/ImageMapper.xml"/>
+		<mapper resource="mybatis/mapper/ImagePositionMapper.xml"/>
+		<mapper resource="mybatis/mapper/ImageRecommendMapper.xml"/>
 		<mapper resource="mybatis/mapper/QuestionInputTypeMapper.xml"/>
 		<mapper resource="mybatis/mapper/QuestionMapper.xml"/>
 		<mapper resource="mybatis/mapper/QuestionOptionMapper.xml"/>

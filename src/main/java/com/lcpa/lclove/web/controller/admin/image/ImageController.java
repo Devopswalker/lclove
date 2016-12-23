@@ -29,12 +29,14 @@ public class ImageController {
 
     @RequestMapping(value = "/uploadImage.do", method= RequestMethod.POST)
     public String uploadImage(@RequestParam(value = "file", required = false) MultipartFile file,
-                              Image image, ModelMap model){
+                              ModelMap model){
         String fileName = file.getOriginalFilename();
         String uploadContext = new Config().getGlobalProp("uploadContext");
         String uploadPath = new Config().getGlobalProp("uploadPath");
-        image.setFileName(fileName);
-        imageService.saveUploadImage(image, file, uploadContext, uploadPath);
+        Image image = new Image();
+        image.setName(fileName);
+        image.setUrl(uploadContext);
+        imageService.saveUploadImage(image, file, uploadPath, uploadContext);
 
         List<Image> allImages = imageService.getAllImage();
         model.addAllAttributes(allImages);
@@ -46,24 +48,17 @@ public class ImageController {
     public String imgList(ModelMap model){
         List<Image> allImages = imageService.getAllImage();
         //TODO:Only Demo
-        if(CollectionUtils.isEmpty(allImages)){
-        	for (int i = 0; i < 5 ; i++) {
-				Image img = new Image();
-				img.setId(i);
-				img.setFileName("fileName" + i);
-				img.setImgSrc("http://www.src" + i + ".com");
-				img.setDescription("SRC:http://www.src" + i + ".com");
-				allImages.add(img);
-			}
-        }
+//        if(CollectionUtils.isEmpty(allImages)){
+//        	for (int i = 0; i < 5 ; i++) {
+//				Image img = new Image();
+//				img.setId(i);
+//				img.setName("fileName" + i);
+//				img.setUrl("http://www.src" + i + ".com");
+//				allImages.add(img);
+//			}
+//        }
         model.put("images", allImages);
         return "admin/common/imgList.vm";
 
-    }
-
-    @RequestMapping(value = "/test", method= RequestMethod.POST)
-    public String test(@ModelAttribute Image image, ModelMap model){
-        String a = image.getDescription();
-        return "";
     }
 }

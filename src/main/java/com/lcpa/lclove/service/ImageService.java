@@ -1,7 +1,9 @@
 package com.lcpa.lclove.service;
 
 import com.lcpa.lclove.dao.ImageMapper;
+import com.lcpa.lclove.dao.ImageRecommendMapper;
 import com.lcpa.lclove.model.Image;
+import com.lcpa.lclove.model.ImageRecommend;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -18,38 +20,27 @@ public class ImageService {
     @Autowired
     public ImageMapper imageMapper;
 
-    public int saveImage(Image image){
-        return imageMapper.insert(image);
-    }
-    public void saveUploadImage(Image image, MultipartFile file,
-                               String uploadContext, String uploadPath){
+    public void saveUploadImage(Image image, MultipartFile file, String uploadPath, String uploadContext){
         imageMapper.insert(image);
+        String uploadFileName = String.valueOf(image.getId()) +"_" + image.getName();
+        String uploadImageUrl = uploadContext + uploadFileName;
+        image.setUrl(uploadImageUrl);
+        imageMapper.updateUrl(image);
 
-        String uploadedFileName = String.valueOf(image.getId()) + "_" + image.getFileName();
-        String uploadImageUrl = uploadContext + uploadedFileName;
-        image.setImgSrc(uploadImageUrl);
-        imageMapper.updateImageSrc(image);
-
-        File targetFile = new File(uploadPath, uploadedFileName);
+        File targetFile = new File(uploadPath, uploadFileName);
         if(!targetFile.exists()){
             targetFile.mkdirs();
         }
-        //保存
+        //save file to server
         try {
             file.transferTo(targetFile);
         } catch (Exception e) {
-            e.printStackTrace();
-            //TODO throw a exception, transaction will not commit.delete action is not needed?
-            imageMapper.deleteByPrimaryKey(image.getId());
+            throw new RuntimeException("upload occur error!");
         }
     }
 
-    public void saveImages(List<Image> imageList){
-        imageMapper.insertImages(imageList);
-    }
-
-    public List<Image> getImageByPosition(Integer position){
-        return imageMapper.selectByPosition(position);
+    public void removeUploadedImageById(Integer id){
+        imageMapper.deleteByPrimaryKey(id);
     }
 
     public List<Image> getAllImage(){

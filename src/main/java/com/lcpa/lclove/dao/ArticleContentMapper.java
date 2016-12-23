@@ -1,17 +1,20 @@
 package com.lcpa.lclove.dao;
 
 import com.lcpa.lclove.model.Article;
+import com.lcpa.lclove.model.ArticleContent;
 
 public interface ArticleContentMapper {
     int deleteByPrimaryKey(Integer id);
 
-    int insert(Article record);
+    int insert(ArticleContent record);
 
-    int insertSelective(Article record);
+    int insertArticle(Article record);
 
-    Article selectByPrimaryKey(Integer id);
+    int insertSelective(ArticleContent record);
 
-    int updateByPrimaryKeySelective(Article record);
+    ArticleContent selectByPrimaryKey(Integer id);
 
-    int updateByPrimaryKeyWithBLOBs(Article record);
+    int updateByPrimaryKeySelective(ArticleContent record);
+
+    int updateArticleByPrimaryKeyWithBLOBs(Article record);
 }

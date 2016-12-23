@@ -9,19 +9,13 @@ public interface ImageMapper {
 
     int insert(Image record);
 
-    int insertUploadImage(Image image);
-
-    int updateImageSrc(Image record);
+    int updateUrl(Image record);
 
     int insertSelective(Image record);
-
-    int insertImages(List<Image> imageList);
 
     Image selectByPrimaryKey(Integer id);
 
     List<Image> selectAll();
-
-    List<Image> selectByPosition(Integer position);
 
     int updateByPrimaryKeySelective(Image record);
 

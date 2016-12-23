@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lcpa.lclove.dao.ImageRecommendMapper">
+  <resultMap id="BaseResultMap" type="com.lcpa.lclove.model.ImageRecommend">
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="POSITION" jdbcType="INTEGER" property="position" />
+    <result column="SEQ" jdbcType="INTEGER" property="seq" />
+    <result column="IMG_URL" jdbcType="VARCHAR" property="imgUrl" />
+    <result column="RECOMMEND_URL" jdbcType="VARCHAR" property="recommendUrl" />
+    <result column="DESCRIPTION" jdbcType="VARCHAR" property="description" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, POSITION, SEQ, IMG_URL, RECOMMEND_URL, DESCRIPTION
+  </sql>
+  <select id="selectByPosition" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from image_recommend
+    where POSITION = #{0} ORDER BY SEQ ASC LIMIT 0, #{1}
+  </select>
+  <select id="selectAll" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from image_recommend
+    where ORDER BY ID ASC
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from image_recommend
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from image_recommend
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.lcpa.lclove.model.ImageRecommend">
+    insert into image_recommend (ID, POSITION, SEQ, 
+      IMG_URL, RECOMMEND_URL, DESCRIPTION
+      )
+    values (#{id,jdbcType=INTEGER}, #{position,jdbcType=INTEGER}, #{seq,jdbcType=INTEGER}, 
+      #{imgUrl,jdbcType=VARCHAR}, #{recommendUrl,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.lcpa.lclove.model.ImageRecommend">
+    insert into image_recommend
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="position != null">
+        POSITION,
+      </if>
+      <if test="seq != null">
+        SEQ,
+      </if>
+      <if test="imgUrl != null">
+        IMG_URL,
+      </if>
+      <if test="recommendUrl != null">
+        RECOMMEND_URL,
+      </if>
+      <if test="description != null">
+        DESCRIPTION,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="position != null">
+        #{position,jdbcType=INTEGER},
+      </if>
+      <if test="seq != null">
+        #{seq,jdbcType=INTEGER},
+      </if>
+      <if test="imgUrl != null">
+        #{imgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="recommendUrl != null">
+        #{recommendUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lcpa.lclove.model.ImageRecommend">
+    update image_recommend
+    <set>
+      <if test="position != null">
+        POSITION = #{position,jdbcType=INTEGER},
+      </if>
+      <if test="seq != null">
+        SEQ = #{seq,jdbcType=INTEGER},
+      </if>
+      <if test="imgUrl != null">
+        IMG_URL = #{imgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="recommendUrl != null">
+        RECOMMEND_URL = #{recommendUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        DESCRIPTION = #{description,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lcpa.lclove.model.ImageRecommend">
+    update image_recommend
+    set POSITION = #{position,jdbcType=INTEGER},
+      SEQ = #{seq,jdbcType=INTEGER},
+      IMG_URL = #{imgUrl,jdbcType=VARCHAR},
+      RECOMMEND_URL = #{recommendUrl,jdbcType=VARCHAR},
+      DESCRIPTION = #{description,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

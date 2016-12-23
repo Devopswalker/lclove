@@ -5,6 +5,7 @@ import com.lcpa.lclove.dao.ArticleMapper;
 import com.lcpa.lclove.dao.ArticleTypeMapper;
 import com.lcpa.lclove.model.Article;
 
+import com.lcpa.lclove.model.ArticleContent;
 import com.lcpa.lclove.model.ArticleType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,12 +29,12 @@ public class ArticleService{
 
     public void saveArticle(Article article){
         articleMapper.insert(article);
-        articleContentMapper.insert(article);
+        articleContentMapper.insertArticle(article);
     }
 
     public void updateArticle(Article article){
         articleMapper.updateByPrimaryKey(article);
-        articleContentMapper.updateByPrimaryKeyWithBLOBs(article);
+        articleContentMapper.updateArticleByPrimaryKeyWithBLOBs(article);
     }
     public  void removeArticle(Integer id){
         articleMapper.deleteByPrimaryKey(id);
@@ -85,8 +86,8 @@ public class ArticleService{
     }
 
     public Article getArticleContent(Article article){
-        Article content = articleContentMapper.selectByPrimaryKey(article.getId());
-        article.setContent(content.getContent());
+        ArticleContent articleContent = articleContentMapper.selectByPrimaryKey(article.getId());
+        article.setContent(articleContent.getContent());
         return article;
     }
 

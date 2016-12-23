@@ -21,7 +21,7 @@ public class Article {
 
     private String editor;
 
-    private Integer state;
+    private Integer state = 1;
 
     private String content;
 

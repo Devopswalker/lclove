@@ -1,11 +1,11 @@
 package com.lcpa.lclove.model;
 
-public class Image {
+public class ImagePosition {
     private Integer id;
 
     private String name;
 
-    private String url;
+    private String description;
 
     public Integer getId() {
         return id;
@@ -23,11 +23,11 @@ public class Image {
         this.name = name == null ? null : name.trim();
     }
 
-    public String getUrl() {
-        return url;
+    public String getDescription() {
+        return description;
     }
 
-    public void setUrl(String url) {
-        this.url = url == null ? null : url.trim();
+    public void setDescription(String description) {
+        this.description = description == null ? null : description.trim();
     }
 }

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lcpa.lclove.dao.ArticleContentMapper">
-  <resultMap id="BaseResultMap" type="com.lcpa.lclove.model.Article">
+  <resultMap id="BaseResultMap" type="com.lcpa.lclove.model.ArticleContent">
     <id column="ID" jdbcType="INTEGER" property="id" />
   </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.lcpa.lclove.model.Article">
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.lcpa.lclove.model.ArticleContent">
     <result column="CONTENT" jdbcType="LONGVARCHAR" property="content" />
   </resultMap>
   <sql id="Base_Column_List">
@@ -25,11 +25,15 @@
     delete from article_content
     where ID = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.lcpa.lclove.model.Article">
+  <insert id="insert" parameterType="com.lcpa.lclove.model.ArticleContent">
     insert into article_content (ID, CONTENT)
     values (#{id,jdbcType=INTEGER}, #{content,jdbcType=LONGVARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.lcpa.lclove.model.Article">
+  <insert id="insertArticle" parameterType="com.lcpa.lclove.model.Article">
+    insert into article_content (ID, CONTENT)
+    values (#{id,jdbcType=INTEGER}, #{content,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lcpa.lclove.model.ArticleContent">
     insert into article_content
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -48,7 +52,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.lcpa.lclove.model.Article">
+  <update id="updateByPrimaryKeySelective" parameterType="com.lcpa.lclove.model.ArticleContent">
     update article_content
     <set>
       <if test="content != null">
@@ -57,63 +61,9 @@
     </set>
     where ID = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.lcpa.lclove.model.Article">
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.lcpa.lclove.model.ArticleContent">
     update article_content
     set CONTENT = #{content,jdbcType=LONGVARCHAR}
-    where ID = #{id,jdbcType=INTEGER}
-  </update>
-  <resultMap id="BaseResultMap" type="com.lcpa.lclove.model.Article">
-    <id column="ID" jdbcType="INTEGER" property="id" />
-    <result column="CONTENT" jdbcType="VARCHAR" property="content" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    ID, CONTENT
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from article_content
-    where ID = #{id,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from article_content
-    where ID = #{id,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="com.lcpa.lclove.model.Article">
-    insert into article_content (ID, CONTENT)
-    values (#{id,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR})
-  </insert>
-  <insert id="insertSelective" parameterType="com.lcpa.lclove.model.Article">
-    insert into article_content
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        ID,
-      </if>
-      <if test="content != null">
-        CONTENT,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="content != null">
-        #{content,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.lcpa.lclove.model.Article">
-    update article_content
-    <set>
-      <if test="content != null">
-        CONTENT = #{content,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where ID = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.lcpa.lclove.model.Article">
-    update article_content
-    set CONTENT = #{content,jdbcType=VARCHAR}
     where ID = #{id,jdbcType=INTEGER}
   </update>
 </mapper>
