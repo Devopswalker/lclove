@@ -18,7 +18,7 @@ public class CommonController extends AnnotationController{
 		return "wide_backPage.vm";
 	}
 	
-	@RequestMapping(value="/adminLogin.xhtml",method=RequestMethod.GET)
+	@RequestMapping(value="/admin/login.xhtml",method=RequestMethod.GET)
 	public String adminLogin(HttpServletRequest request, ModelMap model, String TARGETURL){
 		if(StringUtils.isBlank(TARGETURL)) {
 			TARGETURL = WebUtils.getContextPath(request) + "admin/index.xhtml";
