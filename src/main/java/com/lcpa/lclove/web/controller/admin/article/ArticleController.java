@@ -41,10 +41,10 @@ public class ArticleController extends AnnotationController{
 	public String saveType(ArticleType type, ModelMap model) {
 		//ArticleType type = WebUtils.bindReqParams(request, ArticleType.class);
 		if (type == null) {
-			return showJsonError(model, "�������?");
+			return showJsonError(model, "�������?");
 		}
 		if (StringUtils.isBlank(type.getName())) {
-			return showJsonError(model, "�������Ϊ�գ�?");
+			return showJsonError(model, "�������Ϊ�գ�?");
 		}
 		if (type.getId() == null) {
 			articleService.saveArticleType(type);
@@ -80,7 +80,7 @@ public class ArticleController extends AnnotationController{
     		pageNo = 1;
     	}
     		
-    	List<Article> articleList = articleService.getHomeArticles(pageNo);
+    	List<Article> articleList = articleService.getAllArticles(pageNo);
     	model.put("typeMap", typeMap);
     	model.put("typeList", typeList);
     	model.put("articleList", articleList);
@@ -123,7 +123,7 @@ public class ArticleController extends AnnotationController{
     	if(id == null){
     		return showJsonError(model, "IDΪ�գ�");
     	}
-    	articleService.delArticleById(id);
+    	articleService.removeArticle(id);
 		return showJsonSuccess(model);
 	}
 }

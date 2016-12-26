@@ -50,4 +50,9 @@ public class CommonController extends AnnotationController{
         return "admin/uploadtest.jsp";
     }
 
+	@RequestMapping(value = "/admin/img")
+	public String img() {
+		return "admin/uploadresult.jsp";
+	}
+
 }

@@ -12,9 +12,10 @@
     <result column="TOPIC" jdbcType="VARCHAR" property="topic" />
     <result column="EDITOR" jdbcType="VARCHAR" property="editor" />
     <result column="STATE" jdbcType="INTEGER" property="state" />
+    <result column="THUMBNAIL" jdbcType="VARCHAR" property="thumbnail" />
   </resultMap>
   <sql id="Base_Column_List">
-    ID, TITLE, PUB_DATE, LIKE_NUM, SCAN_NUM, ARTICLE_TYPE, DESCRIPTION, TOPIC, EDITOR, 
+    ID, TITLE, THUMBNAIL, PUB_DATE, LIKE_NUM, SCAN_NUM, ARTICLE_TYPE, DESCRIPTION, TOPIC, EDITOR,
     STATE
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -39,6 +40,13 @@
     order by PUB_DATE desc
     LIMIT #{1},#{2}
   </select>
+  <select id="selectAllArticles" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from article
+    order by id desc
+    LIMIT #{0},#{1}
+  </select>
   <select id="selectHomeArticle" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
@@ -59,11 +67,11 @@
     where ID = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.lcpa.lclove.model.Article" useGeneratedKeys="true" keyProperty="id">
-    insert into article (ID, TITLE, PUB_DATE, 
+    insert into article (ID, TITLE, THUMBNAIL, PUB_DATE,
       LIKE_NUM, SCAN_NUM, ARTICLE_TYPE, 
       DESCRIPTION, TOPIC, EDITOR, 
       STATE)
-    values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{pubDate,jdbcType=TIMESTAMP}, 
+    values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{thumbnail,jdbcType=VARCHAR},#{pubDate,jdbcType=TIMESTAMP},
       #{likeNum,jdbcType=INTEGER}, #{scanNum,jdbcType=INTEGER}, #{articleType,jdbcType=INTEGER}, 
       #{description,jdbcType=VARCHAR}, #{topic,jdbcType=VARCHAR}, #{editor,jdbcType=VARCHAR}, 
       #{state,jdbcType=INTEGER})
@@ -141,6 +149,9 @@
       <if test="title != null">
         TITLE = #{title,jdbcType=VARCHAR},
       </if>
+      <if test="thumbnail != null">
+        THUMBNAIL = #{thumbnail,jdbcType=VARCHAR},
+      </if>
       <if test="pubDate != null">
         PUB_DATE = #{pubDate,jdbcType=TIMESTAMP},
       </if>
@@ -184,6 +195,7 @@
   <update id="updateByPrimaryKey" parameterType="com.lcpa.lclove.model.Article">
     update article
     set TITLE = #{title,jdbcType=VARCHAR},
+      THUMBNAIL = #{thumbnail,jdbcType=VARCHAR},
       PUB_DATE = #{pubDate,jdbcType=TIMESTAMP},
       LIKE_NUM = #{likeNum,jdbcType=INTEGER},
       SCAN_NUM = #{scanNum,jdbcType=INTEGER},
