@@ -23,6 +23,13 @@ public class ArticleController extends AnnotationController{
     @Autowired
     private ArticleService articleService;
 
+	@RequestMapping(value = "/admin/article/test.xhtml")
+	public String test(ModelMap model){
+		Article article = articleService.getArticleDetails(12);
+		model.put("article", article);
+		return "";
+	}
+
     @RequestMapping(value = "/admin/article/typeList.xhtml")
 	public String typeList(ModelMap model){
 		List<ArticleType> typeList = articleService.getAllArticleType();
@@ -34,17 +41,17 @@ public class ArticleController extends AnnotationController{
 	public String saveType(ArticleType type, ModelMap model) {
 		//ArticleType type = WebUtils.bindReqParams(request, ArticleType.class);
 		if (type == null) {
-			return showJsonError(model, "²ÎÊý´íÎó£¡");
+			return showJsonError(model, "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 		}
 		if (StringUtils.isBlank(type.getName())) {
-			return showJsonError(model, "·ÖÀàÃû³ÆÎª¿Õ£¡");
+			return showJsonError(model, "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½Õ£ï¿½");
 		}
 		if (type.getId() == null) {
 			articleService.saveArticleType(type);
 		} else {
 			ArticleType old = articleService.getArticleTypeById(type.getId());
 			if (old == null) {
-				return showJsonError(model, "·ÖÀà²»´æÔÚ»òÒÑÉ¾³ý£¡");
+				return showJsonError(model, "ï¿½ï¿½ï¿½à²»ï¿½ï¿½ï¿½Ú»ï¿½ï¿½ï¿½É¾ï¿½ï¿½");
 			} else {
 				articleService.updateArticleTypeById(type);
 			}
@@ -55,7 +62,7 @@ public class ArticleController extends AnnotationController{
     @RequestMapping(value = "/admin/article/delType.xhtml")
 	public String delTyle(Integer id, ModelMap model){
     	if(id == null){
-    		return showJsonError(model, "IDÎª¿Õ£¡");
+    		return showJsonError(model, "IDÎªï¿½Õ£ï¿½");
     	}
     	articleService.delArticleTypeById(id);
 		return showJsonSuccess(model);
@@ -102,7 +109,7 @@ public class ArticleController extends AnnotationController{
 		}else{
 			article = articleService.getArticleById(id);
 			if(article == null){
-				return this.showJsonError(model, "ÎÄÕÂ²»´æÔÚ!");
+				return this.showJsonError(model, "ï¿½ï¿½ï¿½Â²ï¿½ï¿½ï¿½ï¿½ï¿½!");
 			}
 			
 			this.bindParams(article, new String[]{"id"});
@@ -114,7 +121,7 @@ public class ArticleController extends AnnotationController{
     @RequestMapping(value = "/admin/article/delArticle.xhtml")
 	public String delArticle(Integer id, ModelMap model){
     	if(id == null){
-    		return showJsonError(model, "IDÎª¿Õ£¡");
+    		return showJsonError(model, "IDÎªï¿½Õ£ï¿½");
     	}
     	articleService.delArticleById(id);
 		return showJsonSuccess(model);

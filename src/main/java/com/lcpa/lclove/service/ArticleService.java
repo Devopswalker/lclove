@@ -103,4 +103,11 @@ public class ArticleService{
         searchText = "%"+searchText+"%";
         return articleMapper.selectArticlesByKeyWords(searchText, startIndex, pageSize);
     }
+
+    public Article getArticleDetails(Integer id){
+        Article article = articleMapper.selectByPrimaryKey(id);
+        ArticleContent articleContent = articleContentMapper.selectByPrimaryKey(id);
+        article.setContent(articleContent.getContent());
+        return article;
+    }
 }
