@@ -16,8 +16,8 @@
 	<bean id="config" class="com.lcpa.lclove.support.Config">
 		<property name="pageMap">
 			<map>
-				<entry key="basePath" value="/Lclove/" />
-				<entry key="staticPath" value="/Lclove/" />
+				<entry key="basePath" value="/" />
+				<entry key="staticPath" value="/" />
 				<entry key="mobilePath" value="/wap/" />
 				<entry key="picPath" value="/" />
 				<entry key="VmUtils" value-ref="VmUtils" />

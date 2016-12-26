@@ -1,3 +1,37 @@
+var lclove = {};
+lclove.util = {};
+lclove.util.basePath = '/';
+lclove.util.imgPath = '/';
+
+/* StringBuilder  */
+function StringBuilder () {
+     this.__asBuilder = [];
+}
+
+StringBuilder.prototype.clear = function(){
+     this.__asBuilder = [];
+}
+
+StringBuilder.prototype.append = function(){
+     Array.prototype.push.apply(this.__asBuilder,arguments);
+     return this;
+}
+
+StringBuilder.prototype.toString = function(){
+     return this.__asBuilder.join("");    
+}
+/* StringBuilder  */
+
+/* json对象根据某个字段排序 */
+$.extend({
+	getSortFun: function(order, sortBy){
+		var ordAlpah = (order == 'asc') ? '>' : '<';
+		var sortFun = new Function('a', 'b', 'return a.' + sortBy + ordAlpah + 'b.' + sortBy + '?1:-1');
+		return sortFun;
+	}
+});
+/* json对象根据某个字段排序 */
+
 var curr = 0;
 var banner_points;
 $(document).ready(function(e) {
@@ -100,66 +134,33 @@ function navClick(index){
 	var url;
 	switch(index){
 	case 1:
-		url = "../home.html?"+new Date().getTime();
+		url = "index.xhtml?"+new Date().getTime();
 		break;
 	case 2:
-		url = "special.html";
+		url = "spacial.xhtml";
 		break;
 	case 3:
-		url = "body.html";
+		url = "loves.xhtml";
 		break;
 	case 4:
-		url = "amulet.html";
+		url = "amulet.xhtml";
 		break;
 	case 5:
-		url = "research.html";
+		url = "research.xhtml";
 		break;
 	case 6:
-		url = "amulet.html";
+		url = "comic.xhtml";
 		break;
 	case 7:
-		url = "amulet.html";
+		url = "pray.xhtml";
 		break;
 	default:
 		break;
 	}
 	if(url!=null){
-	    window.location = url;
+		document.location.href = lclove.util.imgPath + url;
 	}
 }
-
-function navClickInHome(index){
-	var url;
-	switch(index){
-	case 1:
-		url = "home.html?"+new Date().getTime();
-		break;
-	case 2:
-		url = "html/special.html";
-		break;
-	case 3:
-		url = "html/body.html";
-		break;
-	case 4:
-		url = "html/amulet.html";
-		break;
-	case 5:
-		url = "html/research.html";
-		break;
-	case 6:
-		url = "html/amulet.html";
-		break;
-	case 7:
-		url = "html/amulet.html";
-		break;
-	default:
-		break;
-	}
-	if(url!=null){
-	    window.location = url;
-	}
-}
-
 
 /* Ajax  */
 $.extend({
@@ -229,4 +230,148 @@ function refreshPage(pageUrl){
 	}
 }
 /*refresh page*/
+
+
+/* to top  */
+$.extend({  
+	backToTop: function(options){
+		var defaults = {
+			text : '',
+			autoShow: true,
+			timeEffect: 500,
+			effectScroll: 'linear',
+			appearMethod : 'slide'
+		};
+
+		var opts = $.extend({}, defaults, options);
+		
+		var init = function(){
+			var divBack = $('<a/>',{id : 'BackToTop',href : '#body', html: '<span>'+opts.text+'</span>'}).appendTo('body');
+			divBack.css({"bottom": "50px", "right":"0px", "position":"fixed"});
+			
+			$(window).scroll(function(){
+				if($(this).scrollTop() != 0) {
+					switch (opts.appearMethod) {
+						case 'fade' : divBack.fadeIn('fast'); break;
+						case 'slide' : divBack.slideDown('fast'); break;
+						default : divBack.show();	
+					}
+				}
+				else {
+					switch (opts.appearMethod) {
+						case 'fade' : divBack.fadeOut('fast'); break;
+						case 'slide' : divBack.slideUp('fast'); break;
+						default : divBack.hide();	
+					}
+				}
+			});
+			
+			$('#BackToTop').click(function(e) {
+				e.preventDefault();
+				$('body,html').animate({scrollTop:0},opts.timeEffect,opts.effectScroll);
+			});
+		}
+		
+		return init();
+	}
+});
+/* to top  */
+
+/* Header Menu */
+;(function($){
+    var eMenu = function(options,object) {
+        var opts = $.extend({}, $.fn.topMenu.defaults, options);
+        var instance = object;
+        var renderHeader = function(){
+            var sbHtml = new StringBuilder();
+            sbHtml.append("<div class='header'>");
+            sbHtml.append("    <div class='header_left'>");
+            sbHtml.append("        <img class='head_left_1' src='" + lclove.util.imgPath + "images/img_cat.png' />");
+            sbHtml.append("        <div class='head_left_2'><font color='#FF0000'>恋</font><br />猫</div>");
+            sbHtml.append("        <div class='head_left_3'>成就女性恋爱的百科全书</div>");
+            sbHtml.append("    </div>");
+            sbHtml.append("    <div class='header_right'>");
+            sbHtml.append("        <ul>");
+            sbHtml.append("            <li><img src='" + lclove.util.imgPath + "images/s_triangle.png'/><div>by LC 品爱</div></li>");
+            sbHtml.append("            <li><img src='" + lclove.util.imgPath + "images/s_triangle.png'/><div>恋猫是什么?</div></li>");
+            sbHtml.append("        </ul>");
+            sbHtml.append("    </div>");
+            sbHtml.append("    <div class='float_pic1'><img src='" + lclove.util.imgPath + "images/head_flower1.png'/></div>");
+            sbHtml.append("    <div class='float_pic2'><img src='" + lclove.util.imgPath + "images/head_flower2.png'/></div>");
+            sbHtml.append("    <div class='float_pic3'><img src='" + lclove.util.imgPath + "images/head_flower3.png'/></div>");
+            sbHtml.append("    <div class='float_pic4'><img src='" + lclove.util.imgPath + "images/head_flower4.png'/></div>");
+            sbHtml.append("    <div class='float_pic5'><img src='" + lclove.util.imgPath + "images/head_flower5.png'/></div>");
+            sbHtml.append("</div>");
+            
+            sbHtml.append("<div class='navigation'>");
+            sbHtml.append("    <div class='pc_style'>");
+            sbHtml.append("        <ul>");
+            sbHtml.append("            <li><div class='home_nav_icon' onClick='navClick(1)'></div><div class='icon_name' onClick='navClick(1)'>Home</div></li>");
+            sbHtml.append("            <li id='secondary_nav'><div  class='normal_nav' onClick='navClick(2)'>恋の喵言喵语</div><div class='icon_name' onClick='navClick(2)'>Spacial</div></li>");
+            sbHtml.append("            <li><div class='normal_nav' onClick='navClick(3)'>恋の恋爱经</div><div class='icon_name' onClick='navClick(3)'>Love</div></li>");
+            sbHtml.append("            <li><div class='normal_nav' onClick='navClick(4)'>恋の护身符</div><div class='icon_name' onClick='navClick(4)'>Amulet</div></li>");
+            sbHtml.append("            <li><div class='normal_nav' onClick='navClick(5)'>恋の好奇心</div><div class='icon_name' onClick='navClick(5)'>Research</div></li>");
+            sbHtml.append("            <li><div class='normal_nav' onClick='navClick(6)'>恋の梦剧场</div><div class='icon_name' onClick='navClick(6)'>Comic</div></li>");
+            sbHtml.append("            <li><div class='normal_nav' onClick='navClick(7)'>恋の上上签</div><div class='icon_name' onClick='navClick(7)'>Pray</div></li>");
+            sbHtml.append("            <li><img src='" + lclove.util.imgPath + "images/img_omamori.png'/></li>");
+            sbHtml.append("        </ul>");
+            sbHtml.append("    </div>");
+            sbHtml.append("</div>");
+            return sbHtml.toString();
+        };
+        
+        var init = function(){
+            $(instance).append($(renderHeader()));
+            $(".head_left_1").on("click", function(){
+            	 window.location.href = lclove.util.basePath + "index.xhtml";
+            });
+            $(".header_right").on("click", function(){
+            	 window.open("http://www.lclovecosmetic.com/"); 
+            });
+        };
+
+        return init();
+    }
+
+    $.fn.topMenu = function(options) {
+        return this.each(function () {
+            return eMenu(options, $(this));
+        });
+    };
+    
+    $.fn.topMenu.defaults = {};
+
+})(jQuery);
+/* Header Menu */
+
+
+/*  Footer  */
+;(function($){
+    var eFooter = function(options,object) {
+        var opts = $.extend({}, $.fn.footerModule.defaults, options);
+        var instance = object;
+
+        var renderFooter = function(data){
+            var sbHtml = new StringBuilder();
+            sbHtml.append("<div class='footer'>");
+            sbHtml.append("    <div class='pc_style'>");
+            sbHtml.append("       <div>Copyright © LCLOVE COSMETIC. All Rights Reserved.</div>");
+            sbHtml.append("    </div>");
+            sbHtml.append("</div>");
+            $(instance).append($(sbHtml.toString()));
+        };
+
+        return renderFooter();
+    }
+
+    $.fn.footerModule = function(options) {
+        return this.each(function () {
+            return eFooter(options, $(this));
+        });
+    };
+        
+    $.fn.footerModule.defaults = {};
+
+})(jQuery);
+/*  Footer  */
 
