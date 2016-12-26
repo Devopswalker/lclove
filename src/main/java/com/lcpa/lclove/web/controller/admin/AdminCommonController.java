@@ -44,11 +44,5 @@ public class AdminCommonController extends AnnotationController{
     public String uploadPage() {
         return "admin/uploadtest.jsp";
     }
-    
-
-	@RequestMapping(value = "/admin/img")
-	public String img() {
-		return "admin/uploadresult.jsp";
-	}
 
 }
