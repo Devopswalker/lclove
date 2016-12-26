@@ -1,21 +1,22 @@
 package com.lcpa.lclove.interceptor;
 
-import org.springframework.web.servlet.HandlerInterceptor;
+import com.lcpa.lclove.util.WebUtils;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.net.URLEncoder;
 
 /**
  * Created by shao on 2016/12/25.
  */
-public class LoginInterceptor implements HandlerInterceptor {
+public class LoginInterceptor extends HandlerInterceptorAdapter {
+
+    public static final String LAST_MODEL_VIEW_ATTRIBUTE = LoginInterceptor.class.getName() + ".lastModelAndView";
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
-        String url = httpServletRequest.getRequestURI();
-        //URL:login.jsp是公开的;这个demo是除了login.jsp是可以公开访问的，其它的URL都进行拦截控制
+        String url = httpServletRequest.getServletPath();
         if(url.indexOf("login")>=0){
             return true;
         }
@@ -26,15 +27,15 @@ public class LoginInterceptor implements HandlerInterceptor {
         if(username != null){
             return true;
         }
-        //不符合条件的，跳转到登录界面 TARGETURL
-        //httpServletResponse.sendRedirect("/adminLogin.xhtml");
-        httpServletResponse.sendRedirect("/Lclove/admin/login.xhtml?TARGETURL=" + URLEncoder.encode(url));
-        //httpServletRequest.getRequestDispatcher("/WEB-INF/page/admin/login.vm").forward(httpServletRequest, httpServletResponse);
+        //不符合条件的，跳转到登录界面
+        httpServletRequest.getSession().setAttribute("loginSuccessRedirect", url);
+        String redirectUrl = WebUtils.getContextPath(httpServletRequest) + "admin/login.xhtml";
+        httpServletResponse.sendRedirect(redirectUrl);
         return false;
     }
 
     @Override
-    public void postHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, ModelAndView modelAndView) throws Exception {
+    public void postHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object handler, ModelAndView modelAndView) throws Exception {
 
     }
 
