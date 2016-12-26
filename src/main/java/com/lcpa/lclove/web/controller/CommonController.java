@@ -23,7 +23,7 @@ public class CommonController extends AnnotationController{
 		if(StringUtils.isBlank(TARGETURL)) {
 			TARGETURL = WebUtils.getContextPath(request) + "admin/index.xhtml";
 		}
-		model.put("TARGETURL", TARGETURL);
+		model.put("targetUrl", TARGETURL);
 		model.put("ptn", "user");
 		return "admin/login.vm";
 	}
