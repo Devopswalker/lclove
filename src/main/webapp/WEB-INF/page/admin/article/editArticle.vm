@@ -46,7 +46,7 @@
             <label>分类标题：</label>
           </div>
           <div class="field">
-            <select name="topic" name="articleType" class="input w50">
+            <select id="articleType" name="articleType" class="input w50">
               <option value="">请选择分类</option>
 			  #foreach($type in $typeList)
               <option value="$type.id" #if($VmUtils.eq($type.id, $article.articleType))selected#end>$type.name</option>
@@ -55,15 +55,15 @@
             <div class="tips"></div>
           </div>
         </div>
-        <div class="form-group">
-          <div class="label">
-            <label>其他属性：</label>
-          </div>
-          <div class="field" style="padding-top:8px;"> 
-	            首页 <input id="tohome" name="tohome" type="checkbox" #if($VmUtils.eq($article.tohome,'Y')) checked="checked" #end/>
-	            推荐 <input id="torecom" name="torecom" type="checkbox" #if($VmUtils.eq($article.torecom,'Y')) checked="checked" #end/>
-          </div>
-        </div>
+##        <div class="form-group">
+##          <div class="label">
+##            <label>其他属性：</label>
+##          </div>
+##          <div class="field" style="padding-top:8px;">
+##	            首页 <input id="tohome" name="tohome" type="checkbox" #if($VmUtils.eq($article.tohome,'Y')) checked="checked" #end/>
+##	            推荐 <input id="torecom" name="torecom" type="checkbox" #if($VmUtils.eq($article.torecom,'Y')) checked="checked" #end/>
+##          </div>
+##        </div>
       <div class="form-group">
         <div class="label">
           <label>简要说明：</label>
@@ -86,15 +86,15 @@
       </div>
      
       <div class="clear"></div>
-      <div class="form-group">
-        <div class="label">
-          <label>排序：</label>
-        </div>
-        <div class="field">
-          <input type="text" class="input w50" id="sortnum" name="sortnum" value="#if($VmUtils.isNull($article.sortnum))0#else $article.sortnum #end"  data-validate="number:排序必须为数字" />
-          <div class="tips"></div>
-        </div>
-      </div>
+##      <div class="form-group">
+##        <div class="label">
+##          <label>排序：</label>
+##        </div>
+##        <div class="field">
+##          <input type="text" class="input w50" id="sortnum" name="sortnum" value="#if($VmUtils.isNull($article.sortnum))0#else $article.sortnum #end"  data-validate="number:排序必须为数字" />
+##          <div class="tips"></div>
+##        </div>
+##      </div>
       <div class="form-group">
         <div class="label">
           <label>发布时间：</label>
