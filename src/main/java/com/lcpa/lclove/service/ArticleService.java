@@ -52,6 +52,13 @@ public class ArticleService{
     public Article getArticleById(Integer id){
     	return articleMapper.selectByPrimaryKey(id);
     }
+
+    public Article getArticleDetailsById(Integer id){
+        Article article = articleMapper.selectByPrimaryKey(id);
+        ArticleContent articleContent = articleContentMapper.selectByPrimaryKey(id);
+        article.setContent(articleContent.getContent());
+        return article;
+    }
     
     public void saveArticleType(ArticleType type){
     	articleTypeMapper.insertSelective(type);
@@ -102,12 +109,5 @@ public class ArticleService{
         Integer pageSize = 3;
         searchText = "%"+searchText+"%";
         return articleMapper.selectArticlesByKeyWords(searchText, startIndex, pageSize);
-    }
-
-    public Article getArticleDetails(Integer id){
-        Article article = articleMapper.selectByPrimaryKey(id);
-        ArticleContent articleContent = articleContentMapper.selectByPrimaryKey(id);
-        article.setContent(articleContent.getContent());
-        return article;
     }
 }

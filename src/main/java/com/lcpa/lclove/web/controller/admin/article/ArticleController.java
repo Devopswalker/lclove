@@ -25,7 +25,7 @@ public class ArticleController extends AnnotationController{
 
 	@RequestMapping(value = "/admin/article/test.xhtml")
 	public String test(ModelMap model){
-		Article article = articleService.getArticleDetails(12);
+		Article article = articleService.getArticleDetailsById(12);
 		model.put("article", article);
 		return "";
 	}
@@ -41,10 +41,10 @@ public class ArticleController extends AnnotationController{
 	public String saveType(ArticleType type, ModelMap model) {
 		//ArticleType type = WebUtils.bindReqParams(request, ArticleType.class);
 		if (type == null) {
-			return showJsonError(model, "�������");
+			return showJsonError(model, "�������?");
 		}
 		if (StringUtils.isBlank(type.getName())) {
-			return showJsonError(model, "�������Ϊ�գ�");
+			return showJsonError(model, "�������Ϊ�գ�?");
 		}
 		if (type.getId() == null) {
 			articleService.saveArticleType(type);
@@ -92,7 +92,7 @@ public class ArticleController extends AnnotationController{
     	List<ArticleType> typeList = articleService.getAllArticleType();
     	Article article = null;
     	if(id != null){
-    		article = articleService.getArticleById(id);
+    		article = articleService.getArticleDetailsById(id);
     	}
     	model.put("article", article);
     	model.put("typeList", typeList);
@@ -107,7 +107,7 @@ public class ArticleController extends AnnotationController{
 			this.bindParams(article);
 			articleService.saveArticle(article);
 		}else{
-			article = articleService.getArticleById(id);
+			article = articleService.getArticleDetailsById(id);
 			if(article == null){
 				return this.showJsonError(model, "���²�����!");
 			}
