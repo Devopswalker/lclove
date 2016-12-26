@@ -19,11 +19,13 @@ public class CommonController extends AnnotationController{
 	}
 	
 	@RequestMapping(value="/admin/login.xhtml",method=RequestMethod.GET)
-	public String adminLogin(HttpServletRequest request, ModelMap model, String TARGETURL){
-		if(StringUtils.isBlank(TARGETURL)) {
-			TARGETURL = WebUtils.getContextPath(request) + "admin/index.xhtml";
+	public String adminLogin(HttpServletRequest request, ModelMap model){
+		String loginSuccessRedirect = request.getSession().getAttribute("loginSuccessRedirect").toString();
+		if(StringUtils.isBlank(loginSuccessRedirect)) {
+			loginSuccessRedirect = "/admin/index.xhtml";
+			request.getSession().setAttribute("loginSuccessRedirect", loginSuccessRedirect);
 		}
-		model.put("TARGETURL", TARGETURL);
+		model.put("TARGETURL", loginSuccessRedirect);
 		model.put("ptn", "user");
 		return "admin/login.vm";
 	}
