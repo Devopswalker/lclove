@@ -11,4 +11,9 @@ public class CommonController extends AnnotationController{
 		return "wide_backPage.vm";
 	}
 
+	@RequestMapping(value = "/admin/img")
+	public String img() {
+		return "admin/uploadresult.jsp";
+	}
+
 }

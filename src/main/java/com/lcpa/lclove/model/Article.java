@@ -7,6 +7,10 @@ public class Article {
 
     private String title;
 
+    private String thumbnail;
+
+    private Integer sortNum;
+
     private Timestamp pubDate;
 
     private Integer likeNum;
@@ -39,6 +43,22 @@ public class Article {
 
     public void setTitle(String title) {
         this.title = title == null ? null : title.trim();
+    }
+
+    public String getThumbnail() {
+        return thumbnail;
+    }
+
+    public void setThumbnail(String thumbnail) {
+        this.thumbnail = thumbnail;
+    }
+
+    public Integer getSortNum() {
+        return sortNum;
+    }
+
+    public void setSortNum(Integer sortNum) {
+        this.sortNum = sortNum;
     }
 
     public Timestamp getPubDate() {

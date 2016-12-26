@@ -41,10 +41,6 @@ public class ArticleService{
         articleContentMapper.deleteByPrimaryKey(id);
     }
     
-    public void delArticleById(Integer id){
-    	articleMapper.deleteByPrimaryKey(id);
-    }
-    
     public void updateArticleById(Article article){
     	articleMapper.updateByPrimaryKey(article);
     }
@@ -80,9 +76,15 @@ public class ArticleService{
         return articleTypeMapper.selectAll();
     }
 
+    public List<Article> getAllArticles(Integer pageNo){
+        Integer startIndex = 0;
+        Integer pageSize = pageNo*5;
+        return articleMapper.selectAllArticles(startIndex, pageSize);
+    }
+
     public List<Article> getArticlesByType(Integer articleType, Integer pageNo){
         Integer startIndex = 0;
-        Integer pageSize = pageNo*2;
+        Integer pageSize = pageNo*3;
         return articleMapper.selectArticleByType(articleType, startIndex, pageSize);
     }
 

@@ -14,6 +14,8 @@ public interface ArticleMapper {
 
     Article selectByPrimaryKey(Integer id);
 
+    List<Article> selectAllArticles(Integer startIndex, Integer pageSize);
+
     List<Article> selectHomeArticle(Integer startIndex, Integer pageSize);
 
     List<Article> selectArticleByType(Integer articleType, Integer startIndex, Integer pageSize);
