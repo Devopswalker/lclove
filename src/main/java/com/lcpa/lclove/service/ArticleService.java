@@ -34,7 +34,7 @@ public class ArticleService{
 
     public void updateArticle(Article article){
         articleMapper.updateByPrimaryKey(article);
-        articleContentMapper.updateArticleByPrimaryKeyWithBLOBs(article);
+        articleContentMapper.updateByPrimaryKeyWithBLOBs(article);
     }
     public  void removeArticle(Integer id){
         articleMapper.deleteByPrimaryKey(id);

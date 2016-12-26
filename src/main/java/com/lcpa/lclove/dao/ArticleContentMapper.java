@@ -16,5 +16,5 @@ public interface ArticleContentMapper {
 
     int updateByPrimaryKeySelective(ArticleContent record);
 
-    int updateArticleByPrimaryKeyWithBLOBs(Article record);
+    int updateByPrimaryKeyWithBLOBs(Article record);
 }
