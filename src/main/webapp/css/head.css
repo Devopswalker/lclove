@@ -16,6 +16,7 @@
 	position:relative;
 	float:right;
 	height:80px;
+	cursor:pointer;
 }
 
 .head_left_1{
@@ -24,6 +25,7 @@
 	vertical-align:middle;
 	height:70px;
 	width:46px;
+	cursor:pointer;
 }
 
 .head_left_2{

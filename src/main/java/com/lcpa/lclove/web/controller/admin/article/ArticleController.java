@@ -41,17 +41,17 @@ public class ArticleController extends AnnotationController{
 	public String saveType(ArticleType type, ModelMap model) {
 		//ArticleType type = WebUtils.bindReqParams(request, ArticleType.class);
 		if (type == null) {
-			return showJsonError(model, "�������?");
+			return showJsonError(model, "参数错误！");
 		}
 		if (StringUtils.isBlank(type.getName())) {
-			return showJsonError(model, "�������Ϊ�գ�?");
+			return showJsonError(model, "分类名称为空！");
 		}
 		if (type.getId() == null) {
 			articleService.saveArticleType(type);
 		} else {
 			ArticleType old = articleService.getArticleTypeById(type.getId());
 			if (old == null) {
-				return showJsonError(model, "���಻���ڻ���ɾ��");
+				return showJsonError(model, "该分类不存在或已被删除！");
 			} else {
 				articleService.updateArticleTypeById(type);
 			}
@@ -62,7 +62,7 @@ public class ArticleController extends AnnotationController{
     @RequestMapping(value = "/admin/article/delType.xhtml")
 	public String delTyle(Integer id, ModelMap model){
     	if(id == null){
-    		return showJsonError(model, "IDΪ�գ�");
+    		return showJsonError(model, "ID为空！");
     	}
     	articleService.delArticleTypeById(id);
 		return showJsonSuccess(model);
@@ -109,7 +109,7 @@ public class ArticleController extends AnnotationController{
 		}else{
 			article = articleService.getArticleDetailsById(id);
 			if(article == null){
-				return this.showJsonError(model, "���²�����!");
+				return this.showJsonError(model, "该文章不存在或已被删除！");
 			}
 			
 			this.bindParams(article, new String[]{"id"});
@@ -121,7 +121,7 @@ public class ArticleController extends AnnotationController{
     @RequestMapping(value = "/admin/article/delArticle.xhtml")
 	public String delArticle(Integer id, ModelMap model){
     	if(id == null){
-    		return showJsonError(model, "IDΪ�գ�");
+    		return showJsonError(model, "ID为空！");
     	}
     	articleService.removeArticle(id);
 		return showJsonSuccess(model);

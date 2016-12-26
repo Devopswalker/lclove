@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<title>LC | 恋猫, 女性恋爱百科</title>
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<link rel="shortcut icon" href="${staticPath}images/favicon.ico"/>  
+		<link rel="stylesheet" type="text/css" href="${staticPath}css/head.css" />
+		<link rel="stylesheet" type="text/css" href="${staticPath}css/float.css" />
+		<link rel="stylesheet" type="text/css" href="${staticPath}css/home_main.css" />
+		<link rel="stylesheet" type="text/css" href="${staticPath}css/navigation.css" />
+		<script src="${staticPath}js/jquery.js"></script>
+		<script src="${staticPath}js/pintuer.js"></script>
+		<script src="${staticPath}js/lclove-util.js"></script>
+
+		<script>
+		$(function(){
+			//固定头部导航
+			$("#myHeader").topMenu();
+			
+			//图片轮播
+			//$(".banner").bannerBox();
+			
+			//通用搜索+微电影图文推荐
+			//$(".search").searchBox();
+			
+			//六个推荐文章
+			//$(".case").recommandShow();
+			
+			//文章列表
+			//$(".article").newsList();
+			
+			//固定页尾
+			$("body").footerModule();
+			
+			//返回顶部
+			$.backToTop();
+		});
+		</script>
+	</head>
+	
+	<body>
+		<!-- 固定头部导航 -->
+		<div id="myHeader"></div>
+		<!-- 固定头部导航 -->
+		
+		<!-- 图片轮播  -->
+		<div class="banner"></div>
+		<!-- 图片轮播  -->
+		
+		<!-- 通用搜索 -->
+		<div class="search"></div>
+		<!-- 通用搜索-->
+		
+		<!-- 六个推荐文章 -->
+		<div class="case"></div>
+		<!-- 六个推荐文章-->
+		
+		<!-- 文章列表 -->
+		<div class="article"></div>
+		<!-- 文章列表-->
+	</body>
+</html>
