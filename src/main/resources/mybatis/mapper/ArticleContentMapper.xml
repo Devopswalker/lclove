@@ -61,7 +61,7 @@
     </set>
     where ID = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.lcpa.lclove.model.ArticleContent">
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.lcpa.lclove.model.Article">
     update article_content
     set CONTENT = #{content,jdbcType=LONGVARCHAR}
     where ID = #{id,jdbcType=INTEGER}
