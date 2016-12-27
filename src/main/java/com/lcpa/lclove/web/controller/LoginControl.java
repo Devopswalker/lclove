@@ -12,21 +12,31 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class LoginControl {
 
-    @RequestMapping(value="/admin/login.action")
-    public String login(HttpSession session, ModelMap model, String username,String password) throws Exception{
-        //TODO
-        //在Session里保存信息
-        session.setAttribute("username", username);
-        //重定向
-        String loginSuccessRedirect = session.getAttribute("loginSuccessRedirect").toString();
-        return "redirect:"+loginSuccessRedirect;
-    }
-
-    @RequestMapping(value="/logout")
-    public String logout(HttpSession session) throws Exception{
-        //清除Session
-        session.invalidate();
-
-        return "redirect:hello.action";
-    }
+//    @RequestMapping(value="/admin/login.action")
+//    public String login(HttpSession session, ModelMap model, String username,String password) throws Exception{
+//        //TODO
+//        //在Session里保存信息
+//        session.setAttribute("username", username);
+//        //重定向
+//        String loginSuccessRedirect = session.getAttribute("loginSuccessRedirect").toString();
+//        return "redirect:"+loginSuccessRedirect;
+//    }
+//
+//    @RequestMapping(value="/admin/changeUser")
+//    public String changeUser(HttpSession session, ModelMap model, String username,String password) throws Exception{
+//        //TODO
+//        //在Session里保存信息
+//        session.setAttribute("username", username);
+//        //重定向
+//        String loginSuccessRedirect = session.getAttribute("loginSuccessRedirect").toString();
+//        return "redirect:"+loginSuccessRedirect;
+//    }
+//
+//    @RequestMapping(value="/logout")
+//    public String logout(HttpSession session) throws Exception{
+//        //清除Session
+//        session.invalidate();
+//
+//        return "redirect:hello.action";
+//    }
 }

@@ -1,22 +1,26 @@
 <!DOCTYPE html>
 <html lang="zh-cn">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-<meta name="renderer" content="webkit">
-<title>后台管理中心</title>
-	<link rel="stylesheet" href="/css/admin/pintuer.css">
-	<link rel="stylesheet" href="/css/admin/admin.css">
-	<script src="/js/jquery.js"></script>
-	<script src="/js/pintuer.js"></script>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="renderer" content="webkit">
+    <title></title>
+    <link rel="stylesheet" href="${staticPath}css/admin/pintuer.css">
+    <link rel="stylesheet" href="${staticPath}css/admin/admin.css">
+    <script src="${staticPath}js/jquery.js"></script>
+    <script src="${staticPath}js/pintuer.js"></script>
+    <script src="${staticPath}js/plugins/layer/laydate/laydate.js"></script>
+    <script src="${staticPath}js/plugins/ueditor/ueditor.config.js"></script>
+    <script src="${staticPath}js/plugins/ueditor/ueditor.all.min.js"></script>
+    <script src="${staticPath}js/plugins/ueditor/lang/zh-cn/zh-cn.js"></script>
 </head>
 <body>
 <div class="panel admin-panel">
   <div class="panel-head"><strong><span class="icon-key"></span> 修改管理员密码</strong></div>
   <div class="body-content">
-    <form method="post" class="form-x" action="">
-    <input type="hidden" id ="username" name="username" value="">
+    <form method="post" class="form-x" action="${basePath}admin/changeUser">
+    <input type="hidden" id ="username" name="username" value="admin">
       <div class="form-group">
         <div class="label">
           <label for="sitename">管理员帐号：</label>
@@ -32,7 +36,7 @@
           <label for="sitename">原始密码：</label>
         </div>
         <div class="field">
-          <input type="password" class="input w50" id="mpass" name="mpass" size="50" placeholder="请输入原始密码" data-validate="required:请输入原始密码" />       
+          <input type="password" class="input w50" id="oldPwd" name="oldPwd" size="50" placeholder="请输入原始密码" data-validate="required:请输入原始密码" />
         </div>
       </div>      
       <div class="form-group">
@@ -40,7 +44,7 @@
           <label for="sitename">新密码：</label>
         </div>
         <div class="field">
-          <input type="password" class="input w50" name="newpass" size="50" placeholder="请输入新密码" data-validate="required:请输入新密码,length#>=5:新密码不能小于5位" />         
+          <input type="password" class="input w50" id="newPwd" name="newPwd" size="50" placeholder="请输入新密码" data-validate="required:请输入新密码,length#>=5:新密码不能小于5位" />
         </div>
       </div>
       <div class="form-group">
@@ -48,7 +52,7 @@
           <label for="sitename">确认新密码：</label>
         </div>
         <div class="field">
-          <input type="password" class="input w50" name="renewpass" size="50" placeholder="请再次输入新密码" data-validate="required:请再次输入新密码,repeat#newpass:两次输入的密码不一致" />          
+          <input type="password" class="input w50" id="renewpass" name="renewpass" size="50" placeholder="请再次输入新密码" data-validate="required:请再次输入新密码,repeat#newPwd:两次输入的密码不一致" />
         </div>
       </div>
       
@@ -57,10 +61,32 @@
           <label></label>
         </div>
         <div class="field">
-          <button class="button bg-main icon-check-square-o" type="submit"> 提交</button>   
+          <button class="button bg-main icon-check-square-o" type="submit"> 提交</button>
         </div>
       </div>      
     </form>
   </div>
 </div>
+<script type="text/javascript">
+    function changePwd(){
+        newPwd1 = $("#newPwd").val();
+        newPwd2 = $("#renewpass").val()
+        if (newPwd1 != newPwd2){
+            $("#newPwd").val("")
+            $("#renewpass").val("")
+            alert("两次输入密码不相同！")
+        }else{
+            var url = '${basePath}admin/changeUser';
+            username = $("#username").val();
+            oldPwd = $("#oldPwd").val();
+            newPwd = $("#newPwd").val();
+            var values = {"username":username, "oldPwd":oldPwd, "newPwd":newPwd};
+            $.getData(url, values, true, 'get', 'json', false, changePwdCallBack);
+        }
+    }
+    //单个删除
+    function changePwdCallBack(r){
+
+    };
+</script>
 </body></html>

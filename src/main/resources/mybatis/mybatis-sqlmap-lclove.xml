@@ -38,6 +38,7 @@
 		<typeAlias type="com.lcpa.lclove.model.Survey" alias="Survey"/>
 		<typeAlias type="com.lcpa.lclove.model.SurveyAnswer" alias="SurveyAnswer"/>
 		<typeAlias type="com.lcpa.lclove.model.SurveyAnswerUser" alias="SurveyAnswerUser"/>
+		<typeAlias type="com.lcpa.lclove.model.User" alias="User"/>
 
 
 	</typeAliases>
@@ -55,6 +56,7 @@
 		<mapper resource="mybatis/mapper/SurveyAnswerMapper.xml"/>
 		<mapper resource="mybatis/mapper/SurveyAnswerUserMapper.xml"/>
 		<mapper resource="mybatis/mapper/SurveyMapper.xml"/>
+		<mapper resource="mybatis/mapper/UserMapper.xml"/>
 	</mappers>
 </configuration>
 
