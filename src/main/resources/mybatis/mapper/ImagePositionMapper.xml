@@ -15,6 +15,11 @@
     from image_position
     where ID = #{id,jdbcType=INTEGER}
   </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from image_position
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from image_position
     where ID = #{id,jdbcType=INTEGER}

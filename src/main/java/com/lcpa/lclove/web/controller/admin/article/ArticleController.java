@@ -36,7 +36,7 @@ public class ArticleController extends AnnotationController{
 		model.put("typeList", typeList);
 		return "admin/article/typeList.vm";
 	}
-    
+
 	@RequestMapping(value = "/admin/article/saveType.xhtml")
 	public String saveType(ArticleType type, ModelMap model) {
 		//ArticleType type = WebUtils.bindReqParams(request, ArticleType.class);
@@ -58,7 +58,7 @@ public class ArticleController extends AnnotationController{
 		}
 		return "redirect:/admin/article/typeList.xhtml";
 	}
-    
+
     @RequestMapping(value = "/admin/article/delType.xhtml")
 	public String delTyle(Integer id, ModelMap model){
     	if(id == null){
@@ -67,7 +67,7 @@ public class ArticleController extends AnnotationController{
     	articleService.delArticleTypeById(id);
 		return showJsonSuccess(model);
 	}
-    
+
     @RequestMapping(value = "/admin/article/articleList.xhtml")
     public String getArticleList(Integer pageNo, String s_tohome, String s_torecom, String keyword, Integer type, ModelMap model) {
     	List<ArticleType> typeList = articleService.getAllArticleType();
@@ -79,14 +79,14 @@ public class ArticleController extends AnnotationController{
     	if(pageNo == null){
     		pageNo = 1;
     	}
-    		
+
     	List<Article> articleList = articleService.getAllArticles(pageNo);
     	model.put("typeMap", typeMap);
     	model.put("typeList", typeList);
     	model.put("articleList", articleList);
         return "admin/article/articleList.vm";
     }
-    
+
     @RequestMapping(value = "/admin/article/editArticle.xhtml")
 	public String editArticle(Integer id, ModelMap model){
     	List<ArticleType> typeList = articleService.getAllArticleType();
@@ -98,7 +98,7 @@ public class ArticleController extends AnnotationController{
     	model.put("typeList", typeList);
 		return "admin/article/editArticle.vm";
 	}
-    
+
     @RequestMapping(value = "/admin/article/saveArticle.xhtml")
 	public String saveArticle(Integer id, ModelMap model) {
     	Article article = null;
@@ -111,13 +111,13 @@ public class ArticleController extends AnnotationController{
 			if(article == null){
 				return this.showJsonError(model, "该文章不存在或已被删除！");
 			}
-			
+
 			this.bindParams(article, new String[]{"id"});
 			articleService.updateArticle(article);
 		}
     	return "redirect:/admin/article/articleList.xhtml";
     }
-    
+
     @RequestMapping(value = "/admin/article/delArticle.xhtml")
 	public String delArticle(Integer id, ModelMap model){
     	if(id == null){

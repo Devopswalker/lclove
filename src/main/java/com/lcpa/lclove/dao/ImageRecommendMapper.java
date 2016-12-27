@@ -13,7 +13,7 @@ public interface ImageRecommendMapper {
 
     ImageRecommend selectByPrimaryKey(Integer id);
 
-    List<ImageRecommend> selectAll();
+    List<ImageRecommend> selectAllRecommendImage(Integer startIndex, Integer pageSize);
 
     List<ImageRecommend> selectByPosition(Integer position, Integer pageSize);
 

@@ -333,7 +333,7 @@ public class DateUtil {
 		time = StringUtils.trim(time);
 		if (StringUtils.isBlank(time))
 			throw new IllegalArgumentException("时间格式有错误！");
-		time = time.replace('：', ':');
+		time = time.replace("：", ":");
 		String[] times = time.split(":");
 		String result = "";
 		if (times[0].length() < 2)

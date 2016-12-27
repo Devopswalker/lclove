@@ -16,7 +16,7 @@
 <div class="panel admin-panel">
     <div class="panel-head"><strong class="icon-reorder"> 已经上传的图片</strong></div>
     <div class="padding border-bottom">
-        <button type="button" class="button border-yellow" onclick="addImage();"><span class="icon-plus-square-o"></span> 上传图片</button>
+        <button type="button" class="button border-main icon-plus-square-o" onclick="addImage();"> 上传图片</button>
     </div>
     <table class="table table-hover text-center">
         <tr>

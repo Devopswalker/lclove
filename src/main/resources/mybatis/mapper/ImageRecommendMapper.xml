@@ -18,11 +18,12 @@
     from image_recommend
     where POSITION = #{0} ORDER BY SEQ ASC LIMIT 0, #{1}
   </select>
-  <select id="selectAll" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="selectAllRecommendImage" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from image_recommend
-    where ORDER BY ID ASC
+    order by id desc
+    LIMIT #{0},#{1}
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 

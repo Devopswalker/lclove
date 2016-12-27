@@ -2,6 +2,8 @@ package com.lcpa.lclove.dao;
 
 import com.lcpa.lclove.model.ImagePosition;
 
+import java.util.List;
+
 public interface ImagePositionMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -10,6 +12,8 @@ public interface ImagePositionMapper {
     int insertSelective(ImagePosition record);
 
     ImagePosition selectByPrimaryKey(Integer id);
+
+    List<ImagePosition> selectAll();
 
     int updateByPrimaryKeySelective(ImagePosition record);
 

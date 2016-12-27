@@ -137,6 +137,7 @@
         </div>
         <div class="field">
           <button class="button bg-main icon-check-square-o" type="submit"> 提交</button>
+            <a class="button bg-main icon-backward" href="${basePath}admin/article/articleList.xhtml"> 取消</a>
         </div>
       </div>
     </form>
