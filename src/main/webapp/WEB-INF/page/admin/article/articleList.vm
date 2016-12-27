@@ -73,7 +73,7 @@
    		<tr>
           <td style="text-align:left; padding-left:20px;"><input type="checkbox" name="id" value="$article.id" />$article.id</td>
 ##          <td><input type="text" name="sortnum" value="$!article.sortnum" style="width:50px; text-align:center; border:1px solid #ddd; padding:7px 0;" /></td>
-          <td width="10%"><img src="${staticPath}#if($VmUtils.isNull($article.thumbnail))images/default_lclove.jpg#else$article.topic#end" alt="" width="70" height="50" /></td>
+          <td width="10%"><img src="$article.thumbnail" alt="" width="70" height="50" /></td>
           <td>$!article.title</td>
 ##          <td><font color="#00CC99">首页</font></td>
           <td>$typeMap.get($article.articleType).name</td>
