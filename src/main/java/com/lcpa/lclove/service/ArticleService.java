@@ -84,7 +84,7 @@ public class ArticleService{
 
     public List<Article> getArticlesByType(Integer articleType, Integer pageNo){
         Integer startIndex = 0;
-        Integer pageSize = pageNo*3;
+        Integer pageSize = pageNo*5;
         return articleMapper.selectArticleByType(articleType, startIndex, pageSize);
     }
 

@@ -1,8 +1,10 @@
 package com.lcpa.lclove.web.controller.admin.article;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.lcpa.lclove.util.StringUtil;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -79,12 +81,19 @@ public class ArticleController extends AnnotationController{
     	if(pageNo == null){
     		pageNo = 1;
     	}
+		model.put("typeMap", typeMap);
+		model.put("typeList", typeList);
 
-    	List<Article> articleList = articleService.getAllArticles(pageNo);
-    	model.put("typeMap", typeMap);
-    	model.put("typeList", typeList);
-    	model.put("articleList", articleList);
-        return "admin/article/articleList.vm";
+		List<Article> articleList;
+		if (type != null && !type.equals("")){
+			articleList = articleService.getArticlesByType(type, pageNo);
+			model.put("articleList", articleList);
+			return showJsonSuccess(model);
+		}else{
+			articleList = articleService.getAllArticles(pageNo);
+			model.put("articleList", articleList);
+			return "admin/article/articleList.vm";
+		}
     }
 
     @RequestMapping(value = "/admin/article/editArticle.xhtml")

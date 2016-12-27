@@ -35,7 +35,7 @@
           </select>
         </li>
           <li>
-            <select name="type" class="input" style="width:200px; line-height:17px;" onchange="changesearch()">
+            <select name="searchArticleType" id="searchArticleType" class="input" style="width:200px; line-height:17px;" onchange="changesearch()">
               <option value="">请选择分类</option>
               #foreach($type in $typeList)
               <option value="$type.id">$type.name</option>
@@ -108,7 +108,16 @@
           </td>
       </tr>
       <tr>
-        <td colspan="8"><div class="pagelist"> <a href="">上一页</a> <span class="current">1</span><a href="">2</a><a href="">3</a><a href="">下一页</a><a href="">尾页</a> </div></td>
+        <td colspan="8">
+			<div class="pagelist">
+				<a href="">上一页</a>
+				<span class="current">1</span>
+				<a href="">2</a>
+				<a href="">3</a>
+				<a href="">下一页</a>
+				<a href="">尾页</a>
+			</div>
+		</td>
       </tr>
     </table>
   </div>
@@ -116,8 +125,11 @@
 <script type="text/javascript">
 
 //搜索
-function changesearch(){	
-		
+function changesearch(){
+    var url = '${basePath}admin/article/articleList.xhtml';
+    searchArticleType = $("#searchArticleType").val();
+    var values = {"type":searchArticleType};
+    $.getData(url, values, true, 'get', 'json', false, delCallBack);
 }
 
 //单个删除
