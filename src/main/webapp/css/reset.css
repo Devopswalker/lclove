@@ -1,0 +1,46 @@
+/*重置样式开始*/
+@charset "utf-8";
+html,body,div,dl,dt,dd,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,p,blockquote,th,td,ins,img{margin: 0px;padding: 0px;word-wrap:break-word;}
+body{font-family: Helvetica, Tahoma, Arial, STXihei, "华文细黑", "Microsoft YaHei", "微软雅黑", SimSun, "宋体", Heiti, "黑体", sans-serif;color:#333;}
+img{border:none 0px;}
+img{vertical-align:middle; _vertical-align:baseline;}
+table{border-collapse: collapse;border-spacing: 0;}
+input{outline:none; vertical-align:middle;}
+ul li,{list-style: none;padding:0; margin:0;}
+ol{list-style-type: decimal;list-style: decimal;padding-left:22px;}
+.clear:after,.button:after,.ui_layout:after,.abeam:after,.list li:after,.tales60:after,.tales100:after,.selectOptions:after,.inner:after,.nav_tabs:after{content:'content';clear:both;display:block;visibility: hidden;height:0px; width:0px;font-size:0px;}
+.clear,.button,.ui_layout,.abeam,.list li,.tales60,.tales100,.selectOptions,.inner{zoom:1}
+.cls{display:block;clear:both;height:0px;width:0px;line-height:0px;font-size:0px;margin:0px;padding:0px;}
+a{text-decoration:none; outline:none;cursor: pointer;}
+a:hover{color:#be9c72;}
+em{font-style: normal;text-decoration:none;}
+/*重置样式结束*/
+
+/* 重置列表元素 */
+ul, ol { list-style: none; }
+small { font-size: 12px; } /* 小于 12px 的中文很难阅读，让 small 正常化 */
+/* 重置表单元素 */
+button { border: none;background:none;outline: none;}
+fieldset, img { border: none; } /* img 搭车：让链接里的 img 无边框 */
+button, input, select, textarea {
+    font-size: 100%; /* 使得表单元素在 ie 下能继承字体大小 */
+}
+h1 { font-size: 18px; /* 18px / 12px = 1.5 */ }
+h2 { font-size: 16px; }
+h3 { font-size: 14px; }
+h4, h5, h6 { font-size: 100%; }
+/*ie高版本的小眼睛和小叉子清除*/
+input::-ms-clear {
+    display: none;
+}
+input::-ms-reveal {
+    display: none;
+}
+label,button { cursor: pointer; }
+/*解决IE图片缩放失真*/
+img { -ms-interpolation-mode: bicubic; margin:0;}
+/*单行文字超出显示省略号*/
+.omg{overflow: hidden; text-overflow: ellipsis; white-space:nowrap;}
+::-moz-placeholder { color: #999; !important;}
+::-webkit-input-placeholder { color:#999 !important;}
+:-ms-input-placeholder { color:#999 !important;}

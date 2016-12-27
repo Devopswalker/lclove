@@ -3,6 +3,11 @@ lclove.util = {};
 lclove.util.basePath = '/';
 lclove.util.imgPath = '/';
 
+lclove.params = {};
+lclove.params.keyword = "";
+lclove.params.navtype = "";
+lclove.params.pageNo = "";
+
 /* StringBuilder  */
 function StringBuilder () {
      this.__asBuilder = [];
@@ -158,14 +163,14 @@ function navClick(index){
 		break;
 	}
 	if(url!=null){
-		document.location.href = lclove.util.imgPath + url;
+		document.location.href = lclove.util.basePath + url;
 	}
 }
 
 /* Ajax  */
 $.extend({
 	getRequest : function(url, data, async, type, dataType, successfn, errorfn) {
-        async = (async==null || async==="" || typeof(async)=="undefined")? "true" : async;
+        async = (async==null || async=="" || typeof(async)=="undefined")? "true" : async;
         type = (type==null || type=="" || typeof(type)=="undefined")? "post" : type;
         dataType = (dataType==null || dataType=="" || typeof(dataType)=="undefined")? "json" : dataType;
         data = (data==null || data=="" || typeof(data)=="undefined")? {} : data;
@@ -188,7 +193,7 @@ $.extend({
 	   		if(result.success){
 	   			var resultData = null;
 	   			if(isJsonType){
-	   				resultData = eval('(' + result.data + ')');	
+	   				resultData = result.data;	
 	   			}else{
 	   				resultData = result;
 	   			}
@@ -278,7 +283,7 @@ $.extend({
 /* to top  */
 
 /* Header Menu */
-;(function($){
+(function($){
     var eMenu = function(options,object) {
         var opts = $.extend({}, $.fn.topMenu.defaults, options);
         var instance = object;
@@ -343,6 +348,98 @@ $.extend({
 
 })(jQuery);
 /* Header Menu */
+
+/* comm search */
+$(function(){
+    var eSearchByType = function(options,object) {
+        var opts = $.extend({}, $.fn.searchByType.defaults, options);
+        var instance = object;
+
+        //筛选
+        var render = function(){
+            var sbHtml = new StringBuilder();
+            sbHtml.append("<input class='search_bar' placeholder='搜索关键字' type='text' value='" + lclove.params.keyword + "'/>");
+            sbHtml.append("<div class='searchButton'></div>");
+            $(instance).append($(sbHtml.toString()));
+            $(".searchButton").on("click", function(){
+            	//筛选条件
+            	var keywrod = $(".search_bar").val();
+            	var filterUrl =  lclove.util.basePath + "ajax/articleList.xhtml?keywrod=" + keywrod + "&type=1";
+            	refreshPage(filterUrl);
+            });
+        };        
+        return render();
+    };
+
+    $.fn.searchByType = function(options) {
+        return this.each(function () {
+            return eSearchByType(options, $(this));
+        });
+    };
+    $.fn.searchByType.defaults = {};
+});
+/* comm search */
+
+/* Recommand Show */
+$(function(){
+    var eRecommandShow = function(options,object) {
+        var opts = $.extend({}, $.fn.recommandShow.defaults, options);
+        var instance = object;
+        var url = lclove.util.basePath + "ajax/getRecommand.xhtml";
+        var imgTemplate = function(data){
+            var sbHtml = new StringBuilder();
+            sbHtml.append("<div class='recommend_item'>");
+            sbHtml.append("  <a href='" + data.recommendUrl + "'><img src='" + lclove.util.imgPath + data.imgUrl + "'/></a>");
+            sbHtml.append("  <div>"+ data.description +"<br />"+ data.seq +"</div>");
+            sbHtml.append("</div>");
+            sbHtml.append("<div class='small_blank'></div>");
+            return $(sbHtml.toString());
+        };
+        
+        var defaultTemplate = function(){
+            var sbHtml = new StringBuilder();
+            sbHtml.append("<div class='recommend_item'><img src='"+ lclove.util.imgPath + "images/recoommend1.png'/><div>微电影系列<br />Vol.1</div></div>");
+            sbHtml.append("<div class='small_blank'></div>");
+            sbHtml.append("<div class='recommend_item'><img src='"+ lclove.util.imgPath + "images/recoommend2.png'/><div>微电影系列<br />Vol.2</div></div>");
+            sbHtml.append("<div class='small_blank'></div>");
+            sbHtml.append("<div class='recommend_item'><img src='"+ lclove.util.imgPath + "images/recoommend3.png'/><div>微电影系列<br />Vol.3</div></div>");
+            sbHtml.append("<div class='small_blank'></div>");
+            return $(sbHtml.toString());
+        };
+
+        var loadRecommand = function () {
+            var sbHtml = new StringBuilder();
+            sbHtml.append(" <div class='recommendList'>");
+            sbHtml.append("</div>");
+            $(instance).append($(sbHtml.toString()));
+        };
+        
+        var fillData = function(data){
+        	if(data != null && data != ""){
+        		$.each(data, function(index, item){
+            		$(".recommendList").append(imgTemplate(item));
+            	});
+        	}else{
+        		$(".recommendList").append(defaultTemplate());
+        	}
+        };
+        loadRecommand();
+        $.getData(url, null, true, "POST", "json", true, fillData);
+    };
+
+    $.fn.recommandShow = function(options) {
+        return this.each(function () {
+            return eRecommandShow(options, $(this));
+        });
+    };
+    $.fn.recommandShow.defaults = {};
+});
+
+/* Recommand Show */
+
+/* TOP 6 */
+
+/* TOP 6 */
 
 
 /*  Footer  */
