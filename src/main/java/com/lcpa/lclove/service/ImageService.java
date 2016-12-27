@@ -25,7 +25,8 @@ public class ImageService {
         String uploadFileName = String.valueOf(image.getId()) +"_" + image.getName();
         String uploadImageUrl = uploadContext + uploadFileName;
         image.setUrl(uploadImageUrl);
-        imageMapper.updateUrl(image);
+        image.setFileName(uploadFileName);
+        imageMapper.update(image);
 
         File targetFile = new File(uploadPath, uploadFileName);
         if(!targetFile.exists()){
@@ -39,8 +40,13 @@ public class ImageService {
         }
     }
 
-    public void removeUploadedImageById(Integer id){
+    public void removeUploadedImageById(Integer id, String fileName, String uploadPath){
+        File targetFile = new File(uploadPath, fileName);
         imageMapper.deleteByPrimaryKey(id);
+        if (targetFile.exists()){
+            targetFile.delete();
+        }
+
     }
 
     public List<Image> getAllImage(){

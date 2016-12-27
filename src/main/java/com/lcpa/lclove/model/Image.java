@@ -5,6 +5,8 @@ public class Image {
 
     private String name;
 
+    private  String fileName;
+
     private String url;
 
     public Integer getId() {
@@ -21,6 +23,14 @@ public class Image {
 
     public void setName(String name) {
         this.name = name == null ? null : name.trim();
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
     }
 
     public String getUrl() {

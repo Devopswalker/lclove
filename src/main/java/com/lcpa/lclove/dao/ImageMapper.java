@@ -9,7 +9,7 @@ public interface ImageMapper {
 
     int insert(Image record);
 
-    int updateUrl(Image record);
+    int update(Image record);
 
     int insertSelective(Image record);
 

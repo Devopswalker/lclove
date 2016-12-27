@@ -1,41 +1,108 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-cn">
 <head>
-  <meta charset="utf-8">
-  <script src="/js/jquery-1.8.3.min.js"></script>
-  <link rel="stylesheet" href="https://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
-  <script src="https://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="renderer" content="webkit">
+    <title></title>
+    <link rel="stylesheet" href="${staticPath}css/admin/pintuer.css">
+    <link rel="stylesheet" href="${staticPath}css/admin/admin.css">
+    <script src="${staticPath}js/jquery.js"></script>
+    <script src="${staticPath}js/pintuer.js"></script>
+    <script src="${staticPath}js/lclove-util.js"></script>
 </head>
 <body>
-<table class="table table-hover">
-  <caption>已经上传的图片</caption>
-  <thead>
-  <tr>
-    <th>名称</th>
-    <th>Position</th>
-    <th>URL</th>
-    <th>Description</th>
-    <th>custom</th>
-  </tr>
-  </thead>
-  <tbody>
-  	#foreach($img in $images)
-		<tr>
-			#if($VmUtils.eq($img.id,"13"))
-			<td>$img.id "逻辑操作，VmUtils是一个java工具类"</td>
-			#else
-			<td>$img.id</td>
-			#end
-			<td>$img.fileName</td>
-			<td>$img.imgSrc</td>
-			<td>$img.description</td>
-			#set($local="自定义属性的值,各种计算,简单攻略：<a href='http://www.cnblogs.com/likwo/archive/2010/05/13/1734936.html'>Velocity语法</a>")
-			<td>$local</td>
-		</tr>
-	#end
-  </tbody>
-</table>
+<div class="panel admin-panel">
+    <div class="panel-head"><strong class="icon-reorder"> 已经上传的图片</strong></div>
+    <div class="padding border-bottom">
+        <button type="button" class="button border-yellow" onclick="addImage();"><span class="icon-plus-square-o"></span> 上传图片</button>
+    </div>
+    <table class="table table-hover text-center">
+        <tr>
+            <th width="10%">ID</th>
+            <th width="20%">文件名</th>
+            <th width="10%">URL</th>
+            <th width="10%">操作</th>
+        </tr>
+      #foreach($img in $images)
+          <tr>
+              <td>$!img.id</td>
+              <td>$!img.name</td>
+              <td>$!img.url</td>
+              <td>
+                  <div class="button-group">
+##                      <a class="button border-main" href="javascript:void(0)" onclick="editType($!img.id,'$!type.name');"><span class="icon-edit"></span> 修改</a>
+                      <a class="button border-red" href="javascript:void(0)" onclick="delImage($!img.id,'$!img.fileName');"><span class="icon-trash-o"></span> 删除</a>
+                  </div>
+              </td>
+          </tr>
+      #end
+    </table>
+</div>
+<script type="text/javascript">
 
+    function addImage(){
+        $("#id").val('');
+        $("#name").val('');
+        window.location.href='#doAdd';
+    }
+
+    function delImage(id,fileName){
+        if(confirm("您确定要删除吗?")){
+            var url = '${basePath}/admin/common/deleteImage.xhtml';
+            var values = {"id":id, "fileName":fileName};
+            $.getData(url, values, true, 'get', 'json', false, delCallBack);
+        }
+    }
+    function delCallBack(r){
+        if(r.success){
+            refreshPage();
+        }else{
+            alert(r.msg);
+        }
+    };
+
+    function editType(id, name){
+        $("#id").val(id);
+        $("#name").val(name);
+        window.location.href='#doAdd';
+    }
+</script>
+<div class="panel admin-panel margin-top">
+    <div class="panel-head" id="doAdd"><strong><span class="icon-pencil-square-o"></span>上传图片</strong></div>
+    <div class="body-content">
+        <form method="post" class="form-x" action="${basePath}/admin/common/uploadImage"
+              enctype="multipart/form-data">
+            <input type="hidden" id="id" name="id" value=""/>
+            <div class="form-group">
+                <div class="label">
+                    <label>上传图片：</label>
+                </div>
+                <div class="field">
+                    <input type="file" id="file" name="file">
+                    <div class="tips"></div>
+                </div>
+            </div>
+##            <div class="form-group">
+##                <div class="label">
+##                    <label>上传图片：</label>
+##                </div>
+##                <div class="field">
+##                    <input type="text" id="file" name="file" class="input tips" style="width:25%; float:left;"  value="$!article.thumbnail"  data-toggle="hover" data-place="right" data-image="" />
+##                    <input type="button" class="button bg-blue margin-left" id="uploadBtn" value="+ 浏览上传"  style="float:left;">
+##                </div>
+##            </div>
+            <div class="form-group">
+                <div class="label">
+                    <label></label>
+                </div>
+                <div class="field">
+                    <button class="button bg-main icon-check-square-o" type="submit"> 提交</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
 </body>
 </html> 

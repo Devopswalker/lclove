@@ -5,9 +5,10 @@
     <id column="ID" jdbcType="INTEGER" property="id" />
     <result column="NAME" jdbcType="VARCHAR" property="name" />
     <result column="URL" jdbcType="VARCHAR" property="url" />
+    <result column="FILE_NAME" jdbcType="VARCHAR" property="fileName" />
   </resultMap>
   <sql id="Base_Column_List">
-    ID, NAME, URL
+    ID, NAME,FILE_NAME, URL
   </sql>
   <select id="selectAll" resultMap="BaseResultMap">
     select
@@ -25,8 +26,7 @@
     where ID = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.lcpa.lclove.model.Image" useGeneratedKeys="true" keyProperty="id">
-    insert into image (ID, NAME
-      )
+    insert into image (ID, NAME)
     values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}
       )
   </insert>
@@ -73,9 +73,10 @@
       URL = #{url,jdbcType=VARCHAR}
     where ID = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateUrl" parameterType="com.lcpa.lclove.model.Image">
+  <update id="update" parameterType="com.lcpa.lclove.model.Image">
     update image
-    set URL = #{url,jdbcType=VARCHAR}
+    set URL = #{url,jdbcType=VARCHAR},
+    FILE_NAME = #{fileName,jdbcType=VARCHAR}
     where ID = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

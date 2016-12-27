@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import com.lcpa.lclove.web.controller.AnnotationController;
 
 import java.io.File;
 import java.util.List;
@@ -22,12 +23,12 @@ import java.util.List;
  */
 @Controller
 @RequestMapping(value = "/")
-public class ImageController {
+public class ImageController extends AnnotationController{
 
     @Autowired
     public ImageService imageService;
 
-    @RequestMapping(value = "/uploadImage.do", method= RequestMethod.POST)
+    @RequestMapping(value = "/admin/common/uploadImage", method= RequestMethod.POST)
     public String uploadImage(@RequestParam(value = "file", required = false) MultipartFile file,
                               ModelMap model){
         String fileName = file.getOriginalFilename();
@@ -38,27 +39,24 @@ public class ImageController {
         image.setUrl(uploadContext);
         imageService.saveUploadImage(image, file, uploadPath, uploadContext);
 
-        List<Image> allImages = imageService.getAllImage();
-        model.addAllAttributes(allImages);
-        return "admin/uploadtest.jsp";
+        return "redirect:/admin/common/imgList.xhtml";
 
     }
     
-    @RequestMapping(value = "/imglist.xhtml")
+    @RequestMapping(value = "/admin/common/imgList.xhtml")
     public String imgList(ModelMap model){
         List<Image> allImages = imageService.getAllImage();
-        //TODO:Only Demo
-//        if(CollectionUtils.isEmpty(allImages)){
-//        	for (int i = 0; i < 5 ; i++) {
-//				Image img = new Image();
-//				img.setId(i);
-//				img.setName("fileName" + i);
-//				img.setUrl("http://www.src" + i + ".com");
-//				allImages.add(img);
-//			}
-//        }
         model.put("images", allImages);
         return "admin/common/imgList.vm";
+    }
 
+    @RequestMapping(value = "/admin/common/deleteImage.xhtml")
+    public String removeImage(Integer id, String fileName, ModelMap model){
+        String uploadPath = new Config().getGlobalProp("uploadPath");
+        if(id == null){
+            return showJsonError(model, "ID为空！");
+        }
+        imageService.removeUploadedImageById(id,fileName, uploadPath);
+        return showJsonSuccess(model);
     }
 }

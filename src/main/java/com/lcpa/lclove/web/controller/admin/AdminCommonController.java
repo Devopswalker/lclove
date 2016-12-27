@@ -40,9 +40,4 @@ public class AdminCommonController extends AnnotationController{
 		return "admin/passPage.vm";
 	}
 
-    @RequestMapping(value = "/admin/upload")
-    public String uploadPage() {
-        return "admin/uploadtest.jsp";
-    }
-
 }
