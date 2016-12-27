@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="renderer" content="webkit">
+    <title></title>
+    <link rel="stylesheet" href="${staticPath}css/admin/pintuer.css">
+    <link rel="stylesheet" href="${staticPath}css/admin/admin.css">
+    <script src="${staticPath}js/jquery.js"></script>
+    <script src="${staticPath}js/pintuer.js"></script>
+    <script src="${staticPath}js/plugins/layer/laydate/laydate.js"></script>
+    <script src="${staticPath}js/plugins/ueditor/ueditor.config.js"></script>
+    <script src="${staticPath}js/plugins/ueditor/ueditor.all.min.js"></script>
+    <script src="${staticPath}js/plugins/ueditor/lang/zh-cn/zh-cn.js"></script>
+</head>
+<body>
+<div class="panel admin-panel">
+    <div class="panel-head" id="add"><strong><span class="icon-pencil-square-o"></span>增加内容</strong></div>
+    <div class="body-content">
+        <form method="post" class="form-x" action="${basePath}admin/recommend/saveRecommend.xhtml">
+            <input type="hidden" id="id" name="id" value="$!imageRecommend.id"/>
+            <div class="form-group">
+                <div class="label">
+                    <label>位置：</label>
+                </div>
+                <div class="field">
+                    <select id="position" name="position" class="input w50">
+                        <option value="">请选择设置页面位置</option>
+                        #foreach($position in $positionList)
+                            <option value="$position.id" #if($VmUtils.eq($position.id, $imageRecommend.position))selected#end>$position.name</option>
+                        #end
+                    </select>
+                    <div class="tips"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="label">
+                    <label>顺序：</label>
+                </div>
+                <div class="field">
+                    <input type="text" class="input w50" id="seq" name="seq" value="$!imageRecommend.seq" data-validate="required:请输入顺序" />
+                    <div class="tips"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="label">
+                    <label>图片URL：</label>
+                </div>
+                <div class="field">
+                    <input type="text" class="input w50" id="imgUrl" name="imgUrl" value="$!imageRecommend.imgUrl" data-validate="required:请输入图片地址" />
+                    <div class="tips"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="label">
+                    <label>跳转链接：</label>
+                </div>
+                <div class="field">
+                    <input type="text" class="input w50" id="recommendUrl" name="recommendUrl" value="$!imageRecommend.recommendUrl" data-validate="required:跳转链接" />
+                    <div class="tips"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="label">
+                    <label>描述：</label>
+                </div>
+                <div class="field">
+                    <input type="text" class="input w50" id="description" name="description" value="$!imageRecommend.description" data-validate="required:请输入描述" />
+                    <div class="tips"></div>
+                </div>
+            </div>
+            <div class="clear"></div>
+            <div class="form-group">
+                <div class="label">
+                    <label></label>
+                </div>
+                <div class="field">
+                    <button class="button bg-main icon-check-square-o" type="submit"> 提交</button>
+                    <a class="button bg-main icon-backward" href="${basePath}admin/recommend/recommendList.xhtml"> 取消</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        editor.ready(function(){
+                    editor.setContent('$!{article.content}');
+                }
+        );
+    });
+</script>
+
+</body>
+</html>
