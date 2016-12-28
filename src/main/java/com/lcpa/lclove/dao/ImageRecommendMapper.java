@@ -1,6 +1,7 @@
 package com.lcpa.lclove.dao;
 
 import com.lcpa.lclove.model.ImageRecommend;
+import com.lcpa.lclove.vo.QueryParameter;
 
 import java.util.List;
 
@@ -13,7 +14,7 @@ public interface ImageRecommendMapper {
 
     ImageRecommend selectByPrimaryKey(Integer id);
 
-    List<ImageRecommend> selectAllRecommendImage(Integer startIndex, Integer pageSize);
+    List<ImageRecommend> selectAllRecommendImage(QueryParameter queryParameter);
 
     List<ImageRecommend> selectByPosition(Integer position, Integer pageSize);
 

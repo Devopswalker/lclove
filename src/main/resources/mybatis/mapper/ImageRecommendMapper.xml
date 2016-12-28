@@ -12,18 +12,26 @@
   <sql id="Base_Column_List">
     ID, POSITION, SEQ, IMG_URL, RECOMMEND_URL, DESCRIPTION
   </sql>
+  <sql id="Paging">
+    <if test="paging != null and paging.StartIndex != null and paging.pageSize">
+      LIMIT #{paging.startIndex},#{ paging.pageSize}
+    </if>
+  </sql>
   <select id="selectByPosition" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from image_recommend
     where POSITION = #{0} ORDER BY SEQ ASC LIMIT 0, #{1}
   </select>
-  <select id="selectAllRecommendImage" resultMap="BaseResultMap">
+  <select id="selectAllRecommendImage" resultMap="BaseResultMap" parameterType="com.lcpa.lclove.vo.QueryParameter">
     select
     <include refid="Base_Column_List" />
     from image_recommend
+    <if test="queryPara != null and queryPara.position != null">
+      WHERE POSITION = #{queryPara.position}
+    </if>
     order by id desc
-    LIMIT #{0},#{1}
+    <include refid="Paging"/>
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 

@@ -4,6 +4,7 @@ import com.lcpa.lclove.dao.ImageMapper;
 import com.lcpa.lclove.dao.ImageRecommendMapper;
 import com.lcpa.lclove.model.Image;
 import com.lcpa.lclove.model.ImageRecommend;
+import com.lcpa.lclove.util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -22,7 +23,9 @@ public class ImageService {
 
     public void saveUploadImage(Image image, MultipartFile file, String uploadPath, String uploadContext){
         imageMapper.insert(image);
-        String uploadFileName = String.valueOf(image.getId()) +"_" + image.getName();
+        String imageSuffix = image.getName().substring(image.getName().lastIndexOf("."));
+        String uploadFileName = String.valueOf(image.getId()) + DateUtil.timeMillis() + imageSuffix;
+//        String uploadFileName = String.valueOf(image.getId()) +"_" + image.getName();
         String uploadImageUrl = uploadContext + uploadFileName;
         image.setUrl(uploadImageUrl);
         image.setFileName(uploadFileName);

@@ -18,6 +18,11 @@
     ID, TITLE, THUMBNAIL, PUB_DATE, LIKE_NUM, SCAN_NUM, ARTICLE_TYPE, DESCRIPTION, TOPIC, EDITOR,
     STATE
   </sql>
+  <sql id="Paging">
+    <if test="paging != null and paging.StartIndex != null and paging.pageSize">
+      LIMIT #{paging.startIndex},#{ paging.pageSize}
+    </if>
+  </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
@@ -43,9 +48,15 @@
   <select id="selectAllArticles" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
-    from article
+    from article WHERE 1=1
+    <if test="queryPara != null and queryPara.articleType != null">
+       AND ARTICLE_TYPE = #{queryPara.articleType}
+    </if>
+    <if test="queryPara != null and queryPara.keywords != null">
+      AND TITLE LIKE CONCAT(CONCAT("%",#{queryPara.keywords}),"%")
+    </if>
     order by id desc
-    LIMIT #{0},#{1}
+    <include refid="Paging"/>
   </select>
   <select id="selectHomeArticle" resultMap="BaseResultMap">
     select

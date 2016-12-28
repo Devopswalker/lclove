@@ -7,10 +7,15 @@ import com.lcpa.lclove.model.Article;
 
 import com.lcpa.lclove.model.ArticleContent;
 import com.lcpa.lclove.model.ArticleType;
+import com.lcpa.lclove.model.ImageRecommend;
+import com.lcpa.lclove.vo.Paging;
+import com.lcpa.lclove.vo.QueryParameter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by shao on 2016/12/5.
@@ -76,10 +81,38 @@ public class ArticleService{
         return articleTypeMapper.selectAll();
     }
 
-    public List<Article> getAllArticles(Integer pageNo){
-        Integer startIndex = 0;
-        Integer pageSize = pageNo*5;
-        return articleMapper.selectAllArticles(startIndex, pageSize);
+//    public List<Article> getAllArticles(Integer pageNo){
+//        Integer startIndex = 0;
+//        Integer pageSize = pageNo*5;
+//        return articleMapper.selectAllArticles(startIndex, pageSize);
+//    }
+
+    public List<Article> getAllArticles(Integer pageNo, Integer articleType, String keywords){
+        Map map = new HashMap<>();
+        if (articleType != null){
+            map.put("articleType", articleType);
+        }
+        if (keywords != null && !keywords.equals("")){
+            map.put("keywords", keywords);
+        }
+        Paging paging = new Paging(pageNo, 5);
+        QueryParameter queryParameter = new QueryParameter(paging,map);
+        return articleMapper.selectAllArticles(queryParameter);
+    }
+    public Paging getAllArticlesPaging(Integer pageNo, Integer articleType, String keywords){
+        Map map = new HashMap<>();
+        if (articleType != null){
+            map.put("articleType", articleType);
+        }
+        if (keywords != null && !keywords.equals("")){
+            map.put("keywords", keywords);
+        }
+        QueryParameter queryParameter = new QueryParameter(null,map);
+        List<Article> articles = articleMapper.selectAllArticles(queryParameter);
+        int total = articles.size();
+        Paging paging = new Paging(pageNo, 5);
+        paging.setTotal(total);
+        return paging;
     }
 
     public List<Article> getArticlesByType(Integer articleType, Integer pageNo){

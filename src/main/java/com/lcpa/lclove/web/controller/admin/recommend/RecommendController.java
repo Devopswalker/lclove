@@ -1,10 +1,9 @@
 package com.lcpa.lclove.web.controller.admin.recommend;
 
-import com.lcpa.lclove.model.Article;
-import com.lcpa.lclove.model.ArticleType;
 import com.lcpa.lclove.model.ImagePosition;
 import com.lcpa.lclove.model.ImageRecommend;
 import com.lcpa.lclove.service.RecommendService;
+import com.lcpa.lclove.vo.Paging;
 import com.lcpa.lclove.web.controller.AnnotationController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,19 +25,21 @@ public class RecommendController extends AnnotationController {
     private RecommendService recommendService;
 
     @RequestMapping(value = "/admin/recommend/recommendList.xhtml")
-    public String getRecommendList(Integer pageNo, String keyword, Integer positionId, ModelMap model) {
+    public String getRecommendList(Integer pageNo, Integer position, ModelMap model) {
         List<ImagePosition> positionList = recommendService.getAllImagePosition();
         //BeanUtil.beanListMap
         Map<Integer, ImagePosition> positionMap = new HashMap();
-        for (ImagePosition position : positionList) {
-            positionMap.put(position.getId(), position);
+        for (ImagePosition imagePosition : positionList) {
+            positionMap.put(imagePosition.getId(), imagePosition);
         }
         if(pageNo == null){
             pageNo = 1;
         }
-
-        List<ImageRecommend> recommendList = recommendService.getAllRecommendImage(pageNo);
+        List<ImageRecommend> recommendList = recommendService.getAllRecommendImage(pageNo, position);
+        Paging paging = recommendService.getAllRecommendImagePaging(pageNo, position);
         model.put("positionMap", positionMap);
+        model.put("paging", paging);
+        model.put("selectPosition", position);
         model.put("positionList", positionList);
         model.put("recommendList", recommendList);
         return "admin/recommend/recommendList.vm";

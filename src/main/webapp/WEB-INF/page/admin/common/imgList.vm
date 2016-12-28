@@ -20,14 +20,16 @@
     </div>
     <table class="table table-hover text-center">
         <tr>
-            <th width="10%">ID</th>
+            <th width="10%">缩略图</th>
             <th width="20%">文件名</th>
             <th width="10%">URL</th>
             <th width="10%">操作</th>
         </tr>
       #foreach($img in $images)
           <tr>
-              <td>$!img.id</td>
+              <td>
+                  <img src="$img.url" alt="" width="70" height="50" />
+              </td>
               <td>$!img.name</td>
               <td>$!img.url</td>
               <td>

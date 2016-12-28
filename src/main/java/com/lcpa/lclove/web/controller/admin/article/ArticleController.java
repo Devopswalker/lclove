@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.lcpa.lclove.util.StringUtil;
+import com.lcpa.lclove.vo.Paging;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -71,7 +72,7 @@ public class ArticleController extends AnnotationController{
 	}
 
     @RequestMapping(value = "/admin/article/articleList.xhtml")
-    public String getArticleList(Integer pageNo, String s_tohome, String s_torecom, String keyword, Integer type, ModelMap model) {
+    public String getArticleList(Integer pageNo,String keyword, Integer type, ModelMap model) {
     	List<ArticleType> typeList = articleService.getAllArticleType();
     	//BeanUtil.beanListMap
     	Map<Integer, ArticleType> typeMap = new HashMap();
@@ -81,19 +82,14 @@ public class ArticleController extends AnnotationController{
     	if(pageNo == null){
     		pageNo = 1;
     	}
+		List<Article> articleList = articleService.getAllArticles(pageNo,type, keyword);
+		Paging paging = articleService.getAllArticlesPaging(pageNo, type, keyword);
+		model.put("paging", paging);
+		model.put("articleList", articleList);
 		model.put("typeMap", typeMap);
 		model.put("typeList", typeList);
-
-		List<Article> articleList;
-		if (type != null && !type.equals("")){
-			articleList = articleService.getArticlesByType(type, pageNo);
-			model.put("articleList", articleList);
-			return showJsonSuccess(model);
-		}else{
-			articleList = articleService.getAllArticles(pageNo);
-			model.put("articleList", articleList);
-			return "admin/article/articleList.vm";
-		}
+		model.put("selectType", type);
+		return "admin/article/articleList.vm";
     }
 
     @RequestMapping(value = "/admin/article/editArticle.xhtml")
