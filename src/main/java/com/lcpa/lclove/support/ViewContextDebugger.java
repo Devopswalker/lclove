@@ -29,7 +29,7 @@ public class ViewContextDebugger {
 		}
 		return false;
 	}
-	
+
 	public void addProperty(Map model) {
 		if(debugEnabled){
 			if(unusedList==null) unusedList = new HashSet();
@@ -47,13 +47,13 @@ public class ViewContextDebugger {
 			}
 		}
 	}
-	
+
 	public String getUnUsedProperty(){
 		try{
 			if(unusedList ==null || unusedList.isEmpty()){
 				return null;
 			}
-			//去除Sprring内置变量
+			//鍘婚櫎Sprring鍐呯疆鍙橀噺
 			Iterator pi = unusedList.iterator();
 			while(pi.hasNext()){
 				String key = "" + pi.next();

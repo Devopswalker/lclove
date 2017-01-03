@@ -12,22 +12,22 @@ import org.springframework.beans.factory.InitializingBean;
 
 import com.lcpa.lclove.util.DateUtil;
 /**
- * LC¹«¹²ÅäÖÃ³õÊ¼»¯
- * @Reference: 
+ * LCå…¬å…±é…ç½®åˆå§‹åŒ–
+ * @Reference:
  * @author: Aaron.Yuan(Devops.Aaron@gmail.com)
- * @since:   2016Äê12ÔÂ11ÈÕ ÏÂÎç3:49:32
+ * @since:   2016å¹´12æœˆ11æ—¥ ä¸‹åˆ3:49:32
  */
 public class Config  implements InitializingBean {
-	
+
 	public static final String SYSTEMID;
 	public static final String SESSION_COOKIE_NAME;
-	
+
 	private boolean initedConfig = false;
 	private boolean initedPage = false;
 	private Map<String, String> configMap = new HashMap<String, String>();
 	private Map<String, Object> pageMap = new HashMap<String, Object>();
 	private static Map pageTools;
-	
+
 	private static final Properties props = new Properties();
 	static{
 		try {
@@ -42,11 +42,11 @@ public class Config  implements InitializingBean {
 			SESSION_COOKIE_NAME = Config.SYSTEMID.toLowerCase() + "_uskey_";
 		}
 	}
-	
+
 	public static Map getPageTools() {
 		return pageTools;
 	}
-	
+
 	public String getGlobalProp(String key){
 		return props.getProperty(key);
 	}
@@ -67,7 +67,7 @@ public class Config  implements InitializingBean {
 			this.configMap = configMap;
 			this.initedConfig = true;
 		} else{
-			throw new IllegalStateException("²»ÄÜ¶à´Îµ÷ÓÃ£¡");
+			throw new IllegalStateException("ä¸èƒ½å¤šæ¬¡è°ƒç”¨ï¼");
 		}
 	}
 	public void setPageMap(Map<String, Object> pageMap) {
@@ -75,13 +75,13 @@ public class Config  implements InitializingBean {
 			this.pageMap = pageMap;
 			this.initedPage = true;
 		} else{
-			throw new IllegalStateException("²»ÄÜ¶à´Îµ÷ÓÃ£¡");
+			throw new IllegalStateException("ä¸èƒ½å¤šæ¬¡è°ƒç”¨ï¼");
 		}
 	}
 	public Map<String, Object> getPageMap(){
 		return new HashMap<String, Object>(pageMap);
 	}
-	
+
 	@Override
 	public void afterPropertiesSet() throws Exception {
 		this.configMap = UnmodifiableMap.decorate(this.configMap);
@@ -97,10 +97,10 @@ public class Config  implements InitializingBean {
 	public ErrorCode replacePageTool(String property, Object value){
 		Object old = pageTools.get(property);
 		if (value == null || old == null){
-			return ErrorCode.getFailure("²ÎÊı´íÎó£¡");
+			return ErrorCode.getFailure("å‚æ•°é”™è¯¯ï¼");
 		}
 		if (!value.getClass().equals(old.getClass())){
-			return ErrorCode.getFailure("²ÎÊıÀàĞÍ²»¼æÈİ£¡");
+			return ErrorCode.getFailure("å‚æ•°ç±»å‹ä¸å…¼å®¹ï¼");
 		}
 		Map tmp = new HashMap(pageTools);
 		tmp.put(property, value);
@@ -109,7 +109,7 @@ public class Config  implements InitializingBean {
 			pageMap.put(property, value);
 		}
 		return ErrorCode.SUCCESS;
-	}	
+	}
 
 	public String getBasePath() {
 		return (String) pageMap.get("basePath");
