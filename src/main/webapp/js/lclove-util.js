@@ -364,7 +364,7 @@ $(function(){
             $(".searchButton").on("click", function(){
             	//筛选条件
             	var keywrod = $(".search_bar").val();
-            	var filterUrl =  lclove.util.basePath + "ajax/articleList.xhtml?keywrod=" + keywrod + "&type=1";
+            	var filterUrl =  lclove.util.basePath + "ajax/getArticleList.xhtml?keywrod=" + keywrod + "&type=1";
             	refreshPage(filterUrl);
             });
         };        
@@ -438,6 +438,84 @@ $(function(){
 /* Recommand Show */
 
 /* TOP 6 */
+$(function(){
+    var eTopShow = function(options,object) {
+        var opts = $.extend({}, $.fn.topShow.defaults, options);
+        var instance = object;
+        var url = lclove.util.basePath + "ajax/getHotArticle.xhtml?navtype="+lclove.params.navtype;
+        var itemTemplate = function(data){
+            var sbHtml = new StringBuilder();
+            sbHtml.append("<div class='hot_article_item'>");
+            sbHtml.append("  <div class='hot_article_pic'><a href='"++ lclove.util.basePath + +"detail.xhtml?id="+data.id+"'><img src='" + lclove.util.imgPath + data.topic + "'/></a></div>");
+            sbHtml.append("  <div class='hot_article_content'>");
+            sbHtml.append("    <div class='hot_article_desc'><a href='"++ lclove.util.basePath + +"detail.xhtml?id="+data.id+"'>"+ data.title +"</a></div>");
+            sbHtml.append("    <div class='hot_article_readed'> "+ data.scanNum +" 浏览</div>");
+            sbHtml.append("  </div>");
+            sbHtml.append("</div>");
+            sbHtml.append("<div class='mini_blank'></div>");
+            sbHtml.append("<div class='separate_small'></div>");
+            return $(sbHtml.toString());
+        };
+        
+        var defaultTemplate = function(){
+            var sbHtml = new StringBuilder();
+            sbHtml.append("<div class='hot_article_item'>");
+            sbHtml.append("  <div class='hot_article_pic'><a href='#'><img src='" + lclove.util.imgPath + "images/article1.jpg'/></a></div>");
+            sbHtml.append("  <div class='hot_article_content'>");
+            sbHtml.append("    <div class='hot_article_desc'><a href='#'>乘务员教你如何在飞机上啪啪啪</a></div>");
+            sbHtml.append("    <div class='hot_article_readed'> 99999 浏览</div>");
+            sbHtml.append("  </div>");
+            sbHtml.append("</div>");
+            sbHtml.append("<div class='mini_blank'></div>");
+            sbHtml.append("<div class='separate_small'></div>");
+            sbHtml.append("<div class='hot_article_item'>");
+            sbHtml.append("  <div class='hot_article_pic'><a href='#'><img src='" + lclove.util.imgPath + "images/article2.jpg'/></a></div>");
+            sbHtml.append("  <div class='hot_article_content'>");
+            sbHtml.append("    <div class='hot_article_desc'><a href='#'>日本调查：高个普通人和矮个帅哥，选哪个？</a></div>");
+            sbHtml.append("    <div class='hot_article_readed'> 88888 浏览</div>");
+            sbHtml.append("  </div>");
+            sbHtml.append("</div>");
+            sbHtml.append("<div class='mini_blank'></div>");
+            sbHtml.append("<div class='separate_small'></div>");
+            sbHtml.append("<div class='hot_article_item'>");
+            sbHtml.append("  <div class='hot_article_pic'><a href='#'><img src='" + lclove.util.imgPath + "images/article3.jpg'/></a></div>");
+            sbHtml.append("  <div class='hot_article_content'>");
+            sbHtml.append("    <div class='hot_article_desc'><a href='#'>《哈利波特》里最浪漫的11个瞬间</a></div>");
+            sbHtml.append("    <div class='hot_article_readed'> 66666 浏览</div>");
+            sbHtml.append("  </div>");
+            sbHtml.append("</div>");
+            sbHtml.append("<div class='mini_blank'></div>");
+            sbHtml.append("<div class='separate_small'></div>");
+            return $(sbHtml.toString());
+        };
+
+        var loadItemList = function () {
+            var sbHtml = new StringBuilder();
+            sbHtml.append("<div class='hot_article_head'><img src='"+ lclove.util.imgPath + "images/hammer.png'/><div>热文TOP</div>");
+            sbHtml.append("</div>");
+            $(instance).append($(sbHtml.toString()));
+        };
+        
+        var fillData = function(data){
+        	if(data != null && data != ""){
+        		$.each(data, function(index, item){
+            		$(".hot_article").append(itemTemplate(item));
+            	});
+        	}else{
+        		$(".hot_article").append(defaultTemplate());
+        	}
+        };
+        loadItemList();
+        $.getData(url, null, true, "POST", "json", true, fillData);
+    };
+
+    $.fn.topShow = function(options) {
+        return this.each(function () {
+            return eTopShow(options, $(this));
+        });
+    };
+    $.fn.topShow.defaults = {};
+});
 
 /* TOP 6 */
 

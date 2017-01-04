@@ -1,6 +1,5 @@
 package com.lcpa.lclove.web.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,7 +35,8 @@ public class LcLoveAjaxController extends AnnotationController{
 	 */
 	@RequestMapping("/ajax/getRecommand.xhtml")
 	public String getRecommandList(Integer position, ModelMap model){
-		if(position == null){
+		return showJsonSuccess(model,"");
+		/*if(position == null){
 			return showJsonError(model, "Position cant be empty!");
 		}
 		int pageSize = 3;
@@ -44,32 +44,43 @@ public class LcLoveAjaxController extends AnnotationController{
 			pageSize = 5;
 		}
 		List<ImageRecommend> recommendList = recommendService.getRecommendImagesByPosition(position, pageSize);
-		return showJsonSuccess(model, JsonUtils.writeObjectToJson(recommendList));
+		return showJsonSuccess(model, JsonUtils.writeObjectToJson(recommendList));*/
 	}
 	
 	/**
-	 * Get Article dataList
+	 * Get Top six for Article
+	 * @param type(ref CommConstant.REC_TYPE_XX)
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("/ajax/getHotArticle.xhtml")
+	public String getHotArticle(Integer navtype, ModelMap model){
+		if(navtype == null){
+			navtype = CommConstant.ARTICLE_TYPE_HOME;
+		}
+		//List<Article> articleList = articleService.getTopArticlesByType(navtype);
+		//return showJsonSuccess(model, JsonUtils.writeObjectToJson(articleList));
+		return showJsonSuccess(model, "");
+	}
+
+	/**
+	 *  Get Article dataList
 	 * @param type
 	 * @param pageNo
+	 * @param keywrod
 	 * @param model
 	 * @return
 	 */
 	@RequestMapping("/ajax/getArticleList.xhtml")
-	public String getArticleList(Integer type, Integer pageNo, ModelMap model){
+	public String getArticleList(Integer type, Integer pageNo, String keywrod, ModelMap model){
 		if(type == null){
-			type = 1;
+			type = CommConstant.ARTICLE_TYPE_HOME;
 		}
 		if(pageNo == null){
 			pageNo = 1;
 		}
 		Integer rowsPerPage = 5;
-		List<Article> articleList = new ArrayList<Article>(0);
-		//TODO:分页
-		if(type == 1){
-			articleList = articleService.getHomeArticles(pageNo);
-		}else{
-			articleList = articleService.getArticlesByType(type, pageNo);
-		}
+		List<Article> articleList = articleService.getAllArticles(pageNo, type, keywrod);
 		PagingJsonVo page = new PagingJsonVo(articleList.size(), rowsPerPage, pageNo);
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		resultMap.put("articles", articleList);

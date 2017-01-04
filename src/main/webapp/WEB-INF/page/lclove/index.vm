@@ -32,7 +32,7 @@
 			$(".recommend_show").recommandShow();
 			
 			<!-- TOP 6-->
-			//$(".hot_article").getTopArticle();
+			$(".hot_article").topShow();
 			
 			//文章列表
 			//$(".content_list").contentList();
@@ -66,8 +66,6 @@
 				
 				<!-- 微电影图文推荐-->
 				<div class="recommend_show"></div>
-				
-				<div class="small_blank"></div>
 				
 				<!-- TOP 6-->
 				<div class="hot_article"></div>
