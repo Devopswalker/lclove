@@ -38,7 +38,7 @@
 			$(".banner").loadBanner();
 			
 			//文章列表
-			//$(".content_list").contentList();
+			$(".content_list").contentList();
 			
 			//固定页尾
 			$("body").footerModule();
