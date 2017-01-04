@@ -9,7 +9,7 @@
 		<link rel="shortcut icon" href="${staticPath}images/favicon.ico"/>  
 		<link rel="stylesheet" type="text/css" href="${staticPath}css/reset.css" />
 		<link rel="stylesheet" type="text/css" href="${staticPath}css/head.css" />
-		<link rel="stylesheet" type="text/css" href="${staticPath}css/pintuer.css" />
+		<!-- <link rel="stylesheet" type="text/css" href="${staticPath}css/pintuer.css" /> -->
 		<link rel="stylesheet" type="text/css" href="${staticPath}css/float.css" />
 		<link rel="stylesheet" type="text/css" href="${staticPath}css/home_main.css" />
 		<link rel="stylesheet" type="text/css" href="${staticPath}css/navigation.css" />

@@ -84,13 +84,13 @@ $(document).ready(function(e) {
 	$(banner_points).each(function(index){		
 		$(this).bind("click", function(){
 			curr = index;
-			if($(this).hasClass("banner_point")){
+			if($(this).hasClass("banner_point")){				
 				$(this).removeClass("banner_point");
 				$(this).addClass("banner_point_on");
 				var others = $(this).siblings();
 				$(others).each(function(){
 					$(this).removeClass("banner_point_on");
-					$(this).addClass("banner_point");
+					$(this).addClass("banner_point");					
 				});
 			}else if($(this).hasClass("banner_point_on")){
 				$(this).removeClass("banner_point_on");
@@ -98,11 +98,11 @@ $(document).ready(function(e) {
 				var others = $(this).siblings();
 				$(others).each(function(){
 					$(this).removeClass("banner_point");
-					$(this).addClass("banner_point_on");
+					$(this).addClass("banner_point_on");					
 				});
 			}
 			content_bg.animate({left:-100*curr+"%"},500);
-		});
+		});							   
 	});
 	
 	setInterval("autoFly()", 10000);
@@ -364,7 +364,7 @@ $(function(){
             $(".searchButton").on("click", function(){
             	//筛选条件
             	var keywrod = $(".search_bar").val();
-            	var filterUrl =  lclove.util.basePath + "ajax/getArticleList.xhtml?keywrod=" + keywrod + "&type=1";
+            	var filterUrl =  lclove.util.basePath + "ajax/articleList.xhtml?keywrod=" + keywrod + "&type=1";
             	refreshPage(filterUrl);
             });
         };        
@@ -385,7 +385,7 @@ $(function(){
     var eRecommandShow = function(options,object) {
         var opts = $.extend({}, $.fn.recommandShow.defaults, options);
         var instance = object;
-        var url = lclove.util.basePath + "ajax/getRecommand.xhtml?position=2";
+        var url = lclove.util.basePath + "ajax/getRecommand.xhtml";
         var imgTemplate = function(data){
             var sbHtml = new StringBuilder();
             sbHtml.append("<div class='recommend_item'>");
@@ -434,202 +434,12 @@ $(function(){
     };
     $.fn.recommandShow.defaults = {};
 });
+
 /* Recommand Show */
 
 /* TOP 6 */
-$(function(){
-    var eTopShow = function(options,object) {
-        var opts = $.extend({}, $.fn.topShow.defaults, options);
-        var instance = object;
-        var url = lclove.util.basePath + "ajax/getHotArticle.xhtml?navtype="+lclove.params.navtype;
-        var itemTemplate = function(data){
-            var sbHtml = new StringBuilder();
-            sbHtml.append("<div class='hot_article_item'>");
-            sbHtml.append("  <div class='hot_article_pic'><a href='"+ lclove.util.basePath + "detail.xhtml?id="+data.id+"'><img src='" + lclove.util.imgPath + data.topic + "'/></a></div>");
-            sbHtml.append("  <div class='hot_article_content'>");
-            sbHtml.append("    <div class='hot_article_desc'><a href='"+ lclove.util.basePath + "detail.xhtml?id="+data.id+"'>"+ data.title +"</a></div>");
-            sbHtml.append("    <div class='hot_article_readed'> "+ data.scanNum +" 浏览</div>");
-            sbHtml.append("  </div>");
-            sbHtml.append("</div>");
-            sbHtml.append("<div class='mini_blank'></div>");
-            sbHtml.append("<div class='separate_small'></div>");
-            return $(sbHtml.toString());
-        };
-        
-        var defaultTemplate = function(){
-            var sbHtml = new StringBuilder();
-            sbHtml.append("<div class='hot_article_item'>");
-            sbHtml.append("  <div class='hot_article_pic'><a href='#'><img src='" + lclove.util.imgPath + "images/article1.jpg'/></a></div>");
-            sbHtml.append("  <div class='hot_article_content'>");
-            sbHtml.append("    <div class='hot_article_desc'><a href='#'>乘务员教你如何在飞机上啪啪啪</a></div>");
-            sbHtml.append("    <div class='hot_article_readed'> 99999 浏览</div>");
-            sbHtml.append("  </div>");
-            sbHtml.append("</div>");
-            sbHtml.append("<div class='mini_blank'></div>");
-            sbHtml.append("<div class='separate_small'></div>");
-            sbHtml.append("<div class='hot_article_item'>");
-            sbHtml.append("  <div class='hot_article_pic'><a href='#'><img src='" + lclove.util.imgPath + "images/article2.jpg'/></a></div>");
-            sbHtml.append("  <div class='hot_article_content'>");
-            sbHtml.append("    <div class='hot_article_desc'><a href='#'>日本调查：高个普通人和矮个帅哥，选哪个？</a></div>");
-            sbHtml.append("    <div class='hot_article_readed'> 88888 浏览</div>");
-            sbHtml.append("  </div>");
-            sbHtml.append("</div>");
-            sbHtml.append("<div class='mini_blank'></div>");
-            sbHtml.append("<div class='separate_small'></div>");
-            sbHtml.append("<div class='hot_article_item'>");
-            sbHtml.append("  <div class='hot_article_pic'><a href='#'><img src='" + lclove.util.imgPath + "images/article3.jpg'/></a></div>");
-            sbHtml.append("  <div class='hot_article_content'>");
-            sbHtml.append("    <div class='hot_article_desc'><a href='#'>《哈利波特》里最浪漫的11个瞬间</a></div>");
-            sbHtml.append("    <div class='hot_article_readed'> 66666 浏览</div>");
-            sbHtml.append("  </div>");
-            sbHtml.append("</div>");
-            sbHtml.append("<div class='mini_blank'></div>");
-            sbHtml.append("<div class='separate_small'></div>");
-            return $(sbHtml.toString());
-        };
 
-        var loadItemList = function () {
-            var sbHtml = new StringBuilder();
-            sbHtml.append("<div class='hot_article_head'><img src='"+ lclove.util.imgPath + "images/hammer.png'/><div>热文TOP</div>");
-            sbHtml.append("</div>");
-            $(instance).append($(sbHtml.toString()));
-        };
-        
-        var fillData = function(data){
-        	if(data != null && data != ""){
-        		$.each(data, function(index, item){
-            		$(".hot_article").append(itemTemplate(item));
-            	});
-        	}else{
-        		$(".hot_article").append(defaultTemplate());
-        	}
-        };
-        loadItemList();
-        $.getData(url, null, true, "POST", "json", true, fillData);
-    };
-
-    $.fn.topShow = function(options) {
-        return this.each(function () {
-            return eTopShow(options, $(this));
-        });
-    };
-    $.fn.topShow.defaults = {};
-});
 /* TOP 6 */
-
-/* load Banner */
-$(function(){
-    var eLoadBanner = function(options,object) {
-        var opts = $.extend({}, $.fn.loadBanner.defaults, options);
-        var instance = object;
-        var url = lclove.util.basePath + "ajax/getRecommand.xhtml?position=1";
-        var imgTemplate = function(data){
-            var sbHtml = new StringBuilder();
-            sbHtml.append("<div class='item'>");
-            sbHtml.append("  <a href='" + data.recommendUrl + "'><img src='" + lclove.util.imgPath + data.imgUrl + "'/></a>");
-            sbHtml.append("</div>");
-            return $(sbHtml.toString());
-        };
-        
-        var defaultTemplate = function(){
-            var sbHtml = new StringBuilder();
-            sbHtml.append("<div class='item'>");
-            sbHtml.append("  <a href='http://www.baidu.com'><img src='" + lclove.util.imgPath + "images/banner.png'/></a>");
-            sbHtml.append("</div>");
-            return $(sbHtml.toString());
-        };
-
-        var instanceObject = function () {
-            var sbHtml = new StringBuilder();
-            sbHtml.append(" <div class='carousel'>");
-            sbHtml.append("</div>");
-            $(instance).append($(sbHtml.toString()));
-        };
-        
-        var fillData = function(data){
-        	if(data != null && data != ""){
-        		$.each(data, function(index, item){
-            		$(".carousel").append(imgTemplate(item));
-            	});
-        	}else{
-        		$(".carousel").append(defaultTemplate());
-        	}
-        };
-        instanceObject();
-        $.getData(url, null, true, "POST", "json", true, fillData);
-    };
-
-    $.fn.loadBanner = function(options) {
-        return this.each(function () {
-            return eLoadBanner(options, $(this));
-        });
-    };
-    $.fn.loadBanner.defaults = {};
-});
-/* load Banner */
-
-
-/* Content List */
-$(function(){
-    var eContentList = function(options,object) {
-        var opts = $.extend({}, $.fn.contentList.defaults, options);
-        var instance = object;
-        var url = lclove.util.basePath + "ajax/getHotArticle.xhtml?navtype="+lclove.params.navtype;
-        var itemTemplate = function(data){
-            var sbHtml = new StringBuilder();
-            sbHtml.append("<div class='content_item_pic'>");
-            sbHtml.append("  <img src='" + lclove.util.imgPath + data.topic + "'/>");
-            sbHtml.append("</div>");
-            sbHtml.append("<div class='content_item_text'>");
-            sbHtml.append("  <div class='hot_article_content'>");
-            sbHtml.append("  <div class='mini_blank'></div>");
-            sbHtml.append("  <div class='separate'></div>");
-            sbHtml.append("  <div class='content_item_text_middle'> "+ data.description +"</div>");
-            sbHtml.append("  <div class='content_item_text_foot'>");
-            sbHtml.append("    <div class='date'></div>");
-            sbHtml.append("    <div class='comment'></div>");
-            sbHtml.append("    <div class='love'></div>");
-            sbHtml.append("    <div class='type'></div>");
-            sbHtml.append("  </div>");
-            sbHtml.append("</div>");
-
-            return $(sbHtml.toString());
-        };
-        
-        var defaultTemplate = function(){
-            var sbHtml = new StringBuilder();
-           
-            return $(sbHtml.toString());
-        };
-
-        var loadItemList = function () {
-            var sbHtml = new StringBuilder();
-            sbHtml.append("<div class='content_item'>");
-            sbHtml.append("</div>");
-            $(instance).append($(sbHtml.toString()));
-        };
-        
-        var fillData = function(data){
-        	if(data != null && data != ""){
-        		$.each(data, function(index, item){
-            		$(".content_item").append(itemTemplate(item));
-            	});
-        	}else{
-        		$(".content_item").append(defaultTemplate());
-        	}
-        };
-        loadItemList();
-        $.getData(url, null, true, "POST", "json", true, fillData);
-    };
-
-    $.fn.contentList = function(options) {
-        return this.each(function () {
-            return eContentList(options, $(this));
-        });
-    };
-    $.fn.contentList.defaults = {};
-});
-/* Content List */
 
 
 /*  Footer  */
