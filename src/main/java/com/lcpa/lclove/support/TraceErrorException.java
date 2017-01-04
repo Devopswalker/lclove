@@ -1,13 +1,13 @@
 package com.lcpa.lclove.support;
 
 /**
- * ÓÃÓÚµ÷ÊÔºÍÎÊÌâ¶¨Î»
- * @Reference: 
+ * ç”¨äºè°ƒè¯•å’Œé—®é¢˜å®šä½
+ * @Reference:
  * @author: Aaron.Yuan(Devops.Aaron@gmail.com)
- * @since:   2016Äê12ÔÂ11ÈÕ ÏÂÎç3:46:57
+ * @since:   2016å¹´12æœˆ11æ—¥ ä¸‹åˆ3:46:57
  */
 public class TraceErrorException extends RuntimeException {
-	
+
 	private static final long serialVersionUID = 1L;
 
 	public TraceErrorException(String msg){

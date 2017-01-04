@@ -27,8 +27,8 @@ public class CommVelocityView extends VelocityToolboxView{
 	public static final String KEY_IGNORE_TOOLS = "IGNORE_EXPORT_TOOL";
 	public static final String DIRECT_OUTPUT = "directOut";
 	public static final String HEADER_KEY_LOG = "_header_log_";
-	public static final String RETURN_LOG_HEADER = "__add_log_header_";//是否将reqlog返回到response头中
-	
+	public static final String RETURN_LOG_HEADER = "__add_log_header_";//鏄惁灏唕eqlog杩斿洖鍒皉esponse澶翠腑
+
 	static{
 		LogTraceUtil.addTrace(new RequestTrace());
 	}
@@ -51,7 +51,7 @@ public class CommVelocityView extends VelocityToolboxView{
 				model.put("charset", request.getParameter("charset"));
 			}
 		}else if(model.get(RENDER_JSON) != null){
-			//json视图设置
+			//json瑙嗗浘璁剧疆
 			model.remove(RENDER_JSON);
 			response.setCharacterEncoding("utf-8");
 			response.setContentType("application/json;charset=utf-8");
@@ -72,11 +72,11 @@ public class CommVelocityView extends VelocityToolboxView{
 	}
 	@Override
 	protected void renderMergedTemplateModel(Map model,
-			HttpServletRequest request, HttpServletResponse response) throws Exception{
+											 HttpServletRequest request, HttpServletResponse response) throws Exception{
 		processHeader(request, response, model);
 		try {
 			PrintWriter writer = response.getWriter();//IllegalStateException
-			//为了vm中间能直接输出Json流，减少一次string转换
+			//涓轰簡vm涓棿鑳界洿鎺ヨ緭鍑篔son娴侊紝鍑忓皯涓�娆tring杞崲
 			for(Object obj: model.values()){
 				if(obj!=null && obj instanceof DirectOut){
 					DirectOut dout = (DirectOut)obj;
@@ -94,8 +94,8 @@ public class CommVelocityView extends VelocityToolboxView{
 			Throwable cause = ex.getWrappedThrowable();
 			throw new NestedServletException(
 					"Method invocation failed during rendering of Velocity view with name '" +
-					getBeanName() + "': " + ex.getMessage() + "; reference [" + ex.getReferenceName() +
-					"], method '" + ex.getMethodName() + "'",
+							getBeanName() + "': " + ex.getMessage() + "; reference [" + ex.getReferenceName() +
+							"], method '" + ex.getMethodName() + "'",
 					cause==null ? ex : cause);
 		} catch (Exception e) {
 			log.error("uri:" + request.getRequestURI() + ", params:" + WebUtils.getParamStr(request), e);

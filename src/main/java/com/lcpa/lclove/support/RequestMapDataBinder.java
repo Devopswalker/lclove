@@ -20,7 +20,7 @@ public class RequestMapDataBinder  extends DataBinder{
 		regEditor();
 	}
 	private void regEditor(){
-		//线程不安全，必须重新生成
+		//绾跨▼涓嶅畨鍏紝蹇呴』閲嶆柊鐢熸垚
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		CustomDateEditor dateEditor = new CustomDateEditor(dateFormat, true);
 		TimestampEditor timestampEditor = new TimestampEditor();

@@ -95,9 +95,15 @@ public class ArticleService{
         if (keywords != null && !keywords.equals("")){
             map.put("keywords", keywords);
         }
-        Paging paging = new Paging(pageNo, 5);
+        Paging paging = new Paging(pageNo, 100);
         QueryParameter queryParameter = new QueryParameter(paging,map);
         return articleMapper.selectAllArticles(queryParameter);
+    }
+    public List<Article> getAllArticles(Integer pageNo, Integer articleType){
+        return getAllArticles(pageNo, articleType, null);
+    }
+    public Paging getAllArticlesPaging(Integer pageNo, Integer articleType){
+        return getAllArticlesPaging(pageNo, articleType, null);
     }
     public Paging getAllArticlesPaging(Integer pageNo, Integer articleType, String keywords){
         Map map = new HashMap<>();
@@ -110,7 +116,7 @@ public class ArticleService{
         QueryParameter queryParameter = new QueryParameter(null,map);
         List<Article> articles = articleMapper.selectAllArticles(queryParameter);
         int total = articles.size();
-        Paging paging = new Paging(pageNo, 5);
+        Paging paging = new Paging(pageNo, 100);
         paging.setTotal(total);
         return paging;
     }
@@ -121,11 +127,12 @@ public class ArticleService{
         return articleMapper.selectArticleByType(articleType, startIndex, pageSize);
     }
 
-    public List<Article> getHomeArticles(Integer pageNo){
-        Integer startIndex = 0;
-        Integer pageSize = pageNo*2;
-        return articleMapper.selectHomeArticle(startIndex, pageSize);
-    }
+//    public List<Article> getHomeArticles(Integer pageNo){
+//        Map map = new HashMap<>();
+//        Paging paging = new Paging(pageNo, 100);
+//        QueryParameter queryParameter = new QueryParameter(paging,map);
+//        return articleMapper.selectHomeArticle(queryParameter);
+//    }
 
     public Article getArticleContent(Article article){
         ArticleContent articleContent = articleContentMapper.selectByPrimaryKey(article.getId());

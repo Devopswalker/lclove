@@ -27,7 +27,7 @@ public class HtmlParser {
 		return result;
 	}
 	/**
-	 * 获取Html中的text
+	 * 鑾峰彇Html涓殑text
 	 * @param html
 	 * @return
 	 */
@@ -37,14 +37,14 @@ public class HtmlParser {
 		html2 = html2.replaceAll("<br/>", "\n");
 		html2 = html2.replaceAll("<br />", "\n");
 		if(html2.indexOf('>')<0 || html2.indexOf('<')<0) {
-			return html2;//统计比：1:30
+			return html2;//缁熻姣旓細1:30
 		}
 		String result = parseHtmlInternal(html2);
 		return result;
 	}
-	
+
 	private static String parseHtmlInternal(String html) {
-		String html2 = html.replaceAll("\n", "@nn@");//为了保留换行
+		String html2 = html.replaceAll("\n", "@nn@");//涓轰簡淇濈暀鎹㈣
 		try{
 			Document doc = Jsoup.parse(html2);
 			doc.select("head").remove();
@@ -53,7 +53,7 @@ public class HtmlParser {
 			return StringUtils.replace(doc.text(), "@nn@","\n");
 		}catch(Exception e){
 		}
-		
+
 		return html;
 	}
 }
