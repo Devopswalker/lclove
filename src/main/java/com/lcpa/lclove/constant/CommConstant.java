@@ -1,18 +1,24 @@
 package com.lcpa.lclove.constant;
 
 /**
- * »ù´¡ÊôĞÔ
+ * åŸºç¡€å±æ€§
  * @Reference: 
  * @author: Aaron.Yuan(Devops.Aaron@gmail.com)
- * @since:   2016Äê12ÔÂ17ÈÕ ÏÂÎç9:38:58
+ * @since:   2016å¹´12æœˆ17æ—¥ ä¸‹åˆ9:38:58
  */
 public abstract class CommConstant {
 	
-	public static final String Y = "Y";						// ÊÇ
-	public static final String N = "N";						// ·ñ
-	public static final String STATUS_ACT = Y;				// ÓĞĞ§µÄ
-	public static final String STATUS_DEL = "D";			// É¾³ıµÄ
-	public static final String CHECKBOX_ON = "on";			// ±»Ñ¡ÖĞ
+	public static final String Y = "Y";						// æ˜¯
+	public static final String N = "N";						// å¦
+	public static final String STATUS_ACT = Y;				// æœ‰æ•ˆçš„
+	public static final String STATUS_DEL = "D";			// åˆ é™¤çš„
+	public static final String CHECKBOX_ON = "on";			// è¢«é€‰ä¸­
 	public static final String logo="images/default_lclove.jpg";
+	
+	public static final int REC_TYPE_SLID = 1;				// Home slid
+	public static final int REC_TYPE_HOME = 2;				// Home Page
+	public static final int REC_TYPE_SPECIAL = 3;			// Special Page
+	public static final int REC_TYPE_LOVES = 4;				// Love Page
+	public static final int REC_TYPE_BODY = 5;				// Body Page
 
 }
