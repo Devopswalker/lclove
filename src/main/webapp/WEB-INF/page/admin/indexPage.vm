@@ -8,7 +8,7 @@
 <meta name="renderer" content="webkit">
 <title>后台管理中心</title>
 	<link rel="shortcut icon" href="${staticPath}images/admin/y.jpg" type="image/x-icon" />
-<link rel="stylesheet" href="${staticPath}css/admin/pintuer.css">
+<link rel="stylesheet" href="${staticPath}css/pintuer.css">
 <link rel="stylesheet" href="${staticPath}css/admin/admin.css">
 <script src="${staticPath}js/jquery.js"></script>
 <script src="${staticPath}js/pintuer.js"></script>

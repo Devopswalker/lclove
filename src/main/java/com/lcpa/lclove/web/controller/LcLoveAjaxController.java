@@ -115,13 +115,13 @@ public class LcLoveAjaxController extends AnnotationController{
 		resultMap.put("articles", articleList);
 		return showJsonSuccess(model, JsonUtils.writeObjectToJson(resultMap));
 	}
-	@RequestMapping("/ajax/getRecommend.xhtml")
+/*	@RequestMapping("/ajax/getRecommend.xhtml")
 	public String getRecommend(Integer position, ModelMap model){
 		List<ImageRecommend> recommendList = recommendService.getRecommendImagesByPosition(position,3);
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		resultMap.put("recommendList", recommendList);
 		return showJsonSuccess(model, JsonUtils.writeObjectToJson(resultMap));
-	}
+	}*/
 	@RequestMapping("/ajax/getHomePageSlide.xhtml")
 	public String getHomePageSlide(Integer position, ModelMap model){
 		List<ImageRecommend> slideList = recommendService.getRecommendImagesByPosition(position,5);
