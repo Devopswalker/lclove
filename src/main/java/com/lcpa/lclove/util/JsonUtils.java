@@ -28,7 +28,7 @@ public class JsonUtils {
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
 		mapper.registerModule(CommJsonModule.GEWA_MODULE);
-		
+
 		try {
 			T result = mapper.readValue(json, clazz);
 			return result;
@@ -162,7 +162,7 @@ public class JsonUtils {
 			return new HashMap();
 		}
 	}
-	
+
 	public static String writeObjectToJson(Object object) {
 		return writeObjectToJson(object, false);
 	}
@@ -182,10 +182,10 @@ public class JsonUtils {
 		}
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.disable(SerializationFeature.WRITE_NULL_MAP_VALUES);
-		//²»×Ô¶¯¹Ø±ÕÁ÷
+		//ä¸è‡ªåŠ¨å…³é—­æµ
 		mapper.getFactory().disable(Feature.AUTO_CLOSE_TARGET);
 		if(excludeNull) {
-			//TODO: Î´ÊµÏÖ
+			//TODO: æœªå®ç°
 		}
 
 		try {
@@ -203,7 +203,7 @@ public class JsonUtils {
 		}
 		return null;
 	}
-	
+
 	public static String writeMapToJson(Map<String, String> dataMap){
 		if(dataMap==null) return null;
 		if(dataMap instanceof HashMap){

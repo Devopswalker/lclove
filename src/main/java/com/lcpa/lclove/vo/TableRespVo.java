@@ -4,19 +4,19 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * ÔËÓª¹ÜÀí-Í¨ÓÃÁĞ±íÏìÓ¦¼¯ºÏ
- * @Reference: 
+ * è¿è¥ç®¡ç†-é€šç”¨åˆ—è¡¨å“åº”é›†åˆ
+ * @Reference:
  * @author: Aaron.Yuan(Devops.Aaron@gmail.com)
- * @since:   2016Äê12ÔÂ16ÈÕ ÏÂÎç3:49:13
+ * @since:   2016å¹´12æœˆ16æ—¥ ä¸‹åˆ3:49:13
  */
 public class TableRespVo<T> implements Serializable {
-	
+
 	private static final long serialVersionUID = 116815093942050920L;
-	
-	private boolean success;	// ²éÑ¯½á¹û
-	private String errmsg;		// ´íÎóÏûÏ¢
-	private List<T> rows;		// Êı¾İÁĞ±í
-	private Integer total;		// ²éÑ¯×ÜÊı
+
+	private boolean success;	// æŸ¥è¯¢ç»“æœ
+	private String errmsg;		// é”™è¯¯æ¶ˆæ¯
+	private List<T> rows;		// æ•°æ®åˆ—è¡¨
+	private Integer total;		// æŸ¥è¯¢æ€»æ•°
 
 	public TableRespVo() {
 

@@ -10,8 +10,8 @@ public class ErrorCode<T> implements Serializable{
 	private static final long serialVersionUID = 4418416282894231647L;
 	private String errcode;
 	private String msg;
-	private String syscode;	//ÄÚ²¿´úÂë
-	private String sysmsg;	//ÄÚ²¿ÏûÏ¢
+	private String syscode;	//å†…éƒ¨ä»£ç 
+	private String sysmsg;	//å†…éƒ¨æ¶ˆæ¯
 	private T retval;
 	private boolean success = false;
 	private ErrorCode(String code, String msg, T retval){
@@ -24,9 +24,9 @@ public class ErrorCode<T> implements Serializable{
 	}
 	private static final String CODE_SUCCESS = "0000";
 	private static final String CODE_UNKNOWN_ERROR = "9999";
-	
-	public static ErrorCode SUCCESS = new ErrorCode(CODE_SUCCESS, "²Ù×÷³É¹¦£¡", null);
-	
+
+	public static ErrorCode SUCCESS = new ErrorCode(CODE_SUCCESS, "æ“ä½œæˆåŠŸï¼", null);
+
 	@Override
 	public boolean equals(Object another){
 		if(another == null || !(another instanceof ErrorCode)) return false;
