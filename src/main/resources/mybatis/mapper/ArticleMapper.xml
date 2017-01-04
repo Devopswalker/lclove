@@ -63,7 +63,7 @@
     <include refid="Base_Column_List" />
     from article
     order by PUB_DATE desc
-    LIMIT #{0},#{1}
+    <include refid="Paging"/>
   </select>
   <select id="selectTopArticlesByType" resultMap="BaseResultMap">
     select

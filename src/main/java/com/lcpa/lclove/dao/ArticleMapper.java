@@ -17,7 +17,7 @@ public interface ArticleMapper {
 
     List<Article> selectAllArticles(QueryParameter queryParameter);
 
-    List<Article> selectHomeArticle(Integer startIndex, Integer pageSize);
+    List<Article> selectHomeArticle(QueryParameter queryParameter);
 
     List<Article> selectArticleByType(Integer articleType, Integer startIndex, Integer pageSize);
 

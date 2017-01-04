@@ -28,11 +28,11 @@ public class UntransArticleService {
         return articleMapper.selectArticleByType(articleType, startIndex, pageSize);
     }
 
-    public List<Article> getHomeArticles(Integer pageNo){
-        Integer startIndex = 0;
-        Integer pageSize = pageNo*2;
-        return articleMapper.selectHomeArticle(startIndex, pageSize);
-    }
+//    public List<Article> getHomeArticles(Integer pageNo){
+//        Integer startIndex = 0;
+//        Integer pageSize = pageNo*2;
+//        return articleMapper.selectHomeArticle(startIndex, pageSize);
+//    }
 
     public List<Article> getTopArticlesByType(Integer articleType){
         Integer startIndex = 0;
