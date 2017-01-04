@@ -69,7 +69,10 @@
     select
     <include refid="Base_Column_List" />
     from article
-    where ARTICLE_TYPE = #{0}
+    where WHERE 1=1
+    <if test="#{0} != null">
+      AND ARTICLE_TYPE = #{0}
+    </if>
     order by SCAN_NUM desc
     LIMIT #{1},#{2}
   </select>

@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.lcpa.lclove.vo.Paging;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -59,7 +58,7 @@ public class LcLoveAjaxController extends AnnotationController{
 		if(navtype == null){
 			navtype = CommConstant.ARTICLE_TYPE_HOME;
 		}
-		//List<Article> articleList = articleService.getTopArticlesByType(navtype);
+		//List<Article> articleList = articleService.getTopRankArticlesByType(navtype);
 		//return showJsonSuccess(model, JsonUtils.writeObjectToJson(articleList));
 		return showJsonSuccess(model, "");
 	}
@@ -68,24 +67,24 @@ public class LcLoveAjaxController extends AnnotationController{
 	 *  Get Article dataList
 	 * @param type
 	 * @param pageNo
-	 * @param keywrod
+	 * @param keyword
 	 * @param model
 	 * @return
 	 */
 	@RequestMapping("/ajax/getArticleList.xhtml")
-	public String getArticleList(Integer type, Integer pageNo, String keywrod, ModelMap model){
-		if(type == null){
+	public String getArticleList(Integer type, Integer pageNo, String keyword, ModelMap model){
+		if(type == null){//TODO type == null home page,不需要加 type
 			type = CommConstant.ARTICLE_TYPE_HOME;
 		}
 		if(pageNo == null){
 			pageNo = 1;
 		}
 		Integer rowsPerPage = 5;
-		List<Article> articleList = articleService.getAllArticles(pageNo, type, keywrod);
+		List<Article> articleList = articleService.getAllArticles(pageNo, rowsPerPage, type, keyword);
 		PagingJsonVo page = new PagingJsonVo(articleList.size(), rowsPerPage, pageNo);
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		resultMap.put("articles", articleList);
-		resultMap.put("pageInfo", page);//TODO change the Paging to PaginJsonVo
+		resultMap.put("pageInfo", page);
 		return showJsonSuccess(model, JsonUtils.writeObjectToJson(resultMap));
 	}
 	
@@ -110,7 +109,8 @@ public class LcLoveAjaxController extends AnnotationController{
 	@RequestMapping("/ajax/getTopRankArticleList.xhtml")
 	public String getTopRankArticleList(Integer type, ModelMap model){
 		//home page set type == null
-		List<Article> articleList = articleService.getTopArticlesByType(type);
+		Integer size = 10;
+		List<Article> articleList = articleService.getTopRankArticlesByType(type, size);
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		resultMap.put("articles", articleList);
 		return showJsonSuccess(model, JsonUtils.writeObjectToJson(resultMap));
