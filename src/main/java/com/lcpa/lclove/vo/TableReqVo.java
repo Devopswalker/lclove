@@ -3,20 +3,20 @@ package com.lcpa.lclove.vo;
 import java.io.Serializable;
 
 /**
- * ÔËÓª¹ÜÀí-Í¨ÓÃÇëÇó²ÎÊı°ó¶¨
- * @Reference: 
+ * è¿è¥ç®¡ç†-é€šç”¨è¯·æ±‚å‚æ•°ç»‘å®š
+ * @Reference:
  * @author: Aaron.Yuan(Devops.Aaron@gmail.com)
- * @since:   2016Äê12ÔÂ16ÈÕ ÏÂÎç3:47:18
+ * @since:   2016å¹´12æœˆ16æ—¥ ä¸‹åˆ3:47:18
  */
 public class TableReqVo implements Serializable {
-	
+
 	private static final long serialVersionUID = 7532828604262217599L;
-	
-	private String sort;		// ÅÅĞò×Ö¶Î
-	private String order;		// ÉıĞò£¨asc£©or½µĞò£¨desc£©
-	private Integer limit;		// Ã¿Ò³¶àÉÙÌõ
-	private Integer offset;		// µÚ¼¸Ìõ¼ÍÂ¼¿ªÊ¼
-	private String search;		// ËÑË÷µÄ×Ö¶Î
+
+	private String sort;		// æ’åºå­—æ®µ
+	private String order;		// å‡åºï¼ˆascï¼‰oré™åºï¼ˆdescï¼‰
+	private Integer limit;		// æ¯é¡µå¤šå°‘æ¡
+	private Integer offset;		// ç¬¬å‡ æ¡çºªå½•å¼€å§‹
+	private String search;		// æœç´¢çš„å­—æ®µ
 
 	public String getSort() {
 		return sort;
