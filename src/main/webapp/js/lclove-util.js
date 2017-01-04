@@ -467,24 +467,6 @@ $(function(){
             sbHtml.append("</div>");
             sbHtml.append("<div class='mini_blank'></div>");
             sbHtml.append("<div class='separate_small'></div>");
-            sbHtml.append("<div class='hot_article_item'>");
-            sbHtml.append("  <div class='hot_article_pic'><a href='#'><img src='" + lclove.util.imgPath + "images/article2.jpg'/></a></div>");
-            sbHtml.append("  <div class='hot_article_content'>");
-            sbHtml.append("    <div class='hot_article_desc'><a href='#'>日本调查：高个普通人和矮个帅哥，选哪个？</a></div>");
-            sbHtml.append("    <div class='hot_article_readed'> 88888 浏览</div>");
-            sbHtml.append("  </div>");
-            sbHtml.append("</div>");
-            sbHtml.append("<div class='mini_blank'></div>");
-            sbHtml.append("<div class='separate_small'></div>");
-            sbHtml.append("<div class='hot_article_item'>");
-            sbHtml.append("  <div class='hot_article_pic'><a href='#'><img src='" + lclove.util.imgPath + "images/article3.jpg'/></a></div>");
-            sbHtml.append("  <div class='hot_article_content'>");
-            sbHtml.append("    <div class='hot_article_desc'><a href='#'>《哈利波特》里最浪漫的11个瞬间</a></div>");
-            sbHtml.append("    <div class='hot_article_readed'> 66666 浏览</div>");
-            sbHtml.append("  </div>");
-            sbHtml.append("</div>");
-            sbHtml.append("<div class='mini_blank'></div>");
-            sbHtml.append("<div class='separate_small'></div>");
             return $(sbHtml.toString());
         };
 
@@ -501,7 +483,11 @@ $(function(){
             		$(".hot_article").append(itemTemplate(item));
             	});
         	}else{
-        		$(".hot_article").append(defaultTemplate());
+        		for (var i=0; i<6 ; i++)
+        		{
+        			$(".hot_article").append(defaultTemplate());
+        		}
+        		
         	}
         };
         loadItemList();
@@ -574,9 +560,10 @@ $(function(){
     var eContentList = function(options,object) {
         var opts = $.extend({}, $.fn.contentList.defaults, options);
         var instance = object;
-        var url = lclove.util.basePath + "ajax/getHotArticle.xhtml?navtype="+lclove.params.navtype;
+        var url = lclove.util.basePath + "ajax/getArticleList.xhtml?type="+lclove.params.navtype;
         var itemTemplate = function(data){
             var sbHtml = new StringBuilder();
+            sbHtml.append("<div class='content_item'>");
             sbHtml.append("<div class='content_item_pic'>");
             sbHtml.append("  <a href='"+ lclove.util.basePath + "detail.xhtml?id="+data.id+"'><img src='" + lclove.util.imgPath + data.thumbnail + "'/></a>");
             sbHtml.append("</div>");
@@ -594,11 +581,13 @@ $(function(){
             sbHtml.append("    <div class='type'> "+ data.topic +" </div>");
             sbHtml.append("  </div>");
             sbHtml.append("</div>");
+            sbHtml.append("</div>");
             return $(sbHtml.toString());
         };
         
         var defaultTemplate = function(){
             var sbHtml = new StringBuilder();
+            sbHtml.append("<div class='content_item'>");
             sbHtml.append("<div class='content_item_pic'>");
             sbHtml.append("  <a href='"+ lclove.util.basePath + "detail.xhtml?id=1'><img src='" + lclove.util.imgPath + "images/content_pic.jpg'/></a>");
             sbHtml.append("</div>");
@@ -616,57 +605,25 @@ $(function(){
             sbHtml.append("    <div class='type'> #新年快乐# </div>");
             sbHtml.append("  </div>");
             sbHtml.append("</div>");
-            sbHtml.append("<div class='content_item_pic'>");
-            sbHtml.append("  <a href='"+ lclove.util.basePath + "detail.xhtml?id=1'><img src='" + lclove.util.imgPath + "images/content_pic.jpg'/></a>");
-            sbHtml.append("</div>");
-            sbHtml.append("<div class='content_item_text'>");
-            sbHtml.append("  <div class='content_item_text_head'>");
-            sbHtml.append("    <a href='"+ lclove.util.basePath + "detail.xhtml?id=1'><img src='" + lclove.util.imgPath + "images/text_head_icon.png'/><div>LC品爱员工美丽小秘密</div></a>");
-            sbHtml.append("  </div>");
-            sbHtml.append("  <div class='mini_blank'></div>");
-            sbHtml.append("  <div class='separate'></div>");
-            sbHtml.append("  <div class='content_item_text_middle'>作为为大家解决身体&烦恼的LC品爱的员工，来看 看他们都有什么变美秘密呢？</div>");
-            sbHtml.append("  <div class='content_item_text_foot'>");
-            sbHtml.append("    <div class='date'>2017-01-04</div>");
-            sbHtml.append("    <div class='comment'><img src='" + lclove.util.imgPath + "images/comment.png'/><div class='sum'>666</div></div>");
-            sbHtml.append("    <div class='love'><img src='" + lclove.util.imgPath + "images/love.png'/><div class='sum'>888</div></div>");
-            sbHtml.append("    <div class='type'> #新年快乐# </div>");
-            sbHtml.append("  </div>");
-            sbHtml.append("</div>");
-            sbHtml.append("<div class='content_item_pic'>");
-            sbHtml.append("  <a href='"+ lclove.util.basePath + "detail.xhtml?id=1'><img src='" + lclove.util.imgPath + "images/content_pic.jpg'/></a>");
-            sbHtml.append("</div>");
-            sbHtml.append("<div class='content_item_text'>");
-            sbHtml.append("  <div class='content_item_text_head'>");
-            sbHtml.append("    <a href='"+ lclove.util.basePath + "detail.xhtml?id=1'><img src='" + lclove.util.imgPath + "images/text_head_icon.png'/><div>LC品爱员工美丽小秘密</div></a>");
-            sbHtml.append("  </div>");
-            sbHtml.append("  <div class='mini_blank'></div>");
-            sbHtml.append("  <div class='separate'></div>");
-            sbHtml.append("  <div class='content_item_text_middle'>作为为大家解决身体&烦恼的LC品爱的员工，来看 看他们都有什么变美秘密呢？</div>");
-            sbHtml.append("  <div class='content_item_text_foot'>");
-            sbHtml.append("    <div class='date'>2017-01-04</div>");
-            sbHtml.append("    <div class='comment'><img src='" + lclove.util.imgPath + "images/comment.png'/><div class='sum'>666</div></div>");
-            sbHtml.append("    <div class='love'><img src='" + lclove.util.imgPath + "images/love.png'/><div class='sum'>888</div></div>");
-            sbHtml.append("    <div class='type'> #新年快乐# </div>");
-            sbHtml.append("  </div>");
             sbHtml.append("</div>");
             return $(sbHtml.toString());
         };
 
         var loadItemList = function () {
             var sbHtml = new StringBuilder();
-            sbHtml.append("<div class='content_item'>");
-            sbHtml.append("</div>");
             $(instance).append($(sbHtml.toString()));
         };
         
         var fillData = function(data){
         	if(data != null && data != ""){
         		$.each(data, function(index, item){
-            		$(".content_item").append(itemTemplate(item));
+            		$(".content_list").append(itemTemplate(item));
             	});
         	}else{
-        		$(".content_item").append(defaultTemplate());
+        		for (var i=0; i<4 ; i++)
+        		{
+        			$(".content_list").append(defaultTemplate());
+        		}
         	}
         };
         loadItemList();
