@@ -29,7 +29,7 @@ import com.lcpa.lclove.support.HtmlParser;
 
 public abstract class WebUtils {
 	protected final static transient Logger dbLogger = Logger.getLogger(WebUtils.class);
-	
+
 	public String checkScript(HttpServletRequest request){
 		String match = "onclick|onfocus|onblur|onload|onerror";
 		for(String[] v: request.getParameterMap().values()){
@@ -50,7 +50,7 @@ public abstract class WebUtils {
 		}
 		return request.getRemoteAddr();
 	}
-	
+
 	public static final String getRemoteIpFromXfwd(String xfwd){
 		String gewaip = null;
 		if (StringUtils.isNotBlank(xfwd)) {
@@ -63,9 +63,9 @@ public abstract class WebUtils {
 				}
 			}
 		}
-		return gewaip; 
+		return gewaip;
 	}
-	
+
 	public static final void writeJsonResponse(HttpServletResponse res, boolean success, String retval) {
 		res.setContentType("application/json;charset=utf-8");
 		res.setCharacterEncoding("utf-8");
@@ -116,7 +116,7 @@ public abstract class WebUtils {
 		while (it.hasMoreElements()) {
 			key = it.nextElement();
 			String value = request.getHeader(key);
-			//½ûÖ¹cookieÈÕÖ¾´òÓ¡
+			//ç¦æ­¢cookieæ—¥å¿—æ‰“å°
 			if(StringUtils.containsIgnoreCase(key, "cookie")){
 				value = "*******";
 			}
@@ -124,10 +124,10 @@ public abstract class WebUtils {
 		}
 		return result;
 	}
-	
+
 	/**
-	 * »ñÈ¡htmlÖĞÍ¼Æ¬µÄurl
-	 * 
+	 * è·å–htmlä¸­å›¾ç‰‡çš„url
+	 *
 	 * @param html
 	 * @return
 	 */
@@ -143,7 +143,7 @@ public abstract class WebUtils {
 	}
 
 	public static final boolean isRobot(String userAgent){
-		return StringUtils.containsIgnoreCase(userAgent, "spider") || 
+		return StringUtils.containsIgnoreCase(userAgent, "spider") ||
 				StringUtils.containsIgnoreCase(userAgent, "Googlebot") ||
 				StringUtils.containsIgnoreCase(userAgent, "robot");
 	}
@@ -197,12 +197,12 @@ public abstract class WebUtils {
 		if (StringUtils.isBlank(str))
 			return false;
 		if (StringUtils.contains(StringUtils.lowerCase(str), "<script"))
-			return true;// ÑéÖ¤JS
+			return true;// éªŒè¯JS
 		if (StringUtils.contains(StringUtils.lowerCase(str), "<iframe"))
-			return true;// ÑéÖ¤iframe
+			return true;// éªŒè¯iframe
 		return false;
 	}
-	
+
 	public static final String getParamStr(HttpServletRequest request) {
 		Map<String, String> requestMap = getRequestMap(request);
 		return "" + requestMap;
@@ -218,9 +218,9 @@ public abstract class WebUtils {
 		}
 		return result;
 	}
-	
+
 	/**
-	 *  ÅĞ¶ÏÓÃ»§ä¯ÀÀÆ÷ĞÅÏ¢
+	 *  åˆ¤æ–­ç”¨æˆ·æµè§ˆå™¨ä¿¡æ¯
 	 * */
 	public static final String getBrowerInfo(String userAgent) {
 		String browserInfo = "UNKNOWN";
@@ -248,8 +248,8 @@ public abstract class WebUtils {
 		return browserInfo;
 	}
 	/**
-	 * ²éÑ¯´®ÌáÈ¡
-	 * 
+	 * æŸ¥è¯¢ä¸²æå–
+	 *
 	 * @param queryStr
 	 * @param encode
 	 * @return
@@ -306,7 +306,7 @@ public abstract class WebUtils {
 		return flatMap;
 	}
 	/**
-	 * ¶àÖµÓÃ¡°,¡±ºÅ¸ô¿ª
+	 * å¤šå€¼ç”¨â€œ,â€å·éš”å¼€
 	 * @param requestMap
 	 * @param encode
 	 * @return
@@ -341,16 +341,16 @@ public abstract class WebUtils {
 		return contextPath;
 	}
 
-	public static final String getRemotePort(HttpServletRequest request) {//»ñÈ¡ÇëÇó¶Ë¿ÚºÅ
+	public static final String getRemotePort(HttpServletRequest request) {//è·å–è¯·æ±‚ç«¯å£å·
 		String port = request.getHeader("x-client-port");
 		if(StringUtils.isBlank(port)){
 			return ""+request.getRemotePort();
 		}
 		return port;
 	}
-	
+
 	/**
-	 * ÓÃÓÚÇëÇó²ÎÊı°ó¶¨
+	 * ç”¨äºè¯·æ±‚å‚æ•°ç»‘å®š
 	 * @param request
 	 * @param clazz
 	 * @return

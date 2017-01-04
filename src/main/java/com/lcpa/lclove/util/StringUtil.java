@@ -19,7 +19,7 @@ import com.lcpa.lclove.support.HtmlParser;
 import com.lcpa.lclove.support.TraceErrorException;
 
 public class StringUtil {
-	
+
 	public static String md5(byte[] input) {
 		return encryptPassword(input, "md5");
 	}
@@ -76,8 +76,8 @@ public class StringUtil {
 	}
 
 	/**
-	 * ½ØÈ¡size¸ö×Ö½Ú
-	 * 
+	 * æˆªå–sizeä¸ªå­—èŠ‚
+	 *
 	 * @param input
 	 * @param size
 	 * @return
@@ -100,8 +100,8 @@ public class StringUtil {
 	}
 
 	/**
-	 * ½ØÈ¡size¸ö×Ö½Ú Æ´´®
-	 * 
+	 * æˆªå–sizeä¸ªå­—èŠ‚ æ‹¼ä¸²
+	 *
 	 * @param input
 	 * @param size
 	 * @return
@@ -159,20 +159,20 @@ public class StringUtil {
 		return result;
 	}
 
-	public static final String upper = "ABCDEFGHJKLMNPQRSTUVWXYZ";// O,IÈ¥µô
-	public static final String lower = "abcdefghijkmnpqrstuvwxyz";// o,lÈ¥µô
-	
-	public static final String upperLower = "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz";// O,IÈ¥µô
-	public static final String lowerDigit = "abcdefghijkmnpqrstuvwxyz23456789";// o,lÈ¥µô,0,1È¥µô
-	public static final String upperDigit = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";// O,IÈ¥µô,0,1È¥µô
+	public static final String upper = "ABCDEFGHJKLMNPQRSTUVWXYZ";// O,Iå»æ‰
+	public static final String lower = "abcdefghijkmnpqrstuvwxyz";// o,lå»æ‰
+
+	public static final String upperLower = "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz";// O,Iå»æ‰
+	public static final String lowerDigit = "abcdefghijkmnpqrstuvwxyz23456789";// o,lå»æ‰,0,1å»æ‰
+	public static final String upperDigit = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";// O,Iå»æ‰,0,1å»æ‰
 	public static final String all = "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz23456789";
-	
+
 	public static final String digital = "1234567890"; //
-	
+
 
 	/**
 	 * @param length
-	 *            Éú³ÉµÄ×Ö·û´®³¤¶È£¬<100
+	 *            ç”Ÿæˆçš„å­—ç¬¦ä¸²é•¿åº¦ï¼Œ<100
 	 * @return
 	 */
 	public static String getRandomString(int length) {
@@ -200,10 +200,10 @@ public class StringUtil {
 			length = 100;
 		}
 		if(includeUpper && includeLower && includeDigital){
-			return getRandomString(all, length); 
+			return getRandomString(all, length);
 		}
 		if(includeUpper && includeLower && !includeDigital){
-			return getRandomString(upperLower, length); 
+			return getRandomString(upperLower, length);
 		}
 		if(includeUpper && !includeLower && includeDigital){
 			return getRandomString(upperDigit, length);
@@ -220,11 +220,11 @@ public class StringUtil {
 		if(!includeUpper && !includeLower && includeDigital){
 			return getRandomString(digital, length);
 		}
-		throw new TraceErrorException("±ØĞë°üº¬Ò»ÖÖ×Ö·û£¡");
+		throw new TraceErrorException("å¿…é¡»åŒ…å«ä¸€ç§å­—ç¬¦ï¼");
 	}
 	/**
 	 * @param length
-	 *            Éú³ÉµÄ×Ö·û´®³¤¶È£¬<100
+	 *            ç”Ÿæˆçš„å­—ç¬¦ä¸²é•¿åº¦ï¼Œ<100
 	 * @return
 	 */
 	public static String getRandomString(String charArray, int length) {
@@ -255,7 +255,7 @@ public class StringUtil {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param str
 	 * @param minstr
 	 * @param maxstr
@@ -276,7 +276,7 @@ public class StringUtil {
 	/**
 	 * Extract the filename from the given path, e.g. "mypath/myfile.txt" ->
 	 * "myfile.txt".
-	 * 
+	 *
 	 * @param path
 	 *            the file path (may be <code>null</code>)
 	 * @return the extracted filename, or <code>null</code> if none
@@ -294,7 +294,7 @@ public class StringUtil {
 	/**
 	 * Extract the filename from the given path, e.g. "mypath/myfile.txt" ->
 	 * "mypath".
-	 * 
+	 *
 	 * @param path
 	 *            the file path (may be <code>null</code>)
 	 * @return the extracted filename, or <code>null</code> if none
@@ -312,7 +312,7 @@ public class StringUtil {
 	/**
 	 * Extract the filename extension from the given path, e.g.
 	 * "mypath/myfile.txt" -> "txt".
-	 * 
+	 *
 	 * @param path
 	 *            the file path (may be <code>null</code>)
 	 * @return the extracted filename extension, or <code>null</code> if none
@@ -350,8 +350,8 @@ public class StringUtil {
 	}
 
 	/**
-	 * Éú³ÉmaxÒÔÄÚ, count¸ö²»ÖØ¸´Ëæ»úÊı eg. getRandomNumber(20, 6) Éú³É20ÒÔÄÚ6¸ö²»ÖØ¸´Ëæ»úÊı
-	 * 
+	 * ç”Ÿæˆmaxä»¥å†…, countä¸ªä¸é‡å¤éšæœºæ•° eg. getRandomNumber(20, 6) ç”Ÿæˆ20ä»¥å†…6ä¸ªä¸é‡å¤éšæœºæ•°
+	 *
 	 */
 	public static Set getRandomNumber(int max, int count) {
 		Set v = new TreeSet();
@@ -409,7 +409,7 @@ public class StringUtil {
 		return matcher.find();
 	}
 
-	// Êı×ÖÈ«½Ç×ª°ë½Ç
+	// æ•°å­—å…¨è§’è½¬åŠè§’
 	public static String ToDBC(String input) {
 		char[] c = input.toCharArray();
 		for (int i = 0; i < c.length; i++) {
@@ -431,7 +431,7 @@ public class StringUtil {
 		}
 	}
 	/**
-	 * 1)³¤¶ÈÊÇ2µÄ±¶Êı  2£©ÊÇÊ®Áù½øÖÆ×Ö·û 3£©¿Õ¡¢null ·µ»Øfalse
+	 * 1)é•¿åº¦æ˜¯2çš„å€æ•°  2ï¼‰æ˜¯åå…­è¿›åˆ¶å­—ç¬¦ 3ï¼‰ç©ºã€null è¿”å›false
 	 * @return
 	 */
 	public static boolean isHexDataStr(String str){

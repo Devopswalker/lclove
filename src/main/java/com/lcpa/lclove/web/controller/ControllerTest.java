@@ -32,7 +32,7 @@ public class ControllerTest {
 
         List<Article> articles = articleService.getArticlesByType(2, 2);
 
-        List<Article> articles1 = articleService.getHomeArticles(1);
+//        List<Article> articles1 = articleService.getHomeArticles(1);
 
         List<Article> articles2 = articleService.getTopArticlesByType(1);
         return "detail";

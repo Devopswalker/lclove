@@ -14,13 +14,13 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.web.util.HtmlUtils;
 
 /**
- * VelocityÒ³Ãæ¹¤¾ßÀà
- * @Reference: 
+ * Velocityé¡µé¢å·¥å…·ç±»
+ * @Reference:
  * @author: Aaron.Yuan(Devops.Aaron@gmail.com)
- * @since:   2016Äê12ÔÂ11ÈÕ ÏÂÎç11:18:49
+ * @since:   2016å¹´12æœˆ11æ—¥ ä¸‹åˆ11:18:49
  */
 public class VmUtils{
-	
+
 	public static final VmUtils instance = new VmUtils();
 	private static String jsVersion = DateUtil.format(new Date(), "yyyyMMddHH");
 	public final static void setJsVersion(String jv) {
@@ -35,21 +35,21 @@ public class VmUtils{
 	}
 
 	/**
-	 * ÏÈ½ØÈ¡ºó£¬ÔÙ½«ËùÓĞµÄHTML·ûºÅÈç:<, >, µÈÌæ»»Îª &gt, &lt
-	 * 
+	 * å…ˆæˆªå–åï¼Œå†å°†æ‰€æœ‰çš„HTMLç¬¦å·å¦‚:<, >, ç­‰æ›¿æ¢ä¸º &gt, &lt
+	 *
 	 * @param str
 	 * @param length
 	 * @return
 	 */
 	public final static String escabbr(String str, int length) {
-		// ÓëhtmlabbrµÄÇø±ğÊÇ²»¾­¹ıÈ¥³ıhtml±êÇ©´¦Àí
+		// ä¸htmlabbrçš„åŒºåˆ«æ˜¯ä¸ç»è¿‡å»é™¤htmlæ ‡ç­¾å¤„ç†
 		String result = StringUtil.enabbr(str, length);
 		return HtmlUtils.htmlEscape(result);
 	}
 
 	/**
-	 * ½«htmlÖĞµÄÎÄ±¾Ìá³ö³öÀ´£¬ÔÙ½ØÈ¡length¸ö£¬ÔÙ½«ËùÓĞµÄHTML·ûºÅÈç:<, >, µÈÌæ»»Îª &gt, &lt
-	 * 
+	 * å°†htmlä¸­çš„æ–‡æœ¬æå‡ºå‡ºæ¥ï¼Œå†æˆªå–lengthä¸ªï¼Œå†å°†æ‰€æœ‰çš„HTMLç¬¦å·å¦‚:<, >, ç­‰æ›¿æ¢ä¸º &gt, &lt
+	 *
 	 * @param html
 	 * @param length
 	 * @return
@@ -260,7 +260,7 @@ public class VmUtils{
 	}
 
 	public final static String formatPercent(Integer num1, Integer num2) {
-		return formatPercent(num1, num2, "0.00%");// ÉèÖÃ°Ù·ÖÂÊµÄÊä³öĞÎÊ½£¬ĞÎÈç00%,¸ù¾İĞèÒªÉè¶¨¡£
+		return formatPercent(num1, num2, "0.00%");// è®¾ç½®ç™¾åˆ†ç‡çš„è¾“å‡ºå½¢å¼ï¼Œå½¢å¦‚00%,æ ¹æ®éœ€è¦è®¾å®šã€‚
 	}
 
 	public final static String formatPercent(Integer num1, Integer num2, String format) {
@@ -279,7 +279,7 @@ public class VmUtils{
 		if (num1.intValue() == num1.doubleValue() && num2.intValue() == num2.doubleValue()) {
 			format = "0%";
 		}
-		return formatPercent(num1, num2, format);// ÉèÖÃ°Ù·ÖÂÊµÄÊä³öĞÎÊ½£¬ĞÎÈç00%,¸ù¾İĞèÒªÉè¶¨¡£
+		return formatPercent(num1, num2, format);// è®¾ç½®ç™¾åˆ†ç‡çš„è¾“å‡ºå½¢å¼ï¼Œå½¢å¦‚00%,æ ¹æ®éœ€è¦è®¾å®šã€‚
 	}
 
 	public final static String formatPercent(Double num1, Double num2, String format) {
@@ -294,11 +294,11 @@ public class VmUtils{
 	public final static String getJsonValueByKey(String json, String key) {
 		return JsonUtils.getJsonValueByKey(json, key);
 	}
-	
+
 	public String getScriptObject(Object modelObject){
 		return JsonUtils.writeObjectToJson(modelObject);
 	}
-	
+
 	public String getScriptString(String str){
 		str = JsonUtils.writeObjectToJson(str);
 		return str;
@@ -307,13 +307,13 @@ public class VmUtils{
 	public static Map<String, String> readJsonToMap(String json){
 		return JsonUtils.readJsonToMap(json);
 	}
-	
+
 	public static String getTextContent(String html){
 		if(StringUtils.isBlank(html)) return "";
 		String text = StringUtil.getHtmlText(html);
 		StringBuilder sb = new StringBuilder();
 		if (StringUtils.isNotBlank(text)) {
-			for (int i = 0; i < text.length(); i++) {// ¹ıÂË¿Õ°××Ö·û
+			for (int i = 0; i < text.length(); i++) {// è¿‡æ»¤ç©ºç™½å­—ç¬¦
 				if (text.charAt(i) >= 48)
 					sb.append(text.charAt(i));
 			}

@@ -34,7 +34,7 @@ public class ReqLogUtil {
 				req.setAttribute(REQ_LOG_ENTRY_ATTR_KEY, logEntry);
 			}
 			for(Map.Entry<String, String> entry: info.entrySet()){
-				//ֻ��ȡ128�ֽ�
+				//只截取128字节
 				logEntry.put(REQ_LOG_ENTRY_KEY_PRE + StringUtils.substring(entry.getKey(), 0, 30), StringUtils.substring(entry.getValue(), 0, 128));
 			}
 		}

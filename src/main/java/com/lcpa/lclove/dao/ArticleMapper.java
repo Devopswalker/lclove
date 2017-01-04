@@ -1,10 +1,9 @@
 package com.lcpa.lclove.dao;
 
-import com.lcpa.lclove.model.Article;
-import com.lcpa.lclove.model.ArticleType;
-import com.lcpa.lclove.vo.QueryParameter;
-
 import java.util.List;
+
+import com.lcpa.lclove.model.Article;
+import com.lcpa.lclove.vo.QueryParameter;
 
 public interface ArticleMapper {
     int deleteByPrimaryKey(Integer id);
@@ -17,7 +16,7 @@ public interface ArticleMapper {
 
     List<Article> selectAllArticles(QueryParameter queryParameter);
 
-    List<Article> selectHomeArticle(Integer startIndex, Integer pageSize);
+    List<Article> selectHomeArticle(QueryParameter queryParameter);
 
     List<Article> selectArticleByType(Integer articleType, Integer startIndex, Integer pageSize);
 
