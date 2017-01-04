@@ -15,20 +15,20 @@ import com.lcpa.lclove.util.VmUtils;
 
 
 /**
- * ·şÎñÆô¶¯¼àÌı/ÈÕÖ¾¼ÓÔØ
- * @Reference: 
+ * æœåŠ¡å¯åŠ¨ç›‘å¬/æ—¥å¿—åŠ è½½
+ * @Reference:
  * @author: Aaron.Yuan(Devops.Aaron@gmail.com)
- * @since:   2016Äê12ÔÂ11ÈÕ ÏÂÎç4:18:16
+ * @since:   2016å¹´12æœˆ11æ—¥ ä¸‹åˆ4:18:16
  */
 public class StartupListener extends ContextLoaderListener{
 	Logger logger = Logger.getLogger(StartupListener.class);
 	@Override
 	public void contextInitialized(ServletContextEvent event) {
-		//¸ù¾İ»·¾³¼ÓÔØÅäÖÃÎÄ¼ş
+		//æ ¹æ®ç¯å¢ƒåŠ è½½é…ç½®æ–‡ä»¶
 		String SPRING_CONFIG_KEY = "contextConfigLocation";
 		String[] remoteConfig = new String[]{
-			"classpath:config.remote.xml",
-			"classpath:spring.xml"
+				"classpath:config.remote.xml",
+				"classpath:spring.xml"
 		};
 		String SPRING_CONFIG_VALUE = StringUtils.join(remoteConfig, ",");
 		System.setProperty("LCCONFIG", "REMOTE");
@@ -37,15 +37,15 @@ public class StartupListener extends ContextLoaderListener{
 		context.setInitParameter(SPRING_CONFIG_KEY, SPRING_CONFIG_VALUE);
 		super.contextInitialized(event);
 		setupContext(context);
-		
-		//³õÊ¼»¯ÆäËûĞÅÏ¢
+
+		//åˆå§‹åŒ–å…¶ä»–ä¿¡æ¯
 		WebApplicationContext ctx = WebApplicationContextUtils.getRequiredWebApplicationContext(context);
 		Config config = ctx.getBean(Config.class);
 		VmUtils utils = new VmUtils();
 		config.replacePageTool("VmUtils", utils);
 		logger.warn("INIT GLOCAL PAGE-TOOLS: " + Config.getPageTools());
 	}
-	
+
 	public static void setupContext(ServletContext context) {
 		WebApplicationContextUtils.getRequiredWebApplicationContext(context);
 	}

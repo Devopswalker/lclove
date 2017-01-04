@@ -29,48 +29,48 @@ import com.lcpa.lclove.util.JsonUtils;
 import com.lcpa.lclove.util.WebUtils;
 
 /**
- * »ù´¡·şÎñ
- * @Reference: 
+ * åŸºç¡€æœåŠ¡
+ * @Reference:
  * @author: Aaron.Yuan(Devops.Aaron@gmail.com)
- * @since:   2016Äê12ÔÂ16ÈÕ ÏÂÎç3:57:53
+ * @since:   2016å¹´12æœˆ16æ—¥ ä¸‹åˆ3:57:53
  */
 public abstract class AnnotationController{
 	public static final String ERROR_MESSAGES_KEY = "errmsg";
-	
+
 	protected final String showError(ModelMap model, String errMsg){
 		model.put(ERROR_MESSAGES_KEY, errMsg);
 		return "redirect:/showResult.xhtml";
 	}
 	protected final String showError_NOT_LOGIN(ModelMap model){
-		model.put(ERROR_MESSAGES_KEY, "ÇëÏÈµÇÂ¼!");
+		model.put(ERROR_MESSAGES_KEY, "è¯·å…ˆç™»å½•!");
 		return "redirect:/showResult.xhtml";
 	}
-	
+
 	protected final String showJsonError_CAPTCHA_ERROR(ModelMap model){
-		return showJsonError(model, "ÑéÖ¤Âë´íÎó£¡");
+		return showJsonError(model, "éªŒè¯ç é”™è¯¯ï¼");
 	}
 	protected final String showJsonError_NOT_LOGIN(ModelMap model){
-		return showJsonError(model, "Äú»¹Ã»ÓĞµÇÂ¼£¬ÇëÏÈµÇÂ¼£¡");
+		return showJsonError(model, "æ‚¨è¿˜æ²¡æœ‰ç™»å½•ï¼Œè¯·å…ˆç™»å½•ï¼");
 	}
 	protected final String showJsonError_NORIGHTS(ModelMap model){
-		return showJsonError(model, "ÄúÃ»ÓĞÈ¨ÏŞ£¡");
+		return showJsonError(model, "æ‚¨æ²¡æœ‰æƒé™ï¼");
 	}
 	protected final String showJsonError_REPEATED(ModelMap model){
-		return showJsonError(model, "²»ÄÜÖØ¸´²Ù×÷£¡");
+		return showJsonError(model, "ä¸èƒ½é‡å¤æ“ä½œï¼");
 	}
 	protected final String showJsonError_NOT_FOUND(ModelMap model){
-		return showJsonError(model, "Î´ÕÒµ½Ïà¹ØÊı¾İ£¡");
+		return showJsonError(model, "æœªæ‰¾åˆ°ç›¸å…³æ•°æ®ï¼");
 	}
 	protected final String showJsonError_DATAERROR(ModelMap model){
-		return showJsonError(model, "Êı¾İÓĞ´íÎó£¬ÇëË¢ĞÂÖØÊÔ£¡");
+		return showJsonError(model, "æ•°æ®æœ‰é”™è¯¯ï¼Œè¯·åˆ·æ–°é‡è¯•ï¼");
 	}
 	protected final String showJsonError_PARAMSERROR(ModelMap model){
-		return showJsonError(model, "²ÎÊı´íÎó£¡");
+		return showJsonError(model, "å‚æ•°é”™è¯¯ï¼");
 	}
 	protected final String showJsonError_SOFAST(ModelMap model){
-		return showJsonError(model, "Ìá½»ÄÚÈİÆµÂÊ²»ÄÜÌ«¿ì£¡");
+		return showJsonError(model, "æäº¤å†…å®¹é¢‘ç‡ä¸èƒ½å¤ªå¿«ï¼");
 	}
-	
+
 	protected final String showJsonSuccess(ModelMap model){
 		return showJsonSuccess(model, "");
 	}
@@ -92,12 +92,12 @@ public abstract class AnnotationController{
 		model.put("jsonMap", jsonMap);
 		return "common/json.vm";
 	}
-	
+
 	protected final String show404(ModelMap model, String msg){
 		model.put("msg", msg);
 		return "error/404.vm";
 	}
-	
+
 	protected void download(String downloadType, HttpServletResponse response){
 		if(StringUtils.equals(downloadType, "xls")){
 			response.setContentType("application/xls");
@@ -108,7 +108,7 @@ public abstract class AnnotationController{
 		}
 		response.addHeader("Content-Disposition", "attachment;filename=LcLove"+DateUtil.format(new Date(), "yyMMdd_hhmmss")+ "." + downloadType);
 	}
-	
+
 	protected HttpServletRequest getRequest(){
 		ServletRequestAttributes holder = (ServletRequestAttributes)RequestContextHolder.getRequestAttributes();
 		if(holder!=null){
@@ -128,10 +128,10 @@ public abstract class AnnotationController{
 			}
 		}
 		return null;
-	}	
-	
+	}
+
 	/**
-	 * Ö»½ÓÊÜGetÌá½»µÄ²ÎÊıÌø×ª
+	 * åªæ¥å—Getæäº¤çš„å‚æ•°è·³è½¬
 	 * @param targetUrl
 	 * @param request
 	 * @param model
@@ -140,20 +140,20 @@ public abstract class AnnotationController{
 	protected String gotoLogin(String targetUrl, HttpServletRequest request, ModelMap model){
 		try {
 			if(StringUtils.isNotBlank(targetUrl)){
-				String queryStr = request.getQueryString();//Ö»½ÓÊÜGet·½·¨
-				String paramStr = ""; 
-				if(StringUtils.isNotBlank(queryStr) && StringUtils.length(queryStr) < 300){//300ÒÔÏÂµÄ×ª·¢
+				String queryStr = request.getQueryString();//åªæ¥å—Getæ–¹æ³•
+				String paramStr = "";
+				if(StringUtils.isNotBlank(queryStr) && StringUtils.length(queryStr) < 300){//300ä»¥ä¸‹çš„è½¬å‘
 					paramStr = URLDecoder.decode(queryStr, "utf-8");
 				}
 				targetUrl += targetUrl.indexOf('?')>0?"&" + paramStr:"?" + paramStr;
-				
+
 				return showRedirect("adminLogin.xhtml?TARGETURL=" + URLEncoder.encode(targetUrl, "utf-8"), model);
 			}
 		} catch (UnsupportedEncodingException e) {//ignore
 		}
 		return showRedirect("adminLogin.xhtml", model);
 	}
-	
+
 	protected final String showRedirect(String path, ModelMap model){
 		if(StringUtils.startsWith(path, "/")) path = path.substring(1);
 		StringBuilder targetUrl = new StringBuilder(path);
@@ -242,17 +242,17 @@ public abstract class AnnotationController{
 	private boolean isEligibleValue(Object value) {
 		return (value != null && BeanUtils.isSimpleValueType(value.getClass()));
 	}
-	
+
 
 	protected void bindParams(Object bean){
 		this.bindParams(bean, null);
 	}
-	
+
 	protected void bindParams(Object bean, String[] exclued){
 		Map<String, String> params = this.getParameterMap();
 		BindUtils.bindData(bean, params, null, exclued);
 	}
-	
+
 	protected Map<String, String> getParameterMap() {
 		return WebUtils.getRequestMap(this.getRequest());
 	}

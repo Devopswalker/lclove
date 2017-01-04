@@ -3,21 +3,21 @@ package com.lcpa.lclove.vo;
 import java.io.Serializable;
 
 public class PagingJsonVo implements Serializable{
-	
+
 	private static final long serialVersionUID = 4736386459450872711L;
-	
-	private int currentPage;    //µ±Ç°Ò³
-	private int rowsCount;      //¼ÇÂ¼Êı
-	private int pageCount;      //·ÖÒ³ÊıÁ¿
-	private int rowsPerPage;    //Ã¿Ò³ÏÔÊ¾ÊıÁ¿
-	
+
+	private int currentPage;    //å½“å‰é¡µ
+	private int rowsCount;      //è®°å½•æ•°
+	private int pageCount;      //åˆ†é¡µæ•°é‡
+	private int rowsPerPage;    //æ¯é¡µæ˜¾ç¤ºæ•°é‡
+
 	public PagingJsonVo(int rowsCount, int rowsPerPage, int currentPage) {
 		this.rowsCount = rowsCount;
 		this.rowsPerPage = rowsPerPage;
 		this.currentPage = currentPage;
 		this.pageCount = (rowsCount-1)/rowsPerPage + 1;
 	}
-	
+
 	public int getCurrentPage() {
 		return currentPage;
 	}
@@ -42,5 +42,5 @@ public class PagingJsonVo implements Serializable{
 	public void setRowsPerPage(int rowsPerPage) {
 		this.rowsPerPage = rowsPerPage;
 	}
-	
+
 }
