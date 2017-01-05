@@ -77,13 +77,24 @@ public class ArticleService{
     }
 
     /**
-     * admin 获取文章信息以及文章内容
+     * 获取文章信息以及文章内容
      * @param id
      * @return
      */
     public Article getArticleDetailsById(Integer id){
         Article article = articleMapper.selectByPrimaryKey(id);
         ArticleContent articleContent = articleContentMapper.selectByPrimaryKey(id);
+        article.setContent(articleContent.getContent());
+        return article;
+    }
+
+    /**
+     * 获取文章内容信息
+     * @param article
+     * @return
+     */
+    public Article getArticleContent(Article article){
+        ArticleContent articleContent = articleContentMapper.selectByPrimaryKey(article.getId());
         article.setContent(articleContent.getContent());
         return article;
     }
@@ -171,17 +182,6 @@ public class ArticleService{
         Paging paging = new Paging(pageNo, 100);
         paging.setTotal(total);
         return paging;
-    }
-
-    /**
-     * 获取文章内容信息
-     * @param article
-     * @return
-     */
-    public Article getArticleContent(Article article){
-        ArticleContent articleContent = articleContentMapper.selectByPrimaryKey(article.getId());
-        article.setContent(articleContent.getContent());
-        return article;
     }
 
     /**
