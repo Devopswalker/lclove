@@ -5,6 +5,7 @@ import javax.servlet.http.HttpSession;
 
 import com.lcpa.lclove.model.User;
 import com.lcpa.lclove.service.UserService;
+import com.lcpa.lclove.util.StringUtil;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,13 +23,13 @@ public class AdminCommonController extends AnnotationController{
 
 	@RequestMapping(value="/admin/login.xhtml",method=RequestMethod.GET)
 	public String adminLogin(HttpServletRequest request, ModelMap model){
-		String loginSuccessRedirect = request.getSession().getAttribute("loginSuccessRedirect").toString();
-		if(StringUtils.isBlank(loginSuccessRedirect)) {
-			loginSuccessRedirect = "/admin/index.xhtml";
-			request.getSession().setAttribute("loginSuccessRedirect", loginSuccessRedirect);
-		}
-		model.put("TARGETURL", loginSuccessRedirect);
-		model.put("ptn", "user");
+//		String loginSuccessRedirect = request.getSession().getAttribute("loginSuccessRedirect").toString();
+//		if(StringUtils.isBlank(loginSuccessRedirect)) {
+//			loginSuccessRedirect = "/admin/index.xhtml";
+//			request.getSession().setAttribute("loginSuccessRedirect", loginSuccessRedirect);
+//		}
+//		model.put("TARGETURL", loginSuccessRedirect);
+//		model.put("ptn", "user");
 		return "admin/login.vm";
 	}
 	
@@ -49,12 +50,15 @@ public class AdminCommonController extends AnnotationController{
 
 	@RequestMapping(value="/admin/login")
 	public String login(HttpSession session, ModelMap model, String username,String password) throws Exception{
-		//TODO
-		//在Session里保存信息
-		session.setAttribute("username", username);
-		//重定向
-		String loginSuccessRedirect = session.getAttribute("loginSuccessRedirect").toString();
-		return "redirect:"+loginSuccessRedirect;
+		User user = userService.getUserByName(username);
+		if (user != null && !StringUtil.isEmpty(user.getPassword()) && user.getPassword().equals(password)){
+			session.setAttribute("username", username);
+			//重定向
+			String loginSuccessRedirect = "/admin/index.xhtml";
+			return "redirect:"+loginSuccessRedirect;
+		}else{
+			return showJsonError(model, "无效的帐号密码！");
+		}
 	}
 
 	@RequestMapping(value="/admin/changeUser")

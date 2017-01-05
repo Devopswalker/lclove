@@ -28,7 +28,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
             return true;
         }
         //不符合条件的，跳转到登录界面
-        httpServletRequest.getSession().setAttribute("loginSuccessRedirect", url);
+//        httpServletRequest.getSession().setAttribute("loginSuccessRedirect", url);
         String redirectUrl = WebUtils.getContextPath(httpServletRequest) + "admin/login.xhtml";
         httpServletResponse.sendRedirect(redirectUrl);
         return false;

@@ -22,7 +22,6 @@ import java.util.List;
  * Created by shaoheng.huang on 2016/12/14.
  */
 @Controller
-@RequestMapping(value = "/")
 public class ImageController extends AnnotationController{
 
     @Autowired

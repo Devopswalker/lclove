@@ -446,4 +446,14 @@ public class StringUtil {
 		}
 		return true;
 	}
+
+	public static boolean isEmpty(String targetStr){
+		if (targetStr == null){
+			return true;
+		}else if ("".equals(targetStr)){
+			return true;
+		}else {
+			return false;
+		}
+	}
 }

@@ -18,7 +18,6 @@ import java.util.Map;
  * Created by shaoheng.huang on 2016/12/27.
  */
 @Controller
-@RequestMapping(value = "/")
 public class RecommendController extends AnnotationController {
 
     @Autowired

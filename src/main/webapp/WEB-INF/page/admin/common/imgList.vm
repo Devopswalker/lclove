@@ -52,7 +52,7 @@
 
     function delImage(id,fileName){
         if(confirm("您确定要删除吗?")){
-            var url = '${basePath}/admin/common/deleteImage.xhtml';
+            var url = '${basePath}admin/common/deleteImage.xhtml';
             var values = {"id":id, "fileName":fileName};
             $.getData(url, values, true, 'get', 'json', false, delCallBack);
         }
@@ -74,7 +74,7 @@
 <div class="panel admin-panel margin-top">
     <div class="panel-head" id="doAdd"><strong><span class="icon-pencil-square-o"></span>上传图片</strong></div>
     <div class="body-content">
-        <form method="post" class="form-x" action="${basePath}/admin/common/uploadImage"
+        <form method="post" class="form-x" action="${basePath}admin/common/uploadImage"
               enctype="multipart/form-data">
             <input type="hidden" id="id" name="id" value=""/>
             <div class="form-group">
