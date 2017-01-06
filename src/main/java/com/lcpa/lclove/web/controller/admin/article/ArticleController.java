@@ -82,9 +82,9 @@ public class ArticleController extends AnnotationController{
     	if(pageNo == null){
     		pageNo = 1;
     	}
-		Integer pageSize = 100;
-		List<Article> articleList = articleService.getAllArticles(pageNo,pageSize,type, keyword);
-		Paging paging = articleService.getAllArticlesPaging(pageNo, type, keyword);
+		Integer pageSize = 10;
+		List<Article> articleList = articleService.getAllArticles(pageNo, pageSize,type, keyword);
+		Paging paging = articleService.getAllArticlesPaging(pageNo, pageSize,type, keyword);
 		model.put("paging", paging);
 		model.put("articleList", articleList);
 		model.put("typeMap", typeMap);

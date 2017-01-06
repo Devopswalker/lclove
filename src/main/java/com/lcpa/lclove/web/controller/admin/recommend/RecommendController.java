@@ -34,8 +34,9 @@ public class RecommendController extends AnnotationController {
         if(pageNo == null){
             pageNo = 1;
         }
-        List<ImageRecommend> recommendList = recommendService.getAllRecommendImage(pageNo, position);
-        Paging paging = recommendService.getAllRecommendImagePaging(pageNo, position);
+        Integer pageSize = 10;
+        List<ImageRecommend> recommendList = recommendService.getAllRecommendImage(pageNo, pageSize, position);
+        Paging paging = recommendService.getAllRecommendImagePaging(pageNo, pageSize,position);
         model.put("positionMap", positionMap);
         model.put("paging", paging);
         model.put("selectPosition", position);

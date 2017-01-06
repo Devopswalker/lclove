@@ -10,10 +10,16 @@
   <sql id="Base_Column_List">
     ID, NAME,FILE_NAME, URL
   </sql>
+  <sql id="Paging">
+    <if test="paging != null and paging.StartIndex != null and paging.pageSize">
+      LIMIT #{paging.startIndex},#{ paging.pageSize}
+    </if>
+  </sql>
   <select id="selectAll" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
-    from image
+    from image ORDER BY ID desc
+    <include refid="Paging"/>
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 

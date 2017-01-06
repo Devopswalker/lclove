@@ -11,6 +11,7 @@
     <script src="${staticPath}js/jquery.js"></script>
     <script src="${staticPath}js/pintuer.js"></script>
     <script src="${staticPath}js/lclove-util.js"></script>
+    <script src="${staticPath}js/jqPaginator.min.js"></script>
 </head>
 <body>
 <div class="panel admin-panel">
@@ -42,8 +43,28 @@
       #end
     </table>
 </div>
-<script type="text/javascript">
+<nav>
+    <ul id="pagination"class="pagination">
 
+    </ul>
+</nav>
+
+<script type="text/javascript">
+    $("#pagination").jqPaginator({
+        totalPages: $!{paging.total},
+        visiblePages: 5,
+        currentPage: $!{paging.pageNo},
+        onPageChange: function (num, type) {
+            if (type != "init"){
+                getResult(num);
+            }
+        }
+    });
+
+    function getResult(num){
+        pageNo = num;
+        refreshPage('${basePath}admin/common/imgList.xhtml?pageNo='+pageNo);
+    }
     function addImage(){
         $("#id").val('');
         $("#name").val('');

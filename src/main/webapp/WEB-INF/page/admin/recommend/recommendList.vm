@@ -11,6 +11,7 @@
     <script src="${staticPath}js/jquery.js"></script>
     <script src="${staticPath}js/pintuer.js"></script>
     <script src="${staticPath}js/lclove-util.js"></script>
+    <script src="${staticPath}js/jqPaginator.min.js"></script>
 </head>
 <body>
 <form method="post" action="" id="listform">
@@ -21,7 +22,7 @@
                 <li> <a class="button border-main icon-plus-square-o" href="${basePath}admin/recommend/editRecommend.xhtml"> 添加推荐</a> </li>
                 <li>搜索：</li>
                 <li>
-                    <select name="type" class="input" style="width:200px; line-height:17px;" onchange="changesearch(this.value)">
+                    <select name="type" id="position" class="input" style="width:200px; line-height:17px;" onchange="changesearch(this.value)">
                         <option value="">请选择分类</option>
                         #foreach($position in $positionList)
                             <option value="$position.id"
@@ -63,17 +64,38 @@
                         </td>
                     </tr>
                 #end
-                <tr>
-                    <td colspan="8">
-                        <div class="pagelist">
-                            <a href="">上一页</a> <span class="current">1</span><a href="">2</a><a href="">3</a><a href="">下一页</a><a href="">尾页</a>
-                        </div>
-                    </td>
-                </tr>
+##                <tr>
+##                    <td colspan="8">
+##                        <div class="pagelist">
+##                            <a href="">上一页</a> <span class="current">1</span><a href="">2</a><a href="">3</a><a href="">下一页</a><a href="">尾页</a>
+##                        </div>
+##                    </td>
+##                </tr>
         </table>
     </div>
 </form>
+<nav>
+    <ul id="pagination"class="pagination">
+
+    </ul>
+</nav>
 <script type="text/javascript">
+    $("#pagination").jqPaginator({
+        totalPages: $!{paging.total},
+        visiblePages: 5,
+        currentPage: $!{paging.pageNo},
+        onPageChange: function (num, type) {
+            if (type != "init"){
+                getResult(num);
+            }
+        }
+    });
+
+    function getResult(num){
+        position = $("#position").val();
+        pageNo = num;
+        refreshPage('${basePath}admin/recommend/recommendList.xhtml?position='+position+'&pageNo='+pageNo);
+    }
 
     //搜索
     function changesearch(position){

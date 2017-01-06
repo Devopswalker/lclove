@@ -55,10 +55,10 @@ public class RecommendService {
      * @param position
      * @return
      */
-    public List<ImageRecommend> getAllRecommendImage(Integer pageNo, Integer position){
+    public List<ImageRecommend> getAllRecommendImage(Integer pageNo, Integer pageSize, Integer position){
         Map map = new HashMap<>();
         map.put("position", position);
-        Paging paging = new Paging(pageNo, 100);
+        Paging paging = new Paging(pageNo, pageSize);
         QueryParameter queryParameter = new QueryParameter(paging,map);
         return imageRecommendMapper.selectAllRecommendImage(queryParameter);
     }
@@ -69,13 +69,18 @@ public class RecommendService {
      * @param position
      * @return
      */
-    public Paging getAllRecommendImagePaging(Integer pageNo, Integer position){
+    public Paging getAllRecommendImagePaging(Integer pageNo, Integer pageSize, Integer position){
         Map map = new HashMap<>();
         map.put("position", position);
         QueryParameter queryParameter1 = new QueryParameter(null,map);
         List<ImageRecommend> allPageRecommends = imageRecommendMapper.selectAllRecommendImage(queryParameter1);
-        int total = allPageRecommends.size();
-        Paging paging = new Paging(pageNo, 100);
+        int totalSize = allPageRecommends.size();
+        int total = totalSize/pageSize;
+        int lastPages = totalSize%pageSize;
+        if (lastPages > 0){
+            total += 1;
+        }
+        Paging paging = new Paging(pageNo, pageSize);
         paging.setTotal(total);
         return paging;
     }

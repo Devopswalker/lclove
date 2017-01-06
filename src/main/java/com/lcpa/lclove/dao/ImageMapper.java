@@ -1,6 +1,7 @@
 package com.lcpa.lclove.dao;
 
 import com.lcpa.lclove.model.Image;
+import com.lcpa.lclove.vo.QueryParameter;
 
 import java.util.List;
 
@@ -15,7 +16,7 @@ public interface ImageMapper {
 
     Image selectByPrimaryKey(Integer id);
 
-    List<Image> selectAll();
+    List<Image> selectAll(QueryParameter queryParameter);
 
     int updateByPrimaryKeySelective(Image record);
 

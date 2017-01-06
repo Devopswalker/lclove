@@ -4,6 +4,7 @@ import com.lcpa.lclove.model.Image;
 import com.lcpa.lclove.service.ImageService;
 import com.lcpa.lclove.support.Config;
 
+import com.lcpa.lclove.vo.Paging;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -43,9 +44,15 @@ public class ImageController extends AnnotationController{
     }
     
     @RequestMapping(value = "/admin/common/imgList.xhtml")
-    public String imgList(ModelMap model){
-        List<Image> allImages = imageService.getAllImage();
+    public String imgList(ModelMap model, Integer pageNo){
+        if(pageNo == null){
+            pageNo = 1;
+        }
+        Integer pageSize = 10;
+        List<Image> allImages = imageService.getAllImage(pageNo, pageSize);
+        Paging paging = imageService.getAllImagePaging(pageNo, pageSize);
         model.put("images", allImages);
+        model.put("paging", paging);
         return "admin/common/imgList.vm";
     }
 

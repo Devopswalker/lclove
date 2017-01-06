@@ -7,7 +7,6 @@ import com.lcpa.lclove.model.Article;
 
 import com.lcpa.lclove.model.ArticleContent;
 import com.lcpa.lclove.model.ArticleType;
-import com.lcpa.lclove.model.ImageRecommend;
 import com.lcpa.lclove.vo.Paging;
 import com.lcpa.lclove.vo.QueryParameter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -168,7 +167,7 @@ public class ArticleService{
      * @param keywords
      * @return
      */
-    public Paging getAllArticlesPaging(Integer pageNo, Integer articleType, String keywords){
+    public Paging getAllArticlesPaging(Integer pageNo, Integer pageSize, Integer articleType, String keywords){
         Map map = new HashMap<>();
         if (articleType != null){
             map.put("articleType", articleType);
@@ -178,8 +177,13 @@ public class ArticleService{
         }
         QueryParameter queryParameter = new QueryParameter(null,map);
         List<Article> articles = articleMapper.selectAllArticles(queryParameter);
-        int total = articles.size();
-        Paging paging = new Paging(pageNo, 100);
+        int totalSize = articles.size();
+        int total = totalSize/pageSize;
+        int lastPages = totalSize%pageSize;
+        if (lastPages > 0){
+            total += 1;
+        }
+        Paging paging = new Paging(pageNo, pageSize);
         paging.setTotal(total);
         return paging;
     }

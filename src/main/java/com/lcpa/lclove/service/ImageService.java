@@ -1,14 +1,13 @@
 package com.lcpa.lclove.service;
 
 import com.lcpa.lclove.dao.ImageMapper;
-import com.lcpa.lclove.dao.ImageRecommendMapper;
 import com.lcpa.lclove.model.Image;
-import com.lcpa.lclove.model.ImageRecommend;
 import com.lcpa.lclove.util.DateUtil;
+import com.lcpa.lclove.vo.Paging;
+import com.lcpa.lclove.vo.QueryParameter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-
 import java.io.File;
 import java.util.List;
 
@@ -52,7 +51,22 @@ public class ImageService {
 
     }
 
-    public List<Image> getAllImage(){
-        return imageMapper.selectAll();
+    public List<Image> getAllImage(Integer pageNo, Integer pageSize){
+        Paging paging = new Paging(pageNo, pageSize);
+        QueryParameter queryParameter = new QueryParameter(paging,null);
+        return imageMapper.selectAll(queryParameter);
+    }
+    public Paging getAllImagePaging(Integer pageNo, Integer pageSize){
+        QueryParameter queryParameter = new QueryParameter(null,null);
+        List<Image> articles = imageMapper.selectAll(queryParameter);
+        int totalSize = articles.size();
+        int total = totalSize/pageSize;
+        int lastPages = totalSize%pageSize;
+        if (lastPages > 0){
+            total += 1;
+        }
+        Paging paging = new Paging(pageNo, pageSize);
+        paging.setTotal(total);
+        return paging;
     }
 }

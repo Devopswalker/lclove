@@ -11,6 +11,7 @@
 <script src="${staticPath}js/jquery.js"></script>
 <script src="${staticPath}js/pintuer.js"></script>
 <script src="${staticPath}js/lclove-util.js"></script>
+	<script src="${staticPath}js/jqPaginator.min.js"></script>
 </head>
 <body>
 <form method="post" action="" id="listform">
@@ -108,20 +109,26 @@
 ##			</select>
 ##          </td>
 ##      </tr>
-      <tr>
-        <td colspan="8">
-			<div class="pagelist">
-				<a href="">上一页</a>
-				<span class="current">1</span>
-				<a href="">2</a>
-				<a href="">3</a>
-				<a href="">下一页</a>
-				<a href="">尾页</a>
-			</div>
-		</td>
-      </tr>
+##      <tr>
+##        <td colspan="8">
+##			<div class="pagelist">
+##				<a href="">上一页</a>
+##				<span class="current">1</span>
+##				<a href="">2</a>
+##				<a href="">3</a>
+##				<a href="">下一页</a>
+##				<a href="">尾页</a>
+##			</div>
+##		</td>
+##      </tr>
     </table>
+
   </div>
+    <nav>
+        <ul id="pagination"class="pagination">
+
+        </ul>
+    </nav>
 </form>
 <script type="text/javascript">
 
@@ -281,36 +288,24 @@ function changecate(o){
 	}
 }
 
-//批量复制
-/* function changecopy(o){
-	var Checkbox=false;
-	 $("input[name='id[]']").each(function(){
-	  if (this.checked==true) {		
-		Checkbox=true;	
-	  }
-	});
-	if (Checkbox){	
-		var i = 0;
-	    $("input[name='id[]']").each(function(){
-	  		if (this.checked==true) {
-				i++;
-			}		
-	    });
-		if(i>1){ 
-	    	alert("只能选择一条信息!");
-			$(o).find("option:first").prop("selected","selected");
-		}else{
-		
-			$("#listform").submit();		
-		}	
-	}
-	else{
-		alert("请选择要复制的内容!");
-		$(o).find("option:first").prop("selected","selected");
-		return false;
-	}
-} */
 
+    $("#pagination").jqPaginator({
+        totalPages: $!{paging.total},
+        visiblePages: 5,
+        currentPage: $!{paging.pageNo},
+        onPageChange: function (num, type) {
+			if (type != "init"){
+                getResult(num);
+			}
+        }
+    });
+
+function getResult(num){
+    searchArticleType = $("#searchArticleType").val();
+    keyword = $("#keyword").val();
+	pageNo = num;
+    refreshPage('${basePath}admin/article/articleList.xhtml?type='+searchArticleType+'&keyword='+keyword+'&pageNo='+pageNo);
+}
 </script>
 </body>
 </html>
