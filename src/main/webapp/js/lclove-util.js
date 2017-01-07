@@ -615,8 +615,8 @@ $(function(){
         };
         
         var fillData = function(data){
-        	if(data != null && data != ""){
-        		$.each(data, function(index, item){
+        	if(data != null && data.articles != null && data.articles != "" ){
+        		$.each(data.articles, function(index, item){
             		$(".content_list").append(itemTemplate(item));
             	});
         	}else{

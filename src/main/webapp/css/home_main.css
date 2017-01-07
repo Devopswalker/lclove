@@ -73,30 +73,36 @@ li{
 	height:1191px;
 }
 .wrap_content{
-	width:80%;
-	min-width: 1250px;
+	/* width:80%;
+	min-width: 1250px; */
+	width: 1050px;
 	position: relative;
 	margin:0 auto;
-	padding:40px 0;
-	hight:1000px;
+	padding:40px 0px;
 }
 
 .wrap_content .content_left{
-	width: 68%;
-	margin-right: 20px;
+	width: 600px;
+	margin: 0px 40px;
 	float: left;
 }
 
 /*通用侧边栏开始*/
 
 .wrap_content .content_right{
-    width:28%;
-    min-width: 400px;
-    float:right;
+    /* width:28%; */
+    width: 340px;
+    float: left;
     overflow:hidden;
+/*     position: relative; */
     /* border-top:2px solid #be9c72; */
 }
 
+.content_right_div{
+	/* position:absoulte; */
+	margin: 0 auto;
+	width:300px;
+}
 /*通用侧边栏结束*/
 
 /* .content_left{
