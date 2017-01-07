@@ -9,7 +9,8 @@
 
 .navigation ul{
 	float:left;
-	margin-left:-40px;
+	margin-left:-20px;
+	margin-top: 10px;
 }
 
 .navigation ul li{

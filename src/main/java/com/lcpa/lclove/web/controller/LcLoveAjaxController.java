@@ -1,5 +1,6 @@
 package com.lcpa.lclove.web.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.lcpa.lclove.constant.CommConstant;
 import com.lcpa.lclove.model.Article;
+import com.lcpa.lclove.model.Comment;
 import com.lcpa.lclove.model.ImageRecommend;
 import com.lcpa.lclove.service.ArticleService;
 import com.lcpa.lclove.service.RecommendService;
@@ -86,6 +88,7 @@ public class LcLoveAjaxController extends AnnotationController{
 		resultMap.put("articles", articleList);
 		resultMap.put("pageInfo", page);
 		return showJsonSuccess(model, JsonUtils.writeObjectToJson(resultMap));
+		//return showJsonSuccess(model, "");
 	}
 	
 	/**
@@ -103,7 +106,13 @@ public class LcLoveAjaxController extends AnnotationController{
 		if(article == null){
 			return showJsonError(model, "资源未开放浏览");
 		}
-		return showJsonSuccess(model, JsonUtils.writeObjectToJson(article));
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		List<Comment> commentList = new ArrayList<Comment>(); 
+		resultMap.put("detail", article);
+		resultMap.put("comments", commentList);
+		resultMap.put("lastId", "");
+		resultMap.put("nextId", "");
+		return showJsonSuccess(model, JsonUtils.writeObjectToJson(resultMap));
 	}
 
 	@RequestMapping("/ajax/getTopRankArticleList.xhtml")
