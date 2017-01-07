@@ -520,7 +520,10 @@ $(function(){
         var defaultTemplate = function(){
             var sbHtml = new StringBuilder();
             sbHtml.append("<div class='item'>");
-            sbHtml.append("  <a href='http://www.baidu.com'><img src='" + lclove.util.imgPath + "images/banner.png'/></a>");
+            sbHtml.append("	<a href='http://www.baidu.com'><img src='" + lclove.util.imgPath + "images/banner.png'/></a>");
+            sbHtml.append("</div>");
+            sbHtml.append("<div class='item'>");
+            sbHtml.append("	<a href='http://www.baidu.com'><img src='" + lclove.util.imgPath + "images/banner.png'/></a>");
             sbHtml.append("</div>");
             return $(sbHtml.toString());
         };
@@ -533,6 +536,8 @@ $(function(){
         };
         
         var fillData = function(data){
+        	var objdiv = $("<div/>").addClass("carousel");
+        	$(instance).append(objdiv);
         	if(data != null && data != ""){
         		$.each(data, function(index, item){
             		$(".carousel").append(imgTemplate(item));
@@ -541,8 +546,9 @@ $(function(){
         		$(".carousel").append(defaultTemplate());
         	}
         };
-        instanceObject();
-        $.getData(url, null, true, "POST", "json", true, fillData);
+        //instanceObject();
+        fillData();
+        //$.getData(url, null, true, "POST", "json", true, fillData);
     };
 
     $.fn.loadBanner = function(options) {

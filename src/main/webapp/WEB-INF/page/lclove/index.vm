@@ -9,12 +9,11 @@
 		<link rel="shortcut icon" href="${staticPath}images/favicon.ico"/>  
 		<link rel="stylesheet" type="text/css" href="${staticPath}css/reset.css" />
 		<link rel="stylesheet" type="text/css" href="${staticPath}css/head.css" />
-		<!-- <link rel="stylesheet" type="text/css" href="${staticPath}css/pintuer.css" /> -->
+		<link rel="stylesheet" type="text/css" href="${staticPath}css/pintuer.css" />
 		<link rel="stylesheet" type="text/css" href="${staticPath}css/float.css" />
 		<link rel="stylesheet" type="text/css" href="${staticPath}css/home_main.css" />
 		<link rel="stylesheet" type="text/css" href="${staticPath}css/navigation.css" />
 		<script src="${staticPath}js/jquery.js"></script>
-		<script src="${staticPath}js/pintuer.js"></script>
 		<script src="${staticPath}js/lclove-util.js"></script>
 	</head>
 	
@@ -29,8 +28,8 @@
 			<!-- 列表 LEFT: 内容列表 -->
 			<div class="content_left">
 				<!-- 列表 LEFT: BANNER -->
-				<div class="banner" style="width:600px;" data-pointer="1" data-style="border-red"></div>
-				
+				<div class="banner" data-pointer="1" data-style="border-red">
+				</div>
 				<div class="small_blank"></div>
 				
 				<!-- 列表 LEFT: DATALIST -->
@@ -86,5 +85,6 @@
 			$.backToTop();
 		});
 		</script>
+		<script src="${staticPath}js/pintuer.js"></script>
 	</body>
 </html>
