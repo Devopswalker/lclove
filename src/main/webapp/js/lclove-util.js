@@ -8,6 +8,7 @@ lclove.params.keyword = "";
 lclove.params.navtype = "";
 lclove.params.pageNo = "";
 lclove.params.position = "";
+lclove.params.aid = "";
 
 /* StringBuilder  */
 function StringBuilder () {
@@ -350,9 +351,9 @@ $(function(){
         var itemTemplate = function(data){
             var sbHtml = new StringBuilder();
             sbHtml.append("<div class='hot_article_item'>");
-            sbHtml.append("  <div class='hot_article_pic'><a href='"+ lclove.util.basePath + "detail.xhtml?id="+data.id+"'><img width='100' height='100' class='radius-small' src='" + data.thumbnail + "'/></a></div>");
+            sbHtml.append("  <div class='hot_article_pic'><a href='"+ lclove.util.basePath + "detail.xhtml?aid="+data.id+"'><img width='100' height='100' class='radius-small' src='" + data.thumbnail + "'/></a></div>");
             sbHtml.append("  <div class='hot_article_content'>");
-            sbHtml.append("    <div class='hot_article_desc'><a href='"+ lclove.util.basePath + "detail.xhtml?id="+data.id+"'>"+ data.title +"</a></div>");
+            sbHtml.append("    <div class='hot_article_desc'><a href='"+ lclove.util.basePath + "detail.xhtml?aid="+data.id+"'>"+ data.title +"</a></div>");
             sbHtml.append("    <div class='hot_article_readed'> "+ data.scanNum +" 浏览</div>");
             sbHtml.append("  </div>");
             sbHtml.append("</div>");
@@ -482,11 +483,11 @@ $(function(){
             var sbHtml = new StringBuilder();
             sbHtml.append("<div class='content_item'>");
             sbHtml.append("<div class='content_item_pic'>");
-            sbHtml.append("  <a class='thumbnail' href='"+ lclove.util.basePath + "detail.xhtml?id="+data.id+"'><img width='148' height='148' class='img-border radius-small' src='" + data.thumbnail + "'/></a>");
+            sbHtml.append("  <a class='thumbnail' href='"+ lclove.util.basePath + "detail.xhtml?aid="+data.id+"'><img width='148' height='148' class='img-border radius-small' src='" + data.thumbnail + "'/></a>");
             sbHtml.append("</div>");
             sbHtml.append("<div class='content_item_text'>");
             sbHtml.append("  <div class='content_item_text_head'>");
-            sbHtml.append("    <a href='"+ lclove.util.basePath + "detail.xhtml?id="+data.id+"'><img src='" + lclove.util.imgPath + "images/text_head_icon.png'/><div>"+ data.title +"</div></a>");
+            sbHtml.append("    <a href='"+ lclove.util.basePath + "detail.xhtml?aid="+data.id+"'><img src='" + lclove.util.imgPath + "images/text_head_icon.png'/><div>"+ data.title +"</div></a>");
             sbHtml.append("  </div>");
             sbHtml.append("  <div class='mini_blank'></div>");
             sbHtml.append("  <div class='separate'></div>");
@@ -506,11 +507,11 @@ $(function(){
             var sbHtml = new StringBuilder();
             sbHtml.append("<div class='content_item'>");
             sbHtml.append("<div class='content_item_pic'>");
-            sbHtml.append("  <a href='"+ lclove.util.basePath + "detail.xhtml?id=1'><img width='148' height='148' class='img-border radius-small' src='" + lclove.util.imgPath + "images/content_pic.jpg'/></a>");
+            sbHtml.append("  <a href='"+ lclove.util.basePath + "detail.xhtml?aid=1'><img width='148' height='148' class='img-border radius-small' src='" + lclove.util.imgPath + "images/content_pic.jpg'/></a>");
             sbHtml.append("</div>");
             sbHtml.append("<div class='content_item_text'>");
             sbHtml.append("  <div class='content_item_text_head'>");
-            sbHtml.append("    <a href='"+ lclove.util.basePath + "detail.xhtml?id=1'><img src='" + lclove.util.imgPath + "images/text_head_icon.png'/><div>LC品爱员工美丽小秘密</div></a>");
+            sbHtml.append("    <a href='"+ lclove.util.basePath + "detail.xhtml?aid=1'><img src='" + lclove.util.imgPath + "images/text_head_icon.png'/><div>LC品爱员工美丽小秘密</div></a>");
             sbHtml.append("  </div>");
             sbHtml.append("  <div class='mini_blank'></div>");
             sbHtml.append("  <div class='separate'></div>");
@@ -591,6 +592,39 @@ $(function(){
     $.fn.contentList.defaults = {};
 });
 /* Content List */
+
+$(function(){
+    var eMyContent = function(options,object) {
+        var opts = $.extend({}, $.fn.ArticleContent.defaults, options);
+        var instance = object;
+        var url = lclove.util.basePath + "ajax/getArticle.xhtml?aid=" + lclove.params.aid;
+        var showContent = function (data) {
+            var sbHtml = new StringBuilder();
+            sbHtml.append("<div class='article_content_head'>");
+            sbHtml.append("  <div class='head_left'>上一篇：</div>");
+            sbHtml.append("  <div class='head_right'>下一篇：</div>");
+            sbHtml.append("</div>");
+            sbHtml.append("<div class='separate'></div>");
+            sbHtml.append("<div class='article_content_body'>");
+            sbHtml.append("  <div class='row_1'><div class='row_1_left'><img src='"+lclove.util.imgPath+"images/text_head_icon.png'/><div>"+data.title+"/div></div><div class='row_1_right'>"+data.topic+"</div></div>");
+            sbHtml.append("  <div class='row_2'>"+data.pubDate+" | 小编："+data.editor+"</div>");
+            sbHtml.append("  <div class='row_3'>");
+            
+            
+            sbHtml.append("  </div>");
+            sbHtml.append("</div>");
+            $(".article_content").append($(sbHtml.toString()));
+        };
+        $.getData(url, null, true, "POST", "json", showContent);
+    };
+    $.fn.ArticleContent = function(options) {
+        return this.each(function () {
+            return eMyContent(options, $(this));
+        });
+    };
+
+    $.fn.ArticleContent.defaults = {};
+});
 
 
 /*  Footer  */

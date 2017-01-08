@@ -22,37 +22,48 @@
 		<div id="myHeader"></div>
 		<!-- 固定头部导航 -->
 		
-		<!-- 图片轮播  -->
-		<div class="banner"></div>
-		<!-- 图片轮播  -->
-		
-		<!-- 通用搜索 -->
-		<div class="search"></div>
-		<!-- 通用搜索-->
-		
-		<!-- 六个推荐文章 -->
-		<div class="case"></div>
-		<!-- 六个推荐文章-->
-		
-		<!-- 文章详情-->
-		<div class="article"></div>
+		<!-- 文章详情 -->
+		<div class="wrap_content clear">
+			<div class="content_left">
+				<!-- 详情 LEFT: 内容详情 -->
+				<div class="article_content"></div>
+			</div>
+			
+			<!-- 列表 RIGHT: 通用搜索 /微电影图文推荐-->
+			<div class="content_right">
+				<div class="content_right_div">
+					<!-- 通用搜索 -->
+					<div class="search_area"></div>
+					
+					<div class="small_blank"></div>
+					
+					<!-- 微电影图文推荐-->
+					<div class="recommend_show"></div>
+					
+					<!-- TOP 6-->
+					<div class="hot_article"></div>
+				</div>
+			</div>
+			
+		</div>
 		<!-- 文章详情-->
 		<script>
 		$(function(){
+			lclove.params.keyword = '$!params.keyword';
+			lclove.params.aid = '$!params.aid';
+			lclove.params.position = '2';
+			
 			//固定头部导航
 			$("#myHeader").topMenu();
 			
-			//图片轮播
-			//$(".banner").bannerBox();
+			//通用搜索
+			$(".search_area").searchByType();
 			
-			//通用搜索+微电影图文推荐
-			//$(".search").searchBox();
+			<!-- 微电影图文推荐-->
+			$(".recommend_show").recommandShow();
 			
-			//六个推荐文章
-			//$(".case").recommandShow();
-			
-			//文章列表
-			//$(".article").newsList();
+			<!-- TOP 6-->
+			$(".hot_article").topShow();
 			
 			//固定页尾
 			$("body").footerModule();

@@ -94,11 +94,11 @@ public class LcLoveAjaxController extends AnnotationController{
 	 * @return
 	 */
 	@RequestMapping("/ajax/getArticle.xhtml")
-		public String getArticleDetail(Integer id, ModelMap model){
-		if(id == null){
+		public String getArticleDetail(Integer aid, ModelMap model){
+		if(aid == null){
 			return showJsonError(model, "资源未开放浏览");
 		}
-		Article article = articleService.getArticleDetailsById(id);
+		Article article = articleService.getArticleDetailsById(aid);
 		if(article == null){
 			return showJsonError(model, "资源未开放浏览");
 		}
