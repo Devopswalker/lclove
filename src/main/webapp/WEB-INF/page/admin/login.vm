@@ -67,7 +67,7 @@
     }
     function loginCallBack(r){
         if(r.success){
-            alert("denglu chenggong")
+            refreshPage('${staticPath}'+r.data);
         }else{
             alert(r.msg);
         }

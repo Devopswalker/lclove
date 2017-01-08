@@ -9,13 +9,13 @@ public class Article {
 
     private String thumbnail;
 
-    private Integer sortNum;
+    private Integer sortNum = 0;
 
     private Timestamp pubDate;
 
-    private Integer likeNum;
+    private Integer likeNum = 0;
 
-    private Integer scanNum;
+    private Integer scanNum = 0;
 
     private Integer articleType;
 

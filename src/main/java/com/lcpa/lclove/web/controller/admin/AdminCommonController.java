@@ -54,21 +54,22 @@ public class AdminCommonController extends AnnotationController{
 		if (user != null && !StringUtil.isEmpty(user.getPassword()) && user.getPassword().equals(password)){
 			session.setAttribute("username", username);
 			//重定向
-			String loginSuccessRedirect = "/admin/index.xhtml";
-			return "redirect:"+loginSuccessRedirect;
+			String loginSuccessRedirect = "admin/index.xhtml";
+			return showJsonSuccess(model,loginSuccessRedirect);
 		}else{
 			return showJsonError(model, "无效的帐号密码！");
 		}
 	}
 
 	@RequestMapping(value="/admin/changeUser")
-	public String changeUser(ModelMap model, String username,String oldPwd, String newPwd) throws Exception{
+	public String changeUser(HttpSession session, ModelMap model, String username,String oldPwd, String newPwd) throws Exception{
 		User user = userService.getUserByName(username);
 		if (user != null){
 			String password = user.getPassword();
 			if (password.endsWith(oldPwd)){
 				user.setPassword(newPwd);
 				userService.updatePassword(user);
+				session.invalidate();
 			}else {
 				return showJsonError(model, "输入旧密码错误！");
 			}

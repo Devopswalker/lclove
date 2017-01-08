@@ -116,7 +116,6 @@
     }
     function ajaxCallBack(r){
         if(r.success){
-            alert(1)
             refreshPage();
         }else{
             alert(r.msg);
