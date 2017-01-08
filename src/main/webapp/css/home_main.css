@@ -325,26 +325,30 @@ li{
 	cursor:default;
 }
 
-.seartch_area{
+.search_area{
 	float:left;
+	width: 300px;
+	margin: 0px auto;
+	position: relative;
 }
 
 .search_bar{
-	float:left;
-	width:250px;
-	height:32px;
-	background:url(../images/search.png);
-	border:0;
-	padding-left:10px;
-	padding-right:40px;
+	width: 100%;
+    height: 32px;
+    padding-left: 10px;
+    border:0;
+    outline: none;
+    background:url(../images/search.png);
 }
 .searchButton{
-	height:30px;
-	width:30px;
-	position:absolute;
-	margin-left:270px;
-	cursor:pointer;
-	z-index:100px;
+	position: absolute;
+    top: 0px;
+    right: 0px;
+    width: 36px;
+    height: 30px;
+    border: none;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
 }
 
 .recommend_show{

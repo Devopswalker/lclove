@@ -565,7 +565,7 @@ $(function(){
             
         	fillData(data);
         	
-            $("<div/>").addClass("loadMore").attr({"cnum": pageNum, "tnum": totalPage}).append($(instance));
+            $("<div/>").addClass("loadMore").attr({"cnum": pageNum, "tnum": totalPage}).appendTo($(instance));
             
             if(pageNum >= totalPage - 1 ){
             	$(".loadMore").css("display", "none");
