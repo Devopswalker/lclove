@@ -85,6 +85,5 @@
 			$.backToTop();
 		});
 		</script>
-		<script src="${staticPath}js/pintuer.js"></script>
 	</body>
 </html>
