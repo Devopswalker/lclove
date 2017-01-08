@@ -9,37 +9,12 @@
 		<link rel="shortcut icon" href="${staticPath}images/favicon.ico"/>  
 		<link rel="stylesheet" type="text/css" href="${staticPath}css/reset.css" />
 		<link rel="stylesheet" type="text/css" href="${staticPath}css/head.css" />
+		<link rel="stylesheet" type="text/css" href="${staticPath}css/pintuer.css" />
 		<link rel="stylesheet" type="text/css" href="${staticPath}css/float.css" />
 		<link rel="stylesheet" type="text/css" href="${staticPath}css/home_main.css" />
 		<link rel="stylesheet" type="text/css" href="${staticPath}css/navigation.css" />
 		<script src="${staticPath}js/jquery.js"></script>
-		<script src="${staticPath}js/pintuer.js"></script>
 		<script src="${staticPath}js/lclove-util.js"></script>
-
-		<script>
-		$(function(){
-			//固定头部导航
-			$("#myHeader").topMenu();
-			
-			//图片轮播
-			//$(".banner").bannerBox();
-			
-			//通用搜索+微电影图文推荐
-			//$(".search").searchBox();
-			
-			//六个推荐文章
-			//$(".case").recommandShow();
-			
-			//文章详情
-			//$(".article").newsList();
-			
-			//固定页尾
-			$("body").footerModule();
-			
-			//返回顶部
-			$.backToTop();
-		});
-		</script>
 	</head>
 	
 	<body>
@@ -62,5 +37,30 @@
 		<!-- 文章详情-->
 		<div class="article"></div>
 		<!-- 文章详情-->
+		<script>
+		$(function(){
+			//固定头部导航
+			$("#myHeader").topMenu();
+			
+			//图片轮播
+			//$(".banner").bannerBox();
+			
+			//通用搜索+微电影图文推荐
+			//$(".search").searchBox();
+			
+			//六个推荐文章
+			//$(".case").recommandShow();
+			
+			//文章列表
+			//$(".article").newsList();
+			
+			//固定页尾
+			$("body").footerModule();
+			
+			//返回顶部
+			$.backToTop();
+		});
+		</script>
+		<script src="${staticPath}js/pintuer.js"></script>
 	</body>
 </html>

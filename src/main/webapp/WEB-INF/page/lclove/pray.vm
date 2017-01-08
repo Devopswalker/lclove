@@ -9,13 +9,34 @@
 		<link rel="shortcut icon" href="${staticPath}images/favicon.ico"/>  
 		<link rel="stylesheet" type="text/css" href="${staticPath}css/reset.css" />
 		<link rel="stylesheet" type="text/css" href="${staticPath}css/head.css" />
+		<link rel="stylesheet" type="text/css" href="${staticPath}css/pintuer.css" />
 		<link rel="stylesheet" type="text/css" href="${staticPath}css/float.css" />
 		<link rel="stylesheet" type="text/css" href="${staticPath}css/home_main.css" />
 		<link rel="stylesheet" type="text/css" href="${staticPath}css/navigation.css" />
 		<script src="${staticPath}js/jquery.js"></script>
-		<script src="${staticPath}js/pintuer.js"></script>
 		<script src="${staticPath}js/lclove-util.js"></script>
-
+	</head>
+	
+	<body>
+		<!-- 固定头部导航 -->
+		<div id="myHeader"></div>
+		<!-- 固定头部导航 -->
+		
+		<!-- 图片轮播  -->
+		<div class="banner"></div>
+		<!-- 图片轮播  -->
+		
+		<!-- 通用搜索 -->
+		<div class="search"></div>
+		<!-- 通用搜索-->
+		
+		<!-- 六个推荐文章 -->
+		<div class="case"></div>
+		<!-- 六个推荐文章-->
+		
+		<!-- 文章列表 -->
+		<div class="article"></div>
+		<!-- 文章列表-->
 		<script>
 		$(function(){
 			//固定头部导航
@@ -40,27 +61,6 @@
 			$.backToTop();
 		});
 		</script>
-	</head>
-	
-	<body>
-		<!-- 固定头部导航 -->
-		<div id="myHeader"></div>
-		<!-- 固定头部导航 -->
-		
-		<!-- 图片轮播  -->
-		<div class="banner"></div>
-		<!-- 图片轮播  -->
-		
-		<!-- 通用搜索 -->
-		<div class="search"></div>
-		<!-- 通用搜索-->
-		
-		<!-- 六个推荐文章 -->
-		<div class="case"></div>
-		<!-- 六个推荐文章-->
-		
-		<!-- 文章列表 -->
-		<div class="article"></div>
-		<!-- 文章列表-->
+		<script src="${staticPath}js/pintuer.js"></script>
 	</body>
 </html>

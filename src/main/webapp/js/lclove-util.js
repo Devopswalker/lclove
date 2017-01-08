@@ -96,7 +96,8 @@ $.extend({
 	   		if(result.success){
 	   			var resultData = null;
 	   			if(isJsonType){
-	   				resultData = result.data;	
+	   				//resultData = result.data;	
+	   				resultData = eval('(' + result.data + ')');
 	   			}else{
 	   				resultData = result;
 	   			}
@@ -292,7 +293,7 @@ $(function(){
         var imgTemplate = function(data){
             var sbHtml = new StringBuilder();
             sbHtml.append("<div class='recommend_item'>");
-            sbHtml.append("  <a href='" + data.recommendUrl + "'><img src='" + lclove.util.imgPath + data.imgUrl + "'/></a>");
+            sbHtml.append("  <a href='" + data.recommendUrl + "'><img src='" + data.imgUrl + "'/></a>");
             sbHtml.append("  <div>"+ data.description +"<br />"+ data.seq +"</div>");
             sbHtml.append("</div>");
             sbHtml.append("<div class='small_blank'></div>");
@@ -348,7 +349,7 @@ $(function(){
         var itemTemplate = function(data){
             var sbHtml = new StringBuilder();
             sbHtml.append("<div class='hot_article_item'>");
-            sbHtml.append("  <div class='hot_article_pic'><a href='"+ lclove.util.basePath + "detail.xhtml?id="+data.id+"'><img src='" + lclove.util.imgPath + data.topic + "'/></a></div>");
+            sbHtml.append("  <div class='hot_article_pic'><a href='"+ lclove.util.basePath + "detail.xhtml?id="+data.id+"'><img src='" + data.thumbnail + "'/></a></div>");
             sbHtml.append("  <div class='hot_article_content'>");
             sbHtml.append("    <div class='hot_article_desc'><a href='"+ lclove.util.basePath + "detail.xhtml?id="+data.id+"'>"+ data.title +"</a></div>");
             sbHtml.append("    <div class='hot_article_readed'> "+ data.scanNum +" 浏览</div>");
@@ -415,7 +416,7 @@ $(function(){
         var imgTemplate = function(data){
             var sbHtml = new StringBuilder();
             sbHtml.append("<div class='item'>");
-            sbHtml.append("  <a href='" + data.recommendUrl + "'><img src='" + lclove.util.imgPath + data.imgUrl + "'/></a>");
+            sbHtml.append("  <a href='" + data.recommendUrl + "'><img src='" + data.imgUrl + "'/></a>");
             sbHtml.append("</div>");
             return $(sbHtml.toString());
         };
@@ -474,7 +475,7 @@ $(function(){
             var sbHtml = new StringBuilder();
             sbHtml.append("<div class='content_item'>");
             sbHtml.append("<div class='content_item_pic'>");
-            sbHtml.append("  <a href='"+ lclove.util.basePath + "detail.xhtml?id="+data.id+"'><img src='" + lclove.util.imgPath + data.thumbnail + "'/></a>");
+            sbHtml.append("  <a href='"+ lclove.util.basePath + "detail.xhtml?id="+data.id+"'><img src='" + data.thumbnail + "'/></a>");
             sbHtml.append("</div>");
             sbHtml.append("<div class='content_item_text'>");
             sbHtml.append("  <div class='content_item_text_head'>");
