@@ -218,7 +218,7 @@ $.extend({
             sbHtml.append("            <li><div class='home_nav_icon' onClick='navClick(1)'></div><div class='icon_name' onClick='navClick(1)'>Home</div></li>");
             sbHtml.append("            <li id='secondary_nav'><div  class='normal_nav' onClick='navClick(2)'>恋の喵言喵语</div><div class='icon_name' onClick='navClick(2)'>Spacial</div></li>");
             sbHtml.append("            <li><div class='normal_nav' onClick='navClick(3)'>恋の恋爱经</div><div class='icon_name' onClick='navClick(3)'>Love</div></li>");
-            sbHtml.append("            <li><div class='normal_nav' onClick='navClick(4)'>恋の护身符</div><div class='icon_name' onClick='navClick(4)'>Amulet</div></li>");
+            sbHtml.append("            <li><div class='normal_nav' onClick='navClick(4)'>恋の护身符</div><div class='icon_name' onClick='navClick(4)'>Body</div></li>");
             sbHtml.append("            <li><div class='normal_nav' onClick='navClick(5)'>恋の好奇心</div><div class='icon_name' onClick='navClick(5)'>Research</div></li>");
             sbHtml.append("            <li><div class='normal_nav' onClick='navClick(6)'>恋の梦剧场</div><div class='icon_name' onClick='navClick(6)'>Comic</div></li>");
             sbHtml.append("            <li><div class='normal_nav' onClick='navClick(7)'>恋の上上签</div><div class='icon_name' onClick='navClick(7)'>Pray</div></li>");
@@ -293,7 +293,7 @@ $(function(){
         var imgTemplate = function(data){
             var sbHtml = new StringBuilder();
             sbHtml.append("<div class='recommend_item'>");
-            sbHtml.append("  <a href='" + data.recommendUrl + "'><img src='" + data.imgUrl + "'/></a>");
+            sbHtml.append("  <a href='" + data.recommendUrl + "'><img width='301' height='116' class='radius-small' src='" + data.imgUrl + "'/></a>");
             sbHtml.append("  <div>"+ data.description +"<br />"+ data.seq +"</div>");
             sbHtml.append("</div>");
             sbHtml.append("<div class='small_blank'></div>");
@@ -302,11 +302,11 @@ $(function(){
         
         var defaultTemplate = function(){
             var sbHtml = new StringBuilder();
-            sbHtml.append("<div class='recommend_item'><img src='"+ lclove.util.imgPath + "images/recoommend1.png'/><div>微电影系列<br />Vol.1</div></div>");
+            sbHtml.append("<div class='recommend_item'><img width='301' height='116' class='radius-small' src='"+ lclove.util.imgPath + "images/recoommend1.png'/><div>微电影系列<br />Vol.1</div></div>");
             sbHtml.append("<div class='small_blank'></div>");
-            sbHtml.append("<div class='recommend_item'><img src='"+ lclove.util.imgPath + "images/recoommend2.png'/><div>微电影系列<br />Vol.2</div></div>");
+            sbHtml.append("<div class='recommend_item'><img width='301' height='116' class='radius-small' src='"+ lclove.util.imgPath + "images/recoommend2.png'/><div>微电影系列<br />Vol.2</div></div>");
             sbHtml.append("<div class='small_blank'></div>");
-            sbHtml.append("<div class='recommend_item'><img src='"+ lclove.util.imgPath + "images/recoommend3.png'/><div>微电影系列<br />Vol.3</div></div>");
+            sbHtml.append("<div class='recommend_item'><img width='301' height='116' class='radius-small' src='"+ lclove.util.imgPath + "images/recoommend3.png'/><div>微电影系列<br />Vol.3</div></div>");
             sbHtml.append("<div class='small_blank'></div>");
             return $(sbHtml.toString());
         };
@@ -363,7 +363,7 @@ $(function(){
         var defaultTemplate = function(){
             var sbHtml = new StringBuilder();
             sbHtml.append("<div class='hot_article_item'>");
-            sbHtml.append("  <div class='hot_article_pic'><a href='#'><img src='" + lclove.util.imgPath + "images/article1.jpg'/></a></div>");
+            sbHtml.append("  <div class='hot_article_pic'><a href='#'><img width='100' height='100' class='radius-small' src='" + lclove.util.imgPath + "images/article1.jpg'/></a></div>");
             sbHtml.append("  <div class='hot_article_content'>");
             sbHtml.append("    <div class='hot_article_desc'><a href='#'>乘务员教你如何在飞机上啪啪啪</a></div>");
             sbHtml.append("    <div class='hot_article_readed'> 99999 浏览</div>");
@@ -499,7 +499,7 @@ $(function(){
             var sbHtml = new StringBuilder();
             sbHtml.append("<div class='content_item'>");
             sbHtml.append("<div class='content_item_pic'>");
-            sbHtml.append("  <a href='"+ lclove.util.basePath + "detail.xhtml?id=1'><img src='" + lclove.util.imgPath + "images/content_pic.jpg'/></a>");
+            sbHtml.append("  <a href='"+ lclove.util.basePath + "detail.xhtml?id=1'><img width='148' height='148' class='img-border radius-small' src='" + lclove.util.imgPath + "images/content_pic.jpg'/></a>");
             sbHtml.append("</div>");
             sbHtml.append("<div class='content_item_text'>");
             sbHtml.append("  <div class='content_item_text_head'>");
