@@ -98,7 +98,7 @@ public class LcLoveAjaxController extends AnnotationController{
 		if(aid == null){
 			return showJsonError(model, "资源未开放浏览");
 		}
-		Article article = articleService.getArticleDetailsById(aid);
+		Article article = articleService.updateGetArticleDetailsById(aid);
 		if(article == null){
 			return showJsonError(model, "资源未开放浏览");
 		}

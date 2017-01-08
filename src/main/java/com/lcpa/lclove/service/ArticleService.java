@@ -76,11 +76,19 @@ public class ArticleService{
     }
 
     /**
-     * 获取文章信息以及文章内容
+     * admin获取文章信息以及文章内容
      * @param id
      * @return
      */
-    public Article getArticleDetailsById(Integer id){
+    public Article getAdminArticleDetailsById(Integer id){
+        Article article = articleMapper.selectByPrimaryKey(id);
+        ArticleContent articleContent = articleContentMapper.selectByPrimaryKey(id);
+        article.setContent(articleContent.getContent());
+        return article;
+    }
+
+    public Article updateGetArticleDetailsById(Integer id){
+        articleMapper.updateScanNum(id);
         Article article = articleMapper.selectByPrimaryKey(id);
         ArticleContent articleContent = articleContentMapper.selectByPrimaryKey(id);
         article.setContent(articleContent.getContent());

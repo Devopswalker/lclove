@@ -219,4 +219,10 @@
       STATE = #{state,jdbcType=INTEGER}
     where ID = #{id,jdbcType=INTEGER}
   </update>
+  <update id="updateScanNum">
+    update article
+    set SCAN_NUM = SCAN_NUM + 1
+    where ID = #{0}
+  </update>
+
 </mapper>

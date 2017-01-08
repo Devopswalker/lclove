@@ -1,10 +1,8 @@
 package com.lcpa.lclove.web.controller.admin.article;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.lcpa.lclove.util.StringUtil;
 import com.lcpa.lclove.vo.Paging;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,13 +23,6 @@ public class ArticleController extends AnnotationController{
 
     @Autowired
     private ArticleService articleService;
-
-	@RequestMapping(value = "/admin/article/test.xhtml")
-	public String test(ModelMap model){
-		Article article = articleService.getArticleDetailsById(12);
-		model.put("article", article);
-		return "";
-	}
 
     @RequestMapping(value = "/admin/article/typeList.xhtml")
 	public String typeList(ModelMap model){
@@ -98,7 +89,7 @@ public class ArticleController extends AnnotationController{
     	List<ArticleType> typeList = articleService.getAllArticleType();
     	Article article = null;
     	if(id != null){
-    		article = articleService.getArticleDetailsById(id);
+    		article = articleService.getAdminArticleDetailsById(id);
     	}
     	model.put("article", article);
     	model.put("typeList", typeList);
@@ -113,7 +104,7 @@ public class ArticleController extends AnnotationController{
 			this.bindParams(article);
 			articleService.saveArticle(article);
 		}else{
-			article = articleService.getArticleDetailsById(id);
+			article = articleService.getAdminArticleDetailsById(id);
 			if(article == null){
 				return this.showJsonError(model, "该文章不存在或已被删除！");
 			}
