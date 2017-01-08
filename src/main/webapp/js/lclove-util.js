@@ -96,7 +96,8 @@ $.extend({
 	   		if(result.success){
 	   			var resultData = null;
 	   			if(isJsonType){
-	   				resultData = result.data;	
+	   				//resultData = result.data;	
+	   				resultData = eval('(' + result.data + ')');
 	   			}else{
 	   				resultData = result;
 	   			}
@@ -517,10 +518,21 @@ $(function(){
             sbHtml.append("</div>");
             return $(sbHtml.toString());
         };
-
-        var loadItemList = function () {
-            var sbHtml = new StringBuilder();
-            $(instance).append($(sbHtml.toString()));
+        
+        var scrollEvent = function(){
+            var winH = $(window).height(); //页面可视区域高度
+            var scrollAdd = function(){
+            	var scrollT = $(window).scrollTop(); //滚动条top 
+            	var pageH = $(document.body).height();
+            	var scrollUrl = lclove.util.basePath + "ajax/getArticleList.xhtml?type="+lclove.params.navtype;
+                if (scrollT + winH > ($(".loadMore").offset().top + 100) && $(".loadMore").css("display") == "block" && ($(".loadMore").attr("cnum") < ($(".loadMore").attr("tnum") -1))) {
+					$(".loadMore").css("display","none");
+					scrollUrl += "&pageNo=" + (parseInt($(".loadMore").attr("cnum")) + 1);
+                	$.getData(scrollUrl, null, true, "POST", "json", true, appendList);
+                }
+            };
+            //定义鼠标滚动事件
+            $(window).scroll(scrollAdd);
         };
         
         var fillData = function(data){
@@ -534,9 +546,39 @@ $(function(){
         			$(".content_list").append(defaultTemplate());
         		}
         	}
+        	var cPageNum = data.pageInfo.currentPage;
+            if(cPageNum == data.pageInfo.pageCount - 1){
+            	$(".loadMore").css("display", "none");
+            }else{
+            	$(".loadMore").appendTo($(instance));
+                $(".loadMore").attr("cnum", cPageNum).css("display", "block");
+            }
         };
-        loadItemList();
-        $.getData(url, null, true, "POST", "json", true, fillData);
+        
+        var appendList = function(data){
+        	fillData(data);
+            var cPageNum = data.pageInfo.currentPage;
+            if(cPageNum == data.pageInfo.pageCount - 1){
+            	$(".loadMore").css("display", "none");
+            }else{
+            	$(".loadMore").appendTo($(instance));
+                $(".loadMore").attr("cnum", cPageNum).css("display", "block");
+            }
+        };
+        
+        var renderList = function(data){
+        	var pageNum = data.pageInfo.currentPage;
+            var totalPage = data.pageInfo.pageCount;
+            
+        	fillData(data);
+            $("<div/>").addClass("loadMore").attr({"cnum": pageNum, "tnum": totalPage}).append($(instance));
+            
+            if(pageNum >= totalPage - 1 )
+            	$(".loadMore").css("display", "none");
+            scrollEvent();
+        };
+
+        $.getData(url, null, true, "POST", "json", true, renderList);
     };
 
     $.fn.contentList = function(options) {
