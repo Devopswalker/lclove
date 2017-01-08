@@ -37,7 +37,6 @@ public class LcLoveAjaxController extends AnnotationController{
 	 */
 	@RequestMapping("/ajax/getRecommand.xhtml")
 	public String getRecommendList(Integer position, ModelMap model){
-		//return showJsonSuccess(model,"");
 		if(position == null){
 			position = 1;
 		}
