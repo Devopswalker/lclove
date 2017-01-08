@@ -546,13 +546,6 @@ $(function(){
         			$(".content_list").append(defaultTemplate());
         		}
         	}
-        	var cPageNum = data.pageInfo.currentPage;
-            if(cPageNum == data.pageInfo.pageCount - 1){
-            	$(".loadMore").css("display", "none");
-            }else{
-            	$(".loadMore").appendTo($(instance));
-                $(".loadMore").attr("cnum", cPageNum).css("display", "block");
-            }
         };
         
         var appendList = function(data){
@@ -571,10 +564,12 @@ $(function(){
             var totalPage = data.pageInfo.pageCount;
             
         	fillData(data);
+        	
             $("<div/>").addClass("loadMore").attr({"cnum": pageNum, "tnum": totalPage}).append($(instance));
             
-            if(pageNum >= totalPage - 1 )
+            if(pageNum >= totalPage - 1 ){
             	$(".loadMore").css("display", "none");
+            }         
             scrollEvent();
         };
 
