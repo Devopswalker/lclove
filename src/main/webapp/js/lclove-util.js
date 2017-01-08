@@ -349,7 +349,7 @@ $(function(){
         var itemTemplate = function(data){
             var sbHtml = new StringBuilder();
             sbHtml.append("<div class='hot_article_item'>");
-            sbHtml.append("  <div class='hot_article_pic'><a href='"+ lclove.util.basePath + "detail.xhtml?id="+data.id+"'><img src='" + data.thumbnail + "'/></a></div>");
+            sbHtml.append("  <div class='hot_article_pic'><a href='"+ lclove.util.basePath + "detail.xhtml?id="+data.id+"'><img width='100' height='100' class='radius-small' src='" + data.thumbnail + "'/></a></div>");
             sbHtml.append("  <div class='hot_article_content'>");
             sbHtml.append("    <div class='hot_article_desc'><a href='"+ lclove.util.basePath + "detail.xhtml?id="+data.id+"'>"+ data.title +"</a></div>");
             sbHtml.append("    <div class='hot_article_readed'> "+ data.scanNum +" 浏览</div>");
@@ -475,7 +475,7 @@ $(function(){
             var sbHtml = new StringBuilder();
             sbHtml.append("<div class='content_item'>");
             sbHtml.append("<div class='content_item_pic'>");
-            sbHtml.append("  <a href='"+ lclove.util.basePath + "detail.xhtml?id="+data.id+"'><img src='" + data.thumbnail + "'/></a>");
+            sbHtml.append("  <a class='thumbnail' href='"+ lclove.util.basePath + "detail.xhtml?id="+data.id+"'><img width='148' height='148' class='img-border radius-small' src='" + data.thumbnail + "'/></a>");
             sbHtml.append("</div>");
             sbHtml.append("<div class='content_item_text'>");
             sbHtml.append("  <div class='content_item_text_head'>");
