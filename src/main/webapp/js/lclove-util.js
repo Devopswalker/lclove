@@ -7,6 +7,7 @@ lclove.params = {};
 lclove.params.keyword = "";
 lclove.params.navtype = "";
 lclove.params.pageNo = "";
+lclove.params.position = "";
 
 /* StringBuilder  */
 function StringBuilder () {
@@ -268,7 +269,7 @@ $(function(){
             $(".searchButton").on("click", function(){
             	//筛选条件
             	var keywrod = $(".search_bar").val();
-            	var filterUrl =  lclove.util.basePath + "ajax/getArticleList.xhtml?keywrod=" + keywrod + "&type=1";
+            	var filterUrl =  lclove.util.basePath + "ajax/getArticleList.xhtml?keywrod=" + keywrod;
             	refreshPage(filterUrl);
             });
         };        
@@ -289,7 +290,7 @@ $(function(){
     var eRecommandShow = function(options,object) {
         var opts = $.extend({}, $.fn.recommandShow.defaults, options);
         var instance = object;
-        var url = lclove.util.basePath + "ajax/getRecommand.xhtml?position=2";
+        var url = lclove.util.basePath + "ajax/getRecommand.xhtml?position=" + lclove.params.position;
         var imgTemplate = function(data){
             var sbHtml = new StringBuilder();
             sbHtml.append("<div class='recommend_item'>");

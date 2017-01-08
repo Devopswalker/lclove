@@ -60,6 +60,7 @@
 			lclove.params.keyword = '$!params.keyword';
 			lclove.params.navtype = '$!params.navtype';
 			lclove.params.pageNo = '$!params.pageNo';
+			lclove.params.position = '2';
 			
 			//固定头部导航
 			$("#myHeader").topMenu();

@@ -73,15 +73,12 @@ public class LcLoveAjaxController extends AnnotationController{
 	 * @return
 	 */
 	@RequestMapping("/ajax/getArticleList.xhtml")
-	public String getArticleList(Integer type, Integer pageNo, String keyword, ModelMap model){
-		if(type == null){
-			type = CommConstant.ARTICLE_TYPE_HOME;
-		}
+	public String getArticleList(Integer navtype, Integer pageNo, String keyword, ModelMap model){
 		if(pageNo == null){
 			pageNo = 1;
 		}
 		Integer rowsPerPage = 5;
-		List<Article> articleList = articleService.getAllArticles(pageNo, rowsPerPage, type, keyword);
+		List<Article> articleList = articleService.getAllArticles(pageNo, rowsPerPage, navtype, keyword);
 		PagingJsonVo page = new PagingJsonVo(articleList.size(), rowsPerPage, pageNo);
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		resultMap.put("articles", articleList);
@@ -110,7 +107,9 @@ public class LcLoveAjaxController extends AnnotationController{
 		resultMap.put("detail", article);
 		resultMap.put("comments", commentList);
 		resultMap.put("lastId", "");
+		resultMap.put("lastTitle", "");
 		resultMap.put("nextId", "");
+		resultMap.put("nextTitle", "");
 		return showJsonSuccess(model, JsonUtils.writeObjectToJson(resultMap));
 	}
 

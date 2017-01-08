@@ -502,6 +502,37 @@ li{
 	margin-top:20px;
 }
 
+/* for the love.html */
+.love_topic{
+	float:left;
+	width:100%;
+}
+
+.love_topic_head{
+	float:left;
+	width:100%;
+}
+
+.love_topic_head img{
+	float:left;
+	height:60px;
+	width:67px;
+}
+
+.love_topic_head div{
+	float:left;
+	line-height:60px;
+	margin-left:20px;
+	font-size:18px;
+	font-weight:bold;
+}
+
+.love_topic_desc_pic{
+	float:left;
+	margin-left:10px;
+	margin-top:20px;
+}
+
 /* for the special.html */
 .special_topic{
 	float:left;
