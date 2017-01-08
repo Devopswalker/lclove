@@ -34,9 +34,9 @@ public class UntransArticleService {
 //        return articleMapper.selectHomeArticle(startIndex, pageSize);
 //    }
 
-    public List<Article> getTopArticlesByType(Integer articleType){
-        Integer startIndex = 0;
-        Integer pageSize = 3;
-        return articleMapper.selectTopArticlesByType(articleType, startIndex, pageSize);
-    }
+//    public List<Article> getTopArticlesByType(Integer articleType){
+//        Integer startIndex = 0;
+//        Integer pageSize = 3;
+//        return articleMapper.selectTopArticlesByType(articleType, startIndex, pageSize);
+//    }
 }

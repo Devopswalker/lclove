@@ -55,7 +55,7 @@
     <if test="queryPara != null and queryPara.keywords != null">
       AND TITLE LIKE CONCAT(CONCAT("%",#{queryPara.keywords}),"%")
     </if>
-    order by id desc
+    order by PUB_DATE desc
     <include refid="Paging"/>
   </select>
   <select id="selectHomeArticle" resultMap="BaseResultMap">
@@ -68,13 +68,12 @@
   <select id="selectTopArticlesByType" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
-    from article
-    where WHERE 1=1
-    <if test="#{0} != null">
-      AND ARTICLE_TYPE = #{0}
+    from article WHERE 1=1
+    <if test="queryPara != null and queryPara.articleType != null">
+      AND ARTICLE_TYPE = #{queryPara.articleType}
     </if>
     order by SCAN_NUM desc
-    LIMIT #{1},#{2}
+    <include refid="Paging"/>
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from article

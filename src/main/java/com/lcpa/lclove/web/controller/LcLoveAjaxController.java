@@ -35,23 +35,23 @@ public class LcLoveAjaxController extends AnnotationController{
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping("/ajax/getRecommand.xhtml")
-	public String getRecommandList(Integer position, ModelMap model){
-		return showJsonSuccess(model,"");
-		/*if(position == null){
-			return showJsonError(model, "Position cant be empty!");
+	@RequestMapping("/ajax/getRecommend.xhtml")
+	public String getRecommendList(Integer position, ModelMap model){
+//		return showJsonSuccess(model,"");
+		if(position == null){
+			position = 1;
 		}
 		int pageSize = 3;
 		if(position == CommConstant.REC_TYPE_SLID){
 			pageSize = 5;
 		}
 		List<ImageRecommend> recommendList = recommendService.getRecommendImagesByPosition(position, pageSize);
-		return showJsonSuccess(model, JsonUtils.writeObjectToJson(recommendList));*/
+		return showJsonSuccess(model, JsonUtils.writeObjectToJson(recommendList));
 	}
 	
 	/**
 	 * Get Top six for Article
-	 * @param type(ref CommConstant.REC_TYPE_XX)
+	 * @param navtype(ref CommConstant.REC_TYPE_XX)
 	 * @param model
 	 * @return
 	 */
@@ -60,9 +60,9 @@ public class LcLoveAjaxController extends AnnotationController{
 		if(navtype == null){
 			navtype = CommConstant.ARTICLE_TYPE_HOME;
 		}
-		//List<Article> articleList = articleService.getTopRankArticlesByType(navtype);
-		//return showJsonSuccess(model, JsonUtils.writeObjectToJson(articleList));
-		return showJsonSuccess(model, "");
+		List<Article> articleList = articleService.getTopRankArticlesByType(navtype, 10);
+		return showJsonSuccess(model, JsonUtils.writeObjectToJson(articleList));
+//		return showJsonSuccess(model, "");
 	}
 
 	/**
@@ -75,7 +75,7 @@ public class LcLoveAjaxController extends AnnotationController{
 	 */
 	@RequestMapping("/ajax/getArticleList.xhtml")
 	public String getArticleList(Integer type, Integer pageNo, String keyword, ModelMap model){
-		if(type == null){//TODO type == null home page,不需要加 type
+		if(type == null){
 			type = CommConstant.ARTICLE_TYPE_HOME;
 		}
 		if(pageNo == null){
@@ -98,7 +98,7 @@ public class LcLoveAjaxController extends AnnotationController{
 	 * @return
 	 */
 	@RequestMapping("/ajax/getArticle.xhtml")
-	public String getArticleDetail(Integer id, ModelMap model){
+		public String getArticleDetail(Integer id, ModelMap model){
 		if(id == null){
 			return showJsonError(model, "资源未开放浏览");
 		}

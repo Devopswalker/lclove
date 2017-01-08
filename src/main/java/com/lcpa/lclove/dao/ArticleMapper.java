@@ -20,7 +20,7 @@ public interface ArticleMapper {
 
     List<Article> selectArticleByType(Integer articleType, Integer startIndex, Integer pageSize);
 
-    List<Article> selectTopArticlesByType(Integer articleType, Integer startIndex, Integer pageSize);
+    List<Article> selectTopArticlesByType(QueryParameter queryParameter);
 
     List<Article> selectArticlesByKeyWords(String searchText, Integer startIndex, Integer pageSize);
 

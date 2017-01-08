@@ -156,7 +156,7 @@ public class ArticleService{
             map.put("keywords", keywords);
         }
         Paging paging = new Paging(pageNo, pageSize);
-        QueryParameter queryParameter = new QueryParameter(paging,map);
+        QueryParameter queryParameter = new QueryParameter(paging, map);
         return articleMapper.selectAllArticles(queryParameter);
     }
 
@@ -193,10 +193,14 @@ public class ArticleService{
      * @param articleType  1：Spacial，2：Love，3：Body， null：所有（home页面）
      * @return
      */
-    public List<Article> getTopRankArticlesByType(Integer articleType, Integer size){
-        Integer startIndex = 0;
-        Integer pageSize = size;
-        return articleMapper.selectTopArticlesByType(articleType, startIndex, pageSize);
+    public List<Article> getTopRankArticlesByType(Integer articleType, Integer pageSize){
+        Map map = new HashMap<>();
+        if (articleType != null && articleType != 1){
+            map.put("articleType", articleType);
+        }
+        Paging paging = new Paging(1, pageSize);
+        QueryParameter queryParameter = new QueryParameter(paging, map);
+        return articleMapper.selectTopArticlesByType(queryParameter);
     }
 
 }

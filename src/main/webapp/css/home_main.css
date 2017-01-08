@@ -657,7 +657,7 @@ li{
 
 .row_3_love{
 	position:absolute;
-	z-index::100;
+	z-index:100;
 	top:790px;
 	right:0;
 }

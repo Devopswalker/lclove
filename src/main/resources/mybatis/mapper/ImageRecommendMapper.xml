@@ -30,7 +30,7 @@
     <if test="queryPara != null and queryPara.position != null">
       WHERE POSITION = #{queryPara.position}
     </if>
-    order by id desc
+    order by SEQ ASC
     <include refid="Paging"/>
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
