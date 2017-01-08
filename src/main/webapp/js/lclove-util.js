@@ -449,10 +449,16 @@ $(function(){
         	}else{
         		$(".carousel").append(defaultTemplate());
         	}
+        	(function() {
+        		var hm = document.createElement("script");
+        		hm.src = lclove.util.imgPath + "js/pintuer.js";
+        		var s = document.getElementsByTagName("script")[0]; 
+        		s.parentNode.insertBefore(hm, s);
+        	})();
         };
         //instanceObject();
-        fillData();
-        //$.getData(url, null, true, "POST", "json", true, fillData);
+        //fillData();
+        $.getData(url, null, true, "POST", "json", true, fillData);
     };
 
     $.fn.loadBanner = function(options) {

@@ -130,6 +130,11 @@ li{
 	z-index:-1;
 }
 
+.item img{
+	width: 590px;
+	height: 209px;
+}
+
 .banner_item{
 	float:left;
 	width:590px;
