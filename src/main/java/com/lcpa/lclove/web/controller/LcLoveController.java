@@ -9,7 +9,7 @@ public class LcLoveController extends AnnotationController{
 	
 	
 	/*恋の首页*/
-	@RequestMapping("/index.xhtml")
+	@RequestMapping("/index")
 	public String initIndex(){
 		return "lclove/index.vm";
 	}

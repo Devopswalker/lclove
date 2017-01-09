@@ -33,6 +33,10 @@
         <url-pattern>/</url-pattern>
     </servlet-mapping>
 
+    <servlet-mapping>
+        <servlet-name>springMVC</servlet-name>
+        <url-pattern>/index</url-pattern><!-- 必须 -->
+    </servlet-mapping>
     <!-- 字符集过滤器 -->
     <filter>
         <filter-name>encodingFilter</filter-name>
@@ -150,7 +154,7 @@
     </error-page>
 
     <welcome-file-list>
-        <welcome-file>/index.jsp</welcome-file>
+        <welcome-file>index</welcome-file>
     </welcome-file-list>
 
 </web-app>
