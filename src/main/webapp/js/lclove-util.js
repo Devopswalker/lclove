@@ -223,7 +223,6 @@ $.extend({
             sbHtml.append("            <li><div class='normal_nav' onClick='navClick(4)'>恋の护身符</div><div class='icon_name' onClick='navClick(4)'>Body</div></li>");
             sbHtml.append("            <li><div class='normal_nav' onClick='navClick(5)'>恋の好奇心</div><div class='icon_name' onClick='navClick(5)'>Research</div></li>");
             sbHtml.append("            <li><div class='normal_nav' onClick='navClick(6)'>恋の梦剧场</div><div class='icon_name' onClick='navClick(6)'>Comic</div></li>");
-            sbHtml.append("            <li><div class='normal_nav' onClick='navClick(7)'>恋の上上签</div><div class='icon_name' onClick='navClick(7)'>Pray</div></li>");
             sbHtml.append("            <li><img src='" + lclove.util.imgPath + "images/img_omamori.png'/></li>");
             sbHtml.append("        </ul>");
             sbHtml.append("    </div>");
@@ -609,13 +608,19 @@ $(function(){
             sbHtml.append("  <div class='row_1'><div class='row_1_left'><img src='"+lclove.util.imgPath+"images/text_head_icon.png'/><div>"+data.title+"/div></div><div class='row_1_right'>"+data.topic+"</div></div>");
             sbHtml.append("  <div class='row_2'>"+data.pubDate+" | 小编："+data.editor+"</div>");
             sbHtml.append("  <div class='row_3'>");
+            sbHtml.append(data.content);
+            
             
             
             sbHtml.append("  </div>");
             sbHtml.append("</div>");
-            $(".article_content").append($(sbHtml.toString()));
+            return $(sbHtml.toString());
         };
-        $.getData(url, null, true, "POST", "json", showContent);
+        
+        var initContent = function(data){
+            $(".article_content").append(showContent(data));
+        };
+        $.getData(url, null, true, "POST", "json", initContent);
     };
     $.fn.ArticleContent = function(options) {
         return this.each(function () {

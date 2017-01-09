@@ -65,6 +65,8 @@
 			<!-- TOP 6-->
 			$(".hot_article").topShow();
 			
+			$(".article_content").ArticleContent();
+			
 			//固定页尾
 			$("body").footerModule();
 			

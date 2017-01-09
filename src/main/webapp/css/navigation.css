@@ -9,12 +9,13 @@
 
 .navigation ul{
 	float:left;
-	margin-left:-20px;
+	margin-left:10px;
 	margin-top: 10px;
 }
 
 .navigation ul li{
 	float:left;	
+	margin-left:10px;
 }
 
 .home_nav_icon{
