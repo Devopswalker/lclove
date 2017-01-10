@@ -165,4 +165,14 @@
       DOWN_NUM = #{downNum,jdbcType=INTEGER}
     where ID = #{id,jdbcType=INTEGER}
   </update>
+  <update id="increaseUpNum">
+    update article
+    set SCAN_NUM = UP_NUM + 1
+    where ID = #{0}
+  </update>
+  <update id="increaseDownNum">
+    update article
+    set SCAN_NUM = DOWN_NUM + 1
+    where ID = #{0}
+  </update>
 </mapper>

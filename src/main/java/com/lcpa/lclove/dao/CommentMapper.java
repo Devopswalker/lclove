@@ -19,4 +19,8 @@ public interface CommentMapper {
     int updateByPrimaryKey(Comment record);
 
     List<Comment> selectAllComments(QueryParameter queryParameter);
+
+    void increaseUpNum(Integer id);
+
+    void increaseDownNum(Integer id);
 }
