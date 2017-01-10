@@ -268,8 +268,8 @@ $(function(){
             $(instance).append($(sbHtml.toString()));
             $(".searchButton").on("click", function(){
             	//筛选条件
-            	var keywrod = $(".search_bar").val();
-            	var filterUrl =  lclove.util.basePath + "ajax/getArticleList.xhtml?keywrod=" + keywrod;
+            	var keyword = $(".search_bar").val();
+            	var filterUrl =  lclove.util.basePath + "ajax/getArticleList.xhtml?keyword=" + keyword+"&navtype="+lclove.params.navtype;
             	refreshPage(filterUrl);
             });
         };        
@@ -417,7 +417,7 @@ $(function(){
         var imgTemplate = function(data){
             var sbHtml = new StringBuilder();
             sbHtml.append("<div class='item'>");
-            sbHtml.append("  <a href='" + data.recommendUrl + "'><img src='" + data.imgUrl + "'/></a>");
+            sbHtml.append("  <a target='_blank' href='" + data.recommendUrl + "'><img src='" + data.imgUrl + "'/></a>");
             sbHtml.append("</div>");
             return $(sbHtml.toString());
         };
@@ -477,7 +477,7 @@ $(function(){
     var eContentList = function(options,object) {
         var opts = $.extend({}, $.fn.contentList.defaults, options);
         var instance = object;
-        var url = lclove.util.basePath + "ajax/getArticleList.xhtml?type="+lclove.params.navtype;
+        var url = lclove.util.basePath + "ajax/getArticleList.xhtml?navtype="+lclove.params.navtype;
         var itemTemplate = function(data){
             var sbHtml = new StringBuilder();
             sbHtml.append("<div class='content_item'>");
@@ -605,10 +605,10 @@ $(function(){
             sbHtml.append("</div>");
             sbHtml.append("<div class='separate'></div>");
             sbHtml.append("<div class='article_content_body'>");
-            sbHtml.append("  <div class='row_1'><div class='row_1_left'><img src='"+lclove.util.imgPath+"images/text_head_icon.png'/><div>"+data.title+"/div></div><div class='row_1_right'>"+data.topic+"</div></div>");
-            sbHtml.append("  <div class='row_2'>"+data.pubDate+" | 小编："+data.editor+"</div>");
+            sbHtml.append("  <div class='row_1'><div class='row_1_left'><img src='"+lclove.util.imgPath+"images/text_head_icon.png'/><div>"+data.detail.title+"</div></div><div class='row_1_right'>"+data.detail.topic+"</div></div>");
+            sbHtml.append("  <div class='row_2'>"+data.detail.pubDate+" | 小编："+data.detail.editor+"</div>");
             sbHtml.append("  <div class='row_3'>");
-            sbHtml.append(data.content);
+            sbHtml.append(data.detail.content);
             
             
             
@@ -620,7 +620,7 @@ $(function(){
         var initContent = function(data){
             $(".article_content").append(showContent(data));
         };
-        $.getData(url, null, true, "POST", "json", initContent);
+        $.getData(url, null, true, "POST", "json",true, initContent);
     };
     $.fn.ArticleContent = function(options) {
         return this.each(function () {
