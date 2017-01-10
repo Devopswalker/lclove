@@ -1,6 +1,9 @@
 package com.lcpa.lclove.dao;
 
 import com.lcpa.lclove.model.Comment;
+import com.lcpa.lclove.vo.QueryParameter;
+
+import java.util.List;
 
 public interface CommentMapper {
     int deleteByPrimaryKey(Integer id);
@@ -14,4 +17,6 @@ public interface CommentMapper {
     int updateByPrimaryKeySelective(Comment record);
 
     int updateByPrimaryKey(Comment record);
+
+    List<Comment> selectAllComments(QueryParameter queryParameter);
 }

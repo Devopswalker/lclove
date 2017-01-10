@@ -12,9 +12,7 @@ import com.lcpa.lclove.vo.QueryParameter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by shao on 2016/12/5.
@@ -93,6 +91,48 @@ public class ArticleService{
         ArticleContent articleContent = articleContentMapper.selectByPrimaryKey(id);
         article.setContent(articleContent.getContent());
         return article;
+    }
+
+    public Article getLastArticle(Article article, Integer sortType){
+        List<Article> articles;
+        Article result = null;
+        if (sortType == 1){//sort by pub_date
+            articles = articleMapper.selectLastByPubDate(article);
+        }else if (sortType == 2){//sort by scan_num
+            articles = articleMapper.selectLastByScanNum(article);
+        }else{
+            articles = new ArrayList<>();
+        }
+        if (!articles.isEmpty()){
+            for (int i = 0; i < articles.size(); i ++){
+                Article temp = articles.get(i);
+                if (temp.getId() == article.getId() && i > 0){
+                    result = articles.get(i-1);
+                }
+            }
+        }
+        return result;
+
+    }
+    public Article getNextArticle(Article article, Integer sortType){
+        List<Article> articles;
+        Article result = null;
+        if (sortType == 1){//sort by pub_date
+            articles = articleMapper.selectNextByPubDate(article);
+        }else if (sortType == 2){//sort by scan_num
+            articles = articleMapper.selectNextByScanNum(article);
+        }else{
+            articles = new ArrayList<>();
+        }
+        if (!articles.isEmpty()){
+            for (int i = 0; i < articles.size(); i ++){
+                Article temp = articles.get(i);
+                if (temp.getId() == article.getId() && i < articles.size()-1){
+                    result = articles.get(i+1);
+                }
+            }
+        }
+        return result;
     }
 
     /**

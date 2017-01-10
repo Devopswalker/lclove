@@ -75,6 +75,42 @@
     order by SCAN_NUM desc
     <include refid="Paging"/>
   </select>
+  <select id="selectLastByPubDate" resultMap="BaseResultMap" parameterType="com.lcpa.lclove.model.Article">
+    select
+    <include refid="Base_Column_List" />
+    from article WHERE PUB_DATE &gt;= #{pubDate,jdbcType=TIMESTAMP}
+    <if test="articleType != null">
+      AND ARTICLE_TYPE = #{articleType,jdbcType=INTEGER}
+    </if>
+    ORDER BY PUB_DATE DESC
+  </select>
+  <select id="selectLastByScanNum" resultMap="BaseResultMap" parameterType="com.lcpa.lclove.model.Article">
+    select
+    <include refid="Base_Column_List" />
+    from article WHERE SCAN_NUM &gt;= #{scanNum,jdbcType=INTEGER}
+    <if test="articleType != null">
+      AND ARTICLE_TYPE = #{articleType,jdbcType=INTEGER}
+    </if>
+    ORDER BY SCAN_NUM DESC
+  </select>
+  <select id="selectNextByPubDate" resultMap="BaseResultMap" parameterType="com.lcpa.lclove.model.Article">
+    select
+    <include refid="Base_Column_List" />
+    from article WHERE PUB_DATE &lt;= #{pubDate,jdbcType=TIMESTAMP}
+    <if test="articleType != null">
+      AND ARTICLE_TYPE = #{articleType,jdbcType=INTEGER}
+    </if>
+    ORDER BY PUB_DATE DESC
+  </select>
+  <select id="selectNextByScanNum" resultMap="BaseResultMap" parameterType="com.lcpa.lclove.model.Article">
+    select
+    <include refid="Base_Column_List" />
+    from article WHERE SCAN_NUM &lt;= #{scanNum,jdbcType=TIMESTAMP}
+    <if test="articleType != null">
+      AND ARTICLE_TYPE = #{articleType,jdbcType=INTEGER}
+    </if>
+    ORDER BY SCAN_NUM DESC
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from article
     where ID = #{id,jdbcType=INTEGER}

@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.lcpa.lclove.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -28,6 +29,9 @@ public class LcLoveAjaxController extends AnnotationController{
 	
 	@Autowired
 	private RecommendService recommendService;
+
+	@Autowired
+	private CommentService commentService;
 	
 	/**
 	 * Get Recommand dataList
@@ -94,7 +98,7 @@ public class LcLoveAjaxController extends AnnotationController{
 	 * @return
 	 */
 	@RequestMapping("/ajax/getArticle.xhtml")
-		public String getArticleDetail(Integer aid, ModelMap model){
+		public String getArticleDetail(Integer aid, ModelMap model, Integer sortType, Integer navtype){
 		if(aid == null){
 			return showJsonError(model, "资源未开放浏览");
 		}
@@ -103,13 +107,22 @@ public class LcLoveAjaxController extends AnnotationController{
 			return showJsonError(model, "资源未开放浏览");
 		}
 		Map<String, Object> resultMap = new HashMap<String, Object>();
-		List<Comment> commentList = new ArrayList<Comment>(); 
+		Article queryArticle = new Article();
+		queryArticle.setId(article.getId());
+		queryArticle.setArticleType(navtype);
+		queryArticle.setPubDate(article.getPubDate());
+		queryArticle.setScanNum(article.getScanNum());
+
+		Article lastArticle = articleService.getLastArticle(queryArticle, sortType);
+		Article nextArticle = articleService.getNextArticle(queryArticle, sortType);
+		List<Comment> commentList = commentService.getCommentList(1, 10, aid);
 		resultMap.put("detail", article);
 		resultMap.put("comments", commentList);
-		resultMap.put("lastId", "");
+		resultMap.put("lastArticle", lastArticle);
 		resultMap.put("lastTitle", "");
-		resultMap.put("nextId", "");
+		resultMap.put("nextArticle", nextArticle);
 		resultMap.put("nextTitle", "");
+		resultMap.put("sortType", sortType);
 		return showJsonSuccess(model, JsonUtils.writeObjectToJson(resultMap));
 	}
 

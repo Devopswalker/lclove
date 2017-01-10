@@ -31,4 +31,12 @@ public interface ArticleMapper {
     int updateByPrimaryKey(Article record);
 
     void updateScanNum(Integer id);
+
+    List<Article> selectLastByPubDate(Article currentArticle);
+
+    List<Article> selectLastByScanNum(Article currentArticle);
+
+    List<Article> selectNextByPubDate(Article currentArticle);
+
+    List<Article> selectNextByScanNum(Article currentArticle);
 }
