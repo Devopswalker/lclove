@@ -605,7 +605,12 @@ $(function(){
             sbHtml.append("</div>");
             sbHtml.append("<div class='separate'></div>");
             sbHtml.append("<div class='article_content_body'>");
-            sbHtml.append("  <div class='row_1'><div class='row_1_left'><img src='"+lclove.util.imgPath+"images/text_head_icon.png'/><div>"+data.detail.title+"</div></div><div class='row_1_right'>"+data.detail.topic+"</div></div>");
+            sbHtml.append("  <div class='row_1'>");
+            sbHtml.append("  	<div class='row_1_left'>");
+            sbHtml.append("  		<img src='"+lclove.util.imgPath+"images/text_head_icon.png'/>");
+            sbHtml.append("  	</div>");
+            sbHtml.append("  	<div>"+data.detail.title+"</div></div><div class='row_1_right'>"+data.detail.topic+"</div>");
+            sbHtml.append("  </div>");
             sbHtml.append("  <div class='row_2'>"+data.detail.pubDate+" | 小编："+data.detail.editor+"</div>");
             sbHtml.append("  <div class='row_3'>");
             sbHtml.append(data.detail.content);
@@ -620,7 +625,7 @@ $(function(){
         var initContent = function(data){
             $(".article_content").append(showContent(data));
         };
-        $.getData(url, null, true, "POST", "json",true, initContent);
+        $.getData(url, null, true, "POST", "json", true, initContent);
     };
     $.fn.ArticleContent = function(options) {
         return this.each(function () {
@@ -630,7 +635,6 @@ $(function(){
 
     $.fn.ArticleContent.defaults = {};
 });
-
 
 /*  Footer  */
 ;(function($){
