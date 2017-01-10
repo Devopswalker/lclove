@@ -605,15 +605,15 @@ $(function(){
 
             if (data.lastArticle != null){
                 var lastUrl = lclove.util.basePath + "detail.xhtml?sortType="+lclove.params.sortType+"&aid=" + data.lastArticle.id +"&navtype="+lclove.params.navtype;
-                sbHtml.append("  <div class='head_left'><a href='"+lastUrl+"'>上一篇：</a></div>");
+                sbHtml.append("  <div class='head_left'><a href='"+lastUrl+"'>上一篇："+data.lastArticle.title+"</a></div>");
             }else{
-                sbHtml.append("  <div class='head_left'>上一篇：</div>");
+                //sbHtml.append("  <div class='head_left'>上一篇："+data.lastArticle.title+"</div>");
             }
             if (data.nextArticle != null){
                 var nextUrl = lclove.util.basePath + "detail.xhtml?sortType="+lclove.params.sortType+"&aid=" + data.nextArticle.id +"&navtype="+lclove.params.navtype;
-                sbHtml.append("  <div class='head_right'><a href='"+nextUrl+"'>下一篇：</a></div>");
+                sbHtml.append("  <div class='head_right'><a href='"+nextUrl+"'>下一篇："+data.nextArticle.title+"</a></div>");
             }else{
-                sbHtml.append("  <div class='head_right'>下一篇：</div>");
+                //sbHtml.append("  <div class='head_right'>下一篇："+data.nextArticle.title+"</div>");
             }
             sbHtml.append("</div>");
             sbHtml.append("<div class='separate'></div>");
@@ -621,8 +621,8 @@ $(function(){
             sbHtml.append("  <div class='row_1'>");
             sbHtml.append("  	<div class='row_1_left'>");
             sbHtml.append("  		<img src='"+lclove.util.imgPath+"images/text_head_icon.png'/>");
-            sbHtml.append("  	</div>");
-            sbHtml.append("  	<div>"+data.detail.title+"</div></div><div class='row_1_right'>"+data.detail.topic+"</div>");
+            sbHtml.append("  	<div>"+data.detail.title+"</div></div>");
+            sbHtml.append("  	<div class='row_1_right'>"+data.detail.topic+"</div>");
             sbHtml.append("  </div>");
             sbHtml.append("  <div class='row_2'>"+data.detail.pubDate+" | 小编："+data.detail.editor+"</div>");
             sbHtml.append("  <div class='row_3'>");
