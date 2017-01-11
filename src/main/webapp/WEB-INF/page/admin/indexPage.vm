@@ -52,6 +52,7 @@
 			<li><a href="${basePath}admin/article/typeList.xhtml" target="right"><span class="icon-caret-right"></span>分类管理</a></li>
 			<li><a href="${basePath}admin/article/articleList.xhtml" target="right"><span class="icon-caret-right"></span>内容管理</a></li>
 			<li><a href="${basePath}admin/research/researchList.xhtml" target="right"><span class="icon-caret-right"></span>调查问答</a></li>
+            <li><a href="${basePath}admin/comic/comicList.xhtml" target="right"><span class="icon-caret-right"></span>Commic</a></li>
 		</ul>
 	</div>
 	<script type="text/javascript">

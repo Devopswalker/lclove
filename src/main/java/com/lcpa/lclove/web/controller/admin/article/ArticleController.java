@@ -155,5 +155,30 @@ public class ArticleController extends AnnotationController{
 		model.put("questionTypes", questionTypes);
 		return "admin/research/editResearch.vm";
 	}
+
+	@RequestMapping(value = "/admin/comic/comicList.xhtml")
+	public String comicList(Integer pageNo, ModelMap model) {
+//		if(pageNo == null){
+//			pageNo = 1;
+//		}
+//		Integer pageSize = 10;
+//		List<Survey> surveys = surveyService.getSurveyList(pageNo, 10);
+//		Paging paging = surveyService.getSurveyPaging(pageNo, pageSize);
+//		model.put("paging", paging);
+//		model.put("surveys", surveys);
+		return "admin/comic/comicList.vm";
+	}
+
+	@RequestMapping(value = "/admin/comic/editComic.xhtml")
+	public String editComic(Integer id, ModelMap model){
+//		Survey survey = null;
+//		if (id != null){
+//			survey = surveyService.getSurveyDetailById(id);
+//		}
+//		List<QuestionInputType> questionTypes = surveyService.getAllQuestionInputType();
+//		model.put("survey", survey);
+//		model.put("questionTypes", questionTypes);
+		return "admin/comic/editComic.vm";
+	}
 }
  
