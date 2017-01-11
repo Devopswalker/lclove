@@ -657,17 +657,6 @@ $(function(){
 
         var renderFooter = function(data){
             var sbHtml = new StringBuilder();
-            /*sbHtml.append("<div class='newFooter'>");
-            sbHtml.append("<div class='footerW1000'>");
-            sbHtml.append("<ul class='fLeft footerNav'>");
-            sbHtml.append(" <li><a href=''>关于恋猫</a></li>");
-            sbHtml.append(" <li><a href=''>关于LC品爱</a></li>");
-            sbHtml.append(" <li><a href=''>转载声明</a></li>");
-            sbHtml.append(" <li><a href='http://www.beianbeian.com/beianxinxi/a89c1924-5c86-4846-a79b-261aaea5527e.html'>ICP备案信息</a></li>");
-            sbHtml.append("</ul>");
-            sbHtml.append("<p class='fRight'>© 2018 恋猫 www.lclianmao.com. 沪ICP备10200855号-5</p>");
-            sbHtml.append("</div>");
-            sbHtml.append("</div>");*/
             sbHtml.append("<div class='layout bg-black bg-inverse'>");
     		sbHtml.append("	<div class='container'>");
     		sbHtml.append("		<div class='navbar'>");
