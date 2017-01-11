@@ -649,6 +649,25 @@ $(function(){
     $.fn.ArticleContent.defaults = {};
 });
 
+/*  Comment  */
+$(function(){
+    var eComment = function(options,object) {
+        var opts = $.extend({}, $.fn.renderComment.defaults, options);
+        var instance = object;
+        var url = lclove.util.basePath + "ajax/getArticle.xhtml?sortType="+lclove.params.sortType+"&aid=" + lclove.params.aid +"&navtype="+lclove.params.navtype;
+     
+        //$.getData(url, null, true, "POST", "json", true, initContent);
+    };
+    $.fn.renderComment = function(options) {
+        return this.each(function () {
+            return eComment(options, $(this));
+        });
+    };
+
+    $.fn.renderComment.defaults = {};
+});
+/*  Comment  */
+
 /*  Footer  */
 ;(function($){
     var eFooter = function(options,object) {
