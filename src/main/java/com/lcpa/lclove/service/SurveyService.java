@@ -1,16 +1,19 @@
 package com.lcpa.lclove.service;
 
+import com.lcpa.lclove.dao.QuestionInputTypeMapper;
 import com.lcpa.lclove.dao.QuestionMapper;
 import com.lcpa.lclove.dao.QuestionOptionMapper;
 import com.lcpa.lclove.dao.SurveyMapper;
-import com.lcpa.lclove.model.Question;
-import com.lcpa.lclove.model.QuestionOption;
-import com.lcpa.lclove.model.Survey;
+import com.lcpa.lclove.model.*;
+import com.lcpa.lclove.vo.Paging;
+import com.lcpa.lclove.vo.QueryParameter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by shaoheng.huang on 2016/12/14.
@@ -24,6 +27,9 @@ public class SurveyService {
     @Autowired QuestionMapper questionMapper;
 
     @Autowired QuestionOptionMapper questionOptionMapper;
+
+    @Autowired
+    private QuestionInputTypeMapper questionInputTypeMapper;
 
 
     public void saveSurvey(Survey survey){
@@ -53,7 +59,7 @@ public class SurveyService {
         questionOptionMapper.deleteBySurveyId(survey.getId());
     }
 
-    public Survey getSurveyById(Integer id){
+    public Survey getSurveyDetailById(Integer id){
         Survey survey = surveyMapper.selectByPrimaryKey(id);
 
         List<Question> questions = questionMapper.selectSurveyId(id);
@@ -64,5 +70,28 @@ public class SurveyService {
         }
         survey.setQuestions(questions);
         return survey;
+    }
+
+    public List<Survey>  getSurveyList(Integer pageNo, Integer pageSize){
+        Paging paging = new Paging(pageNo, pageSize);
+        QueryParameter queryParameter = new QueryParameter(paging, null);
+        return surveyMapper.selectSurveyList(queryParameter);
+    }
+    public Paging getSurveyPaging(Integer pageNo, Integer pageSize){
+        QueryParameter queryParameter = new QueryParameter(null,null);
+        List<Survey> surveys = surveyMapper.selectSurveyList(queryParameter);
+        int totalSize = surveys.size();
+        int total = totalSize/pageSize;
+        int lastPages = totalSize%pageSize;
+        if (lastPages > 0){
+            total += 1;
+        }
+        Paging paging = new Paging(pageNo, pageSize);
+        paging.setTotal(total);
+        return paging;
+    }
+
+    public List<QuestionInputType> getAllQuestionInputType(){
+        return questionInputTypeMapper.selectAll();
     }
 }

@@ -2,6 +2,8 @@ package com.lcpa.lclove.dao;
 
 import com.lcpa.lclove.model.QuestionInputType;
 
+import java.util.List;
+
 public interface QuestionInputTypeMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -14,4 +16,6 @@ public interface QuestionInputTypeMapper {
     int updateByPrimaryKeySelective(QuestionInputType record);
 
     int updateByPrimaryKey(QuestionInputType record);
+
+    List<QuestionInputType> selectAll();
 }

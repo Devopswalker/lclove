@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="renderer" content="webkit">
+    <title></title>
+    <link rel="stylesheet" href="${staticPath}css/pintuer.css">
+    <link rel="stylesheet" href="${staticPath}css/admin/admin.css">
+    <script src="${staticPath}js/jquery.js"></script>
+    <script src="${staticPath}js/pintuer.js"></script>
+    <script src="${staticPath}js/plugins/layer/laydate/laydate.js"></script>
+    <script src="${staticPath}js/plugins/ueditor/ueditor.config.js"></script>
+    <script src="${staticPath}js/plugins/ueditor/ueditor.all.min.js"></script>
+    <script src="${staticPath}js/plugins/ueditor/lang/zh-cn/zh-cn.js"></script>
+    <script src="${staticPath}js/lclove-util.js"></script>
+</head>
+<body>
+<div class="panel admin-panel">
+    <div class="panel-head" id="add"><strong><span class="icon-pencil-square-o"></span>增加内容</strong></div>
+    <div class="body-content">
+        <form method="post" class="form-x" action="${basePath}admin/recommend/saveRecommend.xhtml">
+            <input type="hidden" id="id" name="id" value="$!imageRecommend.id"/>
+            <div class="form-group">
+                <div class="label">
+                    <label>标题：</label>
+                </div>
+                <div class="field">
+                    <input type="text" class="input w50" id="seq" name="seq" value="$!imageRecommend.seq" data-validate="required:请输入问卷调查标题" />
+                    <div class="tips"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="label">
+                    <label>主题：</label>
+                </div>
+                <div class="field">
+                    <input type="text" class="input w50" id="description" name="description" value="$!imageRecommend.description" data-validate="required:请输入描述" />
+                    <div class="tips"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="label">
+                    <label>描述：</label>
+                </div>
+                <div class="field">
+                    <input type="text" class="input w50" id="seq" name="seq" value="$!imageRecommend.seq" data-validate="required:请输入问卷描述" />
+                    <div class="tips"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="label">
+                    <label>开始日期：</label>
+                </div>
+                <div class="field">
+                    <input type="text" class="laydate-icon input w50" id="pubDate" name="pubDate" onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})" value="$!DateUtil.formatTimestamp($!article.pubDate)"  data-validate="required:发布时间不能为空" style="padding:10px!important; height:auto!important;border:1px solid #ddd!important;" />
+                    <div class="tips"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="label">
+                    <label>结束日期：</label>
+                </div>
+                <div class="field">
+                    <input type="text" class="laydate-icon input w50" id="pubDate" name="pubDate" onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})" value="$!DateUtil.formatTimestamp($!article.pubDate)"  data-validate="required:发布时间不能为空" style="padding:10px!important; height:auto!important;border:1px solid #ddd!important;" />
+                    <div class="tips"></div>
+                </div>
+            </div>
+            <div class="form-group" id="questionContent">
+                <div class="label">
+                    <label>问卷调查问题：</label>
+                </div>
+                <span class="button bg-main icon-plus" onclick="addQeustion()"/>
+            </div>
+            <div id="questions">
+
+            </div>
+            <div class="clear"></div>
+            <div class="form-group">
+                <div class="label">
+                    <label></label>
+                </div>
+                <div class="field">
+                    <button class="button bg-main icon-check-square-o" type="submit"> 提交</button>
+                    <a class="button bg-main icon-backward" href="${basePath}admin/recommend/recommendList.xhtml"> 取消</a>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div id="questionTemp" hidden>
+        <div class="form-group" name="question">
+            <div class="label">
+                <label name="questionSeq"></label>
+            </div>
+            <div class="field">
+                <input type="text" class="input w50" data-validate="required:请输入问题" />
+                <select  class="input w50" >
+                    #foreach($questionType in $questionTypes)
+                        <option value="$questionType.id" #if($VmUtils.eq($questionType.id, $survey.questionType))selected#end>$questionType.type</option>
+                    #end
+                </select>
+                <button class="button bg-main icon-plus" onclick="addQeustionOption(event)"/>
+                <button class="button bg-main icon-times" onclick="removeQuestion()"/>
+                <div class="tips"></div>
+            </div>
+        </div>
+    </div>
+    <div id="inputOptionTemp" hidden>
+        <div class="form-group" name="question">
+            <div class="label">
+                <label></label>
+            </div>
+            <div class="field">
+                <input type="text" class="input w50" data-validate="required:请输入答案" />
+                <button class="button bg-main icon-times" onclick="removeOption()"/>
+            </div>
+
+        </div>
+    </div>
+    <div id="radioBtnOptionTemp" hidden>
+        <div class="form-group" name="question">
+            <div class="label">
+                <input type="radio" />
+            </div>
+            <div class="field">
+                <input type="text" class="input w50" data-validate="required:请输入xx" />
+                <button class="button bg-main icon-times" onclick="removeOption()"/>
+            </div>
+
+        </div>
+    </div>
+    <div id="checkBoxBtnOptionTemp" hidden>
+        <div class="form-group" name="question">
+            <div class="label">
+                <input type="checkbox" />
+            </div>
+            <div class="field">
+                <input type="text" class="input w50" data-validate="required:请输入xx" />
+                <button class="button bg-main icon-times" onclick="removeOption()"/>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<script type="text/javascript">
+   function addQeustion(){
+       var questionTemp = $("#questionTemp").clone(true).removeAttr("hidden").html();
+       $("#questions").append(questionTemp)
+   }
+    function addQeustionOption(event){
+        var target = event.target;
+        var selectVal = $(target).prev().val();
+        var parentEle = $(target).parents(".form-group");
+        var optionEle;
+        if (selectVal == 1){
+            optionEle = $("#inputOptionTemp").clone(true).removeAttr("hidden").html();
+        }else if (selectVal == 2){
+            optionEle = $("#radioBtnOptionTemp").clone(true).removeAttr("hidden").html();
+        }else if (selectVal == 3){
+            optionEle = $("#checkBoxBtnOptionTemp").clone(true).removeAttr("hidden").html();
+        }
+        $(parentEle).append(optionEle)
+    }
+    function removeQuestion(){
+        var target = event.target;
+        var parentEle = $(target).closest(".form-group");
+        $(parentEle).remove();
+    }
+   function removeOption(){
+       var target = event.target;
+       var parentEle = $(target).closest(".form-group");
+       $(parentEle).remove();
+   }
+</script>
+
+</body>
+</html>
