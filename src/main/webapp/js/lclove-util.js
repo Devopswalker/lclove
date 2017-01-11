@@ -616,7 +616,7 @@ $(function(){
                 //sbHtml.append("  <div class='head_right'>下一篇："+data.nextArticle.title+"</div>");
             }
             sbHtml.append("</div>");
-            sbHtml.append("<div class='separate'></div>");
+            sbHtml.append("<div class='article_separate'></div>");
             sbHtml.append("<div class='article_content_body'>");
             sbHtml.append("  <div class='row_1'>");
             sbHtml.append("  	<div class='row_1_left'>");
