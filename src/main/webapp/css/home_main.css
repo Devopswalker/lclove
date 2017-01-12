@@ -834,6 +834,21 @@ li{
 	float:left;
 }
 
+._blanklist{
+	height:18px;
+	float:left;
+	line-height:18px;
+	width:100%;
+	margin-top:10px;
+}
+._blanklist img{
+	float:left;
+}
+
+._blanklist div{
+	float:left;
+}
+
 .publish{
 	float:left;
 	width:100%;
