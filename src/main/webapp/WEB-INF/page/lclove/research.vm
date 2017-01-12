@@ -22,37 +22,93 @@
 		<div id="myHeader"></div>
 		<!-- 固定头部导航 -->
 		
-		<!-- 图片轮播  -->
-		<div class="banner"></div>
-		<!-- 图片轮播  -->
-		
-		<!-- 通用搜索 -->
-		<div class="search"></div>
-		<!-- 通用搜索-->
-		
-		<!-- 六个推荐文章 -->
-		<div class="case"></div>
-		<!-- 六个推荐文章-->
-		
-		<!-- 文章列表 -->
-		<div class="article"></div>
-		<!-- 文章列表-->
+		<!-- 答题详情 -->
+		<div class="wrap_content clear">
+			<div class="content_left">
+				<!-- 详情 LEFT: 内容详情 -->
+				<div class="search_info">
+				<div class="search_head"><img src="${staticPath}images/text_head_icon.png"/><div>在线调研 No.1 他心里到底在想什么？</div></div>
+				<img width='550' height='60' class='radius-small' src="${staticPath}images/dy_06.png"/>
+				<div class="smallest_blank"></div>
+				<div id="singleChoose1" class="single_choose">
+					<div class="choose_topic">1.你日常是否经常使用护肤品？（单选）</div>
+					<div class="single_choose_item"><input name="frequence" type="radio" value="" /><div>每天使用</div></div>
+					<div class="single_choose_item"><input name="frequence" type="radio" value="" /><div>经常使用</div></div>
+					<div class="single_choose_item"><input name="frequence" type="radio" value="" /><div>偶尔使用</div></div>
+					<div class="single_choose_item"><input name="frequence" type="radio" value="" /><div>从不使用</div></div>
+					<div class="mini_blank"></div>
+					<div class="choose_topic">1.你日常是否经常使用护肤品？（单选）</div>
+					<div class="single_choose_item"><input name="frequence" type="radio" value="" /><div>每天使用</div></div>
+					<div class="single_choose_item"><input name="frequence" type="radio" value="" /><div>经常使用</div></div>
+					<div class="single_choose_item"><input name="frequence" type="radio" value="" /><div>偶尔使用</div></div>
+					<div class="single_choose_item"><input name="frequence" type="radio" value="" /><div>从不使用</div></div>
+				</div>
+				<div class="mini_blank"></div>
+				<div id="singleChoose2" class="single_choose">
+					<div class="choose_topic">2.你现在使用的护肤品是？（单选）</div>
+					<div class="single_choose_item"><input name="now_use" type="radio" value="" /><div>一个牌子的全套产品</div></div>
+					<div class="single_choose_item"><input name="now_use" type="radio" value="" /><div>只有几个是名牌</div></div>
+					<div class="single_choose_item"><input name="now_use" type="radio" value="" /><div>所有都是名牌</div></div>
+					<div class="single_choose_item"><input name="now_use" type="radio" value="" /><div>按效果搭配使用</div></div>
+				</div>
+				<div class="mini_blank"></div>
+				<div id="mutipleChoose" class="mutiple_choose">
+					<div class="choose_topic">3.您最喜欢通过哪个渠道了解护肤品的信息？（多选）</div>
+					<div class="smallest_blank"></div>
+					<div class="mutiple_choose_item"><div class="up_part"><input name="channel" type="checkbox" value="" /><div>电视</div></div><img width='90' height='80' class='radius-small'  src="${staticPath}images/info1.png"/></div>
+					<div class="mutiple_choose_item"><div class="up_part"><input name="channel" type="checkbox" value="" /><div>网络</div></div><img width='90' height='80' class='radius-small' src="${staticPath}images/info2.png"/></div>
+					<div class="mutiple_choose_item"><div class="up_part"><input name="channel" type="checkbox" value="" /><div>报刊杂志</div></div><img width='90' height='80' class='radius-small' src="${staticPath}images/info3.png"/></div>
+					<div class="mutiple_choose_item"><div class="up_part"><input name="channel" type="checkbox" value="" /><div>售货员</div></div><img width='90' height='80' class='radius-small' src="${staticPath}images/info4.png"/></div>
+					<div class="mutiple_choose_item"><div class="up_part"><input name="channel" type="checkbox" value="" /><div>朋友</div></div><img width='90' height='80' class='radius-small' src="${staticPath}images/info5.png"/></div>
+				</div>
+				<div class="mini_blank"></div>
+				<div class="suggestion">
+					<div class="choose_topic">4.写下你对目前护肤品的期许以及建议</div>
+					<div class="suggenstion_div"><textarea class="suggestion_input"></textarea></div>
+				</div>
+				<div class="mini_blank"></div>
+				<div class="commit"><img src="${staticPath}images/dy_03.png"/><div>完成提交后，可看到调研结果</div></div>
+				<div class="mini_blank"></div>
+			</div>
+			</div>
+			
+			<!-- 列表 RIGHT: 通用搜索 /微电影图文推荐-->
+			<div class="content_right">
+				<div class="content_right_div">
+					<!-- 通用搜索 -->
+					<div class="search_area"></div>
+					
+					<div class="small_blank"></div>
+					
+					<!-- 微电影图文推荐-->
+					<div class="recommend_show"></div>
+					
+					<!-- TOP 6-->
+					<div class="hot_article"></div>
+				</div>
+			</div>
+			
+		</div>
+		<!-- 答题详情-->
 		<script>
 		$(function(){
+			lclove.params.keyword = '$!params.keyword';
+			lclove.params.aid = '$!params.aid';
+			lclove.params.sortType = '$!params.sortType';
+			lclove.params.navtype = '$!params.navtype';
+			lclove.params.position = '2';
+			
 			//固定头部导航
 			$("#myHeader").topMenu();
 			
-			//图片轮播
-			//$(".banner").bannerBox();
+			//通用搜索
+			$(".search_area").searchByType();
 			
-			//通用搜索+微电影图文推荐
-			//$(".search").searchBox();
+			<!-- 微电影图文推荐-->
+			$(".recommend_show").recommandShow();
 			
-			//六个推荐文章
-			//$(".case").recommandShow();
-			
-			//文章列表
-			//$(".article").newsList();
+			<!-- TOP 6-->
+			$(".hot_article").topShow();
 			
 			//固定页尾
 			$("body").footerModule();

@@ -496,7 +496,7 @@ $(function(){
             sbHtml.append("  <div class='content_item_text_foot'>");
             sbHtml.append("    <div class='date'>"+ data.pubDate +"</div>");
             sbHtml.append("    <div class='comment'><img src='" + lclove.util.imgPath + "images/comment.png'/><div class='sum'>"+ data.scanNum +"</div></div>");
-            sbHtml.append("    <div class='love'><img src='" + lclove.util.imgPath + "images/love.png'/><div class='sum'>"+ data.likeNum +"</div></div>");
+            sbHtml.append("    <div class='love'><img width='20' height='20' class='radius-small' src='" + lclove.util.imgPath + "images/love.png'/><div class='sum'>"+ data.likeNum +"</div></div>");
             sbHtml.append("    <div class='type'> "+ data.topic +" </div>");
             sbHtml.append("  </div>");
             sbHtml.append("</div>");
@@ -657,11 +657,27 @@ $(function(){
         var url = lclove.util.basePath + "ajax/getComments.xhtml?aid=" + lclove.params.aid;
         var showComment = function (data) {
             var sbHtml = new StringBuilder();
-            sbHtml.append("<div class='comment_list'>");
-            sbHtml.append("</div>");
-            sbHtml.append("<div class='_blanklist'>");
-            sbHtml.append("  <img style='margin-left:220px;' src='"+lclove.util.imgPath+"images/head_flower1.png'/><div style='margin-left:10px;'>暂无评论</div><img style='margin-left:10px;' src='"+lclove.util.imgPath+"images/head_flower1.png'/>");
-            sbHtml.append("</div>");
+           /* if(data.comments.length > 0 ){
+                 sbHtml.append("<div class='comments_area'>");
+                 sbHtml.append("<div class='comments_title'><img src='"+lclove.util.imgPath+"images/comment.png'/><div> "+data.comments.length+" 条评论</div></div>");
+                 $.each(data.comments, function(){
+                 	sbHtml.append("    <div class='one_comment'>");
+                 	sbHtml.append("        <div class='name'> "+data.comments.nickName+" </div>");
+                 	sbHtml.append("        <div class='colon'>：</div>");
+                 	sbHtml.append("        <div class='comment_content'> "+data.comments.content+" </div>");
+                 	sbHtml.append("        <img class='good_img' src='"+lclove.util.imgPath+"images/good.png'/>");
+                 	sbHtml.append("        <div class='good_count'> "+data.comments.upNum+" </div>");
+                 	sbHtml.append("        <img class='bad_img'src='"+lclove.util.imgPath+"images/bad.png'/>");
+                 	sbHtml.append("        <div class='bad_count'> "+data.comments.downNum+" </div>");
+                     sbHtml.append("    </div>");
+                     sbHtml.append("    <div class='solid_separate'></div>");
+                 });
+                 sbHtml.append("</div>");
+            }else{*/
+            	sbHtml.append("<div class='_blanklist'>");
+                sbHtml.append("  <img style='margin-left:220px;' src='"+lclove.util.imgPath+"images/head_flower1.png'/><div style='margin-left:10px;'>暂无评论</div><img style='margin-left:10px;' src='"+lclove.util.imgPath+"images/head_flower1.png'/>");
+                sbHtml.append("</div>");
+            /*}*/
             sbHtml.append("<div class='comment_submit'>");
             sbHtml.append("  <div class='publish'>发表评论</div>");
             sbHtml.append("  <form name='commentsForm' class='form-inline' method='post'");
@@ -672,108 +688,49 @@ $(function(){
             sbHtml.append("       </div>");
             sbHtml.append("     </div>");
             sbHtml.append("     <div class='form-group' style='margin-top: 10px;margin-bottom: 10px;'>");
-            sbHtml.append("       <textarea class='input' rows='4' cols='50' placeholder='写下您的评论内容' maxlength='200'></textarea>");
+            sbHtml.append("       <textarea class='input' rows='4' cols='50' placeholder='写下您的评论内容' maxlength='200' id='content' name='content' ></textarea>");
             sbHtml.append("     </div>");
             sbHtml.append("     <div class='clear'></div>");
             sbHtml.append("     <div id='submitBtn' class='confirm_comment'><img src='"+lclove.util.imgPath+"images/send.png'/></div>");
             sbHtml.append("  </form>");
             sbHtml.append("</div>");
-            return $(sbHtml.toString());
-           // $("#saveBtn").on("click", saveData);
+            $(instance).append($(sbHtml.toString()));
+            $("#submitBtn").on("click", saveData);
         };
-      //保存修改收货地址
+        //用户评论
         var saveData = function(){
         	//validate
-        	var province = $('.provinceData').val();
-        	var city = $('.CityData').val();
-        	var area = $('.areaData').val();
-        	var address = $('#addresstext').val();
-        	var username = $('#username').val();
-        	var mobile = $('#mobile').val();
-        	
-    	  	if(province=='' || province ==null){
-    	  		$.showPopupMessage({
-    				title: "哈尔滨大剧院",
-    				message: "省份不能为空~~"
-        		});
-    	  		return false;
+        	var nickName = $('#nickName').val();
+        	var email = $('#email').val();
+        	var content = $('#content').val();
+    	  	if(nickName=='' || nickName==null){
+    	  		alert("请填写昵称！");
+     	  		return false;
     	  	}
-    	   	if(city=='' || city==null){
-    	   		$.showPopupMessage({
-    				title: "哈尔滨大剧院",
-    				message: "城市不能为空~~"
-        		});
+    	   	if(email=='' || email==null){
+    	   		alert("请填写邮箱！");
     	   		return false;
     	   	}	
-    	   	if(area==''||area==null){
-    	   		$.showPopupMessage({
-    				title: "哈尔滨大剧院",
-    				message: "区域不能为空~~"
-        		});
+    	   	if(content=='' || content==null){
+    	   		alert("请填写评论！");
     	   		return false;
     	   	}	
-    	  	if(address=='' || address==null){
-    	  		$.showPopupMessage({
-    				title: "哈尔滨大剧院",
-    				message: "收货地址不能为空~~"
-        		});
-    	  		return false;
-    	   	}else if(username==''||username==null){
-    	   		$.showPopupMessage({
-    				title: "哈尔滨大剧院",
-    				message: "收货人不能为空~~"
-        		});
-    	   		return false;
-    	   	}	
-    	    if(mobile==''||mobile==null){
-    	    	$.showPopupMessage({
-    				title: "哈尔滨大剧院",
-    				message: "手机号码不能为空~~"
-        		});
-    	    	return false;
-    	    }else{
-    	    	var re =/1\d{10}/;
-    	    	var is_mobile = re.test(mobile);
-    	    	if(!is_mobile){
-    	    		$.showPopupMessage({
-        				title: "哈尔滨大剧院",
-        				message: "抱歉手机号码输入有误"
-            		});
-    	    	}
-    	    }
-    	    
-    	    if($(".tb1_address").length >= 5){
-    	    	$.showPopupMessage({
-    				title: "哈尔滨大剧院",
-    				message: "收货地址最多添加五个!"
-        		});
-    	    	return false;
-    	    }
         	//validate end
         	
-        	var url = theatre.util.basePath + "ajax/member/saveAddress.xhtml";
+        	var url = lclove.util.basePath + "ajax/saveComments.xhtml";
         	var data = {};
-       	    data.id =opts.aid;
-        	data.realname = $("#username").val();
-        	data.postalcode = $("#postcode").val();
-        	data.mobile = $("#mobile").val();
-//        	data.IDcard = "";
-        	data.provincecode = $(".provinceData").attr("code");
-        	data.provincename = $(".provinceData").val();
-        	data.citycode = $(".CityData").attr("code");
-        	data.cityname = $(".CityData").val();
-        	data.countycode = $(".areaData").attr("code");
-        	data.countyname = $
-        	(".areaData").val();
-        	data.address = $("#addresstext").val();
-        	data.defaultAddress = $("input[type='checkbox']").is(':checked') ? "Y" : "N";
-        	if(opts.aid != ""){
-        		$.getText(url, data, true, "POST", "json", updateAddressInfo);
-        	}
-        	else{
-        		$.getText(url, data, true, "POST", "json", addAddressInfo);
-        	}
+        	data.nickName = nickName;
+        	data.email = email;
+        	data.content = content;
+        	data.articleId = lclove.params.aid;
+        	$.getData(url, data, true, "POST", "json", true, saveComments);
         };
+        
+      //保存回调
+        var saveComments = function(result){
+			refreshPage(lclove.util.basePath + "detail.xhtml?navtype="+lclove.params.navtype+"&sortType=1&aid="+lclove.params.aid);
+        };
+        
         var initComments = function(data){
             $(".detail_comment_content").append(showComment(data));
         };

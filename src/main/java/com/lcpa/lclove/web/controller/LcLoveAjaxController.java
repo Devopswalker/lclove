@@ -114,9 +114,7 @@ public class LcLoveAjaxController extends AnnotationController{
 
 		Article lastArticle = articleService.getLastArticle(queryArticle, sortType);
 		Article nextArticle = articleService.getNextArticle(queryArticle, sortType);
-		List<Comment> commentList = commentService.getCommentList(1, 10, aid);
 		resultMap.put("detail", article);
-		resultMap.put("comments", commentList);
 		resultMap.put("lastArticle", lastArticle);
 		resultMap.put("lastTitle", "");
 		resultMap.put("nextArticle", nextArticle);
@@ -135,12 +133,20 @@ public class LcLoveAjaxController extends AnnotationController{
 		return showJsonSuccess(model, JsonUtils.writeObjectToJson(resultMap));
 	}
 	
-	@RequestMapping("/ajax/getHomePageSlide.xhtml")
-	public String getHomePageSlide(Integer position, ModelMap model){
-		List<ImageRecommend> slideList = recommendService.getRecommendImagesByPosition(position,5);
+	@RequestMapping("/ajax/getComments.xhtml")
+	public String getComments(Integer aid, ModelMap model){
+		List<Comment> commentList = commentService.getCommentList(1, 10, aid);
 		Map<String, Object> resultMap = new HashMap<String, Object>();
-		resultMap.put("slideList", slideList);
+		resultMap.put("comments", commentList);
 		return showJsonSuccess(model, JsonUtils.writeObjectToJson(resultMap));
+	}
+	
+	@RequestMapping("/ajax/saveComments.xhtml")
+	public String saveComments(ModelMap model){
+		Comment comment = new Comment();
+		this.bindParams(comment);
+		commentService.saveComment(comment);
+		return showJsonSuccess(model, JsonUtils.writeObjectToJson(this.getParameterMap()));
 	}
 
 }
