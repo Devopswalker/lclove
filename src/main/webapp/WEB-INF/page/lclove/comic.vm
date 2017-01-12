@@ -18,49 +18,65 @@
 	</head>
 	
 	<body>
-		<!-- 固定头部导航 -->
-		<div id="myHeader"></div>
-		<!-- 固定头部导航 -->
-		
-		<!-- 图片轮播  -->
-		<div class="banner"></div>
-		<!-- 图片轮播  -->
-		
-		<!-- 通用搜索 -->
-		<div class="search"></div>
-		<!-- 通用搜索-->
-		
-		<!-- 六个推荐文章 -->
-		<div class="case"></div>
-		<!-- 六个推荐文章-->
-		
-		<!-- 文章列表 -->
-		<div class="article"></div>
-		<!-- 文章列表-->
-		<script>
-		$(function(){
-			//固定头部导航
-			$("#myHeader").topMenu();
-			
-			//图片轮播
-			//$(".banner").bannerBox();
-			
-			//通用搜索+微电影图文推荐
-			//$(".search").searchBox();
-			
-			//六个推荐文章
-			//$(".case").recommandShow();
-			
-			//文章列表
-			//$(".article").newsList();
-			
-			//固定页尾
-			$("body").footerModule();
-			
-			//返回顶部
-			$.backToTop();
-		});
-		</script>
+    <!-- 固定头部导航 -->
+    <div id="myHeader"></div>
+    <!-- 固定头部导航 -->
+
+    <!-- 文章列表 -->
+    <div class="wrap_content clear">
+
+        <!-- 列表 LEFT: 内容列表 -->
+        <div class="content_left">
+
+
+            <!-- 列表 LEFT: DATALIST -->
+            <div class="content_list"></div>
+
+        </div>
+
+        <!-- 列表 RIGHT: 通用搜索 /微电影图文推荐-->
+        <div class="content_right">
+            <div class="content_right_div">
+
+
+                <!-- 微电影图文推荐-->
+                <div class="recommend_show"></div>
+
+                <!-- TOP 6-->
+                <div class="hot_article"></div>
+            </div>
+        </div>
+
+    </div>
+    <script>
+        $(function(){
+            lclove.params.keyword = '$!params.keyword';
+            lclove.params.navtype = '4';
+            lclove.params.pageNo = '$!params.pageNo';
+            lclove.params.position = '2';
+
+            //固定头部导航
+            $("#myHeader").topMenu();
+
+            //通用搜索
+            $(".search_area").searchByType();
+
+            <!-- 微电影图文推荐-->
+            $(".recommend_show").recommandShow();
+
+            <!-- TOP 6-->
+            $(".hot_article").topShow();
+
+            //文章列表
+            $(".content_list").contentList();
+
+            //固定页尾
+            $("body").footerModule();
+
+            //返回顶部
+            $.backToTop();
+        });
+    </script>
 		<script src="${staticPath}js/pintuer.js"></script>
 	</body>
 </html>

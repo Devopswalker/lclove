@@ -9,17 +9,17 @@ public class Comment {
 
     private String email;
 
-    private String cotent;
+    private String content;
 
     private String editorReply;
 
-    private Integer commStatus;
+    private Integer commStatus = 1;
 
     private Integer parentId;
 
-    private Integer upNum;
+    private Integer upNum = 0;
 
-    private Integer downNum;
+    private Integer downNum = 0;
 
     public Integer getId() {
         return id;
@@ -53,12 +53,12 @@ public class Comment {
         this.email = email == null ? null : email.trim();
     }
 
-    public String getCotent() {
-        return cotent;
+    public String getContent() {
+        return content;
     }
 
-    public void setCotent(String cotent) {
-        this.cotent = cotent == null ? null : cotent.trim();
+    public void setContent(String content) {
+        this.content = content;
     }
 
     public String getEditorReply() {
