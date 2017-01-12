@@ -654,10 +654,36 @@ $(function(){
     var eComment = function(options,object) {
         var opts = $.extend({}, $.fn.renderComment.defaults, options);
         var instance = object;
-        var url = lclove.util.basePath + "ajax/getArticle.xhtml?sortType="+lclove.params.sortType+"&aid=" + lclove.params.aid +"&navtype="+lclove.params.navtype;
-     
-        //$.getData(url, null, true, "POST", "json", true, initContent);
+        var url = lclove.util.basePath + "ajax/getComments.xhtml?aid=" + lclove.params.aid;
+        var showComment = function (data) {
+            var sbHtml = new StringBuilder();
+            sbHtml.append("<div class='comment_list'>");
+            sbHtml.append("</div>");
+            sbHtml.append("<div class='comment_submit'>");
+            sbHtml.append("  <div class='publish'>发表评论</div>");
+            sbHtml.append("  <form name='commentsForm' class='form-inline' method='post'");
+            sbHtml.append("     <div class='form-group'>");
+            sbHtml.append("       <div class='field'>");
+            sbHtml.append("         &nbsp;昵称<font color='red'>*</font>&nbsp;<input type='text' class='input' id='nickName' name='nickName' style='width:240px;' size='30' />");
+            sbHtml.append("         邮箱<font color='red'>*</font>&nbsp;<input type='text' class='input' id='email' name='email' style='width:240px;' size='48' />");
+            sbHtml.append("       </div>");
+            sbHtml.append("     </div>");
+            sbHtml.append("     <div class='form-group' style='margin-top: 10px;margin-bottom: 10px;'>");
+            sbHtml.append("       <textarea class='input' rows='4' cols='50' placeholder='写下您的评论内容' maxlength='200'></textarea>");
+            sbHtml.append("     </div>");
+            sbHtml.append("     <div class='clear'></div>");
+            sbHtml.append("     <div class='confirm_comment'><img src='"+lclove.util.imgPath+"images/send.png'/></div>");
+            sbHtml.append("  </form>");
+            sbHtml.append("</div>");
+            return $(sbHtml.toString());
+        };
+        var initComments = function(data){
+            $(".detail_comment_content").append(showComment(data));
+        };
+        initComments();
+        //$.getData(url, null, true, "POST", "json", true, initComments);
     };
+   
     $.fn.renderComment = function(options) {
         return this.each(function () {
             return eComment(options, $(this));
