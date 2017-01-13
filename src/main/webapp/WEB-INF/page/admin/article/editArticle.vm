@@ -46,7 +46,7 @@
             <label>分类标题：</label>
           </div>
           <div class="field">
-            <select id="articleType" name="articleType" class="input w50">
+            <select id="articleType" name="articleType" class="input w50" onclick="articleTypeClick()" onchange="articleTypeChange()">
               <option value="">请选择分类</option>
 			  #foreach($type in $typeList)
               <option value="$type.id" #if($VmUtils.eq($type.id, $article.articleType))selected#end>$type.name</option>
@@ -82,7 +82,7 @@
           <div class="tips"></div>
         </div>
       </div>
-      <div class="form-group">
+      <div class="form-group" id="content1">
         <div class="label">
           <label>内容：</label>
         </div>
@@ -93,6 +93,14 @@
 			</script>
         </div>
       </div>
+        <div class="form-group" id="content2">
+            <div class="label">
+                <label>视频分享地址：</label>
+            </div>
+            <div class="field" id="content2">
+                <textarea class="input" id="content" name="content" style=" height:90px;">$!{article.content}</textarea>
+            </div>
+        </div>
      
       <div class="clear"></div>
 ##      <div class="form-group">
@@ -154,13 +162,33 @@
 </div>
 
 	<script type="text/javascript">
+        var beforeType;
+        function articleTypeClick(){
+            beforeType = $("#articleType").val();
+        }
+        function articleTypeChange(){
+            var afterType = $("#articleType").val();
+            if (afterType == "4"){
+                $("#content1").hide();
+                $("#content2").show();
+            }else if (beforeType == "4"){
+                $("#content2").hide();
+                $("#content1").show();
+            }
+        }
 		$(document).ready(function() {
-			editor.ready(function(){ 
-				editor.setContent('$!{article.content}');
-				}
-			);
+            var initType = $("#articleType").val();
+            if (initType == "4"){
+                $("#content1").hide();
+                $("#content2").show();
+            }else{
+                $("#content2").hide();
+                $("#content1").show();
+                editor.ready(function(){
+                            editor.setContent('$!{article.content}');
+                        });
+            }
 		});
 	</script>
-	
 </body>
 </html>

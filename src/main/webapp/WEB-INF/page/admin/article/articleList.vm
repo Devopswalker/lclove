@@ -211,82 +211,82 @@ function sorts(){
 
 
 //批量首页显示
-function changeishome(o){
-	var Checkbox=false;
-	 $("input[name='id[]']").each(function(){
-	  if (this.checked==true) {		
-		Checkbox=true;	
-	  }
-	});
-	if (Checkbox){
-		
-		$("#listform").submit();	
-	}
-	else{
-		alert("请选择要操作的内容!");		
-	
-		return false;
-	}
-}
-
-//批量推荐
-function changeisvouch(o){
-	var Checkbox=false;
-	 $("input[name='id[]']").each(function(){
-	  if (this.checked==true) {		
-		Checkbox=true;	
-	  }
-	});
-	if (Checkbox){
-		
-		
-		$("#listform").submit();	
-	}
-	else{
-		alert("请选择要操作的内容!");	
-		
-		return false;
-	}
-}
-
-//批量置顶
-function changeistop(o){
-	var Checkbox=false;
-	 $("input[name='id[]']").each(function(){
-	  if (this.checked==true) {		
-		Checkbox=true;	
-	  }
-	});
-	if (Checkbox){		
-		
-		$("#listform").submit();	
-	}
-	else{
-		alert("请选择要操作的内容!");		
-	
-		return false;
-	}
-}
-
-
-//批量移动
-function changecate(o){
-	var Checkbox=false;
-	 $("input[name='id[]']").each(function(){
-	  if (this.checked==true) {		
-		Checkbox=true;	
-	  }
-	});
-	if (Checkbox){		
-		
-		$("#listform").submit();		
-	}
-	else{
-		alert("请选择要操作的内容!");
-		
-		return false;
-	}
-}
+//function changeishome(o){
+//	var Checkbox=false;
+//	 $("input[name='id[]']").each(function(){
+//	  if (this.checked==true) {
+//		Checkbox=true;
+//	  }
+//	});
+//	if (Checkbox){
+//
+//		$("#listform").submit();
+//	}
+//	else{
+//		alert("请选择要操作的内容!");
+//
+//		return false;
+//	}
+//}
+//
+////批量推荐
+//function changeisvouch(o){
+//	var Checkbox=false;
+//	 $("input[name='id[]']").each(function(){
+//	  if (this.checked==true) {
+//		Checkbox=true;
+//	  }
+//	});
+//	if (Checkbox){
+//
+//
+//		$("#listform").submit();
+//	}
+//	else{
+//		alert("请选择要操作的内容!");
+//
+//		return false;
+//	}
+//}
+//
+////批量置顶
+//function changeistop(o){
+//	var Checkbox=false;
+//	 $("input[name='id[]']").each(function(){
+//	  if (this.checked==true) {
+//		Checkbox=true;
+//	  }
+//	});
+//	if (Checkbox){
+//
+//		$("#listform").submit();
+//	}
+//	else{
+//		alert("请选择要操作的内容!");
+//
+//		return false;
+//	}
+//}
+//
+//
+////批量移动
+//function changecate(o){
+//	var Checkbox=false;
+//	 $("input[name='id[]']").each(function(){
+//	  if (this.checked==true) {
+//		Checkbox=true;
+//	  }
+//	});
+//	if (Checkbox){
+//
+//		$("#listform").submit();
+//	}
+//	else{
+//		alert("请选择要操作的内容!");
+//
+//		return false;
+//	}
+//}
 
 
     $("#pagination").jqPaginator({
