@@ -82,23 +82,23 @@
           <div class="tips"></div>
         </div>
       </div>
-      <div class="form-group" id="content1">
+      <div class="form-group" id="articleContent">
         <div class="label">
           <label>内容：</label>
         </div>
         <div class="field">
-          <script id="container" name="content" type="text/plain" style="width:100%;height:200px;"></script>
+          <script id="articleContainer" name="content" type="text/plain" style="width:100%;height:200px;"></script>
           <script type="text/javascript">
-				var editor = UE.getEditor('container');
+				var editor = UE.getEditor('articleContainer');
 			</script>
         </div>
       </div>
-        <div class="form-group" id="content2">
+        <div class="form-group" id="videoContent">
             <div class="label">
                 <label>视频分享地址：</label>
             </div>
-            <div class="field" id="content2">
-                <textarea class="input" id="content" name="content" style=" height:90px;">$!{article.content}</textarea>
+            <div class="field" >
+                <textarea class="input" id="videoContainer" name="content" style=" height:90px;">$!{article.content}</textarea>
             </div>
         </div>
      
@@ -169,21 +169,25 @@
         function articleTypeChange(){
             var afterType = $("#articleType").val();
             if (afterType == "4"){
-                $("#content1").hide();
-                $("#content2").show();
+                $("#articleContent").hide();
+                $("#videoContent").show();
+                $("#articleContainer").removeAttr("name");
+                $("#videoContainer").attr("name", "content");
             }else if (beforeType == "4"){
-                $("#content2").hide();
-                $("#content1").show();
+                $("#videoContent").hide();
+                $("#articleContent").show();
+                $("#videoContainer").removeAttr("name");
+                $("#articleContainer").attr("name", "content");
             }
         }
 		$(document).ready(function() {
             var initType = $("#articleType").val();
             if (initType == "4"){
-                $("#content1").hide();
-                $("#content2").show();
+                $("#articleContent").hide();
+                $("#videoContent").show();
             }else{
-                $("#content2").hide();
-                $("#content1").show();
+                $("#videoContent").hide();
+                $("#articleContent").show();
                 editor.ready(function(){
                             editor.setContent('$!{article.content}');
                         });

@@ -130,7 +130,6 @@ public class Article {
     }
 
     public void setContent(String content) {
-        String result = content.replaceAll("\'","\"");
-        this.content = result;
+        this.content = content;
     }
 }
