@@ -1,17 +1,15 @@
 package com.lcpa.lclove.model;
 
+import java.util.Date;
+
 public class SurveyAnswer {
     private Integer id;
 
     private Integer surveyId;
 
-    private Integer questionId;
+    private String answerer;
 
-    private Integer optionId;
-
-    private String answer;
-
-    private String user;
+    private Date datetime;
 
     public Integer getId() {
         return id;
@@ -29,35 +27,19 @@ public class SurveyAnswer {
         this.surveyId = surveyId;
     }
 
-    public Integer getQuestionId() {
-        return questionId;
+    public String getAnswerer() {
+        return answerer;
     }
 
-    public void setQuestionId(Integer questionId) {
-        this.questionId = questionId;
+    public void setAnswerer(String answerer) {
+        this.answerer = answerer == null ? null : answerer.trim();
     }
 
-    public Integer getOptionId() {
-        return optionId;
+    public Date getDatetime() {
+        return datetime;
     }
 
-    public void setOptionId(Integer optionId) {
-        this.optionId = optionId;
-    }
-
-    public String getAnswer() {
-        return answer;
-    }
-
-    public void setAnswer(String answer) {
-        this.answer = answer == null ? null : answer.trim();
-    }
-
-    public String getUser() {
-        return user;
-    }
-
-    public void setUser(String user) {
-        this.user = user == null ? null : user.trim();
+    public void setDatetime(Date datetime) {
+        this.datetime = datetime;
     }
 }

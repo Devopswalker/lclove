@@ -19,4 +19,6 @@ public interface SurveyMapper {
     int updateByPrimaryKey(Survey record);
 
     List<Survey> selectSurveyList(QueryParameter queryParameter);
+
+    void updateSurveyState(Integer id);
 }

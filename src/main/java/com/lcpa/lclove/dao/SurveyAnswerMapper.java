@@ -2,6 +2,8 @@ package com.lcpa.lclove.dao;
 
 import com.lcpa.lclove.model.SurveyAnswer;
 
+import java.util.List;
+
 public interface SurveyAnswerMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -14,4 +16,6 @@ public interface SurveyAnswerMapper {
     int updateByPrimaryKeySelective(SurveyAnswer record);
 
     int updateByPrimaryKey(SurveyAnswer record);
+
+    List<SurveyAnswer> selectBySurveyID(Integer id);
 }

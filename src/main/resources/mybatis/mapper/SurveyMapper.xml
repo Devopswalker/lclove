@@ -127,4 +127,10 @@
       TOPIC = #{topic,jdbcType=VARCHAR}
     where ID = #{id,jdbcType=INTEGER}
   </update>
+  <update id="updateSurveyState">
+    update survey
+    set
+    STATE = 0,
+    where ID = #{0}
+  </update>
 </mapper>

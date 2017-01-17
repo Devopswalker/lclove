@@ -14,7 +14,7 @@ public class Survey {
 
     private Timestamp endTime;
 
-    private Integer state;
+    private Integer state = 1;
 
     private String topic;
 

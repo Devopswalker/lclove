@@ -13,6 +13,10 @@ public class QuestionOption {
 
     private String imgSrc;
 
+    private boolean selected;
+
+    private float score;
+
     public Integer getId() {
         return id;
     }
@@ -59,5 +63,21 @@ public class QuestionOption {
 
     public void setImgSrc(String imgSrc) {
         this.imgSrc = imgSrc == null ? null : imgSrc.trim();
+    }
+
+    public boolean isSelected() {
+        return selected;
+    }
+
+    public void setSelected(boolean selected) {
+        this.selected = selected;
+    }
+
+    public float getScore() {
+        return score;
+    }
+
+    public void setScore(float score) {
+        this.score = score;
     }
 }

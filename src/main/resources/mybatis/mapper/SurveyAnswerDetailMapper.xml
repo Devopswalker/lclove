@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lcpa.lclove.dao.SurveyAnswerDetailMapper">
+  <resultMap id="BaseResultMap" type="com.lcpa.lclove.model.SurveyAnswerDetail">
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="OPTION_ID" jdbcType="INTEGER" property="optionId" />
+    <result column="ANSWER_CONTENT" jdbcType="VARCHAR" property="answerContent" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, OPTION_ID, ANSWER_CONTENT
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from survey_answer_detail
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectByOptionId" resultMap="BaseResultMap">
+    select id
+    from survey_answer_detail
+    where OPTION_ID = #{0}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from survey_answer_detail
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.lcpa.lclove.model.SurveyAnswerDetail">
+    insert into survey_answer_detail (ID, OPTION_ID, ANSWER_CONTENT
+      )
+    values (#{id,jdbcType=INTEGER}, #{optionId,jdbcType=INTEGER}, #{answerContent,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.lcpa.lclove.model.SurveyAnswerDetail">
+    insert into survey_answer_detail
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="optionId != null">
+        OPTION_ID,
+      </if>
+      <if test="answerContent != null">
+        ANSWER_CONTENT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="optionId != null">
+        #{optionId,jdbcType=INTEGER},
+      </if>
+      <if test="answerContent != null">
+        #{answerContent,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lcpa.lclove.model.SurveyAnswerDetail">
+    update survey_answer_detail
+    <set>
+      <if test="optionId != null">
+        OPTION_ID = #{optionId,jdbcType=INTEGER},
+      </if>
+      <if test="answerContent != null">
+        ANSWER_CONTENT = #{answerContent,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lcpa.lclove.model.SurveyAnswerDetail">
+    update survey_answer_detail
+    set OPTION_ID = #{optionId,jdbcType=INTEGER},
+      ANSWER_CONTENT = #{answerContent,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+
+  <insert id="insertAnswerDetails" parameterType="java.util.List" useGeneratedKeys="true" keyProperty="id">
+    insert into survey_answer_detail (OPTION_ID, ANSWER_CONTENT
+    )
+    values
+    <foreach collection="list" item="item" index="index" separator="," >
+      (#{item.optionId,jdbcType=INTEGER}, #{item.answerContent,jdbcType=VARCHAR}
+      )
+    </foreach>
+  </insert>
+</mapper>
