@@ -20,14 +20,14 @@
 <div class="panel admin-panel">
     <div class="panel-head" id="add"><strong><span class="icon-pencil-square-o"></span>增加内容</strong></div>
     <div class="body-content">
-        <form method="post" class="form-x" action="${basePath}admin/recommend/saveRecommend.xhtml">
-            <input type="hidden" id="id" name="id" value="$!imageRecommend.id"/>
+        <form method="post" class="form-x" action="${basePath}admin/research/saveResearch.xhtml">
+            <input type="hidden" id="id" name="id" value="$!survey.id"/>
             <div class="form-group">
                 <div class="label">
                     <label>标题：</label>
                 </div>
                 <div class="field">
-                    <input type="text" class="input w50" id="seq" name="seq" value="$!imageRecommend.seq" data-validate="required:请输入问卷调查标题" />
+                    <input type="text" class="input w50" id="title" name="title" value="$!survey.title" data-validate="required:请输入标题" />
                     <div class="tips"></div>
                 </div>
             </div>
@@ -36,16 +36,7 @@
                     <label>主题：</label>
                 </div>
                 <div class="field">
-                    <input type="text" class="input w50" id="description" name="description" value="$!imageRecommend.description" data-validate="required:请输入描述" />
-                    <div class="tips"></div>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="label">
-                    <label>描述：</label>
-                </div>
-                <div class="field">
-                    <input type="text" class="input w50" id="seq" name="seq" value="$!imageRecommend.seq" data-validate="required:请输入问卷描述" />
+                    <input type="text" class="input w50" id="topic" name="topic" value="$!survey.topic" data-validate="required:请输入主题" />
                     <div class="tips"></div>
                 </div>
             </div>
@@ -54,7 +45,7 @@
                     <label>开始日期：</label>
                 </div>
                 <div class="field">
-                    <input type="text" class="laydate-icon input w50" id="pubDate" name="pubDate" onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})" value="$!DateUtil.formatTimestamp($!article.pubDate)"  data-validate="required:发布时间不能为空" style="padding:10px!important; height:auto!important;border:1px solid #ddd!important;" />
+                    <input type="text" class="laydate-icon input w50" id="startTime" name="startTime" onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})" value="$!DateUtil.formatTimestamp($!survey.startTime)"  data-validate="required:开始时间不能为空" style="padding:10px!important; height:auto!important;border:1px solid #ddd!important;" />
                     <div class="tips"></div>
                 </div>
             </div>
@@ -63,18 +54,18 @@
                     <label>结束日期：</label>
                 </div>
                 <div class="field">
-                    <input type="text" class="laydate-icon input w50" id="pubDate" name="pubDate" onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})" value="$!DateUtil.formatTimestamp($!article.pubDate)"  data-validate="required:发布时间不能为空" style="padding:10px!important; height:auto!important;border:1px solid #ddd!important;" />
+                    <input type="text" class="laydate-icon input w50" id="endTime" name="endTime" onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})" value="$!DateUtil.formatTimestamp($!survey.endTime)"  data-validate="required:结束时间不能为空" style="padding:10px!important; height:auto!important;border:1px solid #ddd!important;" />
                     <div class="tips"></div>
                 </div>
             </div>
-            <div class="form-group" id="questionContent">
+            <div class="form-group">
                 <div class="label">
-                    <label>问卷调查问题：</label>
+                    <label>简要说明：</label>
                 </div>
-                <span class="button bg-main icon-plus" onclick="addQeustion()"/>
-            </div>
-            <div id="questions">
-
+                <div class="field">
+                    <textarea class="input" id="description" name="description" style=" height:90px;">$!{survey.description}</textarea>
+                <div class="tips"></div>
+                </div>
             </div>
             <div class="clear"></div>
             <div class="form-group">
@@ -83,7 +74,7 @@
                 </div>
                 <div class="field">
                     <button class="button bg-main icon-check-square-o" type="submit"> 提交</button>
-                    <a class="button bg-main icon-backward" href="${basePath}admin/recommend/recommendList.xhtml"> 取消</a>
+                    <a class="button bg-main icon-backward" href="${basePath}admin/research/researchList.xhtml"> 取消</a>
                 </div>
             </div>
         </form>

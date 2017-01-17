@@ -36,26 +36,27 @@ public class SurveyService {
      * 保存问卷调查
      * @param survey
      */
-    public void saveSurvey(Survey survey){
-        surveyMapper.insert(survey);
-        List<Question> questions = survey.getQuestions();
-
-        for (int i = 0; i < questions.size(); i++){
-            questions.get(i).setSurveyId(survey.getId());
-        }
-        questionMapper.insertQuestions(questions);
-
-        List<QuestionOption> saveQuestionOptions = new ArrayList<>();
-        for (int j = 0; j < questions.size(); j++){
-            List<QuestionOption> questionOptions = questions.get(j).getQuestionOptions();
-            for (int k = 0; k < questionOptions.size(); k++){
-                questionOptions.get(k).setSurveyId(survey.getId());
-                questionOptions.get(k).setQuestionId(questions.get(j).getId());
-            }
-            saveQuestionOptions.addAll(questionOptions);
-        }
-        questionOptionMapper.insertOptions(saveQuestionOptions);
-    }
+	public void saveSurvey(Survey survey) {
+		if (survey.getId() == null) {
+			surveyMapper.insert(survey);
+		} else {
+			List<Question> questions = survey.getQuestions();
+			for (int i = 0; i < questions.size(); i++) {
+				questions.get(i).setSurveyId(survey.getId());
+			}
+			questionMapper.insertQuestions(questions);
+			List<QuestionOption> saveQuestionOptions = new ArrayList<>();
+			for (int j = 0; j < questions.size(); j++) {
+				List<QuestionOption> questionOptions = questions.get(j).getQuestionOptions();
+				for (int k = 0; k < questionOptions.size(); k++) {
+					questionOptions.get(k).setSurveyId(survey.getId());
+					questionOptions.get(k).setQuestionId(questions.get(j).getId());
+				}
+				saveQuestionOptions.addAll(questionOptions);
+			}
+			questionOptionMapper.insertOptions(saveQuestionOptions);
+		}
+	}
 
     /**
      * 删除问卷调查

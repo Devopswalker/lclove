@@ -130,32 +130,6 @@ public class ArticleController extends AnnotationController{
 		return showJsonSuccess(model);
 	}
 
-
-	@RequestMapping(value = "/admin/research/researchList.xhtml")
-	public String researchList(Integer pageNo, ModelMap model) {
-		if(pageNo == null){
-			pageNo = 1;
-		}
-		Integer pageSize = 10;
-		List<Survey> surveys = surveyService.getSurveyList(pageNo, 10);
-		Paging paging = surveyService.getSurveyPaging(pageNo, pageSize);
-		model.put("paging", paging);
-		model.put("surveys", surveys);
-		return "admin/research/researchList.vm";
-	}
-
-	@RequestMapping(value = "/admin/research/editResearch.xhtml")
-	public String editResearch(Integer id, ModelMap model){
-		Survey survey = null;
-		if (id != null){
-			survey = surveyService.getSurveyDetailById(id);
-		}
-		List<QuestionInputType> questionTypes = surveyService.getAllQuestionInputType();
-		model.put("survey", survey);
-		model.put("questionTypes", questionTypes);
-		return "admin/research/editResearch.vm";
-	}
-
 	@RequestMapping(value = "/admin/comic/comicList.xhtml")
 	public String comicList(Integer pageNo, ModelMap model) {
 //		if(pageNo == null){
