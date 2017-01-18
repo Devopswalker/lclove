@@ -54,6 +54,7 @@
 		<mapper resource="mybatis/mapper/QuestionMapper.xml"/>
 		<mapper resource="mybatis/mapper/QuestionOptionMapper.xml"/>
 		<mapper resource="mybatis/mapper/SurveyAnswerMapper.xml"/>
+		<mapper resource="mybatis/mapper/SurveyAnswerDetailMapper.xml"/>
 		<mapper resource="mybatis/mapper/SurveyAnswerUserMapper.xml"/>
 		<mapper resource="mybatis/mapper/SurveyMapper.xml"/>
 		<mapper resource="mybatis/mapper/UserMapper.xml"/>

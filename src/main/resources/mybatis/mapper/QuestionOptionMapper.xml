@@ -10,7 +10,7 @@
     <result column="IMG_SRC" jdbcType="VARCHAR" property="imgSrc" />
   </resultMap>
   <sql id="Base_Column_List">
-    ID, QUESTION_ID, CONTENT, SEQ, IMG_SRC
+    ID, SURVEY_ID, QUESTION_ID, CONTENT, SEQ, IMG_SRC
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -18,7 +18,7 @@
     from question_option
     where ID = #{id,jdbcType=INTEGER}
   </select>
-  <select id="selectQuestionsId" resultMap="BaseResultMap">
+  <select id="selectOptionByQuestionId" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from question_option
@@ -35,9 +35,9 @@
     where SURVEY_ID = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.lcpa.lclove.model.QuestionOption" useGeneratedKeys="true" keyProperty="id">
-    insert into question_option (ID, QUESTION_ID, CONTENT, 
+    insert into question_option (SURVEY_ID,QUESTION_ID, CONTENT,
       SEQ, IMG_SRC)
-    values (#{id,jdbcType=INTEGER}, #{questionId,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR}, 
+    values (#{surveyId,jdbcType=INTEGER},#{questionId,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR},
       #{seq,jdbcType=INTEGER}, #{imgSrc,jdbcType=VARCHAR})
   </insert>
   <insert id="insertOptions" parameterType="java.util.List" useGeneratedKeys="true" keyProperty="id">

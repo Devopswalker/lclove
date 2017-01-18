@@ -123,9 +123,9 @@ public class SurveyService {
 
         List<Question> questions = questionMapper.selectSurveyId(id);
 
-        for (int i = 0; i < questions.size(); i++){
-            List<QuestionOption> options = questionOptionMapper.selectQuestionsId(questions.get(i).getId());
-            questions.get(i).setQuestionOptions(options);
+        for (Question question :questions){
+            List<QuestionOption> options = questionOptionMapper.selectOptionByQuestionId(question.getId());
+            question.setQuestionOptions(options);
         }
         survey.setQuestions(questions);
         return survey;
@@ -140,9 +140,9 @@ public class SurveyService {
         Survey resultSurvey = surveyList.get(0);
         List<Question> questions = questionMapper.selectSurveyId(resultSurvey.getId());
 
-        for (int i = 0; i < questions.size(); i++){
-            List<QuestionOption> options = questionOptionMapper.selectQuestionsId(questions.get(i).getId());
-            questions.get(i).setQuestionOptions(options);
+        for (Question question :questions){
+            List<QuestionOption> options = questionOptionMapper.selectOptionByQuestionId(question.getId());
+            question.setQuestionOptions(options);
         }
         resultSurvey.setQuestions(questions);
         return resultSurvey;
@@ -238,7 +238,7 @@ public class SurveyService {
         List<Question> questions = questionMapper.selectSurveyId(id);
 
         for (Question question : questions){
-            List<QuestionOption> options = questionOptionMapper.selectQuestionsId(question.getId());
+            List<QuestionOption> options = questionOptionMapper.selectOptionByQuestionId(question.getId());
 
             for (QuestionOption option : options){
                 Integer selectedNum = surveyAnswerDetailMapper.selectCountByOptionId(option.getId());

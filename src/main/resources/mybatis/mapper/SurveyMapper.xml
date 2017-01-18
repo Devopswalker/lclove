@@ -29,7 +29,7 @@
     select
     <include refid="Base_Column_List" />
     from survey
-    where STATE = 1
+    where STATE = 1 ORDER BY ID DESC
   </select>
   <select id="selectSurveyList" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select
@@ -44,11 +44,11 @@
     where ID = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.lcpa.lclove.model.Survey" useGeneratedKeys="true" keyProperty="id">
-    insert into survey (TITLE, DESCRIPTION,
-      START_TIME, END_TIME, STATE, 
+    insert into survey (TITLE, HEADER_IMG, DESCRIPTION,
+      START_TIME, END_TIME, STATE,
       TOPIC)
-    values (#{title,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR},
-      #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{state,jdbcType=INTEGER}, 
+    values (#{title,jdbcType=VARCHAR},#{headerImg,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR},
+      #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{state,jdbcType=INTEGER},
       #{topic,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.lcpa.lclove.model.Survey">

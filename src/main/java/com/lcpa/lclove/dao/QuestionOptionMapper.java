@@ -17,7 +17,7 @@ public interface QuestionOptionMapper {
 
     QuestionOption selectByPrimaryKey(Integer id);
 
-    List<QuestionOption> selectQuestionsId(Integer id);
+    List<QuestionOption> selectOptionByQuestionId(Integer id);
 
     int updateByPrimaryKeySelective(QuestionOption record);
 
