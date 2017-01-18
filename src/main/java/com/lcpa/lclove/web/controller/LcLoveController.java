@@ -55,5 +55,17 @@ public class LcLoveController extends AnnotationController{
 	public String initDetail(){
 		return "lclove/detail.vm";
 	}
+	
+	/*关于LM*/
+	@RequestMapping("/lianmao.xhtml")
+	public String initLianmao(){
+		return "lclove/lianmao.vm";
+	}
+	
+	/*关于LC*/
+	@RequestMapping("/brand.xhtml")
+	public String initBrand(){
+		return "lclove/brand.vm";
+	}
 
 }

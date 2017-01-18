@@ -1,5 +1,6 @@
 package com.lcpa.lclove.web.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,6 +14,9 @@ import com.lcpa.lclove.constant.CommConstant;
 import com.lcpa.lclove.model.Article;
 import com.lcpa.lclove.model.Comment;
 import com.lcpa.lclove.model.ImageRecommend;
+import com.lcpa.lclove.model.Question;
+import com.lcpa.lclove.model.QuestionOption;
+import com.lcpa.lclove.model.Survey;
 import com.lcpa.lclove.service.ArticleService;
 import com.lcpa.lclove.service.CommentService;
 import com.lcpa.lclove.service.RecommendService;
@@ -147,6 +151,59 @@ public class LcLoveAjaxController extends AnnotationController{
 		this.bindParams(comment);
 		commentService.saveComment(comment);
 		return showJsonSuccess(model, JsonUtils.writeObjectToJson(this.getParameterMap()));
+	}
+	
+	@RequestMapping("/ajax/getResearchDetail.xhtml")
+	public String getResearchDetail(ModelMap model){
+		Survey survey  = new Survey();
+		initDataValues(survey);
+		return showJsonSuccess(model, JsonUtils.writeObjectToJson(survey));
+	}
+
+	@RequestMapping("/ajax/saveResearch.xhtml")
+	public String saveResearch(ModelMap model){
+		
+		return showJsonSuccess(model);
+	}
+	
+	
+	private void initDataValues(Survey survey) {
+		survey.setId(1);
+		survey.setTitle("他心里到底在想什么？");
+		survey.setHeaderImg("images/dy_06.png");
+		List<Question> questions = new ArrayList();
+		for (int i=0; i<4; i++) {
+			Question question = new Question();
+			question.setId(i);
+			if(i == 3){
+				question.setInputType(1);
+			}else if(i == 2){
+				question.setInputType(3);
+			}else{
+				question.setInputType(2);
+			}
+			question.setSeq(i);
+			question.setTitle("No."+(i+1)+" 你日常是否经常使用护肤品？");
+			question.setSurveyId(1);
+			if(i != 3){
+				List<QuestionOption> options = new ArrayList();
+				for (int j = 0; j < 4; j++) {
+					QuestionOption option = new QuestionOption();
+					option.setId(j);
+					option.setQuestionId(i);
+					option.setSurveyId(1);
+					option.setSeq(j);
+					option.setContent("我是第 "+(j+1)+" 选项");
+					if(j == 3){
+						option.setImgSrc("images/info1.png");
+					}
+					options.add(option);
+				}
+				question.setQuestionOptions(options);
+			}
+			questions.add(question);
+		}
+		survey.setQuestions(questions);
 	}
 
 }

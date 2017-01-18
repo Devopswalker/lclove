@@ -598,7 +598,6 @@ $(function(){
     var eMyContent = function(options,object) {
         var opts = $.extend({}, $.fn.ArticleContent.defaults, options);
         var instance = object;
-        var url = lclove.util.basePath + "ajax/getArticle.xhtml?sortType="+lclove.params.sortType+"&aid=" + lclove.params.aid +"&navtype="+lclove.params.navtype;
         var showContent = function (data) {
             var sbHtml = new StringBuilder();
             sbHtml.append("<div class='article_content_head'>");
@@ -723,11 +722,11 @@ $(function(){
         	data.email = email;
         	data.content = content;
         	data.articleId = lclove.params.aid;
-        	$.getData(url, data, true, "POST", "json", true, saveComments);
+        	$.getData(url, data, true, "POST", "json", true, callBackComments);
         };
         
       //保存回调
-        var saveComments = function(result){
+        var callBackComments = function(result){
 			refreshPage(lclove.util.basePath + "detail.xhtml?navtype="+lclove.params.navtype+"&sortType=1&aid="+lclove.params.aid);
         };
         
@@ -748,6 +747,143 @@ $(function(){
 });
 /*  Comment  */
 
+/*  research  */
+$(function(){
+    var eResearch = function(options,object) {
+        var opts = $.extend({}, $.fn.renderResearch.defaults, options);
+        var instance = object;
+        var url = lclove.util.basePath + "ajax/getResearchDetail.xhtml";
+        var showResearch = function (data) {
+            var sbHtml = new StringBuilder();
+            //TODO:
+            sbHtml.append("<div class='content_submit'>");
+            sbHtml.append("  <form name='contentForm' class='form-inline' method='post'");
+            sbHtml.append("     <div class='clear'></div>");
+            sbHtml.append("     <div id='submitBtn'><img src='"+lclove.util.imgPath+"images/dy_03.png'/><div>完成提交后，可看到调研结果</div></div>");
+            sbHtml.append("  </form>");
+            sbHtml.append("</div>");
+            $(instance).append($(sbHtml.toString()));
+            $("#submitBtn").on("click", submitData);
+        };
+        
+        //提交问卷
+        var submitData = function(){
+        	//validate start
+        	
+        	//validate end
+        	
+        	var url = lclove.util.basePath + "ajax/saveResearch.xhtml";
+        	var data = {};
+        	$.getData(url, data, true, "POST", "json", true, callBackResearch);
+        };
+        
+      //保存回调
+        var callBackResearch = function(result){
+			//todo:保存成功后跳转到问卷结果页面
+        };
+        
+        var initResearch = function(data){
+            $(".detail_comment_content").append(showResearch(data));
+        };
+        initResearch();
+        //$.getData(url, null, true, "POST", "json", true, initComments);
+    };
+   
+    $.fn.renderResearch = function(options) {
+        return this.each(function () {
+            return eResearch(options, $(this));
+        });
+    };
+
+    $.fn.renderResearch.defaults = {};
+});
+/*  research  */
+
+/*  about lm  */
+$(function(){
+    var eAbout = function(options,object) {
+        var opts = $.extend({}, $.fn.aboutModule.defaults, options);
+        var showAbout = function (data) {
+        var sbHtml = new StringBuilder();
+        sbHtml.append("<div class='article_content_body'>");
+        sbHtml.append("<p style='white-space: normal; background-color: rgb(255, 255, 255); text-align: center;'>");
+        sbHtml.append("    <span style='font-size: 20px; font-family: &quot;Adobe 明體 Std L&quot;, serif;'>「</span><span style='font-size: 20px; font-family: 宋体;'>新恋爱</span><span style='font-size: 20px; font-family: &quot;Adobe 明體 Std L&quot;, serif;'>」</span><span style='font-size: 20px; font-family: 宋体;'>时</span><span style='font-size: 20px; font-family: &quot;Adobe 明體 Std L&quot;, serif;'>代</span>");
+        sbHtml.append("</p>");
+        sbHtml.append("<p style='white-space: normal; background-color: rgb(255, 255, 255); text-align: center;'>");
+        sbHtml.append("    <span style='font-size: 20px; font-family: &quot;Adobe 明體 Std L&quot;, serif;'>我的</span><span style='font-size: 20px; font-family: 宋体;'>恋爱将</span><span style='font-size: 20px; font-family: &quot;Adobe 明體 Std L&quot;, serif;'>何去何从？</span>    ");
+        sbHtml.append("</p>");
+        sbHtml.append("<p style='white-space: normal; background-color: rgb(255, 255, 255); text-align: center;'>");
+        sbHtml.append("    <span style='font-family: &quot;Adobe 明體 Std L&quot;, serif;'>&nbsp;</span>");
+        sbHtml.append("</p>");
+        sbHtml.append("<p style='white-space: normal; background-color: rgb(255, 255, 255); text-align: center;'>");
+        sbHtml.append("    <span style='font-family: &quot;Adobe 明體 Std L&quot;, serif;'>想要靠近某个人</span>");
+        sbHtml.append("</p>");
+        sbHtml.append("<p style='white-space: normal; background-color: rgb(255, 255, 255); text-align: center;'>");
+        sbHtml.append("    <span style='font-family: &quot;Adobe 明體 Std L&quot;, serif;'>想要好好去</span><span style='font-family: 宋体;'>爱</span>");
+        sbHtml.append("</p>");
+        sbHtml.append("<p style='white-space: normal; background-color: rgb(255, 255, 255); text-align: center;'>");
+        sbHtml.append("    <span style='font-family: &quot;Adobe 明體 Std L&quot;, serif;'>&nbsp;</span>");
+        sbHtml.append("</p>");
+        sbHtml.append("<p style='white-space: normal; background-color: rgb(255, 255, 255); text-align: center;'>");
+        sbHtml.append("    <span style='font-family: &quot;Adobe 明體 Std L&quot;, serif;'>想要珍惜身边的他</span>");
+        sbHtml.append("</p>");
+        sbHtml.append("<p style='white-space: normal; background-color: rgb(255, 255, 255); text-align: center;'>");
+        sbHtml.append("    <span style='font-family: &quot;Adobe 明體 Std L&quot;, serif;'>想要</span><span style='font-family: 宋体;'>细</span><span style='font-family: &quot;Adobe 明體 Std L&quot;, serif;'>水长流走到最后</span>");
+        sbHtml.append("</p>");
+        sbHtml.append("<p style='white-space: normal; background-color: rgb(255, 255, 255); text-align: center;'>");
+        sbHtml.append("    <span style='font-family: &quot;Adobe 明體 Std L&quot;, serif;'>&nbsp;</span>");
+        sbHtml.append("</p>");
+        sbHtml.append("<p style='white-space: normal; background-color: rgb(255, 255, 255); text-align: center;'>");
+        sbHtml.append("    <span style='font-family: &quot;Adobe 明體 Std L&quot;, serif;'>最好的</span><span style='font-family: 宋体;'>爱</span><span style='font-family: &quot;Adobe 明體 Std L&quot;, serif;'>情</span>");
+        sbHtml.append("</p>");
+        sbHtml.append("<p style='white-space: normal; background-color: rgb(255, 255, 255); text-align: center;'>");
+        sbHtml.append("    <span style='font-family: &quot;Adobe 明體 Std L&quot;, serif;'>就是「有未</span><span style='font-family: 宋体;'>来</span><span style='font-family: &quot;Adobe 明體 Std L&quot;, serif;'>」</span>");
+        sbHtml.append("</p>");
+        sbHtml.append("<p style='white-space: normal; background-color: rgb(255, 255, 255); text-align: center;'>");
+        sbHtml.append("    <span style='font-family: &quot;Adobe 明體 Std L&quot;, serif;'>&nbsp;</span>");
+        sbHtml.append("</p>");
+        sbHtml.append("<p style='white-space: normal; background-color: rgb(255, 255, 255); text-align: center;'>");
+        sbHtml.append("    <span style='font-family: 宋体;'>为</span><span style='font-family: &quot;Adobe 明體 Std L&quot;, serif;'>所有想</span><span style='font-family: 宋体;'>爱</span><span style='font-family: &quot;Adobe 明體 Std L&quot;, serif;'>的女性</span>");
+        sbHtml.append("</p>");
+        sbHtml.append("<p style='white-space: normal; background-color: rgb(255, 255, 255); text-align: center;'>");
+        sbHtml.append("    <span style='font-family: &quot;Adobe 明體 Std L&quot;, serif;'>提供去</span><span style='font-family: 宋体;'>爱</span><span style='font-family: &quot;Adobe 明體 Std L&quot;, serif;'>的精神力量</span>");
+        sbHtml.append("</p>");
+        sbHtml.append("<p style='white-space: normal; background-color: rgb(255, 255, 255); text-align: center;'>");
+        sbHtml.append("    <span style='font-family: &quot;Adobe 明體 Std L&quot;, serif;'>支援大家走在</span><span style='font-family: 宋体;'>恋爱</span><span style='font-family: &quot;Adobe 明體 Std L&quot;, serif;'>成就的路上</span>");
+        sbHtml.append("</p>");
+        sbHtml.append("<p style='white-space: normal; background-color: rgb(255, 255, 255); text-align: center;'>");
+        sbHtml.append("    <span style='font-family: &quot;Adobe 明體 Std L&quot;, serif;'>&nbsp;</span>");
+        sbHtml.append("</p>");
+        sbHtml.append("<p style='white-space: normal; background-color: rgb(255, 255, 255); text-align: center;'>");
+        sbHtml.append("    <span style='font-family: 宋体;'>这</span><span style='font-family: &quot;Adobe 明體 Std L&quot;, serif;'>就是「</span><span style='font-family: 宋体;'>恋</span><span style='font-family: &quot;Adobe 明體 Std L&quot;, serif;'>猫神社」存在意义</span>");
+        sbHtml.append("</p>");
+        sbHtml.append("<p>");
+        sbHtml.append("    <span style='font-family: &quot;Adobe 明體 Std L&quot;, serif;'><br/></span>");
+        sbHtml.append("</p>");
+        sbHtml.append("<p>");
+        sbHtml.append("    <br/>");
+        sbHtml.append("</p>");
+        sbHtml.append("</div>");
+        return $(sbHtml.toString());
+        };
+        
+        var initAbout = function(data){
+            $(".about_content").append(showAbout(data));
+        };
+        initAbout();
+    };
+
+    $.fn.aboutModule = function(options) {
+        return this.each(function () {
+            return eAbout(options, $(this));
+        });
+    };
+        
+    $.fn.aboutModule.defaults = {};
+
+});
+/*  Footer  */
+
 /*  Footer  */
 ;(function($){
     var eFooter = function(options,object) {
@@ -766,8 +902,8 @@ $(function(){
     		sbHtml.append("			<div class='navbar-body nav-navicon' id='navbar-footer'>");
     		sbHtml.append("				<div class='navbar-text navbar-left hidden-s hidden-l'>版权所有 &copy; <a href='http://www.lclianmao.com/' target='_blank'>www.lclianmao.com</a> All Rights Reserved，沪ICP备10200855号-5</div>");
     		sbHtml.append("				<ul class='nav nav-inline navbar-right'>");
-    		sbHtml.append("					<li><a href=''>关于恋猫</a></li>");
-    		sbHtml.append("					<li><a href=''>关于LC品爱</a></li>");
+    		sbHtml.append("					<li><a href='" + lclove.util.basePath + "lianmao.xhtml' target='_blank'>关于恋猫</a></li>");
+    		sbHtml.append("					<li><a href='" + lclove.util.basePath + "brand.xhtml' target='_blank'>关于LC品爱</a></li>");
     		sbHtml.append("					<li><a href=''>转载声明</a></li>");
     		sbHtml.append("					<li><a href='http://www.beianbeian.com/beianxinxi/a89c1924-5c86-4846-a79b-261aaea5527e.html' target='_blank'>ICP备案信息</a></li>");
     		sbHtml.append("				</ul>");
