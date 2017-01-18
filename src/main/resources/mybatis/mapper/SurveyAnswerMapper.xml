@@ -84,4 +84,9 @@
       DATETIME = #{datetime,jdbcType=TIMESTAMP}
     where ID = #{id,jdbcType=INTEGER}
   </update>
+  <select id="selectCountBySurveyID" resultType="int">
+    select count(ID)
+    from survey_answer
+    where SURVEY_ID = #{0}
+  </select>
 </mapper>

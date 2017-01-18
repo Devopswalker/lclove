@@ -40,6 +40,8 @@ public class SurveyService {
 		if (survey.getId() == null) {
 			surveyMapper.insert(survey);
 		} else {
+            surveyMapper.updateByPrimaryKey(survey);
+            /**
 			List<Question> questions = survey.getQuestions();
 			for (int i = 0; i < questions.size(); i++) {
 				questions.get(i).setSurveyId(survey.getId());
@@ -55,8 +57,43 @@ public class SurveyService {
 				saveQuestionOptions.addAll(questionOptions);
 			}
 			questionOptionMapper.insertOptions(saveQuestionOptions);
+             **/
 		}
 	}
+
+    /**
+     * 保存问卷的题库 question 中必须包含 surveyId
+     * @param question
+     */
+    public void saveQuestion(Question question){
+        if (question.getId() == null){
+            questionMapper.insert(question);
+        }else{
+            questionMapper.updateByPrimaryKey(question);
+        }
+
+        for (QuestionOption questionOption : question.getQuestionOptions()){
+            if (questionOption.getId() == null) {
+                questionOption.setQuestionId(question.getId());
+                questionOptionMapper.insert(questionOption);
+            }else {
+                questionOptionMapper.updateByPrimaryKey(questionOption);
+            }
+        }
+    }
+
+    /**
+     * 单独保存问卷调查题库选项
+     * @param questionOption
+     */
+    public void saveQuestionOption(QuestionOption questionOption){
+        if (questionOption.getId() == null) {
+            questionOptionMapper.insert(questionOption);
+        }else {
+            questionOptionMapper.updateByPrimaryKey(questionOption);
+        }
+    }
+
 
     /**
      * 删除问卷调查
@@ -95,7 +132,24 @@ public class SurveyService {
     }
 
     /**
-     * 查找问卷调查列表
+     * 前端页面获取要显示的问卷调查
+     * @return
+     */
+    public Survey getSurveyDetail(){
+        List<Survey> surveyList = surveyMapper.selectLatestShowSurvey();
+        Survey resultSurvey = surveyList.get(0);
+        List<Question> questions = questionMapper.selectSurveyId(resultSurvey.getId());
+
+        for (int i = 0; i < questions.size(); i++){
+            List<QuestionOption> options = questionOptionMapper.selectQuestionsId(questions.get(i).getId());
+            questions.get(i).setQuestionOptions(options);
+        }
+        resultSurvey.setQuestions(questions);
+        return resultSurvey;
+    }
+
+    /**
+     * 获取问卷调查列表
      * @param pageNo
      * @param pageSize
      * @return
@@ -113,14 +167,8 @@ public class SurveyService {
      * @return
      */
     public Paging getSurveyPaging(Integer pageNo, Integer pageSize){
-        QueryParameter queryParameter = new QueryParameter(null,null);
-        List<Survey> surveys = surveyMapper.selectSurveyList(queryParameter);
-        int totalSize = surveys.size();
-        int total = totalSize/pageSize;
-        int lastPages = totalSize%pageSize;
-        if (lastPages > 0){
-            total += 1;
-        }
+        int totalSize = surveyMapper.selectCount();
+        int total = totalSize % pageSize == 0 ? totalSize / pageSize : totalSize / pageSize + 1;
         Paging paging = new Paging(pageNo, pageSize);
         paging.setTotal(total);
         return paging;
@@ -166,7 +214,7 @@ public class SurveyService {
     /**
      * 存储问卷调查
      * @param surveyId 问卷ID
-     * @param ipAddress request.getRemoteAddr() 或缺 ip 地址
+     * @param ipAddress request.getRemoteAddr() 获取 ip 地址
      * @param surveyAnswerDetails 已经选择的问题选项以及答案
      */
     public void saveSurveyAnswer(Integer surveyId, String ipAddress, List<SurveyAnswerDetail> surveyAnswerDetails){
@@ -181,21 +229,19 @@ public class SurveyService {
 
     /**
      * 获取问卷调查结果
-     * @param id
+     * @param id 问卷 ID
      * @return
      */
     public Survey getSurveyReuslt(Integer id){
         Survey survey = surveyMapper.selectByPrimaryKey(id);
-        List<SurveyAnswer> surveyAnswers = surveyAnswerMapper.selectBySurveyID(id);
-        Integer surveyAnswerTotalNum = surveyAnswers.size();
+        Integer surveyAnswerTotalNum = surveyAnswerMapper.selectCountBySurveyID(id);
         List<Question> questions = questionMapper.selectSurveyId(id);
 
         for (Question question : questions){
             List<QuestionOption> options = questionOptionMapper.selectQuestionsId(question.getId());
 
             for (QuestionOption option : options){
-                List<SurveyAnswerDetail> surveyAnswerDetails = surveyAnswerDetailMapper.selectByOptionId(option.getId());
-                Integer selectedNum = surveyAnswerDetails.size();
+                Integer selectedNum = surveyAnswerDetailMapper.selectCountByOptionId(option.getId());
 
                 NumberFormat numberFormat = NumberFormat.getInstance();
                 numberFormat.setMaximumFractionDigits(2);

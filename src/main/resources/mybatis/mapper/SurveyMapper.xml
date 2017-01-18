@@ -4,6 +4,7 @@
   <resultMap id="BaseResultMap" type="com.lcpa.lclove.model.Survey">
     <id column="ID" jdbcType="INTEGER" property="id" />
     <result column="TITLE" jdbcType="VARCHAR" property="title" />
+    <result column="HEADER_IMG" jdbcType="VARCHAR" property="headerImg" />
     <result column="DESCRIPTION" jdbcType="VARCHAR" property="description" />
     <result column="START_TIME" jdbcType="TIMESTAMP" property="startTime" />
     <result column="END_TIME" jdbcType="TIMESTAMP" property="endTime" />
@@ -11,7 +12,7 @@
     <result column="TOPIC" jdbcType="VARCHAR" property="topic" />
   </resultMap>
   <sql id="Base_Column_List">
-    ID, TITLE, DESCRIPTION, START_TIME, END_TIME, STATE, TOPIC
+    ID, TITLE, HEADER_IMG, DESCRIPTION, START_TIME, END_TIME, STATE, TOPIC
   </sql>
   <sql id="Paging">
     <if test="paging != null and paging.StartIndex != null and paging.pageSize">
@@ -23,6 +24,12 @@
     <include refid="Base_Column_List" />
     from survey
     where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectLatestShowSurvey" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from survey
+    where STATE = 1
   </select>
   <select id="selectSurveyList" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select
@@ -133,4 +140,9 @@
     STATE = 0,
     where ID = #{0}
   </update>
+
+  <select id="selectCount" resultType="int">
+    select count(ID)
+    from survey
+  </select>
 </mapper>

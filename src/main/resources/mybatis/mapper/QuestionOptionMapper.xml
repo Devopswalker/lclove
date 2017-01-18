@@ -18,11 +18,11 @@
     from question_option
     where ID = #{id,jdbcType=INTEGER}
   </select>
-  <select id="selectQuestionsId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="selectQuestionsId" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from question_option
-    where QUESTION_ID = #{id,jdbcType=INTEGER}
+    where QUESTION_ID = #{0}
     order by SEQ ASC
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
@@ -34,7 +34,7 @@
     delete from question_option
     where SURVEY_ID = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.lcpa.lclove.model.QuestionOption">
+  <insert id="insert" parameterType="com.lcpa.lclove.model.QuestionOption" useGeneratedKeys="true" keyProperty="id">
     insert into question_option (ID, QUESTION_ID, CONTENT, 
       SEQ, IMG_SRC)
     values (#{id,jdbcType=INTEGER}, #{questionId,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR}, 

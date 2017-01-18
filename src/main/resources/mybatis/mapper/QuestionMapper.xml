@@ -18,11 +18,11 @@
     from question
     where ID = #{id,jdbcType=INTEGER}
   </select>
-  <select id="selectSurveyId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="selectSurveyId" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from question
-    where SURVEY_ID = #{id,jdbcType=INTEGER}
+    where SURVEY_ID = #{0}
     order by SEQ ASC 
   </select>
 
@@ -35,7 +35,7 @@
     where SURVEY_ID = #{id,jdbcType=INTEGER}
   </delete>
 
-  <insert id="insert" parameterType="com.lcpa.lclove.model.Question">
+  <insert id="insert" parameterType="com.lcpa.lclove.model.Question" useGeneratedKeys="true" keyProperty="id">
     insert into question (ID, SURVEY_ID, INPUT_TYPE, 
       TITLE, DESCRIPTION, SEQ
       )

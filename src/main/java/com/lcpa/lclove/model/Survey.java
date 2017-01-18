@@ -8,6 +8,8 @@ public class Survey {
 
     private String title;
 
+    private String headerImg;
+
     private String description;
 
     private Timestamp startTime;
@@ -34,6 +36,14 @@ public class Survey {
 
     public void setTitle(String title) {
         this.title = title == null ? null : title.trim();
+    }
+
+    public String getHeaderImg() {
+        return headerImg;
+    }
+
+    public void setHeaderImg(String headerImg) {
+        this.headerImg = headerImg;
     }
 
     public String getDescription() {

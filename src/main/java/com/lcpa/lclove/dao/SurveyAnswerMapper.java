@@ -18,4 +18,6 @@ public interface SurveyAnswerMapper {
     int updateByPrimaryKey(SurveyAnswer record);
 
     List<SurveyAnswer> selectBySurveyID(Integer id);
+
+    int selectCountBySurveyID(Integer id);
 }
