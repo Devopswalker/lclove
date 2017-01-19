@@ -121,7 +121,7 @@ public class SurveyService {
     public Survey getSurveyDetailById(Integer id){
         Survey survey = surveyMapper.selectByPrimaryKey(id);
 
-        List<Question> questions = questionMapper.selectSurveyId(id);
+        List<Question> questions = questionMapper.selectBySurveyId(id);
 
         for (Question question :questions){
             List<QuestionOption> options = questionOptionMapper.selectOptionByQuestionId(question.getId());
@@ -138,7 +138,7 @@ public class SurveyService {
     public Survey getSurveyDetail(){
         List<Survey> surveyList = surveyMapper.selectLatestShowSurvey();
         Survey resultSurvey = surveyList.get(0);
-        List<Question> questions = questionMapper.selectSurveyId(resultSurvey.getId());
+        List<Question> questions = questionMapper.selectBySurveyId(resultSurvey.getId());
 
         for (Question question :questions){
             List<QuestionOption> options = questionOptionMapper.selectOptionByQuestionId(question.getId());
@@ -235,7 +235,7 @@ public class SurveyService {
     public Survey getSurveyReuslt(Integer id){
         Survey survey = surveyMapper.selectByPrimaryKey(id);
         Integer surveyAnswerTotalNum = surveyAnswerMapper.selectCountBySurveyID(id);
-        List<Question> questions = questionMapper.selectSurveyId(id);
+        List<Question> questions = questionMapper.selectBySurveyId(id);
 
         for (Question question : questions){
             List<QuestionOption> options = questionOptionMapper.selectOptionByQuestionId(question.getId());
@@ -254,5 +254,16 @@ public class SurveyService {
         survey.setQuestions(questions);
         return survey;
 
+    }
+
+    public List<Question> getAllQuestionBySurveyId(Integer id) {
+        return questionMapper.selectBySurveyId(id);
+    }
+
+    public Question getQuestionDetailById(Integer id) {
+        Question question = questionMapper.selectByPrimaryKey(id);
+        List<QuestionOption> questionOptions = questionOptionMapper.selectOptionByQuestionId(id);
+        question.setQuestionOptions(questionOptions);
+        return question;
     }
 }

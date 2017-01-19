@@ -17,7 +17,7 @@ public interface QuestionMapper {
 
     Question selectByPrimaryKey(Integer id);
 
-    List<Question> selectSurveyId(Integer id);
+    List<Question> selectBySurveyId(Integer id);
 
     int updateByPrimaryKeySelective(Question record);
 

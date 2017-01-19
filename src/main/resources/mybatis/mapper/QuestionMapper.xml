@@ -18,7 +18,7 @@
     from question
     where ID = #{id,jdbcType=INTEGER}
   </select>
-  <select id="selectSurveyId" resultMap="BaseResultMap">
+  <select id="selectBySurveyId" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from question

@@ -1,7 +1,11 @@
 package com.lcpa.lclove.web.controller.admin.research;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import com.lcpa.lclove.model.ArticleType;
+import com.lcpa.lclove.model.Question;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -74,4 +78,32 @@ public class ResearchAdminController extends AnnotationController {
         surveyService.removeSurvey(id);
         return showJsonSuccess(model);
     }
+
+    @RequestMapping(value = "/admin/research/questionList.xhtml")
+    public String questionList(Integer id, ModelMap model){
+        List<Question> questions = surveyService.getAllQuestionBySurveyId(id);
+        List<QuestionInputType> typeList = surveyService.getAllQuestionInputType();
+        Map<Integer, QuestionInputType> typeMap = new HashMap();
+        for (QuestionInputType questionInputType : typeList) {
+            typeMap.put(questionInputType.getId(), questionInputType);
+        }
+        model.put("questions", questions);
+        model.put("typeMap", typeMap);
+        return "admin/research/questionList.vm";
+    }
+
+    @RequestMapping(value = "/admin/research/editQuestion.xhtml")
+    public String editQuestion(Integer id, ModelMap model){
+        Question question = null;
+        if (id != null){
+            question = surveyService.getQuestionDetailById(id);
+        }
+        List<QuestionInputType> typeList = surveyService.getAllQuestionInputType();
+
+        model.put("question", question);
+        model.put("typeList", typeList);
+        return "admin/research/editQuestion.vm";
+    }
+
+
 }

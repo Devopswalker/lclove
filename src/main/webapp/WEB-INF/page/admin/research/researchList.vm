@@ -37,8 +37,18 @@
                         <td>$!survey.title</td>
                         <td>$!survey.description</td>
                         <td>$!survey.endTime</td>
-                        <td>$!survey.state</td>
-                        <td><a class="button border-sub" href="${basePath}admin/research/editResearch.xhtml?id=$survey.id"><span class="icon-qrcode"></span> 题库维护</a></td>
+                        <td>
+                            <div class="button-group radio">
+                                <label class="button active">
+                                    <input name="pintuer" value="yes"  type="radio">
+                                    <span class="icon icon-check"></span> 开
+                                </label>
+                                <label class="button">
+                                    <input name="pintuer" value="no" checked="checked" type="radio"><span class="icon icon-times"></span> 关
+                                </label>
+                            </div>
+                        </td>
+                        <td><a class="button border-sub" href="${basePath}admin/research/questionList.xhtml?id=$survey.id"><span class="icon-qrcode"></span> 题库维护</a></td>
                         <td>
                             <div class="button-group">
                                 <a class="button border-main" href="${basePath}admin/research/editResearch.xhtml?id=$survey.id"><span class="icon-edit"></span> 修改</a>

@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="renderer" content="webkit">
+    <title></title>
+    <link rel="stylesheet" href="${staticPath}css/pintuer.css">
+    <link rel="stylesheet" href="${staticPath}css/admin/admin.css">
+    <script src="${staticPath}js/jquery.js"></script>
+    <script src="${staticPath}js/pintuer.js"></script>
+    <script src="${staticPath}js/plugins/layer/laydate/laydate.js"></script>
+    <script src="${staticPath}js/plugins/ueditor/ueditor.config.js"></script>
+    <script src="${staticPath}js/plugins/ueditor/ueditor.all.min.js"></script>
+    <script src="${staticPath}js/plugins/ueditor/lang/zh-cn/zh-cn.js"></script>
+    <script src="${staticPath}js/lclove-util.js"></script>
+</head>
+<body>
+<script>
+    function editQuesitonOption(event){
+//        var formObj = $(event.target).parent().parent()
+//        var conentObj = $(formObj).children("content")
+//        $(formObj).children("imgUrl").removeAttr("disabled")
+    }
+    function saveQuesitonOption(event){
+
+    }
+    function delQuesitonOption(event){
+
+    }
+</script>
+##<div id="questionOptionItem">
+##    <form name="optionItem" method="post" class="form-inline">
+##        <div class="form-group">
+##            <div class="label">
+##                <label for="content">
+##                    内容:</label>
+##            </div>
+##            <div class="field">
+##                <input disabled value="xxxx" type="text" class="input" id="content" name="content" size="20" placeholder="选项内容" />
+##            </div>
+##        </div>
+##        <div class="form-group">
+##            <div class="label">
+##                <label for="imgUrl">
+##                    图片URL:</label>
+##            </div>
+##            <div class="field">
+##                <input disabled  type="text" class="input tips" id="imgUrl" name="imgUrl" size="20"/>
+##            </div>
+##        </div>
+##        <div class="form-group hidden">
+##            <div class="label">
+##                <label for="password">
+##                    图片</label>
+##            </div>
+##            <div class="field">
+##                <img  alt="" width="70" height="50" />
+##            </div>
+##        </div>
+##
+##        <div class="button-group">
+##            <a class="button border-main" onclick="editQuesitonOption(this)"><span class="icon-edit"></span> 修改</a>
+##            <a class="button border-blue" onclick="saveQuesitonOption()"><span class="icon-save"></span> 保存</a>
+##            <a class="button border-red" onclick="delQuesitonOption()"><span class="icon-trash-o"></span> 删除</a>
+##        </div>
+##    </form>
+##</div>
+
+<div class="panel admin-panel">
+    <div class="panel-head" id="add"><strong><span class="icon-pencil-square-o"></span>编辑问题</strong></div>
+    <div class="padding border-bottom">
+        <ul class="search" style="padding-left:10px;">
+            <li><a class="button bg-main icon-backward" href="${basePath}admin/research/questionList.xhtml?id=$survey.id"> 返回问题列表</a></li>
+##            <li> <a class="button border-main icon-plus-square-o" href="${basePath}admin/research/editQuestion.xhtml"> </a> </li>
+
+        </ul>
+    </div>
+    <div class="body-content">
+        <form method="post" class="form-x" action="${basePath}admin/research/saveQuestion.xhtml">
+            <input type="hidden" id="id" name="id" value="$!question.id"/>
+            <div class="form-group">
+                <div class="label">
+                    <label>顺序：</label>
+                </div>
+                <div class="field">
+                    <input type="text" class="input w50" id="title" name="title" value="$!question.seq" data-validate="required:请输入顺序" />
+                    <div class="tips"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="label">
+                    <label>题目：</label>
+                </div>
+                <div class="field">
+                    <input type="text" class="input w50" id="title" name="title" value="$!question.title" data-validate="required:请输入题目" />
+                    <div class="tips"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="label">
+                    <label>题型：</label>
+                </div>
+                <div class="field">
+                    <select id="questionType" name="questionType" class="input w50">
+                        #foreach($type in $typeList)
+                            <option value="$type.id" #if($VmUtils.eq($type.id, $question.inputType))selected#end>$type.name</option>
+                        #end
+                    </select>
+                    <div class="tips"></div>
+                </div>
+##                <div class="field">
+##                    <input type="text" class="input w50" id="topic" name="topic" value="$!survey.headerImg" data-validate="required:请输入图片URL" />
+##                    <div class="tips"></div>
+##                </div>
+            </div>
+##            <div class="padding border-bottom">
+##                <ul class="search" style="padding-left:10px;">
+##                    <li><a class="button bg-main icon-backward" href="${basePath}admin/research/questionList.xhtml?id=$survey.id"> 返回问题列表</a></li>
+##                ##            <li> <a class="button border-main icon-plus-square-o" href="${basePath}admin/research/editQuestion.xhtml"> </a> </li>
+##                    <li><button class="button button-big bg-main dialogs" data-target="#mydialog" data-toggle="click" data-mask="1" data-width="50%">
+##                        添加答案</button></li>
+##                </ul>
+##            </div>
+            <div class="padding border-bottom">
+                <div class="label">
+                    <label class="button bg-main icon-plus" onclick="addTableOption()"> 添加选项</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+            <table class="table table-hover text-center" id="optionTable">
+                <tr>
+                    <th>内容</th>
+                    <th>图片URL</th>
+                    <th>图片</th>
+                    <th>操作</th>
+                </tr>
+                <volist name="list" id="optionList">
+                    #foreach($option in $question.questionOptions)
+                        <tr>
+                            <td><input value="$!option.content"</td>
+                            <td><input value="$!option.imgSrc"</td>
+                            #if($!option.imgSrc != "")
+                            <td><img src="$option.imgSrc" alt="" width="70" height="50" /></td>
+                            #end
+                            #if($!option.imgSrc == "")
+                                <td>无</td>
+                            #end
+                            <td>
+                                <div class="button-group">
+##                                    <a class="button border-main dialogs" data-target="#mydialog" data-toggle="click" onclick="openDialog('$!option.id','$!option.seq','$!option.content','$!option.imgSrc')" data-mask="1" data-width="50%">
+##                                        修改</a>
+##                                    <a class="button border-main" href="${basePath}admin/research/editQuestion.xhtml?id=$question.id"><span class="icon-edit"></span> 修改</a>
+                                    <a class="button border-red" href="javascript:void(0)" onclick="deleteTableOption(this)"><span class="icon-trash-o"></span> 删除</a>
+                                </div>
+                            </td>
+                        </tr>
+                    #end
+            </table>
+            </div>
+            <div class="clear"></div>
+            <div class="form-group">
+                <div class="label">
+                    <label></label>
+                </div>
+                <div class="field">
+                    <button class="button bg-main icon-check-square-o" type="submit"> 提交</button>
+                    <a class="button bg-main icon-backward" href="${basePath}admin/research/researchList.xhtml"> 取消</a>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div id="questionTemp" hidden>
+        <div class="form-group" name="question">
+            <div class="label">
+                <label name="questionSeq"></label>
+            </div>
+            <div class="field">
+                <input type="text" class="input w50" data-validate="required:请输入问题" />
+                <select  class="input w50" >
+                    #foreach($questionType in $questionTypes)
+                        <option value="$questionType.id" #if($VmUtils.eq($questionType.id, $survey.questionType))selected#end>$questionType.type</option>
+                    #end
+                </select>
+                <button class="button bg-main icon-plus" onclick="addQeustionOption(event)"/>
+                <button class="button bg-main icon-times" onclick="removeQuestion()"/>
+                <div class="tips"></div>
+            </div>
+        </div>
+    </div>
+    <div id="inputOptionTemp" hidden>
+        <div class="form-group" name="question">
+            <div class="label">
+                <label></label>
+            </div>
+            <div class="field">
+                <input type="text" class="input w50" data-validate="required:请输入答案" />
+                <button class="button bg-main icon-times" onclick="removeOption()"/>
+            </div>
+
+        </div>
+    </div>
+    <div id="radioBtnOptionTemp" hidden>
+        <div class="form-group" name="question">
+            <div class="label">
+                <input type="radio" />
+            </div>
+            <div class="field">
+                <input type="text" class="input w50" data-validate="required:请输入xx" />
+                <button class="button bg-main icon-times" onclick="removeOption()"/>
+            </div>
+
+        </div>
+    </div>
+    <div id="checkBoxBtnOptionTemp" hidden>
+        <div class="form-group" name="question">
+            <div class="label">
+                <input type="checkbox" />
+            </div>
+            <div class="field">
+                <input type="text" class="input w50" data-validate="required:请输入xx" />
+                <button class="button bg-main icon-times" onclick="removeOption()"/>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<script type="text/javascript">
+    function addQeustion(){
+        var questionTemp = $("#questionTemp").clone(true).removeAttr("hidden").html();
+        $("#questions").append(questionTemp)
+    }
+    function addTableOption(){
+        var sbHtml = new StringBuilder();
+        sbHtml.append('<tr><td><input /></td><td><input /></td><td>无</td>');
+        sbHtml.append('<td><div class="button-group">');
+//        sbHtml.append('<a class="button border-main"><span class="icon-edit"></span> 修改</a>')
+//        sbHtml.append('<a class="button border-blue"><span class="icon-save"></span> 保存</a>')
+        sbHtml.append('<a class="button border-red" href="javascript:void(0)" onclick="return deleteTableOption(this)"><span class="icon-trash-o"></span> 删除</a>')
+        sbHtml.append('</div></td></tr>')
+
+        $("#optionTable").append(sbHtml.toString())
+    }
+    function deleteTableOption(event){
+        if(confirm("您确定要删除吗?")){
+            $(event.target).parent("tr").remove();
+        }
+    }
+    function addQeustionOption(event){
+        var target = event.target;
+        var selectVal = $(target).prev().val();
+        var parentEle = $(target).parents(".form-group");
+        var optionEle;
+        if (selectVal == 1){
+            optionEle = $("#inputOptionTemp").clone(true).removeAttr("hidden").html();
+        }else if (selectVal == 2){
+            optionEle = $("#radioBtnOptionTemp").clone(true).removeAttr("hidden").html();
+        }else if (selectVal == 3){
+            optionEle = $("#checkBoxBtnOptionTemp").clone(true).removeAttr("hidden").html();
+        }
+        $(parentEle).append(optionEle)
+    }
+    function removeQuestion(){
+        var target = event.target;
+        var parentEle = $(target).closest(".form-group");
+        $(parentEle).remove();
+    }
+    function removeOption(){
+        var target = event.target;
+        var parentEle = $(target).closest(".form-group");
+        $(parentEle).remove();
+    }
+
+    function openDialog(id, seq, content, imgSrc){
+        $("#aa").val("xxxxx");
+        $("#editOptionId").val(id);
+        $("#editOptionSeq").val(seq);
+        $("#editOptionContent").val(content);
+        $("#editOptionImg").val(imgSrc);
+    }
+    function dialogShowHandler(){
+        alert(11)
+    }
+</script>
+<div id="mydialog">
+    <div class="dialog">
+        <div class="dialog-head">
+            <span class="close rotate-hover"></span><strong>选项内容</strong>
+        </div>
+        <div class="dialog-body">
+            <form method="post" class="form-x" action="${basePath}admin/research/saveQuestion.xhtml">
+                <input type="hidden" id="editOptionId" name="editOptionId"/>
+                <div class="form-group">
+                    <div class="label w50">
+                        <label>顺序：</label>
+                    </div>
+                    <div class="field">
+                        <input type="text" class="input w50" id="editOptionSeq" name="editOptionSeq" data-validate="required:请输入顺序" />
+                        <div class="tips"></div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="label w50">
+                        <label>内容：</label>
+                    </div>
+                    <div class="field">
+                        <input type="text" class="input w130" id="editOptionContent" name="editOptionContent"  data-validate="required:请输入题目" />
+                        <div class="tips"></div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="label w50">
+                        <label>图片：</label>
+                    </div>
+                    <div class="field">
+                        <input type="text" class="input w130" id="editOptionImg" name="editOptionImg"/>
+                        <div class="tips"></div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="dialog-foot">
+            <button class="button dialog-close">
+                取消</button>
+            <button class="button bg-green">
+                确认</button>
+        </div>
+    </div>
+</div>
+</body>
+</html>

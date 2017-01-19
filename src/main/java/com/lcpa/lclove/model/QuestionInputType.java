@@ -3,7 +3,7 @@ package com.lcpa.lclove.model;
 public class QuestionInputType {
     private Integer id;
 
-    private String type;
+    private String name;
 
     public Integer getId() {
         return id;
@@ -13,11 +13,11 @@ public class QuestionInputType {
         this.id = id;
     }
 
-    public String getType() {
-        return type;
+    public String getName() {
+        return name;
     }
 
-    public void setType(String type) {
-        this.type = type == null ? null : type.trim();
+    public void setName(String name) {
+        this.name = name;
     }
 }
