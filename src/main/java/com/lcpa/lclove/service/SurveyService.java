@@ -71,13 +71,14 @@ public class SurveyService {
         }else{
             questionMapper.updateByPrimaryKey(question);
         }
-
-        for (QuestionOption questionOption : question.getQuestionOptions()){
-            if (questionOption.getId() == null) {
-                questionOption.setQuestionId(question.getId());
-                questionOptionMapper.insert(questionOption);
-            }else {
-                questionOptionMapper.updateByPrimaryKey(questionOption);
+        if (question.getQuestionOptions() != null && question.getQuestionOptions().size() > 0){
+            for (QuestionOption questionOption : question.getQuestionOptions()){
+                if (questionOption.getId() == null) {
+                    questionOption.setQuestionId(question.getId());
+                    questionOptionMapper.insert(questionOption);
+                }else {
+                    questionOptionMapper.updateByPrimaryKey(questionOption);
+                }
             }
         }
     }
@@ -265,5 +266,10 @@ public class SurveyService {
         List<QuestionOption> questionOptions = questionOptionMapper.selectOptionByQuestionId(id);
         question.setQuestionOptions(questionOptions);
         return question;
+    }
+
+    public void removeQuestion(Integer id) {
+        questionMapper.deleteByPrimaryKey(id);
+        questionOptionMapper.deleteByQuestionId(id);
     }
 }

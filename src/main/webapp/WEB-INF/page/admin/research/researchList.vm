@@ -95,7 +95,7 @@
     //单个删除
     function deleteData(entityId){
         if(confirm("您确定要删除吗?")){
-            var url = '${basePath}admin/recommend/delRecommend.xhtml';
+            var url = '${basePath}admin/research/deleteResearch.xhtml';
             var values = {"id":entityId};
             $.getData(url, values, true, 'get', 'json', false, ajaxCallBack);
         }
