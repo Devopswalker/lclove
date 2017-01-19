@@ -598,6 +598,7 @@ $(function(){
     var eMyContent = function(options,object) {
         var opts = $.extend({}, $.fn.ArticleContent.defaults, options);
         var instance = object;
+        var url = lclove.util.basePath + "ajax/getArticle.xhtml?sortType="+lclove.params.sortType+"&aid=" + lclove.params.aid +"&navtype="+lclove.params.navtype;
         var showContent = function (data) {
             var sbHtml = new StringBuilder();
             sbHtml.append("<div class='article_content_head'>");
