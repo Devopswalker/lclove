@@ -5,6 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -17,11 +20,15 @@ import com.lcpa.lclove.model.ImageRecommend;
 import com.lcpa.lclove.model.Question;
 import com.lcpa.lclove.model.QuestionOption;
 import com.lcpa.lclove.model.Survey;
+import com.lcpa.lclove.model.SurveyAnswerDetail;
 import com.lcpa.lclove.service.ArticleService;
 import com.lcpa.lclove.service.CommentService;
 import com.lcpa.lclove.service.RecommendService;
+import com.lcpa.lclove.service.SurveyService;
 import com.lcpa.lclove.util.JsonUtils;
+import com.lcpa.lclove.util.WebUtils;
 import com.lcpa.lclove.vo.PagingJsonVo;
+import com.lcpa.lclove.vo.ResearchOptionsVo;
 
 
 @Controller
@@ -35,6 +42,9 @@ public class LcLoveAjaxController extends AnnotationController{
 
 	@Autowired
 	private CommentService commentService;
+	
+	@Autowired
+	private SurveyService surveyService;
 	
 	/**
 	 * Get Recommand dataList
@@ -154,16 +164,32 @@ public class LcLoveAjaxController extends AnnotationController{
 	}
 	
 	@RequestMapping("/ajax/getResearchDetail.xhtml")
-	public String getResearchDetail(ModelMap model){
+	public String getResearchDetail(Integer surveyId, ModelMap model){
+		/*Survey survey = null;
+		if(survey =! null){
+			survey = surveyService.getSurveyDetailById(surveyId);
+		}else{
+			survey = surveyService.getSurveyDetail();
+		}*/
 		Survey survey  = new Survey();
 		initDataValues(survey);
 		return showJsonSuccess(model, JsonUtils.writeObjectToJson(survey));
 	}
 
 	@RequestMapping("/ajax/saveResearch.xhtml")
-	public String saveResearch(ModelMap model){
-		
-		return showJsonSuccess(model);
+	public String saveResearch(String options, HttpServletRequest request, ModelMap model){
+		if(StringUtils.isBlank(options)){
+			return showJsonError(model, "Argument list syntax error !");
+		}
+		ResearchOptionsVo details = JsonUtils.readJsonToObject(ResearchOptionsVo.class, options);
+		if(details == null){
+			return showJsonError(model, "Bad character in paramenters !");
+		}
+		String clientIp =  WebUtils.getRemoteIp(request);
+		surveyService.saveSurveyAnswer(details.getSurveyId(), clientIp, details.getOptions());
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		resultMap.put("surveyId", details.getSurveyId());
+		return showJsonSuccess(model, JsonUtils.writeObjectToJson(resultMap));
 	}
 	
 	
