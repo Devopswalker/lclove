@@ -657,38 +657,38 @@ $(function(){
         var url = lclove.util.basePath + "ajax/getComments.xhtml?aid=" + lclove.params.aid;
         var showComment = function (data) {
             var sbHtml = new StringBuilder();
-           /* if(data.comments.length > 0 ){
+            if(data.comments.length > 0 ){
                  sbHtml.append("<div class='comments_area'>");
                  sbHtml.append("<div class='comments_title'><img src='"+lclove.util.imgPath+"images/comment.png'/><div> "+data.comments.length+" 条评论</div></div>");
-                 $.each(data.comments, function(){
+                 $.each(data.comments, function(index, item){
                  	sbHtml.append("    <div class='one_comment'>");
-                 	sbHtml.append("        <div class='name'> "+data.comments.nickName+" </div>");
+                 	sbHtml.append("        <div class='name'> "+item.nickName+" </div>");
                  	sbHtml.append("        <div class='colon'>：</div>");
-                 	sbHtml.append("        <div class='comment_content'> "+data.comments.content+" </div>");
+                 	sbHtml.append("        <div class='comment_content'> "+item.content+" </div>");
                  	sbHtml.append("        <img class='good_img' src='"+lclove.util.imgPath+"images/good.png'/>");
-                 	sbHtml.append("        <div class='good_count'> "+data.comments.upNum+" </div>");
+                 	sbHtml.append("        <div class='good_count'> "+item.upNum+" </div>");
                  	sbHtml.append("        <img class='bad_img'src='"+lclove.util.imgPath+"images/bad.png'/>");
-                 	sbHtml.append("        <div class='bad_count'> "+data.comments.downNum+" </div>");
+                 	sbHtml.append("        <div class='bad_count'> "+item.downNum+" </div>");
                      sbHtml.append("    </div>");
                      sbHtml.append("    <div class='solid_separate'></div>");
                  });
                  sbHtml.append("</div>");
-            }else{*/
+            }else{
             	sbHtml.append("<div class='_blanklist'>");
                 sbHtml.append("  <img style='margin-left:220px;' src='"+lclove.util.imgPath+"images/head_flower1.png'/><div style='margin-left:10px;'>暂无评论</div><img style='margin-left:10px;' src='"+lclove.util.imgPath+"images/head_flower1.png'/>");
                 sbHtml.append("</div>");
-            /*}*/
+            }
             sbHtml.append("<div class='comment_submit'>");
             sbHtml.append("  <div class='publish'>发表评论</div>");
             sbHtml.append("  <form name='commentsForm' class='form-inline' method='post'");
             sbHtml.append("     <div class='form-group'>");
             sbHtml.append("       <div class='field'>");
-            sbHtml.append("         &nbsp;昵称<font color='red'>*</font>&nbsp;<input type='text' class='input' id='nickName' name='nickName' style='width:240px;' size='30' />");
-            sbHtml.append("         邮箱<font color='red'>*</font>&nbsp;<input type='text' class='input' id='email' name='email' style='width:240px;' size='48' />");
+            sbHtml.append("         &nbsp;昵称<font color='red'>*</font>&nbsp;<input type='text' class='input' id='nickName' name='nickName' maxlength='12' style='width:240px;' size='30' />");
+            sbHtml.append("         邮箱<font color='red'>*</font>&nbsp;<input type='text' class='input' id='email' name='email' maxlength='36' style='width:240px;' size='48' />");
             sbHtml.append("       </div>");
             sbHtml.append("     </div>");
             sbHtml.append("     <div class='form-group' style='margin-top: 10px;margin-bottom: 10px;'>");
-            sbHtml.append("       <textarea class='input' rows='4' cols='50' placeholder='写下您的评论内容' maxlength='200' id='content' name='content' ></textarea>");
+            sbHtml.append("       <textarea class='input' rows='4' cols='50' placeholder='写下您的评论内容' maxlength='50' id='content' name='content' ></textarea>");
             sbHtml.append("     </div>");
             sbHtml.append("     <div class='clear'></div>");
             sbHtml.append("     <div id='submitBtn' class='confirm_comment'><img src='"+lclove.util.imgPath+"images/send.png'/></div>");
@@ -734,8 +734,8 @@ $(function(){
         var initComments = function(data){
             $(".detail_comment_content").append(showComment(data));
         };
-        initComments();
-        //$.getData(url, null, true, "POST", "json", true, initComments);
+        //initComments();
+        $.getData(url, null, true, "POST", "json", true, initComments);
     };
    
     $.fn.renderComment = function(options) {
