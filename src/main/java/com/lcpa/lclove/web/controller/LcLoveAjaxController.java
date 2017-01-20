@@ -171,8 +171,8 @@ public class LcLoveAjaxController extends AnnotationController{
 		}else{
 			survey = surveyService.getSurveyDetail();
 		}*/
-		Survey survey  = new Survey();
-		initDataValues(survey);
+		Survey survey  = surveyService.getSurveyDetail();
+//		initDataValues(survey);
 		return showJsonSuccess(model, JsonUtils.writeObjectToJson(survey));
 	}
 
