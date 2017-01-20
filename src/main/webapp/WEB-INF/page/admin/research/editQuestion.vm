@@ -92,9 +92,9 @@
                                 #end
                                 <td>
                                     <div class="button-group">
-                                        <a class="button border-main" href="javascript:void(0)" onclick="editTableOption()"><span class="icon-edit"></span> 编辑</a>
-                                        <a class="button border-blue" href="javascript:void(0)" onclick="saveTableOption()"><span class="icon-save"></span> 保存</a>
-                                        <a class="button border-red" href="javascript:void(0)" onclick="deleteTableOption()"><span class="icon-trash-o"></span> 删除</a>
+                                        <a class="button border-main" href="javascript:void(0)" onclick="editTableOption(event)"><span class="icon-edit"></span> 编辑</a>
+                                        <a class="button border-blue" href="javascript:void(0)" onclick="saveTableOption(event)"><span class="icon-save"></span> 保存</a>
+                                        <a class="button border-red" href="javascript:void(0)" onclick="deleteTableOption(event)"><span class="icon-trash-o"></span> 删除</a>
                                     </div>
                                 </td>
                             </tr>
@@ -140,13 +140,14 @@
         sbHtml.append('<td><input class="input" id="imgSrc"/></td>')
         sbHtml.append('<td id="optionImg">无</td>');
         sbHtml.append('<td ><div class="button-group">');
-        sbHtml.append('<a class="button border-main" href="javascript:void(0)" onclick="editTableOption()"><span class="icon-edit"></span> 编辑</a>')
-        sbHtml.append('<a class="button border-blue" href="javascript:void(0)" onclick="saveTableOption()"><span class="icon-save"></span> 保存</a>')
-        sbHtml.append('<a class="button border-red" href="javascript:void(0)" onclick="return deleteTableOption(this)"><span class="icon-trash-o"></span> 删除</a>')
+        sbHtml.append('<a class="button border-main" href="javascript:void(0)" onclick="editTableOption(event)"><span class="icon-edit"></span> 编辑</a>')
+        sbHtml.append('<a class="button border-blue" href="javascript:void(0)" onclick="saveTableOption(event)"><span class="icon-save"></span> 保存</a>')
+        sbHtml.append('<a class="button border-red" href="javascript:void(0)" onclick="return deleteTableOption(event)"><span class="icon-trash-o"></span> 删除</a>')
         sbHtml.append('</div></td></tr>')
         $("#optionTable").append(sbHtml.toString())
     }
-    function editTableOption(){
+    function editTableOption(e){
+        event = e||window.event;
         var target = event.target;
         var parentTr = $(target).closest("tr");
         var content = $(parentTr).find("#content");
@@ -154,7 +155,8 @@
         var imgUrl = $(parentTr).find("#imgSrc");
         $(imgUrl).removeAttr("disabled");
     }
-    function saveTableOption(){
+    function saveTableOption(e){
+        event = e||window.event;
         var target = event.target;
         var parentTr = $(target).closest("tr");
         var content = $(parentTr).find("#content");
@@ -173,8 +175,9 @@
         }
 
     }
-    function deleteTableOption(){
+    function deleteTableOption(e){
         if(confirm("您确定要删除吗?")){
+            event = e||window.event;
             var target = event.target;
             var parentEle = $(target).closest("tr");
             $(parentEle).remove();
