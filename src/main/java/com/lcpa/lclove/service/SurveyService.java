@@ -144,6 +144,10 @@ public class SurveyService {
      */
     public Survey getSurveyDetail(){
         List<Survey> surveyList = surveyMapper.selectLatestShowSurvey();
+        //没有有效的问卷调查
+        if (surveyList == null || surveyList.size() == 0){
+            return new Survey();
+        }
         Survey resultSurvey = surveyList.get(0);
         List<Question> questions = questionMapper.selectBySurveyId(resultSurvey.getId());
 
