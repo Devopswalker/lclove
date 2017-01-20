@@ -22,7 +22,7 @@
                 <li> <a class="button border-main icon-plus-square-o" href="${basePath}admin/research/editResearch.xhtml"> 添加问卷</a> </li>
             </ul>
         </div>
-        <table class="table table-hover text-center">
+        <table class="table table-hover text-center" id="table">
             <tr>
                 <th>标题</th>
                 <th>简述</th>
@@ -39,12 +39,14 @@
                         <td>$!survey.endTime</td>
                         <td>
                             <div class="button-group radio">
-                                <label class="button active">
-                                    <input name="pintuer" value="yes"  type="radio">
+                                <label class="button #if($!survey.state==1)active#end" #if($!survey.state==0)checked="checked"#end
+                                       onchange="changeState($!survey.state,1)" onclick="stateOnclick(1)">
+                                    <input id="state" name="state" value="1"  type="radio">
                                     <span class="icon icon-check"></span> 开
                                 </label>
-                                <label class="button">
-                                    <input name="pintuer" value="no" checked="checked" type="radio"><span class="icon icon-times"></span> 关
+                                <label class="button #if($!survey.state==0)active#end"
+                                       onchange="changeState($!survey.state,0)" onclick="stateOnclick(0)">
+                                    <input id="state" name="state" #if($!survey.state==0)checked="checked"#end value="0" type="radio"><span class="icon icon-times"></span> 关
                                 </label>
                             </div>
                         </td>
@@ -107,7 +109,21 @@
             alert(r.msg);
         }
     };
-
+    function changeState(currentState, changeState){
+        if (changeState == 1){
+            var states = $("#table").find(".active").each(function(){
+                if ($(event.target).is($(this))){
+                    return true;
+                }
+                var stateVal = $(this).find("#state").val();
+                if (stateVal == 1){
+                    alert("只能存在一个被打开的问卷调查")
+                    return;
+                }
+            });
+        }
+        alert(currentState+"---"+changeState)
+    }
     //全选
     $("#checkall").click(function(){
         $("input[name='id[]']").each(function(){
