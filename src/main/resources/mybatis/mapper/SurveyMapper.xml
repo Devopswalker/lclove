@@ -106,6 +106,9 @@
       <if test="title != null">
         TITLE = #{title,jdbcType=VARCHAR},
       </if>
+      <if test="headerImg != null">
+        HEADER_IMG = #{headerImg,jdbcType=VARCHAR},
+      </if>
       <if test="description != null">
         DESCRIPTION = #{description,jdbcType=VARCHAR},
       </if>
@@ -126,7 +129,7 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.lcpa.lclove.model.Survey">
     update survey
-    set TITLE = #{title,jdbcType=VARCHAR},
+    set TITLE = #{title,jdbcType=VARCHAR},HEADER_IMG = #{headerImg,jdbcType=VARCHAR},
       DESCRIPTION = #{description,jdbcType=VARCHAR},
       START_TIME = #{startTime,jdbcType=TIMESTAMP},
       END_TIME = #{endTime,jdbcType=TIMESTAMP},

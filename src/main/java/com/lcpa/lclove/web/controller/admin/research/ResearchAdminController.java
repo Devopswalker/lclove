@@ -53,20 +53,25 @@ public class ResearchAdminController extends AnnotationController {
     }
 
     @RequestMapping(value = "/admin/research/saveResearch.xhtml")
-    public String saveRecommend(Integer id, ModelMap model) {
-    	 Survey survey = null;
-        if(id == null){
-        	survey = new Survey();
-            this.bindParams(survey);
-            surveyService.saveSurvey(survey);
-        }else{
-        	survey = surveyService.getSurveyDetailById(id);
-            if(survey == null){
-                return this.showJsonError(model, "该问卷不存在或已被删除！");
-            }
-            this.bindParams(survey, new String[]{"id"});
-            surveyService.saveSurvey(survey);
+    public String saveResearch(Integer id, ModelMap model) {
+        Survey survey = new Survey();
+        this.bindParams(survey);
+        if(survey == null){
+            return this.showJsonError(model, "该问卷不存在或已被删除！");
         }
+        surveyService.saveSurvey(survey);
+//        if(id == null){
+//        	survey = new Survey();
+//            this.bindParams(survey);
+//            surveyService.saveSurvey(survey);
+//        }else{
+//        	survey = surveyService.getSurveyDetailById(id);
+//            if(survey == null){
+//                return this.showJsonError(model, "该问卷不存在或已被删除！");
+//            }
+//            this.bindParams(survey, new String[]{"id"});
+//            surveyService.saveSurvey(survey);
+//        }
         return "redirect:/admin/research/researchList.xhtml";
     }
 

@@ -759,7 +759,7 @@ $(function(){
             var sbHtml = new StringBuilder();
             //TODO:
             sbHtml.append("<div class='search_head' suveryid='" + data.id + "'><img src='"+lclove.util.imgPath+"images/text_head_icon.png'/><div>" + data.title + "</div></div>");
-            sbHtml.append("<img width='550' height='60' class='radius-small' src='"+lclove.util.imgPath+ data.headerImg + "'/>");
+            sbHtml.append("<img width='550' height='60' class='radius-small' src='"+ data.headerImg + "'/>");
             sbHtml.append("<div class='smallest_blank'></div>");
             $.each(data.questions, function(index, item){
             		sbHtml.append("<div id='" + item.id + "' class='single_choose'>");
