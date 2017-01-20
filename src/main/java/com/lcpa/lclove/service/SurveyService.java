@@ -72,13 +72,19 @@ public class SurveyService {
             questionMapper.updateByPrimaryKey(question);
         }
         if (question.getQuestionOptions() != null && question.getQuestionOptions().size() > 0){
-            for (QuestionOption questionOption : question.getQuestionOptions()){
-                if (questionOption.getId() == null) {
-                    questionOption.setQuestionId(question.getId());
-                    questionOptionMapper.insert(questionOption);
-                }else {
-                    questionOptionMapper.updateByPrimaryKey(questionOption);
-                }
+            questionOptionMapper.deleteByQuestionId(question.getId());
+            for (int i = 0; i < question.getQuestionOptions().size(); i++){
+                QuestionOption questionOption = question.getQuestionOptions().get(i);
+                questionOption.setSurveyId(question.getSurveyId());
+                questionOption.setQuestionId(question.getId());
+                questionOption.setSeq(i+1);
+                questionOptionMapper.insert(questionOption);
+//                if (questionOption.getId() == null) {
+//                    questionOption.setQuestionId(question.getId());
+//                    questionOptionMapper.insert(questionOption);
+//                }else {
+//                    questionOptionMapper.updateByPrimaryKey(questionOption);
+//                }
             }
         }
     }

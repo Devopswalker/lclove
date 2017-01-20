@@ -5,6 +5,9 @@ import java.util.List;
 import java.util.Map;
 
 import com.lcpa.lclove.model.*;
+import com.lcpa.lclove.util.JsonUtils;
+import com.lcpa.lclove.vo.ResearchOptionsVo;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -105,20 +108,26 @@ public class ResearchAdminController extends AnnotationController {
     }
 
     @RequestMapping(value = "/admin/research/saveQuestion.xhtml")
-    public String saveQuestion(ModelMap model) {
-        Question question = new Question();
-        this.bindParams(question);
-        surveyService.saveQuestion(question);
-        List<Question> questions = surveyService.getAllQuestionBySurveyId(question.getSurveyId());
-        List<QuestionInputType> typeList = surveyService.getAllQuestionInputType();
-        Map<Integer, QuestionInputType> typeMap = new HashMap();
-        for (QuestionInputType questionInputType : typeList) {
-            typeMap.put(questionInputType.getId(), questionInputType);
+    public String saveQuestion(String questionData, ModelMap model) {
+        if(StringUtils.isBlank(questionData)){
+            return showJsonError(model, "Argument list syntax error !");
         }
-        model.put("surveyId", question.getSurveyId());
-        model.put("questions", questions);
-        model.put("typeMap", typeMap);
-        return "admin/research/questionList.vm";
+        Question question = JsonUtils.readJsonToObject(Question.class, questionData);
+        if(question == null){
+            return showJsonError(model, "Bad character in paramenters !");
+        }
+        surveyService.saveQuestion(question);
+        return showJsonSuccess(model);
+//        List<Question> questions = surveyService.getAllQuestionBySurveyId(question.getSurveyId());
+//        List<QuestionInputType> typeList = surveyService.getAllQuestionInputType();
+//        Map<Integer, QuestionInputType> typeMap = new HashMap();
+//        for (QuestionInputType questionInputType : typeList) {
+//            typeMap.put(questionInputType.getId(), questionInputType);
+//        }
+//        model.put("questions", questions);
+//        model.put("surveyId", question.getSurveyId());
+//        model.put("typeMap", typeMap);
+//        return "admin/research/questionList.vm";
     }
     @RequestMapping(value = "/admin/research/deleteQuestion.xhtml")
     public String deleteQuestion(Integer id, Integer surveyId, ModelMap model){

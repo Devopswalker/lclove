@@ -205,8 +205,9 @@ $.extend({
             sbHtml.append("    </div>");
             sbHtml.append("    <div class='header_right'>");
             sbHtml.append("        <ul>");
-            sbHtml.append("            <li><img src='" + lclove.util.imgPath + "images/s_triangle.png'/><div>by LC 品爱</div></li>");
-            sbHtml.append("            <li><img src='" + lclove.util.imgPath + "images/s_triangle.png'/><div>恋猫是什么?</div></li>");
+
+            sbHtml.append("            <li><img src='" + lclove.util.imgPath + "images/s_triangle.png'/><div><a href='" + lclove.util.basePath + "brand.xhtml' target='_blank'>by LC 品爱</a></div></li>");
+            sbHtml.append("            <li><img src='" + lclove.util.imgPath + "images/s_triangle.png'/><div><a href='" + lclove.util.basePath + "lianmao.xhtml' target='_blank'>恋猫是什么?</a></div></li>");
             sbHtml.append("        </ul>");
             sbHtml.append("    </div>");
             sbHtml.append("    <div class='float_pic1'><img src='" + lclove.util.imgPath + "images/head_flower1.png'/></div>");
@@ -237,9 +238,9 @@ $.extend({
             $(".head_left_1").on("click", function(){
             	 window.location.href = lclove.util.basePath + "index.xhtml";
             });
-            $(".header_right").on("click", function(){
-            	 window.open("http://www.lclovecosmetic.com/"); 
-            });
+            //$(".header_right").on("click", function(){
+            //	 window.open(lclove.util.basePath + "brand.xhtml");
+            //});
         };
 
         return init();

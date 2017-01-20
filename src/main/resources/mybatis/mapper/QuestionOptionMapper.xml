@@ -39,9 +39,9 @@
     where SURVEY_ID = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.lcpa.lclove.model.QuestionOption" useGeneratedKeys="true" keyProperty="id">
-    insert into question_option (SURVEY_ID,QUESTION_ID, CONTENT,
+    insert into question_option (ID, SURVEY_ID,QUESTION_ID, CONTENT,
       SEQ, IMG_SRC)
-    values (#{surveyId,jdbcType=INTEGER},#{questionId,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR},
+    values (#{id,jdbcType=INTEGER},#{surveyId,jdbcType=INTEGER},#{questionId,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR},
       #{seq,jdbcType=INTEGER}, #{imgSrc,jdbcType=VARCHAR})
   </insert>
   <insert id="insertOptions" parameterType="java.util.List" useGeneratedKeys="true" keyProperty="id">
