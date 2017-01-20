@@ -33,10 +33,10 @@
             </div>
             <div class="form-group">
                 <div class="label">
-                    <label>主题：</label>
+                    <label>图片：</label>
                 </div>
                 <div class="field">
-                    <input type="text" class="input w50" id="topic" name="topic" value="$!survey.topic" data-validate="required:请输入主题" />
+                    <input type="text" class="input w50" id="topic" name="topic" value="$!survey.headerImg" data-validate="required:请输入图片URL" />
                     <div class="tips"></div>
                 </div>
             </div>

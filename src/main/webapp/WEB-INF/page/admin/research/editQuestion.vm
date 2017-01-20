@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="renderer" content="webkit">
+    <title></title>
+    <link rel="stylesheet" href="${staticPath}css/pintuer.css">
+    <link rel="stylesheet" href="${staticPath}css/admin/admin.css">
+    <script src="${staticPath}js/jquery.js"></script>
+    <script src="${staticPath}js/pintuer.js"></script>
+    <script src="${staticPath}js/plugins/layer/laydate/laydate.js"></script>
+    <script src="${staticPath}js/plugins/ueditor/ueditor.config.js"></script>
+    <script src="${staticPath}js/plugins/ueditor/ueditor.all.min.js"></script>
+    <script src="${staticPath}js/plugins/ueditor/lang/zh-cn/zh-cn.js"></script>
+    <script src="${staticPath}js/lclove-util.js"></script>
+</head>
+<body>
+</script>
+
+<div class="panel admin-panel">
+    <div class="panel-head" id="add"><strong><span class="icon-pencil-square-o"></span>编辑问题</strong></div>
+    <div class="padding border-bottom">
+        <ul class="search" style="padding-left:10px;">
+            <li><a class="button bg-main icon-backward" href="${basePath}admin/research/questionList.xhtml?id=$question.surveyId"> 返回问题列表</a></li>
+##            <li> <a class="button border-main icon-plus-square-o" href="${basePath}admin/research/editQuestion.xhtml"> </a> </li>
+
+        </ul>
+    </div>
+    <div class="body-content">
+        <form method="post" class="form-x" action="${basePath}admin/research/saveQuestion.xhtml">
+            <input type="hidden" id="questionId" name="id" value="$!question.id"/>
+            <input type="hidden" id="surveyId" name="surveyId" value="$!question.surveyId"/>
+            <div class="form-group">
+                <div class="label">
+                    <label>顺序：</label>
+                </div>
+                <div class="field">
+                    <input type="text" class="input w50" id="seq" name="seq" value="$!question.seq" data-validate="required:请输入顺序" />
+                    <div class="tips"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="label">
+                    <label>题目：</label>
+                </div>
+                <div class="field">
+                    <input type="text" class="input w50" id="title" name="title" value="$!question.title" data-validate="required:请输入题目" />
+                    <div class="tips"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="label">
+                    <label>题型：</label>
+                </div>
+                <div class="field">
+                    <select id="inputType" name="inputType" class="input w50" onchange="questionTypeChangeHandler()">
+                        #foreach($type in $typeList)
+                            <option value="$type.id" #if($VmUtils.eq($type.id, $question.inputType))selected#end>$type.name</option>
+                        #end
+                    </select>
+                    <div class="tips"></div>
+                </div>
+            </div>
+            <div class="panel admin-panel" id="optionDetail">
+                <div class="padding border-bottom">
+                    <ul class="search" style="padding-left:10px;">
+                        <li>
+                            <a class="button bg-main icon-plus" onclick="addTableOption()"> 添加选项</a></li>
+                    </ul>
+                </div>
+                <table class="table table-hover text-center" >
+
+                    <tr>
+                        <th>内容</th>
+                        <th>图片URL</th>
+                        <th>缩图</th>
+                        <th>操作</th>
+                    </tr>
+                    <tbody id="optionTable">
+        <volist name="questionOptions" id="vo">
+                        #foreach($option in $question.questionOptions)
+                            <tr>
+                                <td><input class="input" disabled id="content" value="$!option.content" data-validate="required:请输入内容"/></td>
+                                <td><input class="input"  disabled id="imgSrc" value="$!option.imgSrc"/></td>
+                                #if($!option.imgSrc != "")
+                                <td id="optionImg"><img src="$option.imgSrc" alt="" width="70" height="50" /></td>
+                                #end
+                                #if($!option.imgSrc == "")
+                                    <td id="optionImg">无</td>
+                                #end
+                                <td>
+                                    <div class="button-group">
+                                        <a class="button border-main" href="javascript:void(0)" onclick="editTableOption()"><span class="icon-edit"></span> 编辑</a>
+                                        <a class="button border-blue" href="javascript:void(0)" onclick="saveTableOption()"><span class="icon-save"></span> 保存</a>
+                                        <a class="button border-red" href="javascript:void(0)" onclick="deleteTableOption()"><span class="icon-trash-o"></span> 删除</a>
+                                    </div>
+                                </td>
+                            </tr>
+                        #end
+                        </volist>
+                    </tbody>
+                </table>
+            </div>
+            <div class="form-group">
+                <div class="label">
+                    <label></label>
+                </div>
+
+            </div>
+            <div class="form-group ">
+                <div class="label">
+                    <label></label>
+                </div>
+                <div class="field">
+                    <button class="button bg-main icon-check-square-o" onclick="saveQuestion()"> 提交</button>
+                    <a class="button bg-main icon-backward" href="${basePath}admin/research/questionList.xhtml?id=$question.surveyId"> 取消</a>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+<script type="text/javascript">
+
+    function questionTypeChangeHandler(){
+        var type = $("#questionType").val();
+        if (type == 1){
+            $("#optionDetail").hide();
+        }else{
+            $("#optionDetail").show();
+        }
+    }
+
+    function addTableOption(){
+        var sbHtml = new StringBuilder();
+        sbHtml.append('<tr><td><input class="input" id="content"/></td>');
+        sbHtml.append('<td><input class="input" id="imgSrc"/></td>')
+        sbHtml.append('<td id="optionImg">无</td>');
+        sbHtml.append('<td ><div class="button-group">');
+        sbHtml.append('<a class="button border-main" href="javascript:void(0)" onclick="editTableOption()"><span class="icon-edit"></span> 编辑</a>')
+        sbHtml.append('<a class="button border-blue" href="javascript:void(0)" onclick="saveTableOption()"><span class="icon-save"></span> 保存</a>')
+        sbHtml.append('<a class="button border-red" href="javascript:void(0)" onclick="return deleteTableOption(this)"><span class="icon-trash-o"></span> 删除</a>')
+        sbHtml.append('</div></td></tr>')
+        $("#optionTable").append(sbHtml.toString())
+    }
+    function editTableOption(){
+        var target = event.target;
+        var parentTr = $(target).closest("tr");
+        var content = $(parentTr).find("#content");
+        $(content).removeAttr("disabled");
+        var imgUrl = $(parentTr).find("#imgSrc");
+        $(imgUrl).removeAttr("disabled");
+    }
+    function saveTableOption(){
+        var target = event.target;
+        var parentTr = $(target).closest("tr");
+        var content = $(parentTr).find("#content");
+        if ($(content).val() == ""){
+            alert("内容不能为空！")
+            return
+        }
+        $(content).attr("disabled", true);
+        var imgUrl = $(parentTr).find("#imgSrc");
+        $(imgUrl).attr("disabled", true);
+        var imageUrlVal = $(imgUrl).val();
+        if (imageUrlVal != ""){
+            var imgUrlObj = $(parentTr).find("#optionImg").empty();
+            var showImg = '<img src="'+imageUrlVal+'" alt="" width="70" height="50" />'
+            var imgUrlObj = $(parentTr).find("#optionImg").append(showImg);
+        }
+
+    }
+    function deleteTableOption(){
+        if(confirm("您确定要删除吗?")){
+            var target = event.target;
+            var parentEle = $(target).closest("tr");
+            $(parentEle).remove();
+        }
+    }
+    function saveQuestion(){
+        var surveyId = '${question.surveyId}';
+        var questionId = '${question.id}';
+        var title = $("#title").val();
+        var seq = $("#seq").val();
+        if (title == "" || seq == ""){
+            return;
+        }
+        var inputType = $("#inputType").val();
+        var isDone = true;
+        questionOptions = [];
+        if (inputType != 1){
+            var optionLen = $("#optionTable").children("tr").each(function(){
+                var optionContent = $(this).find("#content").val();
+                if (optionContent == ""){
+                    alert("内容不能为空！");
+                    isDone = false;
+                    return;
+                }else{
+                    var optionImgUrl = $(this).find("#imgSrc").val();
+                    questionOptions.push({"content":optionContent, "imgSrc":optionImgUrl})
+                }
+
+            });
+        }
+        if (isDone){
+            var question = {"surveyId":surveyId, "id":questionId,"inputType":inputType, "title": title, "seq":seq, "questionOptions":questionOptions};
+            refreshPage('${basePath}admin/research/saveQuestion.xhtml?question='+question);
+        }
+
+
+
+    }
+    $(document).ready(function() {
+        var type = $("#inputType").val();
+        if (type == 1) {
+            $("#optionDetail").hide();
+        } else {
+            $("#optionDetail").show();
+        }
+    })
+</script>
+</body>
+</html>

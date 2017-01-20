@@ -1,14 +1,15 @@
 package com.lcpa.lclove.web.controller.admin.research;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import com.lcpa.lclove.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.lcpa.lclove.model.QuestionInputType;
-import com.lcpa.lclove.model.Survey;
 import com.lcpa.lclove.service.SurveyService;
 import com.lcpa.lclove.vo.Paging;
 import com.lcpa.lclove.web.controller.AnnotationController;
@@ -66,7 +67,7 @@ public class ResearchAdminController extends AnnotationController {
         return "redirect:/admin/research/researchList.xhtml";
     }
 
-    @RequestMapping(value = "/admin/research/delResearch.xhtml")
+    @RequestMapping(value = "/admin/research/deleteResearch.xhtml")
     public String delResearch(Integer id, ModelMap model){
         if(id == null){
             return showJsonError(model, "ID为空！");
@@ -74,4 +75,66 @@ public class ResearchAdminController extends AnnotationController {
         surveyService.removeSurvey(id);
         return showJsonSuccess(model);
     }
+
+    @RequestMapping(value = "/admin/research/questionList.xhtml")
+    public String questionList(Integer id, ModelMap model){
+        List<Question> questions = surveyService.getAllQuestionBySurveyId(id);
+        List<QuestionInputType> typeList = surveyService.getAllQuestionInputType();
+        Map<Integer, QuestionInputType> typeMap = new HashMap();
+        for (QuestionInputType questionInputType : typeList) {
+            typeMap.put(questionInputType.getId(), questionInputType);
+        }
+        model.put("questions", questions);
+        model.put("surveyId", id);
+        model.put("typeMap", typeMap);
+        return "admin/research/questionList.vm";
+    }
+
+    @RequestMapping(value = "/admin/research/editQuestion.xhtml")
+    public String editQuestion(Integer surveyId, Integer id, ModelMap model){
+        Question question = new Question();
+        question.setSurveyId(surveyId);
+        if (id != null){
+            question = surveyService.getQuestionDetailById(id);
+        }
+        List<QuestionInputType> typeList = surveyService.getAllQuestionInputType();
+
+        model.put("question", question);
+        model.put("typeList", typeList);
+        return "admin/research/editQuestion.vm";
+    }
+
+    @RequestMapping(value = "/admin/research/saveQuestion.xhtml")
+    public String saveQuestion(ModelMap model) {
+        Question question = new Question();
+        this.bindParams(question);
+        surveyService.saveQuestion(question);
+        List<Question> questions = surveyService.getAllQuestionBySurveyId(question.getSurveyId());
+        List<QuestionInputType> typeList = surveyService.getAllQuestionInputType();
+        Map<Integer, QuestionInputType> typeMap = new HashMap();
+        for (QuestionInputType questionInputType : typeList) {
+            typeMap.put(questionInputType.getId(), questionInputType);
+        }
+        model.put("surveyId", question.getSurveyId());
+        model.put("questions", questions);
+        model.put("typeMap", typeMap);
+        return "admin/research/questionList.vm";
+    }
+    @RequestMapping(value = "/admin/research/deleteQuestion.xhtml")
+    public String deleteQuestion(Integer id, Integer surveyId, ModelMap model){
+        surveyService.removeQuestion(id);
+        List<Question> questions = surveyService.getAllQuestionBySurveyId(surveyId);
+        List<QuestionInputType> typeList = surveyService.getAllQuestionInputType();
+        Map<Integer, QuestionInputType> typeMap = new HashMap();
+        for (QuestionInputType questionInputType : typeList) {
+            typeMap.put(questionInputType.getId(), questionInputType);
+        }
+        model.put("questions", questions);
+        model.put("surveyId", surveyId);
+        model.put("typeMap", typeMap);
+        return "admin/research/questionList.vm";
+    }
+
+
+
 }

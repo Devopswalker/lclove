@@ -29,6 +29,10 @@
     delete from question_option
     where ID = #{id,jdbcType=INTEGER}
   </delete>
+  <delete id="deleteByQuestionId">
+    delete from question_option
+    where QUESTION_ID = #{0}
+  </delete>
 
   <delete id="deleteBySurveyId" parameterType="java.lang.Integer">
     delete from question_option

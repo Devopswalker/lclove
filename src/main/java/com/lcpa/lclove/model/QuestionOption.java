@@ -11,7 +11,7 @@ public class QuestionOption {
 
     private Integer seq;
 
-    private String imgSrc;
+    private String imgSrc = "";
 
     private boolean selected;
 

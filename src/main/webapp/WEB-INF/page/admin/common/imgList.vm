@@ -103,6 +103,7 @@
                     <label>上传图片：</label>
                 </div>
                 <div class="field">
+##                    <a class="button input-file" href="javascript:void(0);">+ 浏览文件<input size="100" type="file" id="file" name="file"/></a>
                     <input type="file" id="file" name="file">
                     <div class="tips"></div>
                 </div>
