@@ -140,12 +140,19 @@
   <update id="updateSurveyState">
     update survey
     set
-    STATE = 0,
+    STATE = #{1}
     where ID = #{0}
   </update>
 
+  <select id="selectOpenSurveyCount" resultType="int">
+    select count(ID)
+    from survey
+    WHERE STATE = 1
+  </select>
   <select id="selectCount" resultType="int">
     select count(ID)
     from survey
   </select>
+
+
 </mapper>

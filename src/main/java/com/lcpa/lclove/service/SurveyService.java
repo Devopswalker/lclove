@@ -113,11 +113,11 @@ public class SurveyService {
     }
 
     /**
-     * 关闭问卷调查
+     * 更改问卷调查状态
      * @param id
      */
-    public void updateSurveyState(Integer id){
-        surveyMapper.updateSurveyState(id);
+    public void updateSurveyState(Integer id, Integer state){
+        surveyMapper.updateSurveyState(id, state);
     }
 
     /**
@@ -281,5 +281,14 @@ public class SurveyService {
     public void removeQuestion(Integer id) {
         questionMapper.deleteByPrimaryKey(id);
         questionOptionMapper.deleteByQuestionId(id);
+    }
+
+    public boolean hasOpenedSurvey() {
+        int result = surveyMapper.selectOpenSurveyCount();
+        if (result == 0){
+            return false;
+        }else {
+            return true;
+        }
     }
 }

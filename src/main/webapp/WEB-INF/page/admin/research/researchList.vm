@@ -39,13 +39,13 @@
                         <td>$!survey.endTime</td>
                         <td>
                             <div class="button-group radio">
-                                <label class="button #if($!survey.state==1)active#end" #if($!survey.state==0)checked="checked"#end
-                                       onchange="changeState($!survey.state,1)" onclick="stateOnclick(1)">
-                                    <input id="state" name="state" value="1"  type="radio">
+                                <label class="button #if($!survey.state==1)active#end"
+                                       onchange="changeState($!survey.id,1)">
+                                    <input id="state" name="state" #if($!survey.state==1)checked="checked"#end value="1"  type="radio">
                                     <span class="icon icon-check"></span> 开
                                 </label>
                                 <label class="button #if($!survey.state==0)active#end"
-                                       onchange="changeState($!survey.state,0)" onclick="stateOnclick(0)">
+                                       onchange="changeState($!survey.id,0)">
                                     <input id="state" name="state" #if($!survey.state==0)checked="checked"#end value="0" type="radio"><span class="icon icon-times"></span> 关
                                 </label>
                             </div>
@@ -109,21 +109,27 @@
             alert(r.msg);
         }
     };
-    function changeState(currentState, changeState){
+    function changeState(surveyId, changeState){
         if (changeState == 1){
-            var states = $("#table").find(".active").each(function(){
-                if ($(event.target).is($(this))){
-                    return true;
-                }
-                var stateVal = $(this).find("#state").val();
-                if (stateVal == 1){
-                    alert("只能存在一个被打开的问卷调查")
-                    return;
-                }
-            });
+            if(confirm("最多允许一个问卷被打开，确定要打开问卷吗?")){
+                var url = '${basePath}admin/research/updateResearchState.xhtml';
+                var values = {"id":surveyId, "state":changeState};
+                $.getData(url, values, true, 'get', 'json', false, ajaxCallBack);
+            }
+        }else{
+            var url = '${basePath}admin/research/updateResearchState.xhtml';
+            var values = {"id":surveyId, "state":changeState};
+            $.getData(url, values, true, 'get', 'json', false, changeStateajaxCallBack);
         }
-        alert(currentState+"---"+changeState)
+
     }
+    function changeStateajaxCallBack(r){
+        if(r.success){
+            refreshPage('${basePath}admin/research/researchList.xhtml');
+        }else{
+
+        }
+    };
     //全选
     $("#checkall").click(function(){
         $("input[name='id[]']").each(function(){
