@@ -115,6 +115,8 @@
                 var url = '${basePath}admin/research/updateResearchState.xhtml';
                 var values = {"id":surveyId, "state":changeState};
                 $.getData(url, values, true, 'get', 'json', false, ajaxCallBack);
+            }else{
+                refreshPage('${basePath}admin/research/researchList.xhtml');
             }
         }else{
             var url = '${basePath}admin/research/updateResearchState.xhtml';
