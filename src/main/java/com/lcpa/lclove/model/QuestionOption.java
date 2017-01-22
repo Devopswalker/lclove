@@ -15,7 +15,7 @@ public class QuestionOption {
 
     private boolean selected;
 
-    private Integer score;
+    private String score;
 
     public Integer getId() {
         return id;
@@ -73,11 +73,11 @@ public class QuestionOption {
         this.selected = selected;
     }
 
-    public Integer getScore() {
+    public String getScore() {
         return score;
     }
 
-    public void setScore(Integer score) {
+    public void setScore(String score) {
         this.score = score;
     }
 }

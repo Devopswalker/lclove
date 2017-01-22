@@ -257,7 +257,7 @@ public class SurveyService {
                 NumberFormat numberFormat = NumberFormat.getInstance();
                 numberFormat.setMaximumFractionDigits(2);
                 String percentScore = numberFormat.format((float)selectedNum/(float)surveyAnswerTotalNum*100);
-                option.setScore(Integer.parseInt(percentScore));
+                option.setScore(percentScore);
 
             }
             question.setQuestionOptions(options);
