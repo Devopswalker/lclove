@@ -948,11 +948,12 @@ li{
 	margin-top:10px;
 }
 
-.single_choose_item input, .single_choose_item div{
+.single_choose_item input{
 	float:left;
 }
 
 .single_choose_item div{
+	float:left;
 	margin-left:10px;
 }
 
@@ -1108,4 +1109,22 @@ li{
 	-webkit-box-shadow:1.5px 1.5px 1.5px;
 	-moz-box-shadow: 1.5px 1.5px 1.5px;
 	padding:10px;
+}
+
+
+.result_choose_item{
+	width:400px;
+	margin-left:10px;
+	line-height:20px;
+	margin-top:10px;
+	overflow: hidden;
+}
+
+.result_choose_item .result_content{
+	float:left;
+	margin:0 10px;
+}
+
+.result_choose_item .progress{
+	margin-top: 5px;
 }

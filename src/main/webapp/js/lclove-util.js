@@ -767,7 +767,7 @@ $(function(){
                 sbHtml.append("<div class='choose_topic'>" + item.seq+" "+item.title + "</div>");
                 if(item.inputType == "1"){
                 	$.each(item.questionOptions, function(i, subItem){
-                		sbHtml.append("<div class='suggenstion_div'><textarea class='suggestion_input' optionid='" + subItem.id + "'></textarea></div>");
+                		sbHtml.append("<div class='suggenstion_div'><textarea class='suggestion_input' surveyid=" + item.id + " optionid='" + subItem.id + "'></textarea></div>");
                 	});
                 }else if(item.inputType == "2"){
 	                	$.each(item.questionOptions, function(i, subItem){
@@ -779,7 +779,7 @@ $(function(){
 	                	});
                 }else if(item.inputType == "3"){
 	                	$.each(item.questionOptions, function(i, subItem){
-	                		sbHtml.append("<div class='mutiple_choose_item'><div class='up_part'><input name='survey_" + index + "' type='checkbox' value='"+subItem.id+"' /><div>" + subItem.content + "</div></div>");
+	                		sbHtml.append("<div class='mutiple_choose_item'><div class='up_part'><input name='survey_" + item.id + "' type='checkbox' value='"+subItem.id+"' /><div>" + subItem.content + "</div></div>");
 	                		if(subItem.imgSrc != null && subItem.imgSrc != ""){
 	                			sbHtml.append("<img width='90' height='80' class='radius-small'  src='"+subItem.imgSrc+"'/>");
 	                		}
@@ -806,29 +806,36 @@ $(function(){
 	        	$(".single_choose").each(function(){
 	        		var subData = {};
 	        		var subSurveyId = $(this).attr("id");
-	        		subData.optionId = subSurveyId;
-	        		if($(this).find("input[type=radio]")){
-	        			subData.answerContent = $('input[name="survey_' + subSurveyId + '"]:checked ').val();
+//	        		subData.optionId = subSurveyId;
+	        		if($(this).find("input[type=radio]").length > 0){
+	        			subData.optionId = $('input[name="survey_' + subSurveyId + '"]:checked ').val();
 	        			data.options.push(subData);
+	        		}else if($(this).find("input[type=checkbox]").length > 0){
+	        			$('input[name="survey_' + subSurveyId + '"]').each(function(){
+	        				if($(this).is(':checked')){
+	        					subData = {};
+	        					subData.optionId = $(this).val();
+	        					data.options.push(subData);
+	        				}
+	        			})	
+	        		}else if($(this).find("textarea").length > 0){
+	        			var $tempObj = $('textarea[surveyid="' + subSurveyId + '"]');
+    					subData.optionId = $tempObj.attr("optionid");
+    					subData.answerContent = $tempObj.val();
+    					data.options.push(subData);
+	        			
 	        		}
-	        	})
-	        	console.log(data);
+	        	});
+	        	//console.log(data);
+	        	var url = lclove.util.basePath + "ajax/saveResearch.xhtml";
+	        	var values = {"optionDatas":data}
+	        	$.getData(url, data, true, "POST", "json", true, callBackResearch(data.surveyId));
         	}
-        	//validate end
-        	
-//        	var url = lclove.util.basePath + "ajax/saveResearch.xhtml";
-//        	var data = {};
-//        	$.getData(url, data, true, "POST", "json", true, callBackResearch);
-//        };
         
       //保存回调
-        var callBackResearch = function(result){
-			//todo:保存成功后跳转到问卷结果页面
+        var callBackResearch = function(surveyId){
+        	refreshPage(lclove.util.basePath + "researchResult.xhtml?surveyId=" + surveyId);
         };
-        
-//        var initResearch = function(data){
-//            $(instance).append(showResearch(data));
-//        };
         $.getData(url, null, true, "POST", "json", true, showResearch);
     };
    
@@ -859,8 +866,8 @@ $(function(){
                     sbHtml.append("<div id='" + item.id + "' class='single_choose'>");
                     sbHtml.append("<div class='choose_topic'>" + item.seq+" "+item.title + "</div>");
                     $.each(item.questionOptions, function(i, subItem){
-                        sbHtml.append("<div class='single_choose_item'>");
-                        sbHtml.append("  <div>" + subItem.content + "</div>");
+                        sbHtml.append("<div class='result_choose_item'>");
+                        sbHtml.append("  <div class='result_content'>" + subItem.content + "</div>");
     	                sbHtml.append("  <div class='progress'>");
     	                if(subItem.score != null && subItem.score != ""){
     	                	sbHtml.append("    <div class='progress-bar' style='width: " + subItem.score + "%;'>" + subItem.score + "%</div>");
