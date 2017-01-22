@@ -10,6 +10,7 @@ lclove.params.pageNo = "";
 lclove.params.position = "";
 lclove.params.aid = "";
 lclove.params.sortType = "";
+lclove.params.surveyId = "";
 
 
 /* StringBuilder  */
@@ -765,7 +766,9 @@ $(function(){
                 sbHtml.append("<div id='" + item.id + "' class='single_choose'>");
                 sbHtml.append("<div class='choose_topic'>" + item.seq+" "+item.title + "</div>");
                 if(item.inputType == "1"){
-                		sbHtml.append("<div class='suggenstion_div'><textarea class='suggestion_input'></textarea></div>");
+                	$.each(item.questionOptions, function(i, subItem){
+                		sbHtml.append("<div class='suggenstion_div'><textarea class='suggestion_input' optionid='" + subItem.id + "'></textarea></div>");
+                	});
                 }else if(item.inputType == "2"){
 	                	$.each(item.questionOptions, function(i, subItem){
 	                		sbHtml.append("<div class='single_choose_item'><input name='survey_" + item.id + "' type='radio' value='" + subItem.id + "' /><div>" + subItem.content + "</div>");
@@ -838,6 +841,54 @@ $(function(){
     $.fn.renderResearch.defaults = {};
 });
 /*  research  */
+
+
+/*  research result  */
+$(function(){
+    var eResearchResult = function(options,object) {
+        var opts = $.extend({}, $.fn.renderResearch.defaults, options);
+        var instance = object;
+        var url = lclove.util.basePath + "ajax/getResearchDetail.xhtml?surveyId=" + lclove.params.surveyId;
+        var showResearchResult = function (data) {
+            var sbHtml = new StringBuilder();
+            sbHtml.append("<div class='search_head'><img src='"+lclove.util.imgPath+"images/text_head_icon.png'/><div>" + data.title + "</div></div>");
+            sbHtml.append("<img width='550' height='60' class='radius-small' src='"+ data.headerImg + "'/>");
+            sbHtml.append("<div class='smallest_blank'></div>");
+            $.each(data.questions, function(index, item){
+            	if(item.inputType != "1"){
+                    sbHtml.append("<div id='" + item.id + "' class='single_choose'>");
+                    sbHtml.append("<div class='choose_topic'>" + item.seq+" "+item.title + "</div>");
+                    $.each(item.questionOptions, function(i, subItem){
+                        sbHtml.append("<div class='single_choose_item'>");
+                        sbHtml.append("  <div>" + subItem.content + "</div>");
+    	                sbHtml.append("  <div class='progress'>");
+    	                if(subItem.score != null && subItem.score != ""){
+    	                	sbHtml.append("    <div class='progress-bar' style='width: " + subItem.score + "%;'>" + subItem.score + "%</div>");
+    	                }else{
+    	                	sbHtml.append("    <div class='progress-bar' style='width: 0%;'></div>");
+    	                }
+    	                sbHtml.append("  </div>");
+    	                sbHtml.append("</div>");
+    	            });
+                    sbHtml.append("<div class='mini_blank'></div>");
+                    sbHtml.append("</div>");
+                }
+            });
+            sbHtml.append("<div class='mini_blank'></div>");
+            $(instance).append($(sbHtml.toString()));
+        };
+        $.getData(url, null, true, "POST", "json", true, showResearchResult);
+    };
+   
+    $.fn.renderResearchResult = function(options) {
+        return this.each(function () {
+            return eResearchResult(options, $(this));
+        });
+    };
+
+    $.fn.renderResearchResult.defaults = {};
+});
+/*  research result  */
 
 /*  about lm  */
 $(function(){

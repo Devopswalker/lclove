@@ -38,6 +38,12 @@ public class LcLoveController extends AnnotationController{
 		return "lclove/research.vm";
 	}
 	
+	/*恋の好奇心*/
+	@RequestMapping("/researchResult.xhtml")
+	public String initresearchResult(){
+		return "lclove/researchResult.vm";
+	}
+	
 	/*恋の梦剧场*/
 	@RequestMapping("/comic.xhtml")
 	public String initComic(){

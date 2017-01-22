@@ -924,6 +924,8 @@ li{
 .search_head div{
 	float:left;
 	margin-left:10px;
+	margin-bottom:10px;
+	font-size:18px;
 	font-weight:bold;
 }
 
