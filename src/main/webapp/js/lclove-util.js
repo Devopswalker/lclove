@@ -828,8 +828,9 @@ $(function(){
 	        	});
 	        	//console.log(data);
 	        	var url = lclove.util.basePath + "ajax/saveResearch.xhtml";
-	        	var values = {"optionDatas":data}
-	        	$.getData(url, data, true, "POST", "json", true, callBackResearch(data.surveyId));
+	        	var optionDatas = JSON.stringify(data);
+	        	var values = {"optionDatas":optionDatas}
+	        	$.getData(url, values, true, "POST", "json", true, callBackResearch(data.surveyId));
         	}
         
       //保存回调

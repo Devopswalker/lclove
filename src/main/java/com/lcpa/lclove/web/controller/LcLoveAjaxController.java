@@ -171,11 +171,11 @@ public class LcLoveAjaxController extends AnnotationController{
 	}
 
 	@RequestMapping("/ajax/saveResearch.xhtml")
-	public String saveResearch(Integer surveyId, HttpServletRequest request, ModelMap model){
-		
-		Map<String, String> data = this.getParameterMap();
-		String optionsData = JsonUtils.writeMapToJson(data);
-		ResearchOptionsVo details = JsonUtils.readJsonToObject(ResearchOptionsVo.class, optionsData);
+	public String saveResearch(String optionDatas, HttpServletRequest request, ModelMap model){
+		if(StringUtils.isBlank(optionDatas)){
+			return showJsonError(model, "Bad character in paramenters !");
+		}
+		ResearchOptionsVo details = JsonUtils.readJsonToObject(ResearchOptionsVo.class, optionDatas);
 		if(details == null){
 			return showJsonError(model, "Bad character in paramenters !");
 		}
