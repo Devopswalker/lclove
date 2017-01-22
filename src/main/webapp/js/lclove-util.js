@@ -762,25 +762,33 @@ $(function(){
             sbHtml.append("<img width='550' height='60' class='radius-small' src='"+ data.headerImg + "'/>");
             sbHtml.append("<div class='smallest_blank'></div>");
             $.each(data.questions, function(index, item){
-            		sbHtml.append("<div id='" + item.id + "' class='single_choose'>");
+                sbHtml.append("<div id='" + item.id + "' class='single_choose'>");
                 sbHtml.append("<div class='choose_topic'>" + item.seq+" "+item.title + "</div>");
                 if(item.inputType == "1"){
                 		sbHtml.append("<div class='suggenstion_div'><textarea class='suggestion_input'></textarea></div>");
                 }else if(item.inputType == "2"){
 	                	$.each(item.questionOptions, function(i, subItem){
-	                		sbHtml.append("<div class='single_choose_item'><input name='survey_" + item.id + "' type='radio' value='" + subItem.id + "' /><div>" + subItem.content + "</div></div>");
-	                });
+	                		sbHtml.append("<div class='single_choose_item'><input name='survey_" + item.id + "' type='radio' value='" + subItem.id + "' /><div>" + subItem.content + "</div>");
+	                		if(subItem.imgSrc != null && subItem.imgSrc != ""){
+	                			sbHtml.append("<img width='90' height='80' class='radius-small'  src='"+subItem.imgSrc+"'/>");
+	                		}
+	                		sbHtml.append("</div>");
+	                	});
                 }else if(item.inputType == "3"){
 	                	$.each(item.questionOptions, function(i, subItem){
-	                		sbHtml.append("<div class='mutiple_choose_item'><div class='up_part'><input name='survey_" + index + "' type='checkbox' value='"+subItem.id+"' /><div>" + subItem.content + "</div></div><img width='90' height='80' class='radius-small'  src='"+subItem.imgSrc+"'/></div>");
+	                		sbHtml.append("<div class='mutiple_choose_item'><div class='up_part'><input name='survey_" + index + "' type='checkbox' value='"+subItem.id+"' /><div>" + subItem.content + "</div></div>");
+	                		if(subItem.imgSrc != null && subItem.imgSrc != ""){
+	                			sbHtml.append("<img width='90' height='80' class='radius-small'  src='"+subItem.imgSrc+"'/>");
+	                		}
+	                		sbHtml.append("</div>");
 	                });
                 }
                 sbHtml.append("<div class='mini_blank'></div>");
                 sbHtml.append("</div>");
             });
-            sbHtml.append("			<div class='mini_blank'></div>");
-            sbHtml.append("			<div id='submitBtn'><img src='"+lclove.util.imgPath+"images/dy_03.png'/><div>完成提交后，可看到调研结果</div></div>");
-            sbHtml.append("			<div class='mini_blank'></div>");
+            sbHtml.append("<div class='mini_blank'></div>");
+            sbHtml.append("<div id='submitBtn'><img src='"+lclove.util.imgPath+"images/dy_03.png'/><div>完成提交后，可看到调研结果</div></div>");
+            sbHtml.append("<div class='mini_blank'></div>");
             $(instance).append($(sbHtml.toString()));
             
             $("#submitBtn").on("click", submitData);
