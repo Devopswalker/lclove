@@ -36,7 +36,8 @@
                     <label>图片：</label>
                 </div>
                 <div class="field">
-                    <input type="text" class="input w50" id="headerImg" name="headerImg" value="$!survey.headerImg" data-validate="required:请输入图片URL" />
+                    <input type="text" class="input w50 tips" id="headerImg" name="headerImg" value="$!survey.headerImg" data-validate="required:请输入图片URL"
+                           data-toggle="hover" data-place="right" data-image="$!survey.headerImg"/>
                     <div class="tips"></div>
                 </div>
             </div>
