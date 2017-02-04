@@ -127,7 +127,7 @@ li{
 	position:relative;
 	float:left;
 	width:590px;
-	height:209px;
+	height:310px;
 	overflow:hidden;
 }
 
@@ -140,13 +140,13 @@ li{
 
 .item img{
 	width: 590px;
-	height: 209px;
+	height: 310px;
 }
 
 .banner_item{
 	float:left;
 	width:590px;
-	height:209px;
+	height:310px;
 	background:url(../images/banner.png);
 }
 
@@ -598,6 +598,37 @@ li{
 .review_item{
 	float:left;
 	margin-left:5px;
+}
+
+/* for the comic.html */
+.comic_topic{
+	float:left;
+	width:100%;
+}
+
+.comic_topic_head{
+	float:left;
+	width:100%;
+}
+
+.comic_topic_head img{
+	float:left;
+	height:60px;
+	width:67px;
+}
+
+.comic_topic_head div{
+	float:left;
+	line-height:60px;
+	margin-left:20px;
+	font-size:18px;
+	font-weight:bold;
+}
+
+.comic_topic_desc_pic{
+	float:left;
+	margin-left:10px;
+	margin-top:20px;
 }
 
 /* for the article_content.html */

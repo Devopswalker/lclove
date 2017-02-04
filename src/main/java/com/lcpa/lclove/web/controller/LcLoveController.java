@@ -15,9 +15,9 @@ public class LcLoveController extends AnnotationController{
 	}
 	
 	/*恋の喵言喵语*/
-	@RequestMapping("/spacial.xhtml")
-	public String initSpacial(){
-		return "lclove/spacial.vm";
+	@RequestMapping("/special.xhtml")
+	public String initSpecial(){
+		return "lclove/special.vm";
 	}
 	
 	/*恋の恋爱经*/
