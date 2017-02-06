@@ -163,7 +163,7 @@ public class LcLoveAjaxController extends AnnotationController{
 	public String getResearchDetail(Integer surveyId, ModelMap model){
 		Survey survey = null;
 		if(surveyId != null){
-			survey = surveyService.getSurveyReuslt(surveyId);
+			survey = surveyService.getSurveyResult(surveyId);
 		}else{
 			survey = surveyService.getSurveyDetail();
 		}
