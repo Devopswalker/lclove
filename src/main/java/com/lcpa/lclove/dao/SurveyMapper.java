@@ -27,4 +27,6 @@ public interface SurveyMapper {
     List<Survey> selectLatestShowSurvey();
 
     int selectOpenSurveyCount();
+
+    List<Survey> selectAllSurveyOrderByDate(QueryParameter queryParameter);
 }

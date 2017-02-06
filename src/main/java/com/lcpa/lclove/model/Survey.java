@@ -22,6 +22,8 @@ public class Survey {
 
     private String topic;
 
+    private Timestamp pubDate;
+
     private List<Question> questions;
 
     public Integer getId() {
@@ -102,5 +104,13 @@ public class Survey {
 
     public void setThumbnail(String thumbnail) {
         this.thumbnail = thumbnail;
+    }
+
+    public Timestamp getPubDate() {
+        return pubDate;
+    }
+
+    public void setPubDate(Timestamp pubDate) {
+        this.pubDate = pubDate;
     }
 }
