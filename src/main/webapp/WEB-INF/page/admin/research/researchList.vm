@@ -25,9 +25,9 @@
         <table class="table table-hover text-center" id="table">
             <tr>
                 <th>标题</th>
-                <th>简述</th>
+                <th>缩图</th>
+##                <th>简述</th>
                 <th>问卷时间</th>
-                <th>状态</th>
                 <th>详情</th>
                 <th>操作</th>
             </tr>
@@ -35,21 +35,22 @@
                 #foreach($survey in $surveys)
                     <tr>
                         <td>$!survey.title</td>
-                        <td>$!survey.description</td>
+                        <td width="10%"><img src="$survey.thumbnail" alt="" width="70" height="50" /></td>
+##                        <td>$!survey.description</td>
                         <td>$!survey.endTime</td>
-                        <td>
-                            <div class="button-group radio">
-                                <label class="button #if($!survey.state==1)active#end"
-                                       onchange="changeState($!survey.id,1)">
-                                    <input id="state" name="state" #if($!survey.state==1)checked="checked"#end value="1"  type="radio">
-                                    <span class="icon icon-check"></span> 开
-                                </label>
-                                <label class="button #if($!survey.state==0)active#end"
-                                       onchange="changeState($!survey.id,0)">
-                                    <input id="state" name="state" #if($!survey.state==0)checked="checked"#end value="0" type="radio"><span class="icon icon-times"></span> 关
-                                </label>
-                            </div>
-                        </td>
+##                        <td>
+##                            <div class="button-group radio">
+##                                <label class="button #if($!survey.state==1)active#end"
+##                                       onchange="changeState($!survey.id,1)">
+##                                    <input id="state" name="state" #if($!survey.state==1)checked="checked"#end value="1"  type="radio">
+##                                    <span class="icon icon-check"></span> 开
+##                                </label>
+##                                <label class="button #if($!survey.state==0)active#end"
+##                                       onchange="changeState($!survey.id,0)">
+##                                    <input id="state" name="state" #if($!survey.state==0)checked="checked"#end value="0" type="radio"><span class="icon icon-times"></span> 关
+##                                </label>
+##                            </div>
+##                        </td>
                         <td><a class="button border-sub" href="${basePath}admin/research/questionList.xhtml?id=$survey.id"><span class="icon-qrcode"></span> 题库维护</a></td>
                         <td>
                             <div class="button-group">

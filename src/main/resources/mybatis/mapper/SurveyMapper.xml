@@ -10,9 +10,11 @@
     <result column="END_TIME" jdbcType="TIMESTAMP" property="endTime" />
     <result column="STATE" jdbcType="INTEGER" property="state" />
     <result column="TOPIC" jdbcType="VARCHAR" property="topic" />
+    <result column="THUMBNAIL" jdbcType="VARCHAR" property="thumbnail" />
+
   </resultMap>
   <sql id="Base_Column_List">
-    ID, TITLE, HEADER_IMG, DESCRIPTION, START_TIME, END_TIME, STATE, TOPIC
+    ID, TITLE, THUMBNAIL,HEADER_IMG, DESCRIPTION, START_TIME, END_TIME, STATE, TOPIC
   </sql>
   <sql id="Paging">
     <if test="paging != null and paging.StartIndex != null and paging.pageSize">
@@ -44,10 +46,10 @@
     where ID = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.lcpa.lclove.model.Survey" useGeneratedKeys="true" keyProperty="id">
-    insert into survey (TITLE, HEADER_IMG, DESCRIPTION,
+    insert into survey (TITLE, THUMBNAIL, HEADER_IMG, DESCRIPTION,
       START_TIME, END_TIME, STATE,
       TOPIC)
-    values (#{title,jdbcType=VARCHAR},#{headerImg,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR},
+    values (#{title,jdbcType=VARCHAR},#{thumbnail,jdbcType=VARCHAR}, #{headerImg,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR},
       #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{state,jdbcType=INTEGER},
       #{topic,jdbcType=VARCHAR})
   </insert>

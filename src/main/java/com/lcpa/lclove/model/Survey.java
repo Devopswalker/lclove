@@ -10,6 +10,8 @@ public class Survey {
 
     private String headerImg;
 
+    private String thumbnail;
+
     private String description;
 
     private Timestamp startTime;
@@ -92,5 +94,13 @@ public class Survey {
 
     public void setQuestions(List<Question> questions) {
         this.questions = questions;
+    }
+
+    public String getThumbnail() {
+        return thumbnail;
+    }
+
+    public void setThumbnail(String thumbnail) {
+        this.thumbnail = thumbnail;
     }
 }
