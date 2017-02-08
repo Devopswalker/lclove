@@ -716,7 +716,13 @@ $(function(){
     	   	if(content=='' || content==null){
     	   		alert("请填写评论！");
     	   		return false;
-    	   	}	
+    	   	}
+            var search_str = /^[\w\-\.]+@[\w\-\.]+(\.\w+)+$/;
+            if(!search_str.test(email)){
+                alert("邮件格式不正确 ! 请重新输入！");
+                $('#email').focus();
+                return false;
+            }
         	//validate end
         	
         	var url = lclove.util.basePath + "ajax/saveComments.xhtml";

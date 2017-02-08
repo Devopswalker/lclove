@@ -157,7 +157,7 @@ public class ControllerTest extends AnnotationController {
         surveyAnswerDetails2.add(surveyAnswerDetail32);
         surveyService.saveSurveyAnswer(survey1.getId(), "127.0.0.1", surveyAnswerDetails2);
 
-        Survey result = surveyService.getSurveyReuslt(survey1.getId());
+        Survey result = surveyService.getSurveyResult(survey1.getId());
         return "success";
     }
 

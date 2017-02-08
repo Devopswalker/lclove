@@ -28,6 +28,12 @@
     from comment
     where ID = #{id,jdbcType=INTEGER}
   </select>
+  <select id="selectTotalCommentNum" parameterType="java.lang.Integer" resultType="int">
+    select count(ID)
+    from comment
+    WHERE ARTICLE_ID = #{0}
+  </select>
+
   <select id="selectAllComments" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
