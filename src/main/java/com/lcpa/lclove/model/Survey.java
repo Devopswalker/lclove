@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 import java.util.List;
 
 public class Survey {
+	
     private Integer id;
 
     private String title;

@@ -29,7 +29,7 @@ public class Article {
 
     private String content;
 
-    private Integer CommentNum = 0;
+    private Integer commentNum = 0;
 
     public Integer getId() {
         return id;
@@ -136,10 +136,10 @@ public class Article {
     }
 
     public Integer getCommentNum() {
-        return CommentNum;
+        return commentNum;
     }
 
     public void setCommentNum(Integer commentNum) {
-        CommentNum = commentNum;
+    	this.commentNum = commentNum;
     }
 }

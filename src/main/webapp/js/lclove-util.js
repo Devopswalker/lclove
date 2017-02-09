@@ -497,7 +497,7 @@ $(function(){
             sbHtml.append("  <div class='content_item_text_middle'> "+ data.description +"</div>");
             sbHtml.append("  <div class='content_item_text_foot'>");
             sbHtml.append("    <div class='date'>"+ data.pubDate +"</div>");
-            sbHtml.append("    <div class='comment'><img src='" + lclove.util.imgPath + "images/comment.png'/><div class='sum'>"+ data.scanNum +"</div></div>");
+            sbHtml.append("    <div class='comment'><img src='" + lclove.util.imgPath + "images/comment.png'/><div class='sum'>"+ data.commentNum +"</div></div>");
             sbHtml.append("    <div class='love'><img width='20' height='20' class='radius-small' src='" + lclove.util.imgPath + "images/love.png'/><div class='sum'>"+ data.likeNum +"</div></div>");
             sbHtml.append("    <div class='type'> "+ data.topic +" </div>");
             sbHtml.append("  </div>");
