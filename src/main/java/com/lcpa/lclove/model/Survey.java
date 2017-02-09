@@ -10,6 +10,8 @@ public class Survey {
 
     private String headerImg;
 
+    private String thumbnail;
+
     private String description;
 
     private Timestamp startTime;
@@ -19,6 +21,8 @@ public class Survey {
     private Integer state = 0;
 
     private String topic;
+
+    private Timestamp pubDate;
 
     private List<Question> questions;
 
@@ -92,5 +96,21 @@ public class Survey {
 
     public void setQuestions(List<Question> questions) {
         this.questions = questions;
+    }
+
+    public String getThumbnail() {
+        return thumbnail;
+    }
+
+    public void setThumbnail(String thumbnail) {
+        this.thumbnail = thumbnail;
+    }
+
+    public Timestamp getPubDate() {
+        return pubDate;
+    }
+
+    public void setPubDate(Timestamp pubDate) {
+        this.pubDate = pubDate;
     }
 }

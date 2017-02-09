@@ -27,7 +27,7 @@
           <label>标题：</label>
         </div>
         <div class="field">
-          <input type="text" class="input w50" id="title" name="title" value="$!article.title" data-validate="required:请输入标题" />
+          <input type="text" class="input w50" id="title" name="title" value="$!article.title" data-validate="required:请输入标题,length#<=30:长度最大30" />
           <div class="tips"></div>
         </div>
       </div>
@@ -62,7 +62,7 @@
                 <label>主题：</label>
             </div>
             <div class="field">
-                <input type="text" class="input w50" id="topic" name="topic" value="$!article.topic"/>
+                <input type="text" class="input w50" id="topic" name="topic" value="$!article.topic" data-validate="required:请输入主题,length#<=12:长度最大12"/>
                 <div class="tips"></div>
             </div>
         </div>
@@ -137,7 +137,7 @@
           <label>点赞次数：</label>
         </div>
         <div class="field">
-          <input type="text" class="input w50" id="likeNum" name="likeNum" value="$!{article.likeNum}" data-validate="member:只能为数字"  />
+          <input type="text" class="input w50" id="likeNum" name="likeNum" value="$!{article.likeNum}" data-validate="number:只能为数字"  />
           <div class="tips"></div>
         </div>
       </div>
@@ -146,7 +146,7 @@
           <label>点击次数：</label>
         </div>
         <div class="field">
-          <input type="text" class="input w50" id="scanNum" name="scanNum" value="$!{article.scanNum}" data-validate="member:只能为数字"  />
+          <input type="text" class="input w50" id="scanNum" name="scanNum" value="$!{article.scanNum}" data-validate="number:只能为数字"  />
           <div class="tips"></div>
         </div>
       </div>

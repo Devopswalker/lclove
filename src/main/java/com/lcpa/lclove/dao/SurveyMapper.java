@@ -20,9 +20,13 @@ public interface SurveyMapper {
 
     List<Survey> selectSurveyList(QueryParameter queryParameter);
 
-    void updateSurveyState(Integer id);
+    void updateSurveyState(Integer id, Integer state);
 
     int selectCount();
 
     List<Survey> selectLatestShowSurvey();
+
+    int selectOpenSurveyCount();
+
+    List<Survey> selectAllSurveyOrderByDate(QueryParameter queryParameter);
 }

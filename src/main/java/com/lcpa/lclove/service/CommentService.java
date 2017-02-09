@@ -45,6 +45,11 @@ public class CommentService {
         return commentMapper.selectAllComments(queryParameter);
     }
 
+    public Integer getTotalCommentNum(Integer articleId){
+        Integer total = commentMapper.selectTotalCommentNum(articleId);
+        return total;
+    }
+
     /**
      * 删除评论
      * @param id

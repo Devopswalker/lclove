@@ -28,9 +28,9 @@
 			<!-- 列表 LEFT: 内容列表 -->
 			<div class="content_left">
 				<!-- 列表 LEFT: BANNER -->
-				<div class="love_topic">
-					<div class="love_topic_head"><img src="${staticPath}images/topic_flower.png"/><div>Love恋の恋爱经</div></div>
-					<div class="love_topic_desc_pic"><img width='570' height='228' class='radius-small' src="${staticPath}images/amulet_text.png"/></div>
+				<div class="special_topic">
+					<div class="special_topic_head"><img src="${staticPath}images/topic_flower.png" /><div>Special恋の喵言喵语</div></div>
+					<div class="special_topic_desc_pic"><img width='594' height='228' class='radius-small' src="${staticPath}images/special_banner.png" /></div>
 				</div>
 				<div class="small_blank"></div>
 				
@@ -60,9 +60,9 @@
 		<script>
 		$(function(){
 			lclove.params.keyword = '$!params.keyword';
-			lclove.params.navtype = '2';
+			lclove.params.navtype = '1';
 			lclove.params.pageNo = '$!params.pageNo';
-			lclove.params.position = '4';
+			lclove.params.position = '3';
 			
 			//固定头部导航
 			$("#myHeader").topMenu();

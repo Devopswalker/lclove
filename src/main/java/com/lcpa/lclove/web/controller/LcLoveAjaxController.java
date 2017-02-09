@@ -1,6 +1,5 @@
 package com.lcpa.lclove.web.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,10 +16,7 @@ import com.lcpa.lclove.constant.CommConstant;
 import com.lcpa.lclove.model.Article;
 import com.lcpa.lclove.model.Comment;
 import com.lcpa.lclove.model.ImageRecommend;
-import com.lcpa.lclove.model.Question;
-import com.lcpa.lclove.model.QuestionOption;
 import com.lcpa.lclove.model.Survey;
-import com.lcpa.lclove.model.SurveyAnswerDetail;
 import com.lcpa.lclove.service.ArticleService;
 import com.lcpa.lclove.service.CommentService;
 import com.lcpa.lclove.service.RecommendService;
@@ -165,23 +161,21 @@ public class LcLoveAjaxController extends AnnotationController{
 	
 	@RequestMapping("/ajax/getResearchDetail.xhtml")
 	public String getResearchDetail(Integer surveyId, ModelMap model){
-		/*Survey survey = null;
-		if(survey =! null){
-			survey = surveyService.getSurveyDetailById(surveyId);
+		Survey survey = null;
+		if(surveyId != null){
+			survey = surveyService.getSurveyResult(surveyId);
 		}else{
 			survey = surveyService.getSurveyDetail();
-		}*/
-		Survey survey  = surveyService.getSurveyDetail();
-//		initDataValues(survey);
+		}
 		return showJsonSuccess(model, JsonUtils.writeObjectToJson(survey));
 	}
 
 	@RequestMapping("/ajax/saveResearch.xhtml")
-	public String saveResearch(String options, HttpServletRequest request, ModelMap model){
-		if(StringUtils.isBlank(options)){
-			return showJsonError(model, "Argument list syntax error !");
+	public String saveResearch(String optionDatas, HttpServletRequest request, ModelMap model){
+		if(StringUtils.isBlank(optionDatas)){
+			return showJsonError(model, "Bad character in paramenters !");
 		}
-		ResearchOptionsVo details = JsonUtils.readJsonToObject(ResearchOptionsVo.class, options);
+		ResearchOptionsVo details = JsonUtils.readJsonToObject(ResearchOptionsVo.class, optionDatas);
 		if(details == null){
 			return showJsonError(model, "Bad character in paramenters !");
 		}
@@ -193,7 +187,7 @@ public class LcLoveAjaxController extends AnnotationController{
 	}
 	
 	
-	private void initDataValues(Survey survey) {
+	/*private void initDataValues(Survey survey) {
 		survey.setId(1);
 		survey.setTitle("他心里到底在想什么？");
 		survey.setHeaderImg("images/dy_06.png");
@@ -230,6 +224,6 @@ public class LcLoveAjaxController extends AnnotationController{
 			questions.add(question);
 		}
 		survey.setQuestions(questions);
-	}
+	}*/
 
 }

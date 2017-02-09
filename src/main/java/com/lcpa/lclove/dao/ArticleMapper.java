@@ -39,4 +39,6 @@ public interface ArticleMapper {
     List<Article> selectNextByPubDate(Article currentArticle);
 
     List<Article> selectNextByScanNum(Article currentArticle);
+
+    void increaseLoveNum(Integer articleId);
 }

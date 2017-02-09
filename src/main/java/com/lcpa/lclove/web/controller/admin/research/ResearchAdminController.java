@@ -1,5 +1,6 @@
 package com.lcpa.lclove.web.controller.admin.research;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -121,6 +122,13 @@ public class ResearchAdminController extends AnnotationController {
         if(question == null){
             return showJsonError(model, "Bad character in paramenters !");
         }
+        if (question.getInputType() == 1){
+            List<QuestionOption> questionOptions = new ArrayList<QuestionOption>();
+            QuestionOption questionOption = new QuestionOption();
+            questionOption.setContent("");
+            questionOptions.add(questionOption);
+            question.setQuestionOptions(questionOptions);
+        }
         surveyService.saveQuestion(question);
         return showJsonSuccess(model);
 //        List<Question> questions = surveyService.getAllQuestionBySurveyId(question.getSurveyId());
@@ -147,6 +155,19 @@ public class ResearchAdminController extends AnnotationController {
         model.put("surveyId", surveyId);
         model.put("typeMap", typeMap);
         return "admin/research/questionList.vm";
+    }
+
+
+    @RequestMapping(value = "/admin/research/updateResearchState.xhtml")
+    public String updateResearchState(Integer id, Integer state, ModelMap model){
+        surveyService.updateSurveyState(id, state);
+        return showJsonSuccess(model);
+//        if (state == 1 && surveyService.hasOpenedSurvey()){
+//            return showJsonSuccess(model);
+//        }else{
+//            surveyService.updateSurveyState(id, state);
+//            return showJsonSuccess(model);
+//        }
     }
 
 

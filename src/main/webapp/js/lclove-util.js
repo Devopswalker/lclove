@@ -10,6 +10,7 @@ lclove.params.pageNo = "";
 lclove.params.position = "";
 lclove.params.aid = "";
 lclove.params.sortType = "";
+lclove.params.surveyId = "";
 
 
 /* StringBuilder  */
@@ -49,7 +50,7 @@ function navClick(index){
 		url = "index.xhtml?"+new Date().getTime();
 		break;
 	case 2:
-		url = "spacial.xhtml";
+		url = "special.xhtml";
 		break;
 	case 3:
 		url = "loves.xhtml";
@@ -221,11 +222,11 @@ $.extend({
             sbHtml.append("    <div class='pc_style'>");
             sbHtml.append("        <ul>");
             sbHtml.append("            <li><div class='home_nav_icon' onClick='navClick(1)'></div><div class='icon_name' onClick='navClick(1)'>Home</div></li>");
-            sbHtml.append("            <li id='secondary_nav'><div  class='normal_nav' onClick='navClick(2)'>恋の喵言喵语</div><div class='icon_name' onClick='navClick(2)'>Spacial</div></li>");
+            sbHtml.append("            <li id='secondary_nav'><div  class='normal_nav' onClick='navClick(2)'>恋の喵言喵语</div><div class='icon_name' onClick='navClick(2)'>Special</div></li>");
             sbHtml.append("            <li><div class='normal_nav' onClick='navClick(3)'>恋の恋爱经</div><div class='icon_name' onClick='navClick(3)'>Love</div></li>");
             sbHtml.append("            <li><div class='normal_nav' onClick='navClick(4)'>恋の护身符</div><div class='icon_name' onClick='navClick(4)'>Body</div></li>");
-            sbHtml.append("            <li><div class='normal_nav' onClick='navClick(5)'>恋の好奇心</div><div class='icon_name' onClick='navClick(5)'>Research</div></li>");
             sbHtml.append("            <li><div class='normal_nav' onClick='navClick(6)'>恋の梦剧场</div><div class='icon_name' onClick='navClick(6)'>Comic</div></li>");
+            sbHtml.append("            <li><div class='normal_nav' onClick='navClick(5)'>恋の好奇心</div><div class='icon_name' onClick='navClick(5)'>Research</div></li>");
             sbHtml.append("            <li><img src='" + lclove.util.imgPath + "images/img_omamori.png'/></li>");
             sbHtml.append("        </ul>");
             sbHtml.append("    </div>");
@@ -715,7 +716,13 @@ $(function(){
     	   	if(content=='' || content==null){
     	   		alert("请填写评论！");
     	   		return false;
-    	   	}	
+    	   	}
+            var search_str = /^[\w\-\.]+@[\w\-\.]+(\.\w+)+$/;
+            if(!search_str.test(email)){
+                alert("邮件格式不正确 ! 请重新输入！");
+                $('#email').focus();
+                return false;
+            }
         	//validate end
         	
         	var url = lclove.util.basePath + "ajax/saveComments.xhtml";
@@ -762,25 +769,35 @@ $(function(){
             sbHtml.append("<img width='550' height='60' class='radius-small' src='"+ data.headerImg + "'/>");
             sbHtml.append("<div class='smallest_blank'></div>");
             $.each(data.questions, function(index, item){
-            		sbHtml.append("<div id='" + item.id + "' class='single_choose'>");
+                sbHtml.append("<div id='" + item.id + "' class='single_choose'>");
                 sbHtml.append("<div class='choose_topic'>" + item.seq+" "+item.title + "</div>");
                 if(item.inputType == "1"){
-                		sbHtml.append("<div class='suggenstion_div'><textarea class='suggestion_input'></textarea></div>");
+                	$.each(item.questionOptions, function(i, subItem){
+                		sbHtml.append("<div class='suggenstion_div'><textarea class='suggestion_input' surveyid=" + item.id + " optionid='" + subItem.id + "'></textarea></div>");
+                	});
                 }else if(item.inputType == "2"){
 	                	$.each(item.questionOptions, function(i, subItem){
-	                		sbHtml.append("<div class='single_choose_item'><input name='survey_" + item.id + "' type='radio' value='" + subItem.id + "' /><div>" + subItem.content + "</div></div>");
-	                });
+	                		sbHtml.append("<div class='single_choose_item'><input name='survey_" + item.id + "' type='radio' value='" + subItem.id + "' /><div>" + subItem.content + "</div>");
+	                		if(subItem.imgSrc != null && subItem.imgSrc != ""){
+	                			sbHtml.append("<img width='90' height='80' class='radius-small'  src='"+subItem.imgSrc+"'/>");
+	                		}
+	                		sbHtml.append("</div>");
+	                	});
                 }else if(item.inputType == "3"){
 	                	$.each(item.questionOptions, function(i, subItem){
-	                		sbHtml.append("<div class='mutiple_choose_item'><div class='up_part'><input name='survey_" + index + "' type='checkbox' value='"+subItem.id+"' /><div>" + subItem.content + "</div></div><img width='90' height='80' class='radius-small'  src='"+subItem.imgSrc+"'/></div>");
+	                		sbHtml.append("<div class='mutiple_choose_item'><div class='up_part'><input name='survey_" + item.id + "' type='checkbox' value='"+subItem.id+"' /><div>" + subItem.content + "</div></div>");
+	                		if(subItem.imgSrc != null && subItem.imgSrc != ""){
+	                			sbHtml.append("<img width='90' height='80' class='radius-small'  src='"+subItem.imgSrc+"'/>");
+	                		}
+	                		sbHtml.append("</div>");
 	                });
                 }
                 sbHtml.append("<div class='mini_blank'></div>");
                 sbHtml.append("</div>");
             });
-            sbHtml.append("			<div class='mini_blank'></div>");
-            sbHtml.append("			<div id='submitBtn'><img src='"+lclove.util.imgPath+"images/dy_03.png'/><div>完成提交后，可看到调研结果</div></div>");
-            sbHtml.append("			<div class='mini_blank'></div>");
+            sbHtml.append("<div class='mini_blank'></div>");
+            sbHtml.append("<div id='submitBtn'><img src='"+lclove.util.imgPath+"images/dy_03.png'/><div>完成提交后，可看到调研结果</div></div>");
+            sbHtml.append("<div class='mini_blank'></div>");
             $(instance).append($(sbHtml.toString()));
             
             $("#submitBtn").on("click", submitData);
@@ -795,29 +812,37 @@ $(function(){
 	        	$(".single_choose").each(function(){
 	        		var subData = {};
 	        		var subSurveyId = $(this).attr("id");
-	        		subData.optionId = subSurveyId;
-	        		if($(this).find("input[type=radio]")){
-	        			subData.answerContent = $('input[name="survey_' + subSurveyId + '"]:checked ').val();
+//	        		subData.optionId = subSurveyId;
+	        		if($(this).find("input[type=radio]").length > 0){
+	        			subData.optionId = $('input[name="survey_' + subSurveyId + '"]:checked ').val();
 	        			data.options.push(subData);
+	        		}else if($(this).find("input[type=checkbox]").length > 0){
+	        			$('input[name="survey_' + subSurveyId + '"]').each(function(){
+	        				if($(this).is(':checked')){
+	        					subData = {};
+	        					subData.optionId = $(this).val();
+	        					data.options.push(subData);
+	        				}
+	        			})	
+	        		}else if($(this).find("textarea").length > 0){
+	        			var $tempObj = $('textarea[surveyid="' + subSurveyId + '"]');
+    					subData.optionId = $tempObj.attr("optionid");
+    					subData.answerContent = $tempObj.val();
+    					data.options.push(subData);
+	        			
 	        		}
-	        	})
-	        	console.log(data);
+	        	});
+	        	//console.log(data);
+	        	var url = lclove.util.basePath + "ajax/saveResearch.xhtml";
+	        	var optionDatas = JSON.stringify(data);
+	        	var values = {"optionDatas":optionDatas}
+	        	$.getData(url, values, true, "POST", "json", true, callBackResearch(data.surveyId));
         	}
-        	//validate end
-        	
-//        	var url = lclove.util.basePath + "ajax/saveResearch.xhtml";
-//        	var data = {};
-//        	$.getData(url, data, true, "POST", "json", true, callBackResearch);
-//        };
         
       //保存回调
-        var callBackResearch = function(result){
-			//todo:保存成功后跳转到问卷结果页面
+        var callBackResearch = function(surveyId){
+        	refreshPage(lclove.util.basePath + "researchResult.xhtml?surveyId=" + surveyId);
         };
-        
-//        var initResearch = function(data){
-//            $(instance).append(showResearch(data));
-//        };
         $.getData(url, null, true, "POST", "json", true, showResearch);
     };
    
@@ -830,6 +855,54 @@ $(function(){
     $.fn.renderResearch.defaults = {};
 });
 /*  research  */
+
+
+/*  research result  */
+$(function(){
+    var eResearchResult = function(options,object) {
+        var opts = $.extend({}, $.fn.renderResearch.defaults, options);
+        var instance = object;
+        var url = lclove.util.basePath + "ajax/getResearchDetail.xhtml?surveyId=" + lclove.params.surveyId;
+        var showResearchResult = function (data) {
+            var sbHtml = new StringBuilder();
+            sbHtml.append("<div class='search_head'><img src='"+lclove.util.imgPath+"images/text_head_icon.png'/><div>" + data.title + "</div></div>");
+            sbHtml.append("<img width='550' height='60' class='radius-small' src='"+ data.headerImg + "'/>");
+            sbHtml.append("<div class='smallest_blank'></div>");
+            $.each(data.questions, function(index, item){
+            	if(item.inputType != "1"){
+                    sbHtml.append("<div id='" + item.id + "' class='single_choose'>");
+                    sbHtml.append("<div class='choose_topic'>" + item.seq+" "+item.title + "</div>");
+                    $.each(item.questionOptions, function(i, subItem){
+                        sbHtml.append("<div class='result_choose_item'>");
+                        sbHtml.append("  <div class='result_content'>" + subItem.content + "</div>");
+    	                sbHtml.append("  <div class='progress'>");
+    	                if(subItem.score != null && subItem.score != ""){
+    	                	sbHtml.append("    <div class='progress-bar' style='width: " + subItem.score + "%;'>" + subItem.score + "%</div>");
+    	                }else{
+    	                	sbHtml.append("    <div class='progress-bar' style='width: 0%;'></div>");
+    	                }
+    	                sbHtml.append("  </div>");
+    	                sbHtml.append("</div>");
+    	            });
+                    sbHtml.append("<div class='mini_blank'></div>");
+                    sbHtml.append("</div>");
+                }
+            });
+            sbHtml.append("<div class='mini_blank'></div>");
+            $(instance).append($(sbHtml.toString()));
+        };
+        $.getData(url, null, true, "POST", "json", true, showResearchResult);
+    };
+   
+    $.fn.renderResearchResult = function(options) {
+        return this.each(function () {
+            return eResearchResult(options, $(this));
+        });
+    };
+
+    $.fn.renderResearchResult.defaults = {};
+});
+/*  research result  */
 
 /*  about lm  */
 $(function(){

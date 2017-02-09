@@ -25,7 +25,8 @@
         <table class="table table-hover text-center" id="table">
             <tr>
                 <th>标题</th>
-                <th>简述</th>
+                <th>缩图</th>
+##                <th>简述</th>
                 <th>问卷时间</th>
                 <th>状态</th>
                 <th>详情</th>
@@ -35,17 +36,18 @@
                 #foreach($survey in $surveys)
                     <tr>
                         <td>$!survey.title</td>
-                        <td>$!survey.description</td>
-                        <td>$!survey.endTime</td>
+                        <td width="10%"><img src="$survey.thumbnail" alt="" width="70" height="50" /></td>
+##                        <td>$!survey.description</td>
+                        <td>$!survey.pubDate</td>
                         <td>
                             <div class="button-group radio">
-                                <label class="button #if($!survey.state==1)active#end" #if($!survey.state==0)checked="checked"#end
-                                       onchange="changeState($!survey.state,1)" onclick="stateOnclick(1)">
-                                    <input id="state" name="state" value="1"  type="radio">
+                                <label class="button #if($!survey.state==1)active#end"
+                                       onchange="changeState($!survey.id,1)">
+                                    <input id="state" name="state" #if($!survey.state==1)checked="checked"#end value="1"  type="radio">
                                     <span class="icon icon-check"></span> 开
                                 </label>
                                 <label class="button #if($!survey.state==0)active#end"
-                                       onchange="changeState($!survey.state,0)" onclick="stateOnclick(0)">
+                                       onchange="changeState($!survey.id,0)">
                                     <input id="state" name="state" #if($!survey.state==0)checked="checked"#end value="0" type="radio"><span class="icon icon-times"></span> 关
                                 </label>
                             </div>
@@ -109,21 +111,32 @@
             alert(r.msg);
         }
     };
-    function changeState(currentState, changeState){
-        if (changeState == 1){
-            var states = $("#table").find(".active").each(function(){
-                if ($(event.target).is($(this))){
-                    return true;
-                }
-                var stateVal = $(this).find("#state").val();
-                if (stateVal == 1){
-                    alert("只能存在一个被打开的问卷调查")
-                    return;
-                }
-            });
-        }
-        alert(currentState+"---"+changeState)
+    function changeState(surveyId, changeState){
+        var url = '${basePath}admin/research/updateResearchState.xhtml';
+        var values = {"id":surveyId, "state":changeState};
+        $.getData(url, values, true, 'get', 'json', false, ajaxCallBack);
+##        if (changeState == 1){
+##            if(confirm("最多允许一个问卷被打开，确定要打开问卷吗?")){
+##                var url = '${basePath}admin/research/updateResearchState.xhtml';
+##                var values = {"id":surveyId, "state":changeState};
+##                $.getData(url, values, true, 'get', 'json', false, ajaxCallBack);
+##            }else{
+##                refreshPage('${basePath}admin/research/researchList.xhtml');
+##            }
+##        }else{
+##            var url = '${basePath}admin/research/updateResearchState.xhtml';
+##            var values = {"id":surveyId, "state":changeState};
+##            $.getData(url, values, true, 'get', 'json', false, changeStateajaxCallBack);
+##        }
+
     }
+    function changeStateajaxCallBack(r){
+        if(r.success){
+            refreshPage('${basePath}admin/research/researchList.xhtml');
+        }else{
+
+        }
+    };
     //全选
     $("#checkall").click(function(){
         $("input[name='id[]']").each(function(){

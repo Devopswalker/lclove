@@ -127,7 +127,7 @@ li{
 	position:relative;
 	float:left;
 	width:590px;
-	height:209px;
+	height:310px;
 	overflow:hidden;
 }
 
@@ -140,13 +140,13 @@ li{
 
 .item img{
 	width: 590px;
-	height: 209px;
+	height: 310px;
 }
 
 .banner_item{
 	float:left;
 	width:590px;
-	height:209px;
+	height:310px;
 	background:url(../images/banner.png);
 }
 
@@ -600,6 +600,37 @@ li{
 	margin-left:5px;
 }
 
+/* for the comic.html */
+.comic_topic{
+	float:left;
+	width:100%;
+}
+
+.comic_topic_head{
+	float:left;
+	width:100%;
+}
+
+.comic_topic_head img{
+	float:left;
+	height:60px;
+	width:67px;
+}
+
+.comic_topic_head div{
+	float:left;
+	line-height:60px;
+	margin-left:20px;
+	font-size:18px;
+	font-weight:bold;
+}
+
+.comic_topic_desc_pic{
+	float:left;
+	margin-left:10px;
+	margin-top:20px;
+}
+
 /* for the article_content.html */
 .article_content{
 	width:574px;
@@ -924,6 +955,8 @@ li{
 .search_head div{
 	float:left;
 	margin-left:10px;
+	margin-bottom:10px;
+	font-size:18px;
 	font-weight:bold;
 }
 
@@ -946,11 +979,12 @@ li{
 	margin-top:10px;
 }
 
-.single_choose_item input, .single_choose_item div{
+.single_choose_item input{
 	float:left;
 }
 
 .single_choose_item div{
+	float:left;
 	margin-left:10px;
 }
 
@@ -1106,4 +1140,22 @@ li{
 	-webkit-box-shadow:1.5px 1.5px 1.5px;
 	-moz-box-shadow: 1.5px 1.5px 1.5px;
 	padding:10px;
+}
+
+
+.result_choose_item{
+	width:400px;
+	margin-left:10px;
+	line-height:20px;
+	margin-top:10px;
+	overflow: hidden;
+}
+
+.result_choose_item .result_content{
+	float:left;
+	margin:0 10px;
+}
+
+.result_choose_item .progress{
+	margin-top: 5px;
 }
