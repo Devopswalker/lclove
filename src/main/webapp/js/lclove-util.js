@@ -273,7 +273,19 @@ $(function(){
             $(".searchButton").on("click", function(){
             	//筛选条件
             	var keyword = $(".search_bar").val();
-            	var filterUrl =  lclove.util.basePath + "ajax/getArticleList.xhtml?keyword=" + keyword+"&navtype="+lclove.params.navtype;
+            	var tourl = "index.xhtml";
+            	var vnav = lclove.params.navtype;
+            	if(vnav == 1){
+            		tourl = "special.xhtml";
+            	}else if(vnav == 2){
+            		tourl = "loves.xhtml";
+            	}else if(vnav == 3){
+            		tourl = "amulet.xhtml";
+            	}else if(vnav == 4){
+            		tourl = "comic.xhtml";
+            	}
+            	
+            	var filterUrl =  lclove.util.basePath + tourl +"?keyword=" + keyword+"&navtype="+vnav;
             	refreshPage(filterUrl);
             });
         };        
@@ -481,7 +493,7 @@ $(function(){
     var eContentList = function(options,object) {
         var opts = $.extend({}, $.fn.contentList.defaults, options);
         var instance = object;
-        var url = lclove.util.basePath + "ajax/getArticleList.xhtml?navtype="+lclove.params.navtype;
+        var url = lclove.util.basePath + "ajax/getArticleList.xhtml?navtype="+lclove.params.navtype +"&keyword=" + lclove.params.keyword;
         var itemTemplate = function(data){
             var sbHtml = new StringBuilder();
             sbHtml.append("<div class='content_item'>");
@@ -535,7 +547,7 @@ $(function(){
             var scrollAdd = function(){
             	var scrollT = $(window).scrollTop(); //滚动条top 
             	var pageH = $(document.body).height();
-            	var scrollUrl = lclove.util.basePath + "ajax/getArticleList.xhtml?type="+lclove.params.navtype;
+            	var scrollUrl = lclove.util.basePath + "ajax/getArticleList.xhtml?type="+lclove.params.navtype + "&keyword=" + lclove.params.keyword;
                 if (scrollT + winH > ($(".loadMore").offset().top + 100) && $(".loadMore").css("display") == "block" && ($(".loadMore").attr("cnum") < ($(".loadMore").attr("tnum") -1))) {
 					$(".loadMore").css("display","none");
 					scrollUrl += "&pageNo=" + (parseInt($(".loadMore").attr("cnum")) + 1);
@@ -627,11 +639,9 @@ $(function(){
             sbHtml.append("  	<div class='row_1_right'>"+data.detail.topic+"</div>");
             sbHtml.append("  </div>");
             sbHtml.append("  <div class='row_2'>"+data.detail.pubDate+" | 小编："+data.detail.editor+"</div>");
+            sbHtml.append("  <div class='mini_blank'></div>");
             sbHtml.append("  <div class='row_3'>");
             sbHtml.append(data.detail.content);
-            
-            
-            
             sbHtml.append("  </div>");
             sbHtml.append("</div>");
             return $(sbHtml.toString());
@@ -756,15 +766,102 @@ $(function(){
 });
 /*  Comment  */
 
-/*  research  */
+/* research List */
+$(function(){
+    var eResearchList = function(options,object) {
+        var opts = $.extend({}, $.fn.researchList.defaults, options);
+        var instance = object;
+        var url = lclove.util.basePath + "ajax/getSurveyList.xhtml?pageNo="+lclove.params.pageNo;
+        var itemTemplate = function(data){
+            var sbHtml = new StringBuilder();
+            sbHtml.append("<div class='content_item'>");
+            sbHtml.append("<div class='content_item_pic'>");
+            sbHtml.append("  <a class='thumbnail' href='"+ lclove.util.basePath + "researchDetail.xhtml?navtype="+lclove.params.navtype+"&sortType=1&surveyId="+data.id+"'><img width='148' height='148' class='img-border radius-small' src='" + data.thumbnail + "'/></a>");
+            sbHtml.append("</div>");
+            sbHtml.append("<div class='content_item_text'>");
+            sbHtml.append("  <div class='content_item_text_head'>");
+            sbHtml.append("    <a href='"+ lclove.util.basePath + "researchDetail.xhtml?navtype="+lclove.params.navtype+"&sortType=1&surveyId="+data.id+"'><img src='" + lclove.util.imgPath + "images/text_head_icon.png'/><div>"+ data.title +"</div></a>");
+            sbHtml.append("  </div>");
+            sbHtml.append("  <div class='mini_blank'></div>");
+            sbHtml.append("  <div class='separate'></div>");
+            sbHtml.append("  <div class='content_item_text_middle'> "+ data.description +"</div>");
+            sbHtml.append("  <div class='content_item_text_foot'>");
+            sbHtml.append("    <div class='date'>"+ data.pubDate +"</div>");
+            sbHtml.append("  </div>");
+            sbHtml.append("</div>");
+            sbHtml.append("</div>");
+            return $(sbHtml.toString());
+        };
+        
+        var scrollEvent = function(){
+            var winH = $(window).height(); //页面可视区域高度
+            var scrollAdd = function(){
+            	var scrollT = $(window).scrollTop(); //滚动条top 
+            	var pageH = $(document.body).height();
+            	var scrollUrl = lclove.util.basePath + "ajax/getSurveyList.xhtml";
+                if (scrollT + winH > ($(".loadMore").offset().top + 100) && $(".loadMore").css("display") == "block" && ($(".loadMore").attr("cnum") < ($(".loadMore").attr("tnum") -1))) {
+					$(".loadMore").css("display","none");
+					scrollUrl += "&pageNo=" + (parseInt($(".loadMore").attr("cnum")) + 1);
+                	$.getData(scrollUrl, null, true, "POST", "json", true, appendList);
+                }
+            };
+            //定义鼠标滚动事件
+            $(window).scroll(scrollAdd);
+        };
+        
+        var fillData = function(data){
+        	if(data != null && data.surveys != null && data.surveys != "" ){
+        		$.each(data.surveys, function(index, item){
+            		$(".content_list").append(itemTemplate(item));
+            	});
+        	}
+        };
+        
+        var appendList = function(data){
+        	fillData(data);
+            var cPageNum = data.pageInfo.currentPage;
+            if(cPageNum == data.pageInfo.pageCount - 1){
+            	$(".loadMore").css("display", "none");
+            }else{
+            	$(".loadMore").appendTo($(instance));
+                $(".loadMore").attr("cnum", cPageNum).css("display", "block");
+            }
+        };
+        
+        var renderList = function(data){
+        	var pageNum = data.pageInfo.currentPage;
+            var totalPage = data.pageInfo.pageCount;
+            
+        	fillData(data);
+        	
+            $("<div/>").addClass("loadMore").attr({"cnum": pageNum, "tnum": totalPage}).appendTo($(instance));
+            
+            if(pageNum >= totalPage - 1 ){
+            	$(".loadMore").css("display", "none");
+            }         
+            scrollEvent();
+        };
+
+        $.getData(url, null, true, "POST", "json", true, renderList);
+    };
+
+    $.fn.researchList = function(options) {
+        return this.each(function () {
+            return eResearchList(options, $(this));
+        });
+    };
+    $.fn.researchList.defaults = {};
+});
+/* research List */
+
+/*  research detail  */
 $(function(){
     var eResearch = function(options,object) {
         var opts = $.extend({}, $.fn.renderResearch.defaults, options);
         var instance = object;
-        var url = lclove.util.basePath + "ajax/getResearchDetail.xhtml";
+        var url = lclove.util.basePath + "ajax/getResearchDetail.xhtml?surveyId=" + lclove.params.surveyId;
         var showResearch = function (data) {
             var sbHtml = new StringBuilder();
-            //TODO:
             sbHtml.append("<div class='search_head' suveryid='" + data.id + "'><img src='"+lclove.util.imgPath+"images/text_head_icon.png'/><div>" + data.title + "</div></div>");
             sbHtml.append("<img width='550' height='60' class='radius-small' src='"+ data.headerImg + "'/>");
             sbHtml.append("<div class='smallest_blank'></div>");
@@ -812,7 +909,6 @@ $(function(){
 	        	$(".single_choose").each(function(){
 	        		var subData = {};
 	        		var subSurveyId = $(this).attr("id");
-//	        		subData.optionId = subSurveyId;
 	        		if($(this).find("input[type=radio]").length > 0){
 	        			subData.optionId = $('input[name="survey_' + subSurveyId + '"]:checked ').val();
 	        			data.options.push(subData);
@@ -854,7 +950,7 @@ $(function(){
 
     $.fn.renderResearch.defaults = {};
 });
-/*  research  */
+/*  research detail  */
 
 
 /*  research result  */
