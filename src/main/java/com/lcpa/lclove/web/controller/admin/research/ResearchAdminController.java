@@ -160,12 +160,14 @@ public class ResearchAdminController extends AnnotationController {
 
     @RequestMapping(value = "/admin/research/updateResearchState.xhtml")
     public String updateResearchState(Integer id, Integer state, ModelMap model){
-        if (state == 1 && surveyService.hasOpenedSurvey()){
-            return showJsonSuccess(model);
-        }else{
-            surveyService.updateSurveyState(id, state);
-            return showJsonSuccess(model);
-        }
+        surveyService.updateSurveyState(id, state);
+        return showJsonSuccess(model);
+//        if (state == 1 && surveyService.hasOpenedSurvey()){
+//            return showJsonSuccess(model);
+//        }else{
+//            surveyService.updateSurveyState(id, state);
+//            return showJsonSuccess(model);
+//        }
     }
 
 

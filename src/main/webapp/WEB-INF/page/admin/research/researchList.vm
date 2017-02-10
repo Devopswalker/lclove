@@ -25,7 +25,8 @@
         <table class="table table-hover text-center" id="table">
             <tr>
                 <th>标题</th>
-                <th>简述</th>
+                <th>缩图</th>
+##                <th>简述</th>
                 <th>问卷时间</th>
                 <th>状态</th>
                 <th>详情</th>
@@ -35,8 +36,9 @@
                 #foreach($survey in $surveys)
                     <tr>
                         <td>$!survey.title</td>
-                        <td>$!survey.description</td>
-                        <td>$!survey.endTime</td>
+                        <td width="10%"><img src="$survey.thumbnail" alt="" width="70" height="50" /></td>
+##                        <td>$!survey.description</td>
+                        <td>$!survey.pubDate</td>
                         <td>
                             <div class="button-group radio">
                                 <label class="button #if($!survey.state==1)active#end"
@@ -110,19 +112,22 @@
         }
     };
     function changeState(surveyId, changeState){
-        if (changeState == 1){
-            if(confirm("最多允许一个问卷被打开，确定要打开问卷吗?")){
-                var url = '${basePath}admin/research/updateResearchState.xhtml';
-                var values = {"id":surveyId, "state":changeState};
-                $.getData(url, values, true, 'get', 'json', false, ajaxCallBack);
-            }else{
-                refreshPage('${basePath}admin/research/researchList.xhtml');
-            }
-        }else{
-            var url = '${basePath}admin/research/updateResearchState.xhtml';
-            var values = {"id":surveyId, "state":changeState};
-            $.getData(url, values, true, 'get', 'json', false, changeStateajaxCallBack);
-        }
+        var url = '${basePath}admin/research/updateResearchState.xhtml';
+        var values = {"id":surveyId, "state":changeState};
+        $.getData(url, values, true, 'get', 'json', false, ajaxCallBack);
+##        if (changeState == 1){
+##            if(confirm("最多允许一个问卷被打开，确定要打开问卷吗?")){
+##                var url = '${basePath}admin/research/updateResearchState.xhtml';
+##                var values = {"id":surveyId, "state":changeState};
+##                $.getData(url, values, true, 'get', 'json', false, ajaxCallBack);
+##            }else{
+##                refreshPage('${basePath}admin/research/researchList.xhtml');
+##            }
+##        }else{
+##            var url = '${basePath}admin/research/updateResearchState.xhtml';
+##            var values = {"id":surveyId, "state":changeState};
+##            $.getData(url, values, true, 'get', 'json', false, changeStateajaxCallBack);
+##        }
 
     }
     function changeStateajaxCallBack(r){

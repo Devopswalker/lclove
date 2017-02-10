@@ -74,7 +74,6 @@ public class LcLoveAjaxController extends AnnotationController{
 		}
 		List<Article> articleList = articleService.getTopRankArticlesByType(navtype, 6);
 		return showJsonSuccess(model, JsonUtils.writeObjectToJson(articleList));
-//		return showJsonSuccess(model, ""); 
 	}
 
 	/**
@@ -97,7 +96,6 @@ public class LcLoveAjaxController extends AnnotationController{
 		resultMap.put("articles", articleList);
 		resultMap.put("pageInfo", page);
 		return showJsonSuccess(model, JsonUtils.writeObjectToJson(resultMap));
-		//return showJsonSuccess(model, "");
 	}
 	
 	/**
@@ -159,11 +157,32 @@ public class LcLoveAjaxController extends AnnotationController{
 		return showJsonSuccess(model, JsonUtils.writeObjectToJson(this.getParameterMap()));
 	}
 	
+	
+	/**
+	 *  Get Survey dataList
+	 * @param pageNo
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("/ajax/getSurveyList.xhtml")
+	public String getSurveyList(Integer pageNo, ModelMap model){
+		if(pageNo == null){
+			pageNo = 1;
+		}
+		Integer rowsPerPage = 5;
+		List<Survey> surveys = surveyService.getSurveyList(pageNo, rowsPerPage);
+		PagingJsonVo page = new PagingJsonVo(surveys.size(), rowsPerPage, pageNo);
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		resultMap.put("surveys", surveys);
+		resultMap.put("pageInfo", page);
+		return showJsonSuccess(model, JsonUtils.writeObjectToJson(resultMap));
+	}
+	
 	@RequestMapping("/ajax/getResearchDetail.xhtml")
 	public String getResearchDetail(Integer surveyId, ModelMap model){
 		Survey survey = null;
 		if(surveyId != null){
-			survey = surveyService.getSurveyReuslt(surveyId);
+			survey = surveyService.getSurveyResult(surveyId);
 		}else{
 			survey = surveyService.getSurveyDetail();
 		}

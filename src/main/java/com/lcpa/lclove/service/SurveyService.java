@@ -38,6 +38,7 @@ public class SurveyService {
      */
 	public void saveSurvey(Survey survey) {
 		if (survey.getId() == null) {
+            survey.setState(0);
 			surveyMapper.insert(survey);
 		} else {
             surveyMapper.updateByPrimaryKey(survey);
@@ -139,6 +140,17 @@ public class SurveyService {
     }
 
     /**
+     * 前段获取所有的问卷调查列表
+     * @param pageNo
+     * @return
+     */
+    public List<Survey> getAllSurvey(Integer pageNo, Integer pageSize){
+        Paging paging = new Paging(pageNo, pageSize);
+        QueryParameter queryParameter = new QueryParameter(paging, null);
+        List<Survey> surveyList = surveyMapper.selectAllSurveyOrderByDate(queryParameter);
+        return surveyList;
+    }
+    /**
      * 前端页面获取要显示的问卷调查
      * @return
      */
@@ -157,6 +169,21 @@ public class SurveyService {
         }
         resultSurvey.setQuestions(questions);
         return resultSurvey;
+    }
+    /**
+     * 前端页面获取要显示的问卷调查
+     * @return
+     */
+    public Survey getSurveyDetail(Integer id){
+        Survey survey = surveyMapper.selectByPrimaryKey(id);
+        List<Question> questions = questionMapper.selectBySurveyId(survey.getId());
+
+        for (Question question :questions){
+            List<QuestionOption> options = questionOptionMapper.selectOptionByQuestionId(question.getId());
+            question.setQuestionOptions(options);
+        }
+        survey.setQuestions(questions);
+        return survey;
     }
 
     /**
@@ -243,7 +270,7 @@ public class SurveyService {
      * @param id 问卷 ID
      * @return
      */
-    public Survey getSurveyReuslt(Integer id){
+    public Survey getSurveyResult(Integer id){
         Survey survey = surveyMapper.selectByPrimaryKey(id);
         Integer surveyAnswerTotalNum = surveyAnswerMapper.selectCountBySurveyID(id);
         List<Question> questions = questionMapper.selectBySurveyId(id);

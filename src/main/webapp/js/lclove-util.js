@@ -497,7 +497,7 @@ $(function(){
             sbHtml.append("  <div class='content_item_text_middle'> "+ data.description +"</div>");
             sbHtml.append("  <div class='content_item_text_foot'>");
             sbHtml.append("    <div class='date'>"+ data.pubDate +"</div>");
-            sbHtml.append("    <div class='comment'><img src='" + lclove.util.imgPath + "images/comment.png'/><div class='sum'>"+ data.scanNum +"</div></div>");
+            sbHtml.append("    <div class='comment'><img src='" + lclove.util.imgPath + "images/comment.png'/><div class='sum'>"+ data.commentNum +"</div></div>");
             sbHtml.append("    <div class='love'><img width='20' height='20' class='radius-small' src='" + lclove.util.imgPath + "images/love.png'/><div class='sum'>"+ data.likeNum +"</div></div>");
             sbHtml.append("    <div class='type'> "+ data.topic +" </div>");
             sbHtml.append("  </div>");
@@ -716,7 +716,13 @@ $(function(){
     	   	if(content=='' || content==null){
     	   		alert("请填写评论！");
     	   		return false;
-    	   	}	
+    	   	}
+            var search_str = /^[\w\-\.]+@[\w\-\.]+(\.\w+)+$/;
+            if(!search_str.test(email)){
+                alert("邮件格式不正确 ! 请重新输入！");
+                $('#email').focus();
+                return false;
+            }
         	//validate end
         	
         	var url = lclove.util.basePath + "ajax/saveComments.xhtml";

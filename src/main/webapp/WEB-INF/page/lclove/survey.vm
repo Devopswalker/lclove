@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <title>LC | 恋猫, 女性恋爱百科</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link rel="shortcut icon" href="${staticPath}images/favicon.ico"/>
+    <link rel="stylesheet" type="text/css" href="${staticPath}css/reset.css" />
+    <link rel="stylesheet" type="text/css" href="${staticPath}css/head.css" />
+    <link rel="stylesheet" type="text/css" href="${staticPath}css/pintuer.css" />
+    <link rel="stylesheet" type="text/css" href="${staticPath}css/float.css" />
+    <link rel="stylesheet" type="text/css" href="${staticPath}css/home_main.css" />
+    <link rel="stylesheet" type="text/css" href="${staticPath}css/navigation.css" />
+    <script src="${staticPath}js/jquery.js"></script>
+    <script src="${staticPath}js/lclove-util.js"></script>
+</head>
+
+<body>
+<!-- 固定头部导航 -->
+<div id="myHeader"></div>
+<!-- 固定头部导航 -->
+
+<!-- 答题详情 -->
+<div class="wrap_content clear">
+    <!-- 列表 LEFT: 内容列表 -->
+    <div class="content_left">
+        <div class="small_blank"></div>
+
+        <!-- 列表 LEFT: DATALIST -->
+        <div class="content_list"></div>
+
+    </div>
+
+    <!-- 列表 RIGHT: 通用搜索 /微电影图文推荐-->
+    <div class="content_right">
+        <div class="content_right_div">
+            <!-- 通用搜索 -->
+            <div class="search_area"></div>
+
+            <div class="small_blank"></div>
+
+            <!-- 微电影图文推荐-->
+            <div class="recommend_show"></div>
+
+            <!-- TOP 6-->
+            <div class="hot_article"></div>
+        </div>
+    </div>
+
+</div>
+<!-- 答题详情-->
+<script>
+    $(function(){
+        lclove.params.keyword = '$!params.keyword';
+        lclove.params.aid = '$!params.aid';
+        lclove.params.sortType = '$!params.sortType';
+        lclove.params.navtype = '$!params.navtype';
+        lclove.params.position = '2';
+
+        //固定头部导航
+        $("#myHeader").topMenu();
+
+        //通用搜索
+        $(".search_area").searchByType();
+
+        <!-- 微电影图文推荐-->
+        $(".recommend_show").recommandShow();
+
+        <!-- TOP 6-->
+        $(".hot_article").topShow();
+
+        $(".search_info").renderResearch();
+
+        //文章列表
+        $(".content_list").contentList();
+
+        //固定页尾
+        $("body").footerModule();
+
+        //返回顶部
+        $.backToTop();
+    });
+</script>
+<script src="${staticPath}js/pintuer.js"></script>
+</body>
+</html>

@@ -32,13 +32,19 @@ public class LcLoveController extends AnnotationController{
 		return "lclove/amulet.vm";
 	}
 	
-	/*恋の好奇心*/
+	/*恋の好奇心&详情*/
 	@RequestMapping("/research.xhtml")
 	public String initResearch(){
 		return "lclove/research.vm";
 	}
 	
-	/*恋の好奇心*/
+	/*恋の好奇心&详情*/
+	@RequestMapping("/researchDetail.xhtml")
+	public String initResearchDetail(){
+		return "lclove/researchDetail.vm";
+	}
+	
+	/*恋の好奇心&结果详情*/
 	@RequestMapping("/researchResult.xhtml")
 	public String initresearchResult(){
 		return "lclove/researchResult.vm";

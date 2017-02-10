@@ -260,5 +260,10 @@
     set SCAN_NUM = SCAN_NUM + 1
     where ID = #{0}
   </update>
+  <update id="increaseLoveNum">
+    update article
+    set LIKE_NUM = LIKE_NUM + 1
+    where ID = #{0}
+  </update>
 
 </mapper>

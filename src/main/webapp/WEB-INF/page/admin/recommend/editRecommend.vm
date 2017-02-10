@@ -40,7 +40,7 @@
                     <label>顺序：</label>
                 </div>
                 <div class="field">
-                    <input type="text" class="input w50" id="seq" name="seq" value="$!imageRecommend.seq" data-validate="required:请输入顺序"
+                    <input type="text" class="input w50" id="seq" name="seq" value="$!imageRecommend.seq" data-validate="required:请输入顺序,number:只能为数字"
                            />
                     <div class="tips"></div>
                 </div>
