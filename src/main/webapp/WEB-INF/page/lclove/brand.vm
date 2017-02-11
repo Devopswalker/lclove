@@ -1,75 +1,141 @@
 <!DOCTYPE html>
 <html lang="zh-cn">
 <head>
-<title>LC | 恋猫, 女性恋爱百科</title>
-<meta name="renderer" content="webkit">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-<link rel="shortcut icon" href="${staticPath}images/favicon.ico" />
+    <title>LC | 恋猫, 女性恋爱百科</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link rel="shortcut icon" href="${staticPath}images/favicon.ico"/>
+    <link rel="stylesheet" type="text/css" href="${staticPath}css/reset.css" />
+    <link rel="stylesheet" type="text/css" href="${staticPath}css/head.css" />
+    <link rel="stylesheet" type="text/css" href="${staticPath}css/pintuer.css" />
+    <link rel="stylesheet" type="text/css" href="${staticPath}css/float.css" />
+    <link rel="stylesheet" type="text/css" href="${staticPath}css/home_main.css" />
+    <link rel="stylesheet" type="text/css" href="${staticPath}css/navigation.css" />
+    <script src="${staticPath}js/jquery.js"></script>
+    <script src="${staticPath}js/lclove-util.js"></script>
 </head>
-<body bgcolor="#ffffff" style="text-align: center;margin: auto;">
-	<table style="display: inline-table;border-collapse: collapse;" bgcolor="#ffffff" border="0" cellpadding="0" cellspacing="0" width="900">
-		<tr>
-			<td><img name="brand_r1_c1"
-				src="${staticPath}images/brand/brand_r1_c1.jpg" width="900" height="100%"
-				border="0" id="brand_r1_c1" alt="" /></td>
-		</tr>
-		<tr>
-			<td><img name="brand_r2_c1"
-				src="${staticPath}images/brand/brand_r2_c1.jpg" width="900" height="100%"
-				border="0" id="brand_r2_c1" alt="" /></td>
-		</tr>
-		<tr>
-			<td><img name="brand_r3_c1"
-				src="${staticPath}images/brand/brand_r3_c1.jpg" width="900" height="100%"
-				border="0" id="brand_r3_c1" alt="" /></td>
-		</tr>
-		<tr>
-			<td><img name="brand_r4_c1"
-				src="${staticPath}images/brand/brand_r4_c1.jpg" width="900" height="100%"
-				border="0" id="brand_r4_c1" usemap="#m_brand_r4_c1" alt="" /></td>
-		</tr>
-		<tr>
-			<td><img name="brand_r5_c1"
-				src="${staticPath}images/brand/brand_r5_c1.jpg" width="900" height="100%"
-				border="0" id="brand_r5_c1" usemap="#m_brand_r5_c1" alt="" /></td>
-		</tr>
-		<tr>
-			<td><img name="brand_r6_c1"
-				src="${staticPath}images/brand/brand_r6_c1.jpg" width="900" height="100%"
-				border="0" id="brand_r6_c1" usemap="#m_brand_r6_c1" alt="" /></td>
-		</tr>
-		<tr>
-			<td><img name="brand_r7_c1"
-				src="${staticPath}images/brand/brand_r7_c1.jpg" width="900" height="100%"
-				border="0" id="brand_r7_c1" usemap="#m_brand_r7_c1" alt="" /></td>
-		</tr>
-		<tr>
-			<td><img name="brand_r8_c1"
-				src="${staticPath}images/brand/brand_r8_c1.jpg" width="900" height="100%"
-				border="0" id="brand_r8_c1" alt="" /></td>
-		</tr>
-	</table>
-	<map name="m_brand_r4_c1" id="m_brand_r4_c1">
-		<area shape="rect" coords="32,24,883,402"
-			href="https://detail.tmall.hk/hk/item.htm?spm=a1z10.1-b-s.w5001-14898357363.5.U74Q8l&amp;id=40586054885&amp;rn=97cded0e17e83b6e99beb4f61129b041&amp;abbucket=19&amp;skuId=3162553993593&amp;scene=taobao_shop"
-			target="_blank" alt="" />
-	</map>
-	<map name="m_brand_r5_c1" id="m_brand_r5_c1">
-		<area shape="rect" coords="48,23,870,335"
-			href="https://detail.tmall.hk/hk/item.htm?spm=a220o.1000855.1998025129.1.TKyxlE&amp;abtest=_AB-LR32-PR32&amp;pvid=634d55ec-a4ad-4eb7-afb1-c9adf3d56d1d&amp;pos=1&amp;abbucket=_AB-M32_B15&amp;acm=03054.1003.1.1285741&amp;id=40569038511&amp;scm=1007.12559.61743.100200300000000&amp;skuId=65361435"
-			target="_blank" alt="" />
-	</map>
-	<map name="m_brand_r6_c1" id="m_brand_r6_c1">
-		<area shape="rect" coords="48,10,870,354"
-			href="https://detail.tmall.hk/hk/item.htm?spm=a220o.1000855.w8004311-14898357392.8.j3gfd1&amp;id=40590514672&amp;skuId=60434713600"
-			target="_blank" alt="" />
-	</map>
-	<map name="m_brand_r7_c1" id="m_brand_r7_c1">
-		<area shape="rect" coords="52,10,870,355"
-			href="https://detail.tmall.hk/hk/item.htm?spm=a1z10.1-b-s.w5003-15361602340.3.U74Q8l&amp;id=40590745534&amp;rn=f8945138def5e6902885924d9d1f17f9&amp;abbucket=2&amp;skuId=61245949505&amp;scene=taobao_shop"
-			target="_blank" alt="" />
-	</map>
+
+<body>
+<!-- 固定头部导航 -->
+<div id="myHeader"></div>
+<!-- 固定头部导航 -->
+
+<!-- 文章详情 -->
+<div class="wrap_content clear">
+    <div class="content_left">
+        <!-- 详情 LEFT: 内容详情 -->
+        <div class="love_topic_head"><img src="${staticPath}images/img_omamori.png"/><div>by LC 品爱</div></div>
+		<table style="display: inline-table;border-collapse: collapse;" bgcolor="#ffffff" border="0" cellpadding="0" cellspacing="0" width="600">
+			<tr>
+				<td><img name="brand_r1_c1"
+						 src="${staticPath}images/brand/brand_r1_c1.jpg" width="100%" height="100%"
+						 border="0" id="brand_r1_c1" alt="" /></td>
+			</tr>
+			<tr>
+				<td><img name="brand_r2_c1"
+						 src="${staticPath}images/brand/brand_r2_c1.jpg" width="100%" height="100%"
+						 border="0" id="brand_r2_c1" alt="" /></td>
+			</tr>
+			<tr>
+				<td><img name="brand_r3_c1"
+						 src="${staticPath}images/brand/brand_r3_c1.jpg" width="100%" height="100%"
+						 border="0" id="brand_r3_c1" alt="" /></td>
+			</tr>
+			<tr>
+				<td><img name="brand_r4_c1"
+						 src="${staticPath}images/brand/brand_r4_c1.jpg" width="100%" height="100%"
+						 border="0" id="brand_r4_c1" usemap="#m_brand_r4_c1" alt="" /></td>
+			</tr>
+			<tr>
+				<td><img name="brand_r5_c1"
+						 src="${staticPath}images/brand/brand_r5_c1.jpg" width="100%" height="100%"
+						 border="0" id="brand_r5_c1" usemap="#m_brand_r5_c1" alt="" /></td>
+			</tr>
+			<tr>
+				<td><img name="brand_r6_c1"
+						 src="${staticPath}images/brand/brand_r6_c1.jpg" width="100%" height="100%"
+						 border="0" id="brand_r6_c1" usemap="#m_brand_r6_c1" alt="" /></td>
+			</tr>
+			<tr>
+				<td><img name="brand_r7_c1"
+						 src="${staticPath}images/brand/brand_r7_c1.jpg" width="100%" height="100%"
+						 border="0" id="brand_r7_c1" usemap="#m_brand_r7_c1" alt="" /></td>
+			</tr>
+			<tr>
+				<td><img name="brand_r8_c1"
+						 src="${staticPath}images/brand/brand_r8_c1.jpg" width="100%" height="100%"
+						 border="0" id="brand_r8_c1" alt="" /></td>
+			</tr>
+		</table>
+		<map name="m_brand_r4_c1" id="m_brand_r4_c1">
+			<area shape="rect" coords="32,24,883,402"
+				  href="https://detail.tmall.hk/hk/item.htm?spm=a1z10.1-b-s.w5001-14898357363.5.U74Q8l&amp;id=40586054885&amp;rn=97cded0e17e83b6e99beb4f61129b041&amp;abbucket=19&amp;skuId=3162553993593&amp;scene=taobao_shop"
+				  target="_blank" alt="" />
+		</map>
+		<map name="m_brand_r5_c1" id="m_brand_r5_c1">
+			<area shape="rect" coords="48,23,870,335"
+				  href="https://detail.tmall.hk/hk/item.htm?spm=a220o.1000855.1998025129.1.TKyxlE&amp;abtest=_AB-LR32-PR32&amp;pvid=634d55ec-a4ad-4eb7-afb1-c9adf3d56d1d&amp;pos=1&amp;abbucket=_AB-M32_B15&amp;acm=03054.1003.1.1285741&amp;id=40569038511&amp;scm=1007.12559.61743.100200300000000&amp;skuId=65361435"
+				  target="_blank" alt="" />
+		</map>
+		<map name="m_brand_r6_c1" id="m_brand_r6_c1">
+			<area shape="rect" coords="48,10,870,354"
+				  href="https://detail.tmall.hk/hk/item.htm?spm=a220o.1000855.w8004311-14898357392.8.j3gfd1&amp;id=40590514672&amp;skuId=60434713600"
+				  target="_blank" alt="" />
+		</map>
+		<map name="m_brand_r7_c1" id="m_brand_r7_c1">
+			<area shape="rect" coords="52,10,870,355"
+				  href="https://detail.tmall.hk/hk/item.htm?spm=a1z10.1-b-s.w5003-15361602340.3.U74Q8l&amp;id=40590745534&amp;rn=f8945138def5e6902885924d9d1f17f9&amp;abbucket=2&amp;skuId=61245949505&amp;scene=taobao_shop"
+				  target="_blank" alt="" />
+		</map>
+    </div>
+
+    <!-- 列表 RIGHT: 通用搜索 /微电影图文推荐-->
+    <div class="content_right">
+        <div class="content_right_div">
+            <!-- 通用搜索 -->
+            <div class="search_area"></div>
+
+            <div class="small_blank"></div>
+
+            <!-- 微电影图文推荐-->
+            <div class="recommend_show"></div>
+
+            <!-- TOP 6-->
+            <div class="hot_article"></div>
+        </div>
+    </div>
+
+</div>
+<!-- 文章详情-->
+<script>
+    $(function(){
+        lclove.params.keyword = '$!params.keyword';
+        lclove.params.navtype = '$!params.navtype';
+        lclove.params.pageNo = '$!params.pageNo';
+        lclove.params.position = '2';
+        //固定头部导航
+        $("#myHeader").topMenu();
+
+        //通用搜索
+        $(".search_area").searchByType();
+
+        <!-- 微电影图文推荐-->
+        $(".recommend_show").recommandShow();
+
+        <!-- TOP 6-->
+        $(".hot_article").topShow();
+
+        $(".about_content").aboutModule();
+
+        //固定页尾
+        $("body").footerModule();
+
+        //返回顶部
+        $.backToTop();
+    });
+</script>
+<script src="${staticPath}js/pintuer.js"></script>
 </body>
 </html>
