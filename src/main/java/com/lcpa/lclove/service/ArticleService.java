@@ -252,7 +252,7 @@ public class ArticleService{
      */
     public List<Article> getTopRankArticlesByType(Integer articleType, Integer pageSize){
         Map map = new HashMap<>();
-        if (articleType != null && articleType != 1){
+        if (articleType != null){
             map.put("articleType", articleType);
         }
         Paging paging = new Paging(1, pageSize);

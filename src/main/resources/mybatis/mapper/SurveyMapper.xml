@@ -42,6 +42,16 @@
     order by ID desc
     <include refid="Paging"/>
   </select>
+  <select id="selectDetailSurveyList" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from survey WHERE STATE=1
+    <if test="queryPara != null and queryPara.keywords != null">
+      AND TITLE LIKE CONCAT(CONCAT("%",#{queryPara.keywords}),"%")
+    </if>
+    order by PUB_DATE desc
+    <include refid="Paging"/>
+  </select>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from survey

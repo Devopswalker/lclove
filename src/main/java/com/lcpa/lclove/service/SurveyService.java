@@ -187,7 +187,7 @@ public class SurveyService {
     }
 
     /**
-     * 获取问卷调查列表
+     * admin 获取问卷调查列表
      * @param pageNo
      * @param pageSize
      * @return
@@ -197,6 +197,24 @@ public class SurveyService {
         QueryParameter queryParameter = new QueryParameter(paging, null);
         return surveyMapper.selectSurveyList(queryParameter);
     }
+
+    /**
+     * 前段获取调查问卷列表
+     * @param pageNo
+     * @param pageSize
+     * @param keywords
+     * @return
+     */
+    public List<Survey>  getSurveyList(Integer pageNo, Integer pageSize, String keywords){
+        Map map = new HashMap<>();
+        if (keywords != null && !keywords.equals("")){
+            map.put("keywords", keywords);
+        }
+        Paging paging = new Paging(pageNo, pageSize);
+        QueryParameter queryParameter = new QueryParameter(paging, map);
+        return surveyMapper.selectDetailSurveyList(queryParameter);
+    }
+
 
     /**
      * 后台问卷调查列表分页

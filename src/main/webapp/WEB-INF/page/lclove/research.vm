@@ -57,7 +57,8 @@
 		$(function(){
 			lclove.params.keyword = '$!params.keyword';
 			lclove.params.sortType = '$!params.sortType';
-			lclove.params.navtype = '$!params.navtype';
+            lclove.params.navtype = '$!params.navtype';
+            lclove.params.isSurvey = true;
 			lclove.params.position = '2';
 			
 			//固定头部导航

@@ -6,6 +6,7 @@ lclove.util.imgPath = '/';
 lclove.params = {};
 lclove.params.keyword = "";
 lclove.params.navtype = "";
+lclove.params.isSurvey = false;
 lclove.params.pageNo = "";
 lclove.params.position = "";
 lclove.params.aid = "";
@@ -275,10 +276,13 @@ $(function(){
             	var keyword = $(".search_bar").val();
             	var tourl = "index.xhtml";
             	var vnav = lclove.params.navtype;
-            	if(vnav == 1){
+                var isSurvey = lclove.params.isSurvey;
+                if (isSurvey == true){
+                    tourl = "research.xhtml";
+                }else if(vnav == 1){
             		tourl = "special.xhtml";
             	}else if(vnav == 2){
-            		tourl = "loves.xhtml";
+                    tourl = "loves.xhtml";
             	}else if(vnav == 3){
             		tourl = "amulet.xhtml";
             	}else if(vnav == 4){
@@ -519,26 +523,30 @@ $(function(){
         };
         
         var defaultTemplate = function(){
+            //var sbHtml = new StringBuilder();
+            //sbHtml.append("<div class='content_item'>");
+            //sbHtml.append("<div class='content_item_pic'>");
+            //sbHtml.append("  <a href='"+ lclove.util.basePath + "detail.xhtml?navtype="+lclove.params.navtype+"&sortType=1&aid=1'><img width='148' height='148' class='img-border radius-small' src='" + lclove.util.imgPath + "images/content_pic.jpg'/></a>");
+            //sbHtml.append("</div>");
+            //sbHtml.append("<div class='content_item_text'>");
+            //sbHtml.append("  <div class='content_item_text_head'>");
+            //sbHtml.append("    <a href='"+ lclove.util.basePath + "detail.xhtml?navtype="+lclove.params.navtype+"&sortType=1&aid=1'><img src='" + lclove.util.imgPath + "images/text_head_icon.png'/><div>LC品爱员工美丽小秘密</div></a>");
+            //sbHtml.append("  </div>");
+            //sbHtml.append("  <div class='mini_blank'></div>");
+            //sbHtml.append("  <div class='separate'></div>");
+            //sbHtml.append("  <div class='content_item_text_middle'>作为为大家解决身体&烦恼的LC品爱的员工，来看 看他们都有什么变美秘密呢？</div>");
+            //sbHtml.append("  <div class='content_item_text_foot'>");
+            //sbHtml.append("    <div class='date'>2017-01-04</div>");
+            //sbHtml.append("    <div class='comment'><img src='" + lclove.util.imgPath + "images/comment.png'/><div class='sum'>666</div></div>");
+            //sbHtml.append("    <div class='love'><img src='" + lclove.util.imgPath + "images/love.png'/><div class='sum'>888</div></div>");
+            //sbHtml.append("    <div class='type'> #新年快乐# </div>");
+            //sbHtml.append("  </div>");
+            //sbHtml.append("</div>");
+            //sbHtml.append("</div>");
             var sbHtml = new StringBuilder();
-            sbHtml.append("<div class='content_item'>");
-            sbHtml.append("<div class='content_item_pic'>");
-            sbHtml.append("  <a href='"+ lclove.util.basePath + "detail.xhtml?navtype="+lclove.params.navtype+"&sortType=1&aid=1'><img width='148' height='148' class='img-border radius-small' src='" + lclove.util.imgPath + "images/content_pic.jpg'/></a>");
-            sbHtml.append("</div>");
-            sbHtml.append("<div class='content_item_text'>");
-            sbHtml.append("  <div class='content_item_text_head'>");
-            sbHtml.append("    <a href='"+ lclove.util.basePath + "detail.xhtml?navtype="+lclove.params.navtype+"&sortType=1&aid=1'><img src='" + lclove.util.imgPath + "images/text_head_icon.png'/><div>LC品爱员工美丽小秘密</div></a>");
-            sbHtml.append("  </div>");
-            sbHtml.append("  <div class='mini_blank'></div>");
-            sbHtml.append("  <div class='separate'></div>");
-            sbHtml.append("  <div class='content_item_text_middle'>作为为大家解决身体&烦恼的LC品爱的员工，来看 看他们都有什么变美秘密呢？</div>");
-            sbHtml.append("  <div class='content_item_text_foot'>");
-            sbHtml.append("    <div class='date'>2017-01-04</div>");
-            sbHtml.append("    <div class='comment'><img src='" + lclove.util.imgPath + "images/comment.png'/><div class='sum'>666</div></div>");
-            sbHtml.append("    <div class='love'><img src='" + lclove.util.imgPath + "images/love.png'/><div class='sum'>888</div></div>");
-            sbHtml.append("    <div class='type'> #新年快乐# </div>");
-            sbHtml.append("  </div>");
-            sbHtml.append("</div>");
-            sbHtml.append("</div>");
+            //sbHtml.append('<div class="no_data_container"><p>沒有查找結果，請重新輸入搜索條件</p></div>');
+            sbHtml.append('<img class="no_data_img" src="/images/NO_DATA.jpg">');
+
             return $(sbHtml.toString());
         };
         
@@ -564,10 +572,10 @@ $(function(){
             		$(".content_list").append(itemTemplate(item));
             	});
         	}else{
-        		for (var i=0; i<4 ; i++)
-        		{
+        		//for (var i=0; i<4 ; i++)
+        		//{
         			$(".content_list").append(defaultTemplate());
-        		}
+        		//}
         	}
         };
         
@@ -771,7 +779,7 @@ $(function(){
     var eResearchList = function(options,object) {
         var opts = $.extend({}, $.fn.researchList.defaults, options);
         var instance = object;
-        var url = lclove.util.basePath + "ajax/getSurveyList.xhtml?pageNo="+lclove.params.pageNo;
+        var url = lclove.util.basePath + "ajax/getSurveyList.xhtml?pageNo="+lclove.params.pageNo +"&keyword=" + lclove.params.keyword;
         var itemTemplate = function(data){
             var sbHtml = new StringBuilder();
             sbHtml.append("<div class='content_item'>");
@@ -790,6 +798,12 @@ $(function(){
             sbHtml.append("  </div>");
             sbHtml.append("</div>");
             sbHtml.append("</div>");
+            return $(sbHtml.toString());
+        };
+
+        var defaultTemplate = function(){
+            var sbHtml = new StringBuilder();
+            sbHtml.append('<img class="no_data_img" src="/images/NO_DATA.jpg">');
             return $(sbHtml.toString());
         };
         
@@ -814,7 +828,9 @@ $(function(){
         		$.each(data.surveys, function(index, item){
             		$(".content_list").append(itemTemplate(item));
             	});
-        	}
+        	}else{
+                $(".content_list").append(defaultTemplate());
+            }
         };
         
         var appendList = function(data){

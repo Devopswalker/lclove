@@ -165,12 +165,12 @@ public class LcLoveAjaxController extends AnnotationController{
 	 * @return
 	 */
 	@RequestMapping("/ajax/getSurveyList.xhtml")
-	public String getSurveyList(Integer pageNo, ModelMap model){
+	public String getSurveyList(Integer pageNo, String keyword, ModelMap model){
 		if(pageNo == null){
 			pageNo = 1;
 		}
 		Integer rowsPerPage = 5;
-		List<Survey> surveys = surveyService.getSurveyList(pageNo, rowsPerPage);
+		List<Survey> surveys = surveyService.getSurveyList(pageNo, rowsPerPage, keyword);
 		PagingJsonVo page = new PagingJsonVo(surveys.size(), rowsPerPage, pageNo);
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		resultMap.put("surveys", surveys);
