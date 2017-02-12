@@ -6,7 +6,6 @@ body{
 	font-size:12px;
 	background:url(../images/body_bg.jpg) no-repeat;
 	background-size: 100% 100%;
-	position: relative;
 }
 
 input::-webkit-input-placeholder { 
@@ -759,6 +758,16 @@ li{
 
 .taplike{
 	float:right;
+}
+
+.taptolike{
+	display:block;
+}
+
+.likenums{
+	float:right;
+	height: 20px;
+	line-height: 20px;
 }
 
 .foot_row_1{
