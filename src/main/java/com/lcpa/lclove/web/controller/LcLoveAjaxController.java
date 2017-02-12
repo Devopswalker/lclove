@@ -207,17 +207,13 @@ public class LcLoveAjaxController extends AnnotationController{
 	
 	/**
 	 *  Get BackNumber dataList
-	 * @param navtype
 	 * @param model
 	 * @return
 	 */
 	@RequestMapping("/ajax/getBackNumberList.xhtml")
-	public String getBackNumberList(Integer navtype, ModelMap model){
-		if(navtype == null){
-			navtype = 1;
-		}
+	public String getBackNumberList(ModelMap model){
 		Integer rowsPerPage = 12;
-		List<Article> articleList = articleService.getAllArticles(1, rowsPerPage, navtype, null);
+		List<Article> articleList = articleService.getAllLookBackArticles(rowsPerPage);
 		PagingJsonVo page = new PagingJsonVo(articleList.size(), rowsPerPage, 1);
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		resultMap.put("backNumbers", articleList);

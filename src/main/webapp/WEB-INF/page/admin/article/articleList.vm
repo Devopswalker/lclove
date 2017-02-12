@@ -55,7 +55,7 @@
 ##        <th width="10%">排序</th>
         <th style="text-align:left; padding-left:20px;">缩略图</th>
         <th>名称</th>
-##        <th>属性</th>
+        <th>加入往期回顾</th>
         <th>分类名称</th>
         <th width="10%">更新时间</th>
         <th width="310">操作</th>
@@ -77,9 +77,22 @@
 ##          <td><input type="text" name="sortnum" value="$!article.sortnum" style="width:50px; text-align:center; border:1px solid #ddd; padding:7px 0;" /></td>
           <td width="10%"><img src="$article.thumbnail" alt="" width="70" height="50" /></td>
           <td>$!article.title</td>
-##          <td><font color="#00CC99">首页</font></td>
-          <td>$typeMap.get($article.articleType).name</td>
-          <td>$DateUtil.formatTimestamp($!article.pubDate)</td>
+            <td>
+                <div class="button-group radio">
+                    <label class="button #if($!article.isLookBack==1)active#end"
+                           onchange="changeLookBack($!article.id,1)">
+                        <input id="state" name="state" #if($!article.isLookBack==1)checked="checked"#end value="1"  type="radio">
+                        <span class="icon icon-check"></span> 开
+                    </label>
+                    <label class="button #if($!article.isLookBack==0)active#end"
+                           onchange="changeLookBack($!article.id,0)">
+                        <input id="state" name="state" #if($!article.isLookBack==0)checked="checked"#end value="0" type="radio"><span class="icon icon-times"></span> 关
+                    </label>
+                </div>
+            </td>
+        <td>$typeMap.get($article.articleType).name</td>
+
+        <td>$DateUtil.formatTimestamp($!article.pubDate)</td>
           <td><div class="button-group"> <a class="button border-main" href="${basePath}admin/article/editArticle.xhtml?id=$article.id"><span class="icon-edit"></span> 修改</a> <a class="button border-red" href="javascript:void(0)" onclick="return deleteArticle($article.id)"><span class="icon-trash-o"></span> 删除</a> </div></td>
         </tr>
    		#end
@@ -131,7 +144,12 @@
     </nav>
 </form>
 <script type="text/javascript">
+    function changeLookBack(articleId, changeState){
+        var url = '${basePath}admin/article/updateLookBack.xhtml';
+        var values = {"id":articleId, "lookBack":changeState};
+        $.getData(url, values, true, 'get', 'json', false, refreshCallBack);
 
+    }
 //搜索
 function changesearch(){
 	url = '${basePath}admin/article/articleList.xhtml'
@@ -149,10 +167,10 @@ function deleteArticle(articleId){
     if(confirm("您确定要删除吗?")){
         var url = '${basePath}admin/article/delArticle.xhtml';
         var values = {"id":articleId};
-        $.getData(url, values, true, 'get', 'json', false, delCallBack);
+        $.getData(url, values, true, 'get', 'json', false, refreshCallBack);
     }
 }
-function delCallBack(r){
+function refreshCallBack(r){
     if(r.success){
         refreshPage();
     }else{

@@ -217,6 +217,13 @@ public class ArticleService{
         return result;
     }
 
+    public List<Article> getAllLookBackArticles(Integer pageSize){
+        Paging paging = new Paging(1, pageSize);
+        QueryParameter queryParameter = new QueryParameter(paging, null);
+        List<Article> result = articleMapper.selectAllLookBackArticles(queryParameter);
+        return result;
+    }
+
     /**
      * admin获取文章分页信息 //TODO 可更改
      * @param pageNo
@@ -268,4 +275,7 @@ public class ArticleService{
         articleMapper.increaseLoveNum(articleId);
     }
 
+    public void updateLookBack(Integer id, Integer lookBack) {
+        articleMapper.updateLookBack(id, lookBack);
+    }
 }

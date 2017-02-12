@@ -13,10 +13,11 @@
     <result column="EDITOR" jdbcType="VARCHAR" property="editor" />
     <result column="STATE" jdbcType="INTEGER" property="state" />
     <result column="THUMBNAIL" jdbcType="VARCHAR" property="thumbnail" />
+    <result column="IS_LOOK_BACK" jdbcType="VARCHAR" property="isLookBack" />
   </resultMap>
   <sql id="Base_Column_List">
     ID, TITLE, THUMBNAIL, PUB_DATE, LIKE_NUM, SCAN_NUM, ARTICLE_TYPE, DESCRIPTION, TOPIC, EDITOR,
-    STATE
+    STATE,IS_LOOK_BACK
   </sql>
   <sql id="Paging">
     <if test="paging != null and paging.StartIndex != null and paging.pageSize">
@@ -58,6 +59,15 @@
     order by PUB_DATE desc
     <include refid="Paging"/>
   </select>
+  <select id="selectAllLookBackArticles" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from article WHERE IS_LOOK_BACK=1
+    order by ID desc
+    <include refid="Paging"/>
+  </select>
+
+
   <select id="selectHomeArticle" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
@@ -265,5 +275,12 @@
     set LIKE_NUM = LIKE_NUM + 1
     where ID = #{0}
   </update>
+  <update id="updateLookBack">
+    update article
+    set IS_LOOK_BACK = #{1}
+    where ID = #{0}
+  </update>
+
+
 
 </mapper>
