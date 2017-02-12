@@ -6,6 +6,7 @@ body{
 	font-size:12px;
 	background:url(../images/body_bg.jpg) no-repeat;
 	background-size: 100% 100%;
+	position: relative;
 }
 
 input::-webkit-input-placeholder { 
