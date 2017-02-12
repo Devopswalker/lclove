@@ -82,11 +82,11 @@
                     <label class="button #if($!article.isLookBack==1)active#end"
                            onchange="changeLookBack($!article.id,1)">
                         <input id="state" name="state" #if($!article.isLookBack==1)checked="checked"#end value="1"  type="radio">
-                        <span class="icon icon-check"></span> 开
+                        <span class="icon icon-check"></span> 是
                     </label>
                     <label class="button #if($!article.isLookBack==0)active#end"
                            onchange="changeLookBack($!article.id,0)">
-                        <input id="state" name="state" #if($!article.isLookBack==0)checked="checked"#end value="0" type="radio"><span class="icon icon-times"></span> 关
+                        <input id="state" name="state" #if($!article.isLookBack==0)checked="checked"#end value="0" type="radio"><span class="icon icon-times"></span> 否
                     </label>
                 </div>
             </td>
