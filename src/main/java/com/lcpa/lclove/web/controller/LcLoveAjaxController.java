@@ -245,43 +245,22 @@ public class LcLoveAjaxController extends AnnotationController{
 	}
 	
 	
-	/*private void initDataValues(Survey survey) {
-		survey.setId(1);
-		survey.setTitle("他心里到底在想什么？");
-		survey.setHeaderImg("images/dy_06.png");
-		List<Question> questions = new ArrayList();
-		for (int i=0; i<4; i++) {
-			Question question = new Question();
-			question.setId(i);
-			if(i == 3){
-				question.setInputType(1);
-			}else if(i == 2){
-				question.setInputType(3);
-			}else{
-				question.setInputType(2);
-			}
-			question.setSeq(i);
-			question.setTitle("No."+(i+1)+" 你日常是否经常使用护肤品？");
-			question.setSurveyId(1);
-			if(i != 3){
-				List<QuestionOption> options = new ArrayList();
-				for (int j = 0; j < 4; j++) {
-					QuestionOption option = new QuestionOption();
-					option.setId(j);
-					option.setQuestionId(i);
-					option.setSurveyId(1);
-					option.setSeq(j);
-					option.setContent("我是第 "+(j+1)+" 选项");
-					if(j == 3){
-						option.setImgSrc("images/info1.png");
-					}
-					options.add(option);
-				}
-				question.setQuestionOptions(options);
-			}
-			questions.add(question);
+	/**
+	 * Get addLike for Article
+	 * @param sid
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("/ajax/ontTapToLike.xhtml")
+	public String tapToLike(Integer sid, ModelMap model){
+		if(sid == null){
+			return showJsonError(model, "Bad character in paramenters !");
 		}
-		survey.setQuestions(questions);
-	}*/
+		articleService.addLikeNum(sid);
+		Article article = articleService.getArticleById(sid);
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		resultMap.put("article", article);
+		return showJsonSuccess(model, JsonUtils.writeObjectToJson(resultMap));
+	}
 
 }

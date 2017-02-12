@@ -651,8 +651,13 @@ $(function(){
             sbHtml.append("  <div class='row_3'>");
             sbHtml.append(data.detail.content);
             sbHtml.append("  </div>");
+            sbHtml.append("  <div class='mini_blank'></div>");
+            sbHtml.append("  <div class='taplike'>");
+            sbHtml.append("    <a id='taptolike' ref='javascript:void(0)' onclick='tapToLike("+data.detail.id+");' ><img width='20' height='20' class='radius-small' src='" + lclove.util.imgPath + "images/love.png'/><div class='likesum' id='likenums'>"+ data.detail.likeNum +"</div></div>");
+            sbHtml.append("    </a>");
+            sbHtml.append("  </div>");
             sbHtml.append("</div>");
-            return $(sbHtml.toString());
+            $(instance).append($(sbHtml.toString()));
         };
         
         var initContent = function(data){
@@ -668,6 +673,22 @@ $(function(){
 
     $.fn.ArticleContent.defaults = {};
 });
+
+function tapToLike(sid){
+	var url = lclove.util.basePath + "ajax/ontTapToLike.xhtml";
+	var data = {};
+	data.sid = sid;
+	$.getData(url, data, true, "POST", "json", true, callBackAddLike);
+}
+
+function callBackAddLike(result){
+	if(result.article != null){
+		var curNum = result.article.likeNum;
+		$("#likenums").html(curNum);
+	}
+	
+	
+}
 
 /*  Comment  */
 $(function(){
@@ -685,10 +706,10 @@ $(function(){
                  	sbHtml.append("        <div class='name'> "+item.nickName+" </div>");
                  	sbHtml.append("        <div class='colon'>：</div>");
                  	sbHtml.append("        <div class='comment_content'> "+item.content+" </div>");
-                 	sbHtml.append("        <img class='good_img' src='"+lclove.util.imgPath+"images/good.png'/>");
+/*                 	sbHtml.append("        <img class='good_img' src='"+lclove.util.imgPath+"images/good.png'/>");
                  	sbHtml.append("        <div class='good_count'> "+item.upNum+" </div>");
                  	sbHtml.append("        <img class='bad_img'src='"+lclove.util.imgPath+"images/bad.png'/>");
-                 	sbHtml.append("        <div class='bad_count'> "+item.downNum+" </div>");
+                 	sbHtml.append("        <div class='bad_count'> "+item.downNum+" </div>");*/
                      sbHtml.append("    </div>");
                      sbHtml.append("    <div class='solid_separate'></div>");
                  });

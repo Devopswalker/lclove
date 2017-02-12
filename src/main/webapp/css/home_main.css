@@ -739,7 +739,6 @@ li{
 .row_3_love{
 	position:absolute;
 	z-index:100;
-	top:790px;
 	right:0;
 }
 
@@ -755,6 +754,10 @@ li{
 .article_content_foot{
 	float:left;
 	width:100%;
+}
+
+.taplike{
+	float:right;
 }
 
 .foot_row_1{
@@ -818,7 +821,7 @@ li{
 
 .one_comment .comment_content{
 	float: left;
-	width:320px;
+	width:100%;
 	margin-left:10px;
 }
 
