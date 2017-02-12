@@ -760,6 +760,16 @@ li{
 	float:right;
 }
 
+.taptolike{
+	display:block;
+}
+
+.likenums{
+	float:right;
+	height: 20px;
+	line-height: 20px;
+}
+
 .foot_row_1{
 	float:left;
 	font-size:16px;
