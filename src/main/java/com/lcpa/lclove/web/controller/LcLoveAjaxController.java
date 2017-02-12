@@ -205,6 +205,45 @@ public class LcLoveAjaxController extends AnnotationController{
 		return showJsonSuccess(model, JsonUtils.writeObjectToJson(resultMap));
 	}
 	
+	/**
+	 *  Get BackNumber dataList
+	 * @param navtype
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("/ajax/getBackNumberList.xhtml")
+	public String getBackNumberList(Integer navtype, ModelMap model){
+		if(navtype == null){
+			navtype = 1;
+		}
+		Integer rowsPerPage = 12;
+		List<Article> articleList = articleService.getAllArticles(1, rowsPerPage, navtype, null);
+		PagingJsonVo page = new PagingJsonVo(articleList.size(), rowsPerPage, 1);
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		resultMap.put("backNumbers", articleList);
+		resultMap.put("pageInfo", page);
+		return showJsonSuccess(model, JsonUtils.writeObjectToJson(resultMap));
+	}
+	
+	/**
+	 * Get Recommend for Article
+	 * @param navtype(ref CommConstant.REC_TYPE_XX)
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("/ajax/getRecomments.xhtml")
+	public String getRecomments(Integer navtype, ModelMap model){
+		if(navtype == null){
+			navtype = CommConstant.ARTICLE_TYPE_HOME;
+		}
+		List<Article> articleList = articleService.getAllArticles(1, 6, navtype, null);
+		List<Article> topThreeList = articleService.getTopRankArticlesByType(navtype, 3);
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		resultMap.put("readings", articleList);
+		resultMap.put("recommends", topThreeList);
+		return showJsonSuccess(model, JsonUtils.writeObjectToJson(resultMap));
+	}
+	
 	
 	/*private void initDataValues(Survey survey) {
 		survey.setId(1);

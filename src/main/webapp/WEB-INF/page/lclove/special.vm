@@ -36,6 +36,16 @@
 				
 				<!-- 列表 LEFT: DATALIST -->
 				<div class="content_list"></div>
+				
+				<div class="small_blank"></div>
+				
+				<section class="specialBackNumber">
+					<h2 class="title">
+						<img src="${staticPath}images/specialbacknumber.gif" width="600" height="27" alt="Back Number 過去の特集">
+					</h2>
+					
+					<div class="specialBackNumberListBox"></div>
+				</section>
 			
 			</div>
 			
@@ -78,6 +88,8 @@
 			
 			//文章列表
 			$(".content_list").contentList();
+			
+			$(".specialBackNumberListBox").backNumberList();
 			
 			//固定页尾
 			$("body").footerModule();

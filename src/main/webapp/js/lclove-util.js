@@ -774,6 +774,63 @@ $(function(){
 });
 /*  Comment  */
 
+/*  Recomment  */
+$(function(){
+    var eRecomment = function(options,object) {
+        var opts = $.extend({}, $.fn.renderComment.defaults, options);
+        var instance = object;
+        var url = lclove.util.basePath + "ajax/getRecomments.xhtml";
+        var showRecomment = function (data) {
+            var sbHtml = new StringBuilder();
+            if(data.readings.length > 0 ){
+                 sbHtml.append("<div class='detail_comment_recommend_head'>推荐阅读</div>");
+                 sbHtml.append("<section class='readingRecommend'>");
+                 sbHtml.append("  <div class='readingRecommendListBox'>");
+                 $.each(data.readings, function(index, item){
+                     sbHtml.append("<div class='readingRecommendList'>");
+                     sbHtml.append("  <a href='"+ lclove.util.basePath + "detail.xhtml?navtype="+lclove.params.navtype+"&sortType=2&aid="+item.id+"'>");
+                     sbHtml.append("  <div>→"+item.title+"</div>");
+                     sbHtml.append("  </a>");
+                     sbHtml.append("</div>");
+                 });
+                 sbHtml.append("  </div>");
+                 sbHtml.append("</section>");
+                 sbHtml.append("<div class='separate'></div>");
+            }
+            
+            if(data.recommends.length > 0 ){
+                sbHtml.append("<div class='detail_comment_recommend_head'>热文推荐</div>");
+                sbHtml.append("<section class='hotRecommend'>");
+                sbHtml.append("  <div class='hotRecommendListBox'>");
+                $.each(data.recommends, function(index, item){
+                	 sbHtml.append("<div class='hotRecommendList'>");
+                     sbHtml.append("  <a href='"+ lclove.util.basePath + "detail.xhtml?navtype="+lclove.params.navtype+"&sortType=2&aid="+item.id+"'><img width='183' height='160' class='radius-small' src='" + item.thumbnail + "'/>");
+                     sbHtml.append("  </a>");
+                     sbHtml.append("</div>");
+                });
+                sbHtml.append("  </div>");
+                sbHtml.append("</section>");
+           }
+            $(instance).append($(sbHtml.toString()));
+        };
+        
+        var initRecomments = function(data){
+            $(".detail_comment_recommend").append(showRecomment(data));
+        };
+        
+        $.getData(url, null, true, "POST", "json", true, initRecomments);
+    };
+   
+    $.fn.renderRecomment = function(options) {
+        return this.each(function () {
+            return eRecomment(options, $(this));
+        });
+    };
+
+    $.fn.renderRecomment.defaults = {};
+});
+/*  Recomment  */
+
 /* research List */
 $(function(){
     var eResearchList = function(options,object) {
@@ -1015,6 +1072,52 @@ $(function(){
     $.fn.renderResearchResult.defaults = {};
 });
 /*  research result  */
+
+
+/* backnumber list */
+$(function(){
+    var eBackNumberList = function(options,object) {
+        var opts = $.extend({}, $.fn.backNumberList.defaults, options);
+        var instance = object;
+        var url = lclove.util.basePath + "ajax/getBackNumberList.xhtml?navtype="+lclove.params.navtype;
+        var itemTemplate = function(data){
+            var sbHtml = new StringBuilder();
+            sbHtml.append("<div class='specialBackNumberList'>");
+            sbHtml.append("  <a href='"+ lclove.util.basePath + "detail.xhtml?navtype="+lclove.params.navtype+"&sortType=2&aid="+data.id+"'><img width='140' height='140' class='radius-small' src='" + data.thumbnail + "'/>");
+            sbHtml.append("  </a>");
+            sbHtml.append("</div>");
+            return $(sbHtml.toString());
+        };
+        
+        var defaultTemplate = function(){
+            var sbHtml = new StringBuilder();
+            sbHtml.append("<div class='specialBackNumberList'>");
+            sbHtml.append("  <span>暂无记录</span>");
+            sbHtml.append("</div>");
+            return $(sbHtml.toString());
+        };
+        
+        var fillData = function(data){
+        	if(data != null && data != ""){
+        		$.each(data.backNumbers, function(index, item){
+            		$(".specialBackNumberListBox").append(itemTemplate(item));
+            	});
+        	}else{
+        		$(".specialBackNumberListBox").append(defaultTemplate());
+        		
+        	}
+        };
+        $.getData(url, null, true, "POST", "json", true, fillData);
+    };
+
+    $.fn.backNumberList = function(options) {
+        return this.each(function () {
+            return eBackNumberList(options, $(this));
+        });
+    };
+    $.fn.backNumberList.defaults = {};
+});
+/* backnumber list */ 
 
 /*  about lm  */
 $(function(){
