@@ -653,7 +653,7 @@ $(function(){
             sbHtml.append("  </div>");
             sbHtml.append("  <div class='mini_blank'></div>");
             sbHtml.append("  <div class='taplike'>");
-            sbHtml.append("    <a id='taptolike' ref='javascript:void(0)' onclick='tapToLike("+data.detail.id+");' ><img width='20' height='20' class='radius-small' src='" + lclove.util.imgPath + "images/love.png'/><div class='likesum' id='likenums'>"+ data.detail.likeNum +"</div></div>");
+            sbHtml.append("    <a calss='taptolike' id='taptolike' ref='javascript:void(0)' onclick='tapToLike("+data.detail.id+");' ><img width='20' height='20' class='radius-small' src='" + lclove.util.imgPath + "images/love.png'/><div class='likenums' id='likenums'>&nbsp;"+ data.detail.likeNum +"</div></div>");
             sbHtml.append("    </a>");
             sbHtml.append("  </div>");
             sbHtml.append("</div>");
@@ -684,7 +684,7 @@ function tapToLike(sid){
 function callBackAddLike(result){
 	if(result.article != null){
 		var curNum = result.article.likeNum;
-		$("#likenums").html(curNum);
+		$("#likenums").html("&nbsp;"+curNum);
 	}
 	
 	
