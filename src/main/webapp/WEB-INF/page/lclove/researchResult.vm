@@ -22,13 +22,13 @@
 		<div id="myHeader"></div>
 		<!-- 固定头部导航 -->
 		
-		<!-- 文章详情 -->
+		<!-- 答题详情 -->
 		<div class="wrap_content clear">
 			<div class="content_left">
 				<!-- 详情 LEFT: 内容详情 -->
-				<div class="article_content"></div>
-				<div class="detail_comment_recommend"></div>
-				<div class="detail_comment_content"></div>
+				<div class="search_info">
+					
+				</div>
 			</div>
 			
 			<!-- 列表 RIGHT: 通用搜索 /微电影图文推荐-->
@@ -48,13 +48,13 @@
 			</div>
 			
 		</div>
-		<!-- 文章详情-->
+		<!-- 答题详情-->
 		<script>
 		$(function(){
 			lclove.params.keyword = '$!params.keyword';
-			lclove.params.aid = '$!params.aid';
-            lclove.params.sortType = '$!params.sortType';
-            lclove.params.navtype = '$!params.navtype';
+			lclove.params.surveyId = '$!params.surveyId';
+			lclove.params.sortType = '$!params.sortType';
+			lclove.params.navtype = '$!params.navtype';
 			lclove.params.position = '2';
 			
 			//固定头部导航
@@ -69,11 +69,7 @@
 			<!-- TOP 6-->
 			$(".hot_article").topShow();
 			
-			$(".article_content").ArticleContent();
-			
-			$(".detail_comment_recommend").renderRecomment();
-			
-			$(".detail_comment_content").renderComment();
+			$(".search_info").renderResearchResult();
 			
 			//固定页尾
 			$("body").footerModule();

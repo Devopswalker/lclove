@@ -3,6 +3,7 @@ package com.lcpa.lclove.service;
 import com.lcpa.lclove.dao.ArticleContentMapper;
 import com.lcpa.lclove.dao.ArticleMapper;
 import com.lcpa.lclove.dao.ArticleTypeMapper;
+import com.lcpa.lclove.dao.CommentMapper;
 import com.lcpa.lclove.model.Article;
 
 import com.lcpa.lclove.model.ArticleContent;
@@ -28,6 +29,8 @@ public class ArticleService{
 
     @Autowired
     public ArticleTypeMapper articleTypeMapper;
+
+    @Autowired public CommentMapper commentMapper;
 
     /**
      * admin 保存文章
@@ -205,7 +208,13 @@ public class ArticleService{
         }
         Paging paging = new Paging(pageNo, pageSize);
         QueryParameter queryParameter = new QueryParameter(paging, map);
-        return articleMapper.selectAllArticles(queryParameter);
+        List<Article> result = articleMapper.selectAllArticles(queryParameter);
+        if (result != null){
+            for(Article article : result){
+                article.setCommentNum(commentMapper.selectTotalCommentNum(article.getId()));
+            }
+        }
+        return result;
     }
 
     /**
@@ -243,12 +252,20 @@ public class ArticleService{
      */
     public List<Article> getTopRankArticlesByType(Integer articleType, Integer pageSize){
         Map map = new HashMap<>();
-        if (articleType != null && articleType != 1){
+        if (articleType != null){
             map.put("articleType", articleType);
         }
         Paging paging = new Paging(1, pageSize);
         QueryParameter queryParameter = new QueryParameter(paging, map);
         return articleMapper.selectTopArticlesByType(queryParameter);
+    }
+
+    /**
+     * 文章点赞
+     * @param articleId
+     */
+    public void addLikeNum(Integer articleId){
+        articleMapper.increaseLoveNum(articleId);
     }
 
 }

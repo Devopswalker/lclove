@@ -22,4 +22,6 @@ public interface QuestionOptionMapper {
     int updateByPrimaryKeySelective(QuestionOption record);
 
     int updateByPrimaryKey(QuestionOption record);
+
+    void deleteByQuestionId(Integer id);
 }

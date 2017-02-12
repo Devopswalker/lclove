@@ -38,6 +38,7 @@ public class SurveyService {
      */
 	public void saveSurvey(Survey survey) {
 		if (survey.getId() == null) {
+            survey.setState(0);
 			surveyMapper.insert(survey);
 		} else {
             surveyMapper.updateByPrimaryKey(survey);
@@ -71,13 +72,20 @@ public class SurveyService {
         }else{
             questionMapper.updateByPrimaryKey(question);
         }
-
-        for (QuestionOption questionOption : question.getQuestionOptions()){
-            if (questionOption.getId() == null) {
+        if (question.getQuestionOptions() != null && question.getQuestionOptions().size() > 0){
+            questionOptionMapper.deleteByQuestionId(question.getId());
+            for (int i = 0; i < question.getQuestionOptions().size(); i++){
+                QuestionOption questionOption = question.getQuestionOptions().get(i);
+                questionOption.setSurveyId(question.getSurveyId());
                 questionOption.setQuestionId(question.getId());
+                questionOption.setSeq(i+1);
                 questionOptionMapper.insert(questionOption);
-            }else {
-                questionOptionMapper.updateByPrimaryKey(questionOption);
+//                if (questionOption.getId() == null) {
+//                    questionOption.setQuestionId(question.getId());
+//                    questionOptionMapper.insert(questionOption);
+//                }else {
+//                    questionOptionMapper.updateByPrimaryKey(questionOption);
+//                }
             }
         }
     }
@@ -106,11 +114,11 @@ public class SurveyService {
     }
 
     /**
-     * 关闭问卷调查
+     * 更改问卷调查状态
      * @param id
      */
-    public void updateSurveyState(Integer id){
-        surveyMapper.updateSurveyState(id);
+    public void updateSurveyState(Integer id, Integer state){
+        surveyMapper.updateSurveyState(id, state);
     }
 
     /**
@@ -132,11 +140,26 @@ public class SurveyService {
     }
 
     /**
+     * 前段获取所有的问卷调查列表
+     * @param pageNo
+     * @return
+     */
+    public List<Survey> getAllSurvey(Integer pageNo, Integer pageSize){
+        Paging paging = new Paging(pageNo, pageSize);
+        QueryParameter queryParameter = new QueryParameter(paging, null);
+        List<Survey> surveyList = surveyMapper.selectAllSurveyOrderByDate(queryParameter);
+        return surveyList;
+    }
+    /**
      * 前端页面获取要显示的问卷调查
      * @return
      */
     public Survey getSurveyDetail(){
         List<Survey> surveyList = surveyMapper.selectLatestShowSurvey();
+        //没有有效的问卷调查
+        if (surveyList == null || surveyList.size() == 0){
+            return new Survey();
+        }
         Survey resultSurvey = surveyList.get(0);
         List<Question> questions = questionMapper.selectBySurveyId(resultSurvey.getId());
 
@@ -147,9 +170,24 @@ public class SurveyService {
         resultSurvey.setQuestions(questions);
         return resultSurvey;
     }
+    /**
+     * 前端页面获取要显示的问卷调查
+     * @return
+     */
+    public Survey getSurveyDetail(Integer id){
+        Survey survey = surveyMapper.selectByPrimaryKey(id);
+        List<Question> questions = questionMapper.selectBySurveyId(survey.getId());
+
+        for (Question question :questions){
+            List<QuestionOption> options = questionOptionMapper.selectOptionByQuestionId(question.getId());
+            question.setQuestionOptions(options);
+        }
+        survey.setQuestions(questions);
+        return survey;
+    }
 
     /**
-     * 获取问卷调查列表
+     * admin 获取问卷调查列表
      * @param pageNo
      * @param pageSize
      * @return
@@ -159,6 +197,24 @@ public class SurveyService {
         QueryParameter queryParameter = new QueryParameter(paging, null);
         return surveyMapper.selectSurveyList(queryParameter);
     }
+
+    /**
+     * 前段获取调查问卷列表
+     * @param pageNo
+     * @param pageSize
+     * @param keywords
+     * @return
+     */
+    public List<Survey>  getSurveyList(Integer pageNo, Integer pageSize, String keywords){
+        Map map = new HashMap<>();
+        if (keywords != null && !keywords.equals("")){
+            map.put("keywords", keywords);
+        }
+        Paging paging = new Paging(pageNo, pageSize);
+        QueryParameter queryParameter = new QueryParameter(paging, map);
+        return surveyMapper.selectDetailSurveyList(queryParameter);
+    }
+
 
     /**
      * 后台问卷调查列表分页
@@ -232,7 +288,7 @@ public class SurveyService {
      * @param id 问卷 ID
      * @return
      */
-    public Survey getSurveyReuslt(Integer id){
+    public Survey getSurveyResult(Integer id){
         Survey survey = surveyMapper.selectByPrimaryKey(id);
         Integer surveyAnswerTotalNum = surveyAnswerMapper.selectCountBySurveyID(id);
         List<Question> questions = questionMapper.selectBySurveyId(id);
@@ -246,7 +302,7 @@ public class SurveyService {
                 NumberFormat numberFormat = NumberFormat.getInstance();
                 numberFormat.setMaximumFractionDigits(2);
                 String percentScore = numberFormat.format((float)selectedNum/(float)surveyAnswerTotalNum*100);
-                option.setScore(Integer.parseInt(percentScore));
+                option.setScore(percentScore);
 
             }
             question.setQuestionOptions(options);
@@ -265,5 +321,19 @@ public class SurveyService {
         List<QuestionOption> questionOptions = questionOptionMapper.selectOptionByQuestionId(id);
         question.setQuestionOptions(questionOptions);
         return question;
+    }
+
+    public void removeQuestion(Integer id) {
+        questionMapper.deleteByPrimaryKey(id);
+        questionOptionMapper.deleteByQuestionId(id);
+    }
+
+    public boolean hasOpenedSurvey() {
+        int result = surveyMapper.selectOpenSurveyCount();
+        if (result == 0){
+            return false;
+        }else {
+            return true;
+        }
     }
 }

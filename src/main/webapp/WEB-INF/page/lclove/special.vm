@@ -22,13 +22,31 @@
 		<div id="myHeader"></div>
 		<!-- 固定头部导航 -->
 		
-		<!-- 文章详情 -->
+		<!-- 文章列表 -->
 		<div class="wrap_content clear">
+		
+			<!-- 列表 LEFT: 内容列表 -->
 			<div class="content_left">
-				<!-- 详情 LEFT: 内容详情 -->
-				<div class="article_content"></div>
-				<div class="detail_comment_recommend"></div>
-				<div class="detail_comment_content"></div>
+				<!-- 列表 LEFT: BANNER -->
+				<div class="special_topic">
+					<div class="special_topic_head"><img src="${staticPath}images/topic_flower.png" /><div>Special恋の喵言喵语</div></div>
+					<div class="special_topic_desc_pic"><img width='594' height='228' class='radius-small' src="${staticPath}images/special_banner.png" /></div>
+				</div>
+				<div class="small_blank"></div>
+				
+				<!-- 列表 LEFT: DATALIST -->
+				<div class="content_list"></div>
+				
+				<div class="small_blank"></div>
+				
+				<section class="specialBackNumber">
+					<h2 class="title">
+						<img src="${staticPath}images/specialbacknumber.gif" width="600" height="27" alt="Back Number 過去の特集">
+					</h2>
+					
+					<div class="specialBackNumberListBox"></div>
+				</section>
+			
 			</div>
 			
 			<!-- 列表 RIGHT: 通用搜索 /微电影图文推荐-->
@@ -48,14 +66,13 @@
 			</div>
 			
 		</div>
-		<!-- 文章详情-->
+		<!-- 文章列表-->
 		<script>
 		$(function(){
 			lclove.params.keyword = '$!params.keyword';
-			lclove.params.aid = '$!params.aid';
-            lclove.params.sortType = '$!params.sortType';
-            lclove.params.navtype = '$!params.navtype';
-			lclove.params.position = '2';
+			lclove.params.navtype = '1';
+			lclove.params.pageNo = '$!params.pageNo';
+			lclove.params.position = '3';
 			
 			//固定头部导航
 			$("#myHeader").topMenu();
@@ -69,11 +86,10 @@
 			<!-- TOP 6-->
 			$(".hot_article").topShow();
 			
-			$(".article_content").ArticleContent();
+			//文章列表
+			$(".content_list").contentList();
 			
-			$(".detail_comment_recommend").renderRecomment();
-			
-			$(".detail_comment_content").renderComment();
+			$(".specialBackNumberListBox").backNumberList();
 			
 			//固定页尾
 			$("body").footerModule();

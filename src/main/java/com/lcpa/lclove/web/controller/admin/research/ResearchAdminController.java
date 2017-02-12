@@ -1,18 +1,19 @@
 package com.lcpa.lclove.web.controller.admin.research;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.lcpa.lclove.model.ArticleType;
-import com.lcpa.lclove.model.Question;
+import com.lcpa.lclove.model.*;
+import com.lcpa.lclove.util.JsonUtils;
+import com.lcpa.lclove.vo.ResearchOptionsVo;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.lcpa.lclove.model.QuestionInputType;
-import com.lcpa.lclove.model.Survey;
 import com.lcpa.lclove.service.SurveyService;
 import com.lcpa.lclove.vo.Paging;
 import com.lcpa.lclove.web.controller.AnnotationController;
@@ -53,24 +54,29 @@ public class ResearchAdminController extends AnnotationController {
     }
 
     @RequestMapping(value = "/admin/research/saveResearch.xhtml")
-    public String saveRecommend(Integer id, ModelMap model) {
-    	 Survey survey = null;
-        if(id == null){
-        	survey = new Survey();
-            this.bindParams(survey);
-            surveyService.saveSurvey(survey);
-        }else{
-        	survey = surveyService.getSurveyDetailById(id);
-            if(survey == null){
-                return this.showJsonError(model, "该问卷不存在或已被删除！");
-            }
-            this.bindParams(survey, new String[]{"id"});
-            surveyService.saveSurvey(survey);
+    public String saveResearch(Integer id, ModelMap model) {
+        Survey survey = new Survey();
+        this.bindParams(survey);
+        if(survey == null){
+            return this.showJsonError(model, "该问卷不存在或已被删除！");
         }
+        surveyService.saveSurvey(survey);
+//        if(id == null){
+//        	survey = new Survey();
+//            this.bindParams(survey);
+//            surveyService.saveSurvey(survey);
+//        }else{
+//        	survey = surveyService.getSurveyDetailById(id);
+//            if(survey == null){
+//                return this.showJsonError(model, "该问卷不存在或已被删除！");
+//            }
+//            this.bindParams(survey, new String[]{"id"});
+//            surveyService.saveSurvey(survey);
+//        }
         return "redirect:/admin/research/researchList.xhtml";
     }
 
-    @RequestMapping(value = "/admin/research/delResearch.xhtml")
+    @RequestMapping(value = "/admin/research/deleteResearch.xhtml")
     public String delResearch(Integer id, ModelMap model){
         if(id == null){
             return showJsonError(model, "ID为空！");
@@ -88,13 +94,15 @@ public class ResearchAdminController extends AnnotationController {
             typeMap.put(questionInputType.getId(), questionInputType);
         }
         model.put("questions", questions);
+        model.put("surveyId", id);
         model.put("typeMap", typeMap);
         return "admin/research/questionList.vm";
     }
 
     @RequestMapping(value = "/admin/research/editQuestion.xhtml")
-    public String editQuestion(Integer id, ModelMap model){
-        Question question = null;
+    public String editQuestion(Integer surveyId, Integer id, ModelMap model){
+        Question question = new Question();
+        question.setSurveyId(surveyId);
         if (id != null){
             question = surveyService.getQuestionDetailById(id);
         }
@@ -104,6 +112,64 @@ public class ResearchAdminController extends AnnotationController {
         model.put("typeList", typeList);
         return "admin/research/editQuestion.vm";
     }
+
+    @RequestMapping(value = "/admin/research/saveQuestion.xhtml")
+    public String saveQuestion(String questionData, ModelMap model) {
+        if(StringUtils.isBlank(questionData)){
+            return showJsonError(model, "Argument list syntax error !");
+        }
+        Question question = JsonUtils.readJsonToObject(Question.class, questionData);
+        if(question == null){
+            return showJsonError(model, "Bad character in paramenters !");
+        }
+        if (question.getInputType() == 1){
+            List<QuestionOption> questionOptions = new ArrayList<QuestionOption>();
+            QuestionOption questionOption = new QuestionOption();
+            questionOption.setContent("");
+            questionOptions.add(questionOption);
+            question.setQuestionOptions(questionOptions);
+        }
+        surveyService.saveQuestion(question);
+        return showJsonSuccess(model);
+//        List<Question> questions = surveyService.getAllQuestionBySurveyId(question.getSurveyId());
+//        List<QuestionInputType> typeList = surveyService.getAllQuestionInputType();
+//        Map<Integer, QuestionInputType> typeMap = new HashMap();
+//        for (QuestionInputType questionInputType : typeList) {
+//            typeMap.put(questionInputType.getId(), questionInputType);
+//        }
+//        model.put("questions", questions);
+//        model.put("surveyId", question.getSurveyId());
+//        model.put("typeMap", typeMap);
+//        return "admin/research/questionList.vm";
+    }
+    @RequestMapping(value = "/admin/research/deleteQuestion.xhtml")
+    public String deleteQuestion(Integer id, Integer surveyId, ModelMap model){
+        surveyService.removeQuestion(id);
+        List<Question> questions = surveyService.getAllQuestionBySurveyId(surveyId);
+        List<QuestionInputType> typeList = surveyService.getAllQuestionInputType();
+        Map<Integer, QuestionInputType> typeMap = new HashMap();
+        for (QuestionInputType questionInputType : typeList) {
+            typeMap.put(questionInputType.getId(), questionInputType);
+        }
+        model.put("questions", questions);
+        model.put("surveyId", surveyId);
+        model.put("typeMap", typeMap);
+        return "admin/research/questionList.vm";
+    }
+
+
+    @RequestMapping(value = "/admin/research/updateResearchState.xhtml")
+    public String updateResearchState(Integer id, Integer state, ModelMap model){
+        surveyService.updateSurveyState(id, state);
+        return showJsonSuccess(model);
+//        if (state == 1 && surveyService.hasOpenedSurvey()){
+//            return showJsonSuccess(model);
+//        }else{
+//            surveyService.updateSurveyState(id, state);
+//            return showJsonSuccess(model);
+//        }
+    }
+
 
 
 }

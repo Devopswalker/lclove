@@ -25,10 +25,14 @@
 		<!-- 答题详情 -->
 		<div class="wrap_content clear">
 			<div class="content_left">
-				<!-- 详情 LEFT: 内容详情 -->
-				<div class="search_info">
-					
+				<!-- 列表 LEFT: BANNER -->
+				<div class="comic_topic">
+					<div class="comic_topic_head"><img src="${staticPath}images/topic_flower.png"/><div>Research恋の好奇心 </div></div>
+					<div class="comic_topic_desc_pic"><img width='570' height='228' class='radius-small' src="${staticPath}images/amulet_text.png"/></div>
 				</div>
+				<div class="small_blank"></div>
+				<!-- 列表 LEFT: DATALIST -->
+				<div class="content_list"></div>
 			</div>
 			
 			<!-- 列表 RIGHT: 通用搜索 /微电影图文推荐-->
@@ -52,9 +56,9 @@
 		<script>
 		$(function(){
 			lclove.params.keyword = '$!params.keyword';
-			lclove.params.aid = '$!params.aid';
 			lclove.params.sortType = '$!params.sortType';
-			lclove.params.navtype = '$!params.navtype';
+            lclove.params.navtype = '$!params.navtype';
+            lclove.params.isSurvey = true;
 			lclove.params.position = '2';
 			
 			//固定头部导航
@@ -69,7 +73,7 @@
 			<!-- TOP 6-->
 			$(".hot_article").topShow();
 			
-			$(".search_info").renderResearch();
+			$(".content_list").researchList();
 			
 			//固定页尾
 			$("body").footerModule();

@@ -22,10 +22,11 @@
                 <li> <a class="button border-main icon-plus-square-o" href="${basePath}admin/research/editResearch.xhtml"> 添加问卷</a> </li>
             </ul>
         </div>
-        <table class="table table-hover text-center">
+        <table class="table table-hover text-center" id="table">
             <tr>
                 <th>标题</th>
-                <th>简述</th>
+                <th>缩图</th>
+##                <th>简述</th>
                 <th>问卷时间</th>
                 <th>状态</th>
                 <th>详情</th>
@@ -35,16 +36,19 @@
                 #foreach($survey in $surveys)
                     <tr>
                         <td>$!survey.title</td>
-                        <td>$!survey.description</td>
-                        <td>$!survey.endTime</td>
+                        <td width="10%"><img src="$survey.thumbnail" alt="" width="70" height="50" /></td>
+##                        <td>$!survey.description</td>
+                        <td>$!survey.pubDate</td>
                         <td>
                             <div class="button-group radio">
-                                <label class="button active">
-                                    <input name="pintuer" value="yes"  type="radio">
+                                <label class="button #if($!survey.state==1)active#end"
+                                       onchange="changeState($!survey.id,1)">
+                                    <input id="state" name="state" #if($!survey.state==1)checked="checked"#end value="1"  type="radio">
                                     <span class="icon icon-check"></span> 开
                                 </label>
-                                <label class="button">
-                                    <input name="pintuer" value="no" checked="checked" type="radio"><span class="icon icon-times"></span> 关
+                                <label class="button #if($!survey.state==0)active#end"
+                                       onchange="changeState($!survey.id,0)">
+                                    <input id="state" name="state" #if($!survey.state==0)checked="checked"#end value="0" type="radio"><span class="icon icon-times"></span> 关
                                 </label>
                             </div>
                         </td>
@@ -95,7 +99,7 @@
     //单个删除
     function deleteData(entityId){
         if(confirm("您确定要删除吗?")){
-            var url = '${basePath}admin/recommend/delRecommend.xhtml';
+            var url = '${basePath}admin/research/deleteResearch.xhtml';
             var values = {"id":entityId};
             $.getData(url, values, true, 'get', 'json', false, ajaxCallBack);
         }
@@ -107,7 +111,32 @@
             alert(r.msg);
         }
     };
+    function changeState(surveyId, changeState){
+        var url = '${basePath}admin/research/updateResearchState.xhtml';
+        var values = {"id":surveyId, "state":changeState};
+        $.getData(url, values, true, 'get', 'json', false, ajaxCallBack);
+##        if (changeState == 1){
+##            if(confirm("最多允许一个问卷被打开，确定要打开问卷吗?")){
+##                var url = '${basePath}admin/research/updateResearchState.xhtml';
+##                var values = {"id":surveyId, "state":changeState};
+##                $.getData(url, values, true, 'get', 'json', false, ajaxCallBack);
+##            }else{
+##                refreshPage('${basePath}admin/research/researchList.xhtml');
+##            }
+##        }else{
+##            var url = '${basePath}admin/research/updateResearchState.xhtml';
+##            var values = {"id":surveyId, "state":changeState};
+##            $.getData(url, values, true, 'get', 'json', false, changeStateajaxCallBack);
+##        }
 
+    }
+    function changeStateajaxCallBack(r){
+        if(r.success){
+            refreshPage('${basePath}admin/research/researchList.xhtml');
+        }else{
+
+        }
+    };
     //全选
     $("#checkall").click(function(){
         $("input[name='id[]']").each(function(){

@@ -29,6 +29,8 @@ public class Article {
 
     private String content;
 
+    private Integer commentNum = 0;
+
     public Integer getId() {
         return id;
     }
@@ -131,5 +133,13 @@ public class Article {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public Integer getCommentNum() {
+        return commentNum;
+    }
+
+    public void setCommentNum(Integer commentNum) {
+    	this.commentNum = commentNum;
     }
 }

@@ -127,7 +127,7 @@ li{
 	position:relative;
 	float:left;
 	width:590px;
-	height:209px;
+	height:310px;
 	overflow:hidden;
 }
 
@@ -140,13 +140,13 @@ li{
 
 .item img{
 	width: 590px;
-	height: 209px;
+	height: 310px;
 }
 
 .banner_item{
 	float:left;
 	width:590px;
-	height:209px;
+	height:310px;
 	background:url(../images/banner.png);
 }
 
@@ -572,9 +572,9 @@ li{
 }
 
 .review{
-	width:574px;
+	width:600px;
 	float:left;
-	margin-top:40px;
+	margin-top:10px;
 	background:#fff;
 	border-radius:3px;
 	box-shadow: 1.5px 1.5px 1.5px;
@@ -586,7 +586,7 @@ li{
 .review_head{
 	float:left;
 	font-size:16px;
-	width:574px;
+	width:600px;
 	font-weight:bold;
 }
 
@@ -600,9 +600,40 @@ li{
 	margin-left:5px;
 }
 
+/* for the comic.html */
+.comic_topic{
+	float:left;
+	width:100%;
+}
+
+.comic_topic_head{
+	float:left;
+	width:100%;
+}
+
+.comic_topic_head img{
+	float:left;
+	height:60px;
+	width:67px;
+}
+
+.comic_topic_head div{
+	float:left;
+	line-height:60px;
+	margin-left:20px;
+	font-size:18px;
+	font-weight:bold;
+}
+
+.comic_topic_desc_pic{
+	float:left;
+	margin-left:10px;
+	margin-top:20px;
+}
+
 /* for the article_content.html */
 .article_content{
-	width:574px;
+	width:600px;
 /* 	float:left; */
 	background:#fff;
 	border-radius:3px;
@@ -708,7 +739,6 @@ li{
 .row_3_love{
 	position:absolute;
 	z-index:100;
-	top:790px;
 	right:0;
 }
 
@@ -724,6 +754,10 @@ li{
 .article_content_foot{
 	float:left;
 	width:100%;
+}
+
+.taplike{
+	float:right;
 }
 
 .foot_row_1{
@@ -787,7 +821,7 @@ li{
 
 .one_comment .comment_content{
 	float: left;
-	width:320px;
+	width:100%;
 	margin-left:10px;
 }
 
@@ -900,7 +934,7 @@ li{
 /* for the research.html */
 .search_info{
 	float:left;
-	width:574px;
+	width:600px;
 	background:#fff;
 	border-radius:3px;
 	box-shadow: 1.5px 1.5px 1.5px;
@@ -924,6 +958,8 @@ li{
 .search_head div{
 	float:left;
 	margin-left:10px;
+	margin-bottom:10px;
+	font-size:18px;
 	font-weight:bold;
 }
 
@@ -946,11 +982,12 @@ li{
 	margin-top:10px;
 }
 
-.single_choose_item input, .single_choose_item div{
+.single_choose_item input{
 	float:left;
 }
 
 .single_choose_item div{
+	float:left;
 	margin-left:10px;
 }
 
@@ -1085,11 +1122,11 @@ li{
 }
 
 .detail_comment_content{
-	margin-top: 20px;
-	margin-bottom: 20px;
+	margin-top: 10px;
+	margin-bottom: 10px;
 	min-height: 300px;
 	background: #fff;
-	width: 574px;
+	width: 600px;
 	border-radius:3px;
 	box-shadow: 1.5px 1.5px 1.5px;
 	-webkit-box-shadow:1.5px 1.5px 1.5px;
@@ -1097,8 +1134,29 @@ li{
 	padding:10px;
 }
 
+.detail_comment_recommend{
+	margin-top: 10px;
+	margin-bottom: 10px;
+	min-height: 320px;
+	background: #fff;
+	width: 600px;
+	border-radius:3px;
+	box-shadow: 1.5px 1.5px 1.5px;
+	-webkit-box-shadow:1.5px 1.5px 1.5px;
+	-moz-box-shadow: 1.5px 1.5px 1.5px;
+	padding:10px;
+}
+
+
+.detail_comment_recommend_head{
+	float:left;
+	font-size:16px;
+	width:600px;
+	font-weight:bold;
+}
+
 .about_content{
-	width:574px;
+	width:600px;
  	text-align:center;
 	background:#fff;
 	border-radius:3px;
@@ -1106,4 +1164,42 @@ li{
 	-webkit-box-shadow:1.5px 1.5px 1.5px;
 	-moz-box-shadow: 1.5px 1.5px 1.5px;
 	padding:10px;
+}
+
+
+.result_choose_item{
+	width:400px;
+	margin-left:10px;
+	line-height:20px;
+	margin-top:10px;
+	overflow: hidden;
+}
+
+.result_choose_item .result_content{
+	float:left;
+	margin:0 10px;
+}
+
+.result_choose_item .progress{
+	margin-top: 5px;
+}
+.no_data_img{
+	width: 594px;
+	height: 600px;
+	opacity:0.4;
+	filter:alpha(opacity=40); /* 针对 IE8 以及更早的版本 */
+
+}
+.specialBackNumberList{
+	float:left;
+	margin:5px;
+}
+.readingRecommendList{
+	float:left;
+	margin:5px;
+	width: 45%;
+}
+.hotRecommendList{
+	float:left;
+	margin:5px;
 }

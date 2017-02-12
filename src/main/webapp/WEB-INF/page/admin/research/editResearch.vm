@@ -22,42 +22,63 @@
     <div class="body-content">
         <form method="post" class="form-x" action="${basePath}admin/research/saveResearch.xhtml">
             <input type="hidden" id="id" name="id" value="$!survey.id"/>
+            <input type="hidden" id="state" name="state" value="$!survey.state"/>
             <div class="form-group">
                 <div class="label">
                     <label>标题：</label>
                 </div>
                 <div class="field">
-                    <input type="text" class="input w50" id="title" name="title" value="$!survey.title" data-validate="required:请输入标题" />
+                    <input type="text" class="input w50" id="title" name="title" value="$!survey.title" data-validate="required:请输入标题,length#<=30:长度最大30" />
                     <div class="tips"></div>
                 </div>
             </div>
             <div class="form-group">
                 <div class="label">
-                    <label>图片：</label>
+                    <label>缩图：</label>
                 </div>
                 <div class="field">
-                    <input type="text" class="input w50" id="topic" name="topic" value="$!survey.headerImg" data-validate="required:请输入图片URL" />
+                    <input type="text" class="input w50 tips" id="thumbnail" name="thumbnail" value="$!survey.thumbnail" data-validate="required:请输入图片URL"
+                           data-toggle="hover" data-place="right" data-image="$!survey.thumbnail"/>
                     <div class="tips"></div>
                 </div>
             </div>
             <div class="form-group">
                 <div class="label">
-                    <label>开始日期：</label>
+                    <label>描述图片：</label>
                 </div>
                 <div class="field">
-                    <input type="text" class="laydate-icon input w50" id="startTime" name="startTime" onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})" value="$!DateUtil.formatTimestamp($!survey.startTime)"  data-validate="required:开始时间不能为空" style="padding:10px!important; height:auto!important;border:1px solid #ddd!important;" />
+                    <input type="text" class="input w50 tips" id="headerImg" name="headerImg" value="$!survey.headerImg" data-validate="required:请输入图片URL"
+                           data-toggle="hover" data-place="right" data-image="$!survey.headerImg"/>
                     <div class="tips"></div>
                 </div>
             </div>
             <div class="form-group">
                 <div class="label">
-                    <label>结束日期：</label>
+                    <label>发布日期：</label>
                 </div>
                 <div class="field">
-                    <input type="text" class="laydate-icon input w50" id="endTime" name="endTime" onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})" value="$!DateUtil.formatTimestamp($!survey.endTime)"  data-validate="required:结束时间不能为空" style="padding:10px!important; height:auto!important;border:1px solid #ddd!important;" />
+                    <input type="text" class="laydate-icon input w50" id="pubDate" name="pubDate" onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})" value="$!DateUtil.formatTimestamp($!survey.pubDate)"  data-validate="required:发布时间不能为空" style="padding:10px!important; height:auto!important;border:1px solid #ddd!important;" />
                     <div class="tips"></div>
                 </div>
             </div>
+##            <div class="form-group">
+##                <div class="label">
+##                    <label>开始日期：</label>
+##                </div>
+##                <div class="field">
+##                    <input type="text" class="laydate-icon input w50" id="startTime" name="startTime" onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})" value="$!DateUtil.formatTimestamp($!survey.startTime)"  data-validate="required:开始时间不能为空" style="padding:10px!important; height:auto!important;border:1px solid #ddd!important;" />
+##                    <div class="tips"></div>
+##                </div>
+##            </div>
+##            <div class="form-group">
+##                <div class="label">
+##                    <label>结束日期：</label>
+##                </div>
+##                <div class="field">
+##                    <input type="text" class="laydate-icon input w50" id="endTime" name="endTime" onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})" value="$!DateUtil.formatTimestamp($!survey.endTime)"  data-validate="required:结束时间不能为空" style="padding:10px!important; height:auto!important;border:1px solid #ddd!important;" />
+##                    <div class="tips"></div>
+##                </div>
+##            </div>
             <div class="form-group">
                 <div class="label">
                     <label>简要说明：</label>
