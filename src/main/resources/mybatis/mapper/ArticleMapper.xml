@@ -63,7 +63,7 @@
     select
     <include refid="Base_Column_List" />
     from article WHERE IS_LOOK_BACK=1
-    order by ID desc
+    order by PUB_DATE desc
     <include refid="Paging"/>
   </select>
 
