@@ -46,7 +46,7 @@
 				
 				<section class="specialBackNumber">
 					<h2 class="title">
-						<img src="${staticPath}images/specialbacknumber.gif" width="600" height="27" alt="Back Number 過去の特集">
+						<img src="${staticPath}images/specialbacknumber.gif" width="600" height="27" alt="Back Number 過去特集">
 					</h2>
 					
 					<div class="specialBackNumberListBox"></div>
