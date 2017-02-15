@@ -63,10 +63,10 @@
 		
 		<div style="overflow:hidden; position:absolute; bottom: 40px; left:0px; z-index: -1;">
 				<img width="100%" height="100%" src="/images/left_corner.png" />
-			</div>
-			<div style="overflow:hidden; position:absolute; bottom: 40px; right:0px; z-index: -1;">
+		</div>
+		<div style="overflow:hidden; position:absolute; bottom: 40px; right:0px; z-index: -1;">
 				<img src="/images/right_corner.png" />
-			</div>
+		</div>
 		<script>
 		$(function(){
 			lclove.params.keyword = '$!params.keyword';

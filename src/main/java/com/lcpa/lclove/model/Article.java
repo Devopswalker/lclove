@@ -31,6 +31,8 @@ public class Article {
 
     private Integer commentNum = 0;
 
+    private Integer isLookBack = 0;
+
     public Integer getId() {
         return id;
     }
@@ -141,5 +143,13 @@ public class Article {
 
     public void setCommentNum(Integer commentNum) {
     	this.commentNum = commentNum;
+    }
+
+    public Integer getIsLookBack() {
+        return isLookBack;
+    }
+
+    public void setIsLookBack(Integer isLookBack) {
+        this.isLookBack = isLookBack;
     }
 }

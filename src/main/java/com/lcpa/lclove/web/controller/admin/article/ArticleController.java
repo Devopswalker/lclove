@@ -154,5 +154,11 @@ public class ArticleController extends AnnotationController{
 //		model.put("questionTypes", questionTypes);
 		return "admin/comic/editComic.vm";
 	}
+	@RequestMapping(value = "/admin/article/updateLookBack.xhtml")
+	public String updateLookBack(Integer id, Integer lookBack, ModelMap model){
+		articleService.updateLookBack(id, lookBack);
+		return showJsonSuccess(model);
+	}
+
 }
  

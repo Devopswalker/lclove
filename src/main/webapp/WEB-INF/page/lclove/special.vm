@@ -24,7 +24,12 @@
 		
 		<!-- 文章列表 -->
 		<div class="wrap_content clear">
-		
+			<div style="overflow:hidden; position:absolute; left:-224px;">
+				<img src="/images/left_smoke.png" />
+			</div>
+			<div style="overflow:hidden; position:absolute; top: -200px; left:1050px;">
+				<img src="/images/right_smoke.png" />
+			</div>
 			<!-- 列表 LEFT: 内容列表 -->
 			<div class="content_left">
 				<!-- 列表 LEFT: BANNER -->
@@ -41,7 +46,7 @@
 				
 				<section class="specialBackNumber">
 					<h2 class="title">
-						<img src="${staticPath}images/specialbacknumber.gif" width="600" height="27" alt="Back Number 過去の特集">
+						<img src="${staticPath}images/specialbacknumber.gif" width="600" height="27" alt="Back Number 過去特集">
 					</h2>
 					
 					<div class="specialBackNumberListBox"></div>
@@ -67,6 +72,12 @@
 			
 		</div>
 		<!-- 文章列表-->
+		<div style="overflow:hidden; position:absolute; bottom: 40px; left:0px; z-index: -1;">
+				<img width="100%" height="100%" src="/images/left_corner.png" />
+		</div>
+		<div style="overflow:hidden; position:absolute; bottom: 40px; right:0px; z-index: -1;">
+				<img src="/images/right_corner.png" />
+		</div>
 		<script>
 		$(function(){
 			lclove.params.keyword = '$!params.keyword';
