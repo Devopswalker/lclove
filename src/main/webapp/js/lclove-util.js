@@ -706,12 +706,11 @@ $(function(){
                  	sbHtml.append("        <div class='name'> "+item.nickName+" </div>");
                  	sbHtml.append("        <div class='colon'>：</div>");
                  	sbHtml.append("        <div class='comment_content'> "+item.content+" </div>");
-/*                 	sbHtml.append("        <img class='good_img' src='"+lclove.util.imgPath+"images/good.png'/>");
+                 	sbHtml.append("        <div class='bad_count'>回复</div>");
+                 	sbHtml.append("        <img class='good_img' src='"+lclove.util.imgPath+"images/good.png'/>");
                  	sbHtml.append("        <div class='good_count'> "+item.upNum+" </div>");
-                 	sbHtml.append("        <img class='bad_img'src='"+lclove.util.imgPath+"images/bad.png'/>");
-                 	sbHtml.append("        <div class='bad_count'> "+item.downNum+" </div>");*/
-                     sbHtml.append("    </div>");
-                     sbHtml.append("    <div class='solid_separate'></div>");
+                 	sbHtml.append("    </div>");
+                 	sbHtml.append("    <div class='solid_separate'></div>");
                  });
                  sbHtml.append("</div>");
             }else{
@@ -794,6 +793,25 @@ $(function(){
     $.fn.renderComment.defaults = {};
 });
 /*  Comment  */
+
+
+/*  doPraise  */
+function doPraiseOpration(cid){
+	var url = lclove.util.basePath + "ajax/ontTapToLike.xhtml";
+	var data = {};
+	data.cid = cid;
+	$.getData(url, data, true, "POST", "json", true, callBackAddLike);
+}
+
+function callBackDoPraise(result){
+	if(result.article != null){
+		var curNum = result.article.likeNum;
+		$("#likenums").html("&nbsp;"+curNum);
+	}
+	
+	
+}
+/*  doPraise  */
 
 /*  Recomment  */
 $(function(){
