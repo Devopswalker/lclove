@@ -12,10 +12,14 @@
     <result column="PARENT_ID" jdbcType="INTEGER" property="parentId" />
     <result column="UP_NUM" jdbcType="INTEGER" property="upNum" />
     <result column="DOWN_NUM" jdbcType="INTEGER" property="downNum" />
+    <result column="REPLY_ID" jdbcType="INTEGER" property="replyId" />
+    <result column="REPLY_NICK_NAME" jdbcType="INTEGER" property="replyName" />
+    <result column="REPLY_CONTENT" jdbcType="INTEGER" property="replyContent" />
+    <result column="REPLIED_NUM" jdbcType="INTEGER" property="repliedNumber" />
   </resultMap>
   <sql id="Base_Column_List">
     ID, ARTICLE_ID, NICK_NAME, EMAIL, CONTENT, EDITOR_REPLY, COMM_STATUS, PARENT_ID, UP_NUM,
-    DOWN_NUM
+    DOWN_NUM,REPLY_ID,REPLY_NICK_NAME,REPLY_CONTENT
   </sql>
   <sql id="Paging">
     <if test="paging != null and paging.StartIndex != null and paging.pageSize">
@@ -172,13 +176,19 @@
     where ID = #{id,jdbcType=INTEGER}
   </update>
   <update id="increaseUpNum">
-    update article
-    set SCAN_NUM = UP_NUM + 1
+    update comment
+    set UP_NUM = UP_NUM + 1
     where ID = #{0}
   </update>
   <update id="increaseDownNum">
-    update article
-    set SCAN_NUM = DOWN_NUM + 1
+    update comment
+    set DOWN_NUM = DOWN_NUM + 1
     where ID = #{0}
   </update>
+  <update id="increaseRepliedNum">
+    update comment
+    set REPLIED_NUM = REPLIED_NUM + 1
+    where ID = #{0}
+  </update>
+
 </mapper>

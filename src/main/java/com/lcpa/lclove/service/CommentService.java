@@ -21,11 +21,15 @@ public class CommentService {
     public CommentMapper commentMapper;
 
     /**
-     * 保存评论
+     * 保存评论,新评论 replyId，replyName，replyContent 为空
+     * 回复的评论 replyId，replyName，replyContent 赋值传到service
      * @param comment
      */
     public void saveComment(Comment comment){
         commentMapper.insert(comment);
+        if (comment.getReplyId() != null){
+            commentMapper.increaseRepliedNum(comment.getReplyId());
+        }
     }
 
     /**
@@ -59,7 +63,7 @@ public class CommentService {
     }
 
     /**
-     *
+     *评论点赞
      * @param id
      */
     public void updateUpNum(Integer id){
