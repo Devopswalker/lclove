@@ -258,5 +258,24 @@ public class LcLoveAjaxController extends AnnotationController{
 		resultMap.put("article", article);
 		return showJsonSuccess(model, JsonUtils.writeObjectToJson(resultMap));
 	}
+	
+	
+	/**
+	 * Get doPraise for Comment
+	 * @param cid
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("/ajax/onTapToPraise.xhtml")
+	public String onTapToPraise(Integer cid, ModelMap model){
+		if(cid == null){
+			return showJsonError(model, "Bad character in paramenters !");
+		}
+		commentService.updateUpNum(cid);
+		Comment comment = commentService.getCommentById(cid);
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		resultMap.put("comment", comment);
+		return showJsonSuccess(model, JsonUtils.writeObjectToJson(resultMap));
+	}
 
 }
