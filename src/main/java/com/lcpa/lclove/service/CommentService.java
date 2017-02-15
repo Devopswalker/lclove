@@ -1,15 +1,16 @@
 package com.lcpa.lclove.service;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.lcpa.lclove.dao.CommentMapper;
 import com.lcpa.lclove.model.Comment;
 import com.lcpa.lclove.vo.Paging;
 import com.lcpa.lclove.vo.QueryParameter;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Created by shaoheng.huang on 2017/1/10.
@@ -72,5 +73,14 @@ public class CommentService {
      */
     public void updateDownNum(Integer id){
         commentMapper.increaseDownNum(id);
+    }
+    
+    /**
+     * 获取评论信息
+     * @param id
+     * @return
+     */
+    public Comment getCommentById(Integer id){
+    	return commentMapper.selectByPrimaryKey(id);
     }
 }
