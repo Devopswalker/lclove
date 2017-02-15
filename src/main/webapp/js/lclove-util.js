@@ -731,14 +731,17 @@ $(function(){
             sbHtml.append("<div class='comment_submit'>");
             sbHtml.append("  <div class='publish'>发表评论</div>");
             sbHtml.append("  <form name='commentsForm' class='form-inline' method='post'");
+            sbHtml.append("     <input type='hidden' name='replyId' id='replyId' value=''>");
+            sbHtml.append("     <input type='hidden' name='replyName' id='replyName' value=''>");
+            sbHtml.append("     <input type='hidden' name='replyContent' id='replyContent' value=''>");
             sbHtml.append("     <div class='form-group'>");
             sbHtml.append("       <div class='field'>");
             sbHtml.append("         &nbsp;昵称<font color='red'>*</font>&nbsp;<input type='text' class='input' id='nickName' name='nickName' maxlength='12' style='width:240px;' size='30' />");
             sbHtml.append("         邮箱<font color='red'>*</font>&nbsp;<input type='text' class='input' id='email' name='email' maxlength='36' style='width:240px;' size='48' />");
             sbHtml.append("       </div>");
             sbHtml.append("     </div>");
-            sbHtml.append("     <div class='form-group' style='margin-top: 10px;margin-bottom: 10px;'>");
-            sbHtml.append("       <textarea class='input' rows='4' cols='50' placeholder='写下您的评论内容' maxlength='50' id='content' name='content' ></textarea>");
+            sbHtml.append("     <div class='form-group' style='margin-top: 10px;margin-bottom: 10px;margin-left: 5px;'>");
+            sbHtml.append("       <textarea class='input' rows='4' cols='74' placeholder='写下您的评论内容' maxlength='50' id='content' name='content' ></textarea>");
             sbHtml.append("     </div>");
             sbHtml.append("     <div class='clear'></div>");
             sbHtml.append("     <div id='submitBtn' class='confirm_comment'><img src='"+lclove.util.imgPath+"images/send.png'/></div>");
@@ -778,6 +781,9 @@ $(function(){
         	data.nickName = nickName;
         	data.email = email;
         	data.content = content;
+        	data.replyId = $('#replyId').val();
+        	data.replyName = $('#replyName').val();
+        	data.replyContent = $('#replyContent').val();
         	data.articleId = lclove.params.aid;
         	$.getData(url, data, true, "POST", "json", true, callBackComments);
         };
@@ -804,6 +810,20 @@ $(function(){
 });
 /*  Comment  */
 
+
+function replyComment(cid){
+	if(cid=='' || cid==null){
+		return;
+	}
+	var replyName = $('#comment_name_' + cid).html(); 
+	var replyContent = $('#comment_content_' + cid).html(); 
+	$('#replyId').val(cid);
+	$('#replyName').val(replyName);
+	$('#replyContent').val(replyContent);
+	$("#content").attr("placeholder","请填写回复 @"+replyName +"的内容");
+	$('#content').focus();
+	
+}
 
 /*  doPraise  */
 function doPraiseOpration(cid){
