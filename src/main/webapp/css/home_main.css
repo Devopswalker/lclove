@@ -1215,3 +1215,17 @@ li{
 	float:left;
 	margin:5px;
 }
+
+.left_flower{
+	overflow:hidden; 
+	position:absolute; 
+	left:-224px;
+	top: 200px;
+}
+
+.right_flower{
+	overflow:hidden; 
+	position:absolute; 
+	left:1050px;;
+	top: 150px;
+}
