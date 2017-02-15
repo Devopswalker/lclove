@@ -14,8 +14,8 @@
     <result column="DOWN_NUM" jdbcType="INTEGER" property="downNum" />
     <result column="REPLY_ID" jdbcType="INTEGER" property="replyId" />
     <result column="REPLY_NICK_NAME" jdbcType="INTEGER" property="replyName" />
-    <result column="REPLY_CONTENT" jdbcType="INTEGER" property="replyContent" />
-    <result column="REPLIED_NUM" jdbcType="INTEGER" property="repliedNumber" />
+    <result column="REPLY_CONTENT" jdbcType="VARCHAR" property="replyContent" />
+    <result column="REPLIED_NUM" jdbcType="VARCHAR" property="repliedNumber" />
   </resultMap>
   <sql id="Base_Column_List">
     ID, ARTICLE_ID, NICK_NAME, EMAIL, CONTENT, EDITOR_REPLY, COMM_STATUS, PARENT_ID, UP_NUM,
@@ -56,11 +56,12 @@
     insert into comment (ID, ARTICLE_ID, NICK_NAME, 
       EMAIL, CONTENT, EDITOR_REPLY,
       COMM_STATUS, PARENT_ID, UP_NUM, 
-      DOWN_NUM)
+      DOWN_NUM,REPLY_ID,REPLY_NICK_NAME,REPLY_CONTENT,REPLIED_NUM)
     values (#{id,jdbcType=INTEGER}, #{articleId,jdbcType=INTEGER}, #{nickName,jdbcType=VARCHAR}, 
       #{email,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, #{editorReply,jdbcType=VARCHAR},
       #{commStatus,jdbcType=INTEGER}, #{parentId,jdbcType=INTEGER}, #{upNum,jdbcType=INTEGER},
-      #{downNum,jdbcType=INTEGER})
+      #{downNum,jdbcType=INTEGER},#{replyId,jdbcType=INTEGER},#{replyName,jdbcType=VARCHAR},
+      #{replyContent,jdbcType=VARCHAR},#{repliedNumber,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.lcpa.lclove.model.Comment">
     insert into comment

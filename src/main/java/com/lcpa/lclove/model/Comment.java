@@ -27,7 +27,7 @@ public class Comment {
 
     private String replyContent; //被回复的评论 内容
 
-    private Integer repliedNumber; // 该评论被回复的次数
+    private Integer repliedNumber = 0; // 该评论被回复的次数
 
     public Integer getId() {
         return id;

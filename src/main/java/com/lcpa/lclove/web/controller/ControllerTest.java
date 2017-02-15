@@ -2,6 +2,7 @@ package com.lcpa.lclove.web.controller;
 
 import com.lcpa.lclove.constant.CommConstant;
 import com.lcpa.lclove.model.*;
+import com.lcpa.lclove.service.CommentService;
 import com.lcpa.lclove.service.SurveyService;
 import com.lcpa.lclove.util.JsonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by shao on 2017/1/18.
@@ -22,6 +25,39 @@ public class ControllerTest extends AnnotationController {
 
     @Autowired
     private SurveyService surveyService;
+
+    @Autowired
+    private CommentService commentService;
+
+    @RequestMapping("/test/getComments")
+    public void getComments(Integer id, ModelMap model){
+        List<Comment> commentList = commentService.getCommentList(1, 10, id);
+
+    }
+    @RequestMapping("/test/saveComment")
+    public void saveComment( ModelMap model){
+        Comment comment = new Comment();
+        comment.setNickName("xiaobai");
+        comment.setEmail("ssss@12.com");
+        comment.setContent("hi all");
+        comment.setArticleId(27);
+        commentService.saveComment(comment);
+
+    }
+    @RequestMapping("/test/replyComment")
+    public void replyComment( ModelMap model){
+        Comment comment = new Comment();
+        comment.setNickName("xiaohei");
+        comment.setEmail("www@12.com");
+        comment.setContent("hi xiaobai");
+        comment.setArticleId(27);
+        comment.setReplyId(34);
+        comment.setReplyName("xiaoxxx");
+        comment.setReplyContent("eeeeeeeeeeeeeeeeeeeee");
+        commentService.saveComment(comment);
+
+
+    }
 
     @RequestMapping("/test/saveSurvey")
     public String surveyControllerTest(ModelMap model){
