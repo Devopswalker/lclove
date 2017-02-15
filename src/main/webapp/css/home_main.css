@@ -815,7 +815,7 @@ li{
 .one_comment{
 	width:100%;
 	margin-top:10px;
-	height:35px;
+	height:30px;
 }
 
 .one_comment .name{
@@ -832,8 +832,34 @@ li{
 }
 
 .one_comment .comment_content{
+	float:left;
+	width:380px;
+	margin-left:10px;
+}
+
+.one_comment_r{
+	width:90%;
+	height:30px;
+	margin-left:50px;
+	background-color: #f4f2f2;
+}
+
+.one_comment_r .name_r{
+	float:left;
+	height:16px;
+	width:60px;
+	font-weight:bold;
+}
+
+.one_comment_r .colon_r{
+	float:left;
+	height:16px;
+	width:10px;
+}
+
+.one_comment_r .comment_r_content{
 	float: left;
-	width:480px;
+	width:380px;
 	margin-left:10px;
 }
 
@@ -844,7 +870,7 @@ li{
 	margin-left:10px;
 }
 
-.one_comment .good_count, .one_comment .bad_count{
+.one_comment .good_count, .one_comment .reply_tag{
 	float:left;
 	height:16px;
 	width:30px;

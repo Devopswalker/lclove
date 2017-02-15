@@ -703,13 +703,23 @@ $(function(){
                  sbHtml.append("<div class='comments_title'><img src='"+lclove.util.imgPath+"images/comment.png'/><div> "+data.comments.length+" 条评论</div></div>");
                  $.each(data.comments, function(index, item){
                  	sbHtml.append("    <div class='one_comment'>");
-                 	sbHtml.append("        <div class='name'> "+item.nickName+" </div>");
+                 	sbHtml.append("        <div class='name' id='comment_name_"+item.id+"'> "+item.nickName+" </div>");
                  	sbHtml.append("        <div class='colon'>：</div>");
-                 	sbHtml.append("        <div class='comment_content'> "+item.content+" </div>");
-                 	sbHtml.append("        <div class='bad_count'>回复</div>");
-                 	sbHtml.append("        <img class='good_img' src='"+lclove.util.imgPath+"images/good.png'/>");
-                 	sbHtml.append("        <div class='good_count'> "+item.upNum+" </div>");
+                 	sbHtml.append("        <div class='comment_content' id='comment_content_"+item.id+"'> "+item.content+" </div>");
+                 	sbHtml.append("        <a ref='javascript:void(0)' onclick='replyComment("+item.id+");' >");
+                 	sbHtml.append("            <div class='reply_tag'>回复</div>");
+                 	sbHtml.append("        </a>");
+                 	sbHtml.append("        <a ref='javascript:void(0)' onclick='doPraiseOpration("+item.id+");' >");
+                 	sbHtml.append("            <img class='good_img' src='"+lclove.util.imgPath+"images/love.png'/> <div class='good_count' id='good_count"+item.id+"'> "+item.upNum+" </div>");
+                 	sbHtml.append("        </a>");
                  	sbHtml.append("    </div>");
+                 	if(item.replyId != null){
+                 		sbHtml.append("     <div class='one_comment_r'>");
+                     	sbHtml.append("        <div class='name_r' id='comment_r_name_"+item.replyId+"'> "+item.replyName+" </div>");
+                     	sbHtml.append("        <div class='colon_r'>：</div>");
+                     	sbHtml.append("        <div class='comment_content_r' id='comment_r_content_"+item.replyId+"'> "+item.replyContent+" </div>");
+                 		sbHtml.append("    </div>");
+                 	}
                  	sbHtml.append("    <div class='solid_separate'></div>");
                  });
                  sbHtml.append("</div>");
@@ -797,18 +807,17 @@ $(function(){
 
 /*  doPraise  */
 function doPraiseOpration(cid){
-	var url = lclove.util.basePath + "ajax/ontTapToLike.xhtml";
+	var url = lclove.util.basePath + "ajax/onTapToPraise.xhtml";
 	var data = {};
 	data.cid = cid;
-	$.getData(url, data, true, "POST", "json", true, callBackAddLike);
+	$.getData(url, data, true, "POST", "json", true, callBackDoPraise);
 }
 
 function callBackDoPraise(result){
-	if(result.article != null){
-		var curNum = result.article.likeNum;
-		$("#likenums").html("&nbsp;"+curNum);
+	if(result.comment != null){
+		var curNum = result.comment.upNum;
+		$("#good_count"+result.comment.id).html(curNum);
 	}
-	
 	
 }
 /*  doPraise  */
