@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.lcpa.lclove.vo.Paging;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -91,7 +92,8 @@ public class LcLoveAjaxController extends AnnotationController{
 		}
 		Integer rowsPerPage = 5;
 		List<Article> articleList = articleService.getAllArticles(pageNo, rowsPerPage, navtype, keyword);
-		PagingJsonVo page = new PagingJsonVo(articleList.size(), rowsPerPage, pageNo);
+		Integer totalSize = articleService.getTotalArticleSize(pageNo, rowsPerPage, navtype, keyword);
+		PagingJsonVo page = new PagingJsonVo(totalSize, rowsPerPage, pageNo);
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		resultMap.put("articles", articleList);
 		resultMap.put("pageInfo", page);

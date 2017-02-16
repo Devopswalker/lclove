@@ -240,16 +240,24 @@ public class ArticleService{
             map.put("keywords", keywords);
         }
         QueryParameter queryParameter = new QueryParameter(null,map);
-        List<Article> articles = articleMapper.selectAllArticles(queryParameter);
-        int totalSize = articles.size();
-        int total = totalSize/pageSize;
-        int lastPages = totalSize%pageSize;
-        if (lastPages > 0){
-            total += 1;
-        }
+        Integer totalSize = articleMapper.selectTotalArticleSize(queryParameter);
+        int totalPageNumber = (totalSize + pageSize -1) / pageSize;
         Paging paging = new Paging(pageNo, pageSize);
-        paging.setTotal(total);
+        paging.setTotal(totalPageNumber);
         return paging;
+    }
+    public Integer getTotalArticleSize(Integer pageNo, Integer pageSize, Integer articleType, String keywords){
+        Map map = new HashMap<>();
+        if (articleType != null){
+            map.put("articleType", articleType);
+        }
+        if (keywords != null && !keywords.equals("")){
+            map.put("keywords", keywords);
+        }
+        QueryParameter queryParameter = new QueryParameter(null,map);
+        Integer totalSize = articleMapper.selectTotalArticleSize(queryParameter);
+
+        return totalSize;
     }
 
     /**

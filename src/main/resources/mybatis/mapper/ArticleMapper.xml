@@ -66,8 +66,17 @@
     order by PUB_DATE desc
     <include refid="Paging"/>
   </select>
-
-
+  <select id="selectTotalArticleSize" resultType="Integer">
+    select
+    COUNT(ID)
+    from article WHERE 1=1
+    <if test="queryPara != null and queryPara.articleType != null">
+      AND ARTICLE_TYPE = #{queryPara.articleType}
+    </if>
+    <if test="queryPara != null and queryPara.keywords != null">
+      AND TITLE LIKE CONCAT(CONCAT("%",#{queryPara.keywords}),"%")
+    </if>
+  </select>
   <select id="selectHomeArticle" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
