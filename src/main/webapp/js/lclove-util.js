@@ -1289,6 +1289,7 @@ $(function(){
     		sbHtml.append("			</div>");
     		sbHtml.append("			<div class='navbar-body nav-navicon' id='navbar-footer'>");
     		sbHtml.append("				<div class='navbar-text navbar-left hidden-s hidden-l'>版权所有 &copy; <a href='http://www.lclianmao.com/' target='_blank'>www.lclianmao.com</a> All Rights Reserved，沪ICP备10200855号-5</div>");
+            sbHtml.append("				<div class='navbar-text navbar-left hidden-s hidden-l'><a href='http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=31010402001468' target='_blank'><img src='/images/beian.png' style='float:left;' class=‘radius-small’/> 沪公网安备 31010402001468号</a></div>");
     		sbHtml.append("				<ul class='nav nav-inline navbar-right'>");
     		sbHtml.append("					<li><a href='" + lclove.util.basePath + "lianmao.xhtml' target='_blank'>关于恋猫</a></li>");
     		sbHtml.append("					<li><a href='" + lclove.util.basePath + "brand.xhtml' target='_blank'>关于LC品爱</a></li>");
