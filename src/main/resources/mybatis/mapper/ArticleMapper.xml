@@ -138,11 +138,11 @@
     insert into article (ID, TITLE, THUMBNAIL, PUB_DATE,
       LIKE_NUM, SCAN_NUM, ARTICLE_TYPE, 
       DESCRIPTION, TOPIC, EDITOR, 
-      STATE)
+      STATE,IS_LOOK_BACK)
     values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{thumbnail,jdbcType=VARCHAR},#{pubDate,jdbcType=TIMESTAMP},
       #{likeNum,jdbcType=INTEGER}, #{scanNum,jdbcType=INTEGER}, #{articleType,jdbcType=INTEGER}, 
       #{description,jdbcType=VARCHAR}, #{topic,jdbcType=VARCHAR}, #{editor,jdbcType=VARCHAR}, 
-      #{state,jdbcType=INTEGER})
+      #{state,jdbcType=INTEGER},#{isLookBack,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.lcpa.lclove.model.Article">
     insert into article

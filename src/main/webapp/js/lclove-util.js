@@ -506,7 +506,7 @@ $(function(){
             sbHtml.append("</div>");
             sbHtml.append("<div class='content_item_text'>");
             sbHtml.append("  <div class='content_item_text_head'>");
-            sbHtml.append("    <a href='"+ lclove.util.basePath + "detail.xhtml?navtype="+lclove.params.navtype+"&sortType=1&aid="+data.id+"'><img src='" + lclove.util.imgPath + "images/text_head_icon.png'/><div>"+ data.title +"</div></a>");
+            sbHtml.append("    <a href='"+ lclove.util.basePath + "detail.xhtml?navtype="+lclove.params.navtype+"&sortType=1&aid="+data.id+"'><span><img src='" + lclove.util.imgPath + "images/text_head_icon.png'/>"+ data.title +"</span></a>");
             sbHtml.append("  </div>");
             sbHtml.append("  <div class='mini_blank'></div>");
             sbHtml.append("  <div class='separate'></div>");
@@ -913,7 +913,7 @@ $(function(){
             sbHtml.append("</div>");
             sbHtml.append("<div class='content_item_text'>");
             sbHtml.append("  <div class='content_item_text_head'>");
-            sbHtml.append("    <a href='"+ lclove.util.basePath + "researchDetail.xhtml?navtype="+lclove.params.navtype+"&sortType=1&surveyId="+data.id+"'><img src='" + lclove.util.imgPath + "images/text_head_icon.png'/><div>"+ data.title +"</div></a>");
+            sbHtml.append("    <a href='"+ lclove.util.basePath + "researchDetail.xhtml?navtype="+lclove.params.navtype+"&sortType=1&surveyId="+data.id+"'><sapn><img src='" + lclove.util.imgPath + "images/text_head_icon.png'/>"+ data.title +"</span></a>");
             sbHtml.append("  </div>");
             sbHtml.append("  <div class='mini_blank'></div>");
             sbHtml.append("  <div class='separate'></div>");
