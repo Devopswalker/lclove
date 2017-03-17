@@ -70,9 +70,9 @@ public class LcLoveAjaxController extends AnnotationController{
 	 */
 	@RequestMapping("/ajax/getHotArticle.xhtml")
 	public String getHotArticle(Integer navtype, ModelMap model){
-		if(navtype == null){
-			navtype = CommConstant.ARTICLE_TYPE_HOME;
-		}
+//		if(navtype == null){
+//			navtype = CommConstant.ARTICLE_TYPE_HOME;
+//		}
 		List<Article> articleList = articleService.getTopRankArticlesByType(navtype, 6);
 		return showJsonSuccess(model, JsonUtils.writeObjectToJson(articleList));
 	}
