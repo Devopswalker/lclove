@@ -722,6 +722,7 @@ li{
 	overflow: hidden;
 	white-space: nowrap;
 	text-overflow:ellipsis;
+	color: #333;
 }
 
 .row_1_right{
