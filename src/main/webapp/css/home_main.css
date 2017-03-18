@@ -240,7 +240,7 @@ li{
 .content_item_text_head span{
 	width: 356px;
 	margin-left:5px;
-	font-size:16px;
+	font-size:20px;
 	font-weight:bold;
 	overflow : hidden;
 	text-overflow: ellipsis;
@@ -717,7 +717,7 @@ li{
 	width: 400px;
 	float:left;
 	margin-left:10px;
-	font-size:16px;
+	font-size:20px;
 	font-weight:bold;
 	overflow: hidden;
 	white-space: nowrap;
@@ -1028,8 +1028,9 @@ li{
 	float:left;
 	margin-left:10px;
 	margin-bottom:10px;
-	font-size:18px;
+	font-size:20px;
 	font-weight:bold;
+	color:#333;
 }
 
 .single_choose{

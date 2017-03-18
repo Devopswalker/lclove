@@ -913,7 +913,7 @@ $(function(){
             sbHtml.append("</div>");
             sbHtml.append("<div class='content_item_text'>");
             sbHtml.append("  <div class='content_item_text_head'>");
-            sbHtml.append("    <a href='"+ lclove.util.basePath + "researchDetail.xhtml?navtype="+lclove.params.navtype+"&sortType=1&surveyId="+data.id+"'><sapn>"+ data.title +"</span></a>"); //<img src='" + lclove.util.imgPath + "images/text_head_icon.png'/>
+            sbHtml.append("    <a href='"+ lclove.util.basePath + "researchDetail.xhtml?navtype="+lclove.params.navtype+"&sortType=1&surveyId="+data.id+"'><span>"+ data.title +"</span></a>"); //<img src='" + lclove.util.imgPath + "images/text_head_icon.png'/>
             sbHtml.append("  </div>");
             sbHtml.append("  <div class='mini_blank'></div>");
             sbHtml.append("  <div class='separate'></div>");
@@ -1004,7 +1004,7 @@ $(function(){
         var showResearch = function (data) {
             var sbHtml = new StringBuilder();
             sbHtml.append("<div class='search_head' suveryid='" + data.id + "'><img src='"+lclove.util.imgPath+"images/text_head_icon.png'/><div>" + data.title + "</div></div>");
-            sbHtml.append("<img width='550' height='150' class='radius-small' src='"+ data.headerImg + "'/>");
+            sbHtml.append("<img width='550' height='227' class='radius-small' src='"+ data.headerImg + "'/>");
             sbHtml.append("<div class='smallest_blank'></div>");
             $.each(data.questions, function(index, item){
                 sbHtml.append("<div id='" + item.id + "' class='single_choose'>");
@@ -1103,7 +1103,7 @@ $(function(){
         var showResearchResult = function (data) {
             var sbHtml = new StringBuilder();
             sbHtml.append("<div class='search_head'><img src='"+lclove.util.imgPath+"images/text_head_icon.png'/><div>" + data.title + "</div></div>");
-            sbHtml.append("<img width='550' height='150' class='radius-small' src='"+ data.headerImg + "'/>");
+            sbHtml.append("<img width='550' height='227' class='radius-small' src='"+ data.headerImg + "'/>");
             sbHtml.append("<div class='smallest_blank'></div>");
             $.each(data.questions, function(index, item){
             	if(item.inputType != "1"){
