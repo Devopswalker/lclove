@@ -80,7 +80,7 @@
           <label>简要说明：</label>
         </div>
         <div class="field">
-          <textarea class="input" id="description" name="description" style=" height:90px;">$!{article.description}</textarea>
+          <textarea class="input" id="description" maxlength="300" name="description" style=" height:90px;">$!{article.description}</textarea>
           <div class="tips"></div>
         </div>
       </div>
