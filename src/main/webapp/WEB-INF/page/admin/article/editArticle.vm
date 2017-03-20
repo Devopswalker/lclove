@@ -48,7 +48,7 @@
             <label>分类标题：</label>
           </div>
           <div class="field">
-            <select id="articleType" name="articleType" class="input w50" onclick="articleTypeClick()" onchange="articleTypeChange()">
+            <select id="articleType" name="articleType" class="input w50">#onclick="articleTypeClick()" onchange="articleTypeChange()"
               <option value="">请选择分类</option>
 			  #foreach($type in $typeList)
               <option value="$type.id" #if($VmUtils.eq($type.id, $article.articleType))selected#end>$type.name</option>
@@ -89,20 +89,20 @@
           <label>内容：</label>
         </div>
         <div class="field">
-          <script id="articleContainer" type="text/plain" style="width:100%;height:200px;"></script>
+          <script id="articleContainer" name="content" type="text/plain" style="width:100%;height:200px;"></script>
           <script type="text/javascript">
 				var editor = UE.getEditor('articleContainer');
 			</script>
         </div>
       </div>
-        <div class="form-group" id="videoContent">
-            <div class="label">
-                <label>视频分享地址：</label>
-            </div>
-            <div class="field" >
-                <textarea class="input" id="videoContainer" style=" height:90px;">$!{article.content}</textarea>
-            </div>
-        </div>
+##        <div class="form-group" id="videoContent">
+##            <div class="label">
+##                <label>视频分享地址：</label>
+##            </div>
+##            <div class="field" >
+##                <textarea class="input" id="videoContainer" style=" height:90px;">$!{article.content}</textarea>
+##            </div>
+##        </div>
      
       <div class="clear"></div>
 ##      <div class="form-group">
@@ -164,37 +164,37 @@
 </div>
 
 	<script type="text/javascript">
-        var beforeType;
-        function articleTypeClick(){
-            beforeType = $("#articleType").val();
-        }
-        function articleTypeChange(){
-            var afterType = $("#articleType").val();
-            if (afterType == "4"){
-                $("#articleContent").hide();
-                $("#videoContent").show();
-                $("#articleContainer").removeAttr("name");
-                $("#videoContainer").attr("name", "content");
-            }else if (beforeType == "4"){
-                $("#videoContent").hide();
-                $("#articleContent").show();
-                $("#videoContainer").removeAttr("name");
-                $("#articleContainer").attr("name", "content");
-            }
-        }
+//        var beforeType;
+//        function articleTypeClick(){
+//            beforeType = $("#articleType").val();
+//        }
+//        function articleTypeChange(){
+//            var afterType = $("#articleType").val();
+//            if (afterType == "4"){
+//                $("#articleContent").hide();
+//                $("#videoContent").show();
+//                $("#articleContainer").removeAttr("name");
+//                $("#videoContainer").attr("name", "content");
+//            }else if (beforeType == "4"){
+//                $("#videoContent").hide();
+//                $("#articleContent").show();
+//                $("#videoContainer").removeAttr("name");
+//                $("#articleContainer").attr("name", "content");
+//            }
+//        }
 		$(document).ready(function() {
-            var initType = $("#articleType").val();
-            if (initType == "4"){
-                $("#articleContent").hide();
-                $("#videoContent").show();
-                $("#articleContainer").removeAttr("name");
-                $("#videoContainer").attr("name", "content");
-            }else{
-                $("#videoContent").hide();
-                $("#articleContent").show();
-                $("#videoContainer").removeAttr("name");
-                $("#articleContainer").attr("name", "content");
-            }
+//            var initType = $("#articleType").val();
+//            if (initType == "4"){
+//                $("#articleContent").hide();
+//                $("#videoContent").show();
+//                $("#articleContainer").removeAttr("name");
+//                $("#videoContainer").attr("name", "content");
+//            }else{
+//                $("#videoContent").hide();
+//                $("#articleContent").show();
+//                $("#videoContainer").removeAttr("name");
+//                $("#articleContainer").attr("name", "content");
+//            }
             editor.ready(function(){
                 editor.setContent('$!{article.content}');
             });
