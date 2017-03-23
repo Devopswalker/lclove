@@ -555,7 +555,7 @@ $(function(){
             var scrollAdd = function(){
             	var scrollT = $(window).scrollTop(); //滚动条top 
             	var pageH = $(document.body).height();
-            	var scrollUrl = lclove.util.basePath + "ajax/getArticleList.xhtml?type="+lclove.params.navtype + "&keyword=" + lclove.params.keyword;
+            	var scrollUrl = lclove.util.basePath + "ajax/getArticleList.xhtml?navtype="+lclove.params.navtype + "&keyword=" + lclove.params.keyword;
                 if (scrollT + winH > ($(".loadMore").offset().top + 100) && $(".loadMore").css("display") == "block" && ($(".loadMore").attr("cnum") < ($(".loadMore").attr("tnum") -1))) {
 					$(".loadMore").css("display","none");
 					scrollUrl += "&pageNo=" + (parseInt($(".loadMore").attr("cnum")) + 1);
