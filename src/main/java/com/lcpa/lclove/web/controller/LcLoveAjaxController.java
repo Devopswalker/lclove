@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.lcpa.lclove.model.*;
 import com.lcpa.lclove.vo.Paging;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,10 +15,6 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.lcpa.lclove.constant.CommConstant;
-import com.lcpa.lclove.model.Article;
-import com.lcpa.lclove.model.Comment;
-import com.lcpa.lclove.model.ImageRecommend;
-import com.lcpa.lclove.model.Survey;
 import com.lcpa.lclove.service.ArticleService;
 import com.lcpa.lclove.service.CommentService;
 import com.lcpa.lclove.service.RecommendService;
@@ -26,7 +23,6 @@ import com.lcpa.lclove.util.JsonUtils;
 import com.lcpa.lclove.util.WebUtils;
 import com.lcpa.lclove.vo.PagingJsonVo;
 import com.lcpa.lclove.vo.ResearchOptionsVo;
-
 
 @Controller
 public class LcLoveAjaxController extends AnnotationController{
@@ -79,7 +75,7 @@ public class LcLoveAjaxController extends AnnotationController{
 
 	/**
 	 *  Get Article dataList
-	 * @param type
+	 * @param navtype
 	 * @param pageNo
 	 * @param keyword
 	 * @param model
@@ -102,7 +98,7 @@ public class LcLoveAjaxController extends AnnotationController{
 	
 	/**
 	 * Get Article Details
-	 * @param id
+	 * @param aid
 	 * @param model
 	 * @return
 	 */
@@ -173,6 +169,10 @@ public class LcLoveAjaxController extends AnnotationController{
 		}
 		Integer rowsPerPage = 5;
 		List<Survey> surveys = surveyService.getSurveyList(pageNo, rowsPerPage, keyword);
+
+		//TODO next line is new service method
+		List<Research> researchList = surveyService.getResearchList(pageNo, rowsPerPage, keyword);
+
 		PagingJsonVo page = new PagingJsonVo(surveys.size(), rowsPerPage, pageNo);
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		resultMap.put("surveys", surveys);

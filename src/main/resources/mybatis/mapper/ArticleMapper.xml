@@ -14,6 +14,7 @@
     <result column="STATE" jdbcType="INTEGER" property="state" />
     <result column="THUMBNAIL" jdbcType="VARCHAR" property="thumbnail" />
     <result column="IS_LOOK_BACK" jdbcType="VARCHAR" property="isLookBack" />
+    <result column="COMMENT_NUM" jdbcType="INTEGER" property="commentNum" />
   </resultMap>
   <sql id="Base_Column_List">
     ID, TITLE, THUMBNAIL, PUB_DATE, LIKE_NUM, SCAN_NUM, ARTICLE_TYPE, DESCRIPTION, TOPIC, EDITOR,
@@ -48,14 +49,16 @@
   </select>
   <select id="selectAllArticles" resultMap="BaseResultMap">
     select
-    <include refid="Base_Column_List" />
-    from article WHERE 1=1
+    count(cmt.ID) as COMMENT_NUM, a.*
+    FROM article a LEFT JOIN comment cmt
+    ON a.ID = cmt.ARTICLE_ID WHERE ARTICLE_TYPE != 5
     <if test="queryPara != null and queryPara.articleType != null">
        AND ARTICLE_TYPE = #{queryPara.articleType}
     </if>
     <if test="queryPara != null and queryPara.keywords != null">
       AND TITLE LIKE CONCAT(CONCAT("%",#{queryPara.keywords}),"%")
     </if>
+    GROUP BY a.ID
     order by PUB_DATE desc
     <include refid="Paging"/>
   </select>

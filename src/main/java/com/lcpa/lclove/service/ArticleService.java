@@ -209,11 +209,11 @@ public class ArticleService{
         Paging paging = new Paging(pageNo, pageSize);
         QueryParameter queryParameter = new QueryParameter(paging, map);
         List<Article> result = articleMapper.selectAllArticles(queryParameter);
-        if (result != null){
-            for(Article article : result){
-                article.setCommentNum(commentMapper.selectTotalCommentNum(article.getId()));
-            }
-        }
+//        if (result != null){
+//            for(Article article : result){
+//                article.setCommentNum(commentMapper.selectTotalCommentNum(article.getId()));
+//            }
+//        }
         return result;
     }
 
