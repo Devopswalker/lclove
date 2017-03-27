@@ -141,7 +141,7 @@ public class LcLoveAjaxController extends AnnotationController{
 	
 	@RequestMapping("/ajax/getComments.xhtml")
 	public String getComments(Integer aid, ModelMap model){
-		List<Comment> commentList = commentService.getCommentList(1, 10, aid);
+		List<Comment> commentList = commentService.getCommentList(1, 100, aid);
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		resultMap.put("comments", commentList);
 		return showJsonSuccess(model, JsonUtils.writeObjectToJson(resultMap));

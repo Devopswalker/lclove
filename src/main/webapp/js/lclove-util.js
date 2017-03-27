@@ -315,7 +315,7 @@ $(function(){
             var sbHtml = new StringBuilder();
             sbHtml.append("<div class='recommend_item'>");
             sbHtml.append("  <a href='" + data.recommendUrl + "'><img width='301' height='116' class='radius-small' src='" + data.imgUrl + "'/></a>");
-            sbHtml.append("  <div>"+ data.description +"<br />"+ data.seq +"</div>");
+            sbHtml.append("  <div>"+ data.description +"</div>");
             sbHtml.append("</div>");
             sbHtml.append("<div class='small_blank'></div>");
             return $(sbHtml.toString());
@@ -323,11 +323,11 @@ $(function(){
         
         var defaultTemplate = function(){
             var sbHtml = new StringBuilder();
-            sbHtml.append("<div class='recommend_item'><img width='301' height='116' class='radius-small' src='"+ lclove.util.imgPath + "images/recoommend1.png'/><div>微电影系列<br />Vol.1</div></div>");
+            sbHtml.append("<div class='recommend_item'><img width='301' height='116' class='radius-small' src='"+ lclove.util.imgPath + "images/recoommend1.png'/><div>微电影系列</div></div>");
             sbHtml.append("<div class='small_blank'></div>");
-            sbHtml.append("<div class='recommend_item'><img width='301' height='116' class='radius-small' src='"+ lclove.util.imgPath + "images/recoommend2.png'/><div>微电影系列<br />Vol.2</div></div>");
+            sbHtml.append("<div class='recommend_item'><img width='301' height='116' class='radius-small' src='"+ lclove.util.imgPath + "images/recoommend2.png'/><div>微电影系列</div></div>");
             sbHtml.append("<div class='small_blank'></div>");
-            sbHtml.append("<div class='recommend_item'><img width='301' height='116' class='radius-small' src='"+ lclove.util.imgPath + "images/recoommend3.png'/><div>微电影系列<br />Vol.3</div></div>");
+            sbHtml.append("<div class='recommend_item'><img width='301' height='116' class='radius-small' src='"+ lclove.util.imgPath + "images/recoommend3.png'/><div>微电影系列</div></div>");
             sbHtml.append("<div class='small_blank'></div>");
             return $(sbHtml.toString());
         };
