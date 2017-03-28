@@ -231,6 +231,22 @@ li{
 	margin-left:5px;
 	font-size:20px;
 	font-weight:bold;
+	overflow : hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 3;
+	-webkit-box-orient: vertical;
+}
+.content_item_text_head span{
+	width: 356px;
+	margin-left:5px;
+	font-size:20px;
+	font-weight:bold;
+	overflow : hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
 }
 
 .content_item_text_middle{
@@ -238,6 +254,11 @@ li{
 	margin-top:10px;
 	font-size:16px;
 	line-height:25px;
+	overflow : hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
 }
 
 .content_item_text_foot{
@@ -653,13 +674,21 @@ li{
 }
 
 .head_left{
+	width: 250px;
 	float:left;
 	font-size:14px;
 	color:#FF0000;
 	text-decoration:underline;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow:ellipsis;
 }
 
 .head_right{
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow:ellipsis;
+	width: 250px;
 	float:right;
 	font-size:14px;	
 }
@@ -690,10 +719,15 @@ li{
 }
 
 .row_1_left div{
+	width: 400px;
 	float:left;
 	margin-left:10px;
-	font-size:16px;
+	font-size:20px;
 	font-weight:bold;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow:ellipsis;
+	color: #333;
 }
 
 .row_1_right{
@@ -708,6 +742,7 @@ li{
 }
 
 .row_3{
+	width: 100%;
 	float:left;
 }
 
@@ -840,8 +875,8 @@ li{
 .one_comment_r{
 	width:90%;
 	height:30px;
-	line-height: 30px;
 	margin-left:50px;
+	line-height:30px;
 	background-color: #f4f2f2;
 }
 
@@ -998,8 +1033,9 @@ li{
 	float:left;
 	margin-left:10px;
 	margin-bottom:10px;
-	font-size:18px;
+	font-size:20px;
 	font-weight:bold;
+	color:#333;
 }
 
 .single_choose{
@@ -1255,4 +1291,10 @@ li{
 	position:absolute; 
 	left:1050px;;
 	top: 150px;
+}
+.readingRecommendList div{
+	width: 250px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow:ellipsis;
 }
