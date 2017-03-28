@@ -40,7 +40,7 @@
 				<!-- 列表 LEFT: BANNER -->
 				<div class="comic_topic">
 					<div class="comic_topic_head"><img src="${staticPath}images/topic_flower.png"/><div>Research恋の好奇心 </div></div>
-					<div class="comic_topic_desc_pic"><img width='570' height='228' class='radius-small' src="${staticPath}images/research_header.jpg"/></div>
+					<div class="comic_topic_desc_pic"><img width='580' height='225' class='radius-small' src="${staticPath}images/research_header.jpg"/></div>
 				</div>
 				<div class="small_blank"></div>
 				<!-- 列表 LEFT: DATALIST -->
@@ -77,7 +77,7 @@
 			lclove.params.sortType = '$!params.sortType';
             lclove.params.navtype = '$!params.navtype';
             lclove.params.isSurvey = true;
-			lclove.params.position = '2';
+			lclove.params.position = '7';
 			
 			//固定头部导航
 			$("#myHeader").topMenu();
