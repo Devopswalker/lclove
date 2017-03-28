@@ -15,6 +15,12 @@ input::-webkit-input-placeholder {
 	color:#cccccc;
 } 
 
+.loadMore{
+	float: left;
+	width:1px;
+	height: 1px;
+}
+
 
 li{
 	list-style: none;
