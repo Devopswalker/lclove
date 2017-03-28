@@ -840,6 +840,7 @@ li{
 .one_comment_r{
 	width:90%;
 	height:30px;
+	line-height: 30px;
 	margin-left:50px;
 	background-color: #f4f2f2;
 }
