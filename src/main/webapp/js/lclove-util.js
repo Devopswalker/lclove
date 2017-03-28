@@ -315,7 +315,7 @@ $(function(){
             var sbHtml = new StringBuilder();
             sbHtml.append("<div class='recommend_item'>");
             sbHtml.append("  <a href='" + data.recommendUrl + "'><img width='301' height='116' class='radius-small' src='" + data.imgUrl + "'/></a>");
-            sbHtml.append("  <div>"+ data.description +"<br />"+ data.seq +"</div>");
+            sbHtml.append("  <div>"+ data.description +"</div>");
             sbHtml.append("</div>");
             sbHtml.append("<div class='small_blank'></div>");
             return $(sbHtml.toString());
@@ -323,11 +323,11 @@ $(function(){
         
         var defaultTemplate = function(){
             var sbHtml = new StringBuilder();
-            sbHtml.append("<div class='recommend_item'><img width='301' height='116' class='radius-small' src='"+ lclove.util.imgPath + "images/recoommend1.png'/><div>微电影系列<br />Vol.1</div></div>");
+            sbHtml.append("<div class='recommend_item'><img width='301' height='116' class='radius-small' src='"+ lclove.util.imgPath + "images/recoommend1.png'/><div>微电影系列</div></div>");
             sbHtml.append("<div class='small_blank'></div>");
-            sbHtml.append("<div class='recommend_item'><img width='301' height='116' class='radius-small' src='"+ lclove.util.imgPath + "images/recoommend2.png'/><div>微电影系列<br />Vol.2</div></div>");
+            sbHtml.append("<div class='recommend_item'><img width='301' height='116' class='radius-small' src='"+ lclove.util.imgPath + "images/recoommend2.png'/><div>微电影系列</div></div>");
             sbHtml.append("<div class='small_blank'></div>");
-            sbHtml.append("<div class='recommend_item'><img width='301' height='116' class='radius-small' src='"+ lclove.util.imgPath + "images/recoommend3.png'/><div>微电影系列<br />Vol.3</div></div>");
+            sbHtml.append("<div class='recommend_item'><img width='301' height='116' class='radius-small' src='"+ lclove.util.imgPath + "images/recoommend3.png'/><div>微电影系列</div></div>");
             sbHtml.append("<div class='small_blank'></div>");
             return $(sbHtml.toString());
         };
@@ -506,7 +506,7 @@ $(function(){
             sbHtml.append("</div>");
             sbHtml.append("<div class='content_item_text'>");
             sbHtml.append("  <div class='content_item_text_head'>");
-            sbHtml.append("    <a href='"+ lclove.util.basePath + "detail.xhtml?navtype="+lclove.params.navtype+"&sortType=1&aid="+data.id+"'><img src='" + lclove.util.imgPath + "images/text_head_icon.png'/><div>"+ data.title +"</div></a>");
+            sbHtml.append("    <a href='"+ lclove.util.basePath + "detail.xhtml?navtype="+lclove.params.navtype+"&sortType=1&aid="+data.id+"'><span>"+ data.title +"</span></a>"); //<img src='" + lclove.util.imgPath + "images/text_head_icon.png'/>
             sbHtml.append("  </div>");
             sbHtml.append("  <div class='mini_blank'></div>");
             sbHtml.append("  <div class='separate'></div>");
@@ -555,7 +555,7 @@ $(function(){
             var scrollAdd = function(){
             	var scrollT = $(window).scrollTop(); //滚动条top 
             	var pageH = $(document.body).height();
-            	var scrollUrl = lclove.util.basePath + "ajax/getArticleList.xhtml?type="+lclove.params.navtype + "&keyword=" + lclove.params.keyword;
+            	var scrollUrl = lclove.util.basePath + "ajax/getArticleList.xhtml?navtype="+lclove.params.navtype + "&keyword=" + lclove.params.keyword;
                 if (scrollT + winH > ($(".loadMore").offset().top + 100) && $(".loadMore").css("display") == "block" && ($(".loadMore").attr("cnum") < ($(".loadMore").attr("tnum") -1))) {
 					$(".loadMore").css("display","none");
 					scrollUrl += "&pageNo=" + (parseInt($(".loadMore").attr("cnum")) + 1);
@@ -731,14 +731,17 @@ $(function(){
             sbHtml.append("<div class='comment_submit'>");
             sbHtml.append("  <div class='publish'>发表评论</div>");
             sbHtml.append("  <form name='commentsForm' class='form-inline' method='post'");
+            sbHtml.append("     <input type='hidden' name='replyId' id='replyId' value=''>");
+            sbHtml.append("     <input type='hidden' name='replyName' id='replyName' value=''>");
+            sbHtml.append("     <input type='hidden' name='replyContent' id='replyContent' value=''>");
             sbHtml.append("     <div class='form-group'>");
             sbHtml.append("       <div class='field'>");
             sbHtml.append("         &nbsp;昵称<font color='red'>*</font>&nbsp;<input type='text' class='input' id='nickName' name='nickName' maxlength='12' style='width:240px;' size='30' />");
             sbHtml.append("         邮箱<font color='red'>*</font>&nbsp;<input type='text' class='input' id='email' name='email' maxlength='36' style='width:240px;' size='48' />");
             sbHtml.append("       </div>");
             sbHtml.append("     </div>");
-            sbHtml.append("     <div class='form-group' style='margin-top: 10px;margin-bottom: 10px;'>");
-            sbHtml.append("       <textarea class='input' rows='4' cols='50' placeholder='写下您的评论内容' maxlength='50' id='content' name='content' ></textarea>");
+            sbHtml.append("     <div class='form-group' style='margin-top: 10px;margin-bottom: 10px;margin-left: 5px;'>");
+            sbHtml.append("       <textarea class='input' rows='4' cols='74' placeholder='写下您的评论内容' maxlength='50' id='content' name='content' ></textarea>");
             sbHtml.append("     </div>");
             sbHtml.append("     <div class='clear'></div>");
             sbHtml.append("     <div id='submitBtn' class='confirm_comment'><img src='"+lclove.util.imgPath+"images/send.png'/></div>");
@@ -778,6 +781,9 @@ $(function(){
         	data.nickName = nickName;
         	data.email = email;
         	data.content = content;
+        	data.replyId = $('#replyId').val();
+        	data.replyName = $('#replyName').val();
+        	data.replyContent = $('#replyContent').val();
         	data.articleId = lclove.params.aid;
         	$.getData(url, data, true, "POST", "json", true, callBackComments);
         };
@@ -804,6 +810,20 @@ $(function(){
 });
 /*  Comment  */
 
+
+function replyComment(cid){
+	if(cid=='' || cid==null){
+		return;
+	}
+	var replyName = $('#comment_name_' + cid).html(); 
+	var replyContent = $('#comment_content_' + cid).html(); 
+	$('#replyId').val(cid);
+	$('#replyName').val(replyName);
+	$('#replyContent').val(replyContent);
+	$("#content").attr("placeholder","请填写回复 @"+replyName +"的内容");
+	$('#content').focus();
+	
+}
 
 /*  doPraise  */
 function doPraiseOpration(cid){
@@ -893,7 +913,7 @@ $(function(){
             sbHtml.append("</div>");
             sbHtml.append("<div class='content_item_text'>");
             sbHtml.append("  <div class='content_item_text_head'>");
-            sbHtml.append("    <a href='"+ lclove.util.basePath + "researchDetail.xhtml?navtype="+lclove.params.navtype+"&sortType=1&surveyId="+data.id+"'><img src='" + lclove.util.imgPath + "images/text_head_icon.png'/><div>"+ data.title +"</div></a>");
+            sbHtml.append("    <a href='"+ lclove.util.basePath + "researchDetail.xhtml?navtype="+lclove.params.navtype+"&sortType=1&surveyId="+data.id+"'><span>"+ data.title +"</span></a>"); //<img src='" + lclove.util.imgPath + "images/text_head_icon.png'/>
             sbHtml.append("  </div>");
             sbHtml.append("  <div class='mini_blank'></div>");
             sbHtml.append("  <div class='separate'></div>");
@@ -984,7 +1004,7 @@ $(function(){
         var showResearch = function (data) {
             var sbHtml = new StringBuilder();
             sbHtml.append("<div class='search_head' suveryid='" + data.id + "'><img src='"+lclove.util.imgPath+"images/text_head_icon.png'/><div>" + data.title + "</div></div>");
-            sbHtml.append("<img width='550' height='60' class='radius-small' src='"+ data.headerImg + "'/>");
+            sbHtml.append("<img width='550' height='227' class='radius-small' src='"+ data.headerImg + "'/>");
             sbHtml.append("<div class='smallest_blank'></div>");
             $.each(data.questions, function(index, item){
                 sbHtml.append("<div id='" + item.id + "' class='single_choose'>");
@@ -1083,7 +1103,7 @@ $(function(){
         var showResearchResult = function (data) {
             var sbHtml = new StringBuilder();
             sbHtml.append("<div class='search_head'><img src='"+lclove.util.imgPath+"images/text_head_icon.png'/><div>" + data.title + "</div></div>");
-            sbHtml.append("<img width='550' height='60' class='radius-small' src='"+ data.headerImg + "'/>");
+            sbHtml.append("<img width='550' height='227' class='radius-small' src='"+ data.headerImg + "'/>");
             sbHtml.append("<div class='smallest_blank'></div>");
             $.each(data.questions, function(index, item){
             	if(item.inputType != "1"){
@@ -1269,6 +1289,7 @@ $(function(){
     		sbHtml.append("			</div>");
     		sbHtml.append("			<div class='navbar-body nav-navicon' id='navbar-footer'>");
     		sbHtml.append("				<div class='navbar-text navbar-left hidden-s hidden-l'>版权所有 &copy; <a href='http://www.lclianmao.com/' target='_blank'>www.lclianmao.com</a> All Rights Reserved，沪ICP备10200855号-5</div>");
+            sbHtml.append("				<div class='navbar-text navbar-left hidden-s hidden-l'><a href='http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=31010402001468' target='_blank'><img src='/images/beian.png' style='float:left;' class=‘radius-small’/> 沪公网安备 31010402001468号</a></div>");
     		sbHtml.append("				<ul class='nav nav-inline navbar-right'>");
     		sbHtml.append("					<li><a href='" + lclove.util.basePath + "lianmao.xhtml' target='_blank'>关于恋猫</a></li>");
     		sbHtml.append("					<li><a href='" + lclove.util.basePath + "brand.xhtml' target='_blank'>关于LC品爱</a></li>");

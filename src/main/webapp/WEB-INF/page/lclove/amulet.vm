@@ -41,7 +41,7 @@
 				<!-- 列表 LEFT: BANNER -->
 				<div class="amulet_topic">
 					<div class="amulet_topic_head"><img src="${staticPath}images/topic_flower.png"/><div>Body恋の护身符</div></div>
-					<div class="amulet_topic_desc_pic"><img width='570' height='228' class='radius-small' src="${staticPath}images/amulet_text.png"/></div>
+					<div class="amulet_topic_desc_pic"><img width='570' height='228' class='radius-small' src="${staticPath}images/body_header.jpg"/></div>
 				</div>
 				<div class="small_blank"></div>
 				

@@ -1,5 +1,6 @@
 package com.lcpa.lclove.dao;
 
+import com.lcpa.lclove.model.Research;
 import com.lcpa.lclove.model.Survey;
 import com.lcpa.lclove.vo.QueryParameter;
 
@@ -31,4 +32,6 @@ public interface SurveyMapper {
     int selectOpenSurveyCount();
 
     List<Survey> selectAllSurveyOrderByDate(QueryParameter queryParameter);
+
+    List<Research> selectResearch(QueryParameter queryParameter);
 }

@@ -40,8 +40,8 @@
         <div class="content_left">
 			<!-- 列表 LEFT: BANNER -->
 			<div class="comic_topic">
-				<div class="comic_topic_head"><img src="${staticPath}images/topic_flower.png"/><div>Body恋の梦剧场</div></div>
-				<div class="comic_topic_desc_pic"><img width='570' height='228' class='radius-small' src="${staticPath}images/amulet_text.png"/></div>
+				<div class="comic_topic_head"><img src="${staticPath}images/topic_flower.png"/><div>Comic恋の梦剧场</div></div>
+				<div class="comic_topic_desc_pic"><img width='570' height='228' class='radius-small' src="${staticPath}images/comic_header.jpg"/></div>
 			</div>
 			<div class="small_blank"></div>
 

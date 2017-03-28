@@ -215,6 +215,15 @@ public class SurveyService {
         return surveyMapper.selectDetailSurveyList(queryParameter);
     }
 
+    public List<Research>  getResearchList(Integer pageNo, Integer pageSize, String keywords){
+        Map map = new HashMap<>();
+        if (keywords != null && !keywords.equals("")){
+            map.put("keywords", keywords);
+        }
+        Paging paging = new Paging(pageNo, pageSize);
+        QueryParameter queryParameter = new QueryParameter(paging, map);
+        return surveyMapper.selectResearch(queryParameter);
+    }
 
     /**
      * 后台问卷调查列表分页

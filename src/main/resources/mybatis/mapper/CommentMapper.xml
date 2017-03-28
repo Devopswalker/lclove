@@ -19,7 +19,7 @@
   </resultMap>
   <sql id="Base_Column_List">
     ID, ARTICLE_ID, NICK_NAME, EMAIL, CONTENT, EDITOR_REPLY, COMM_STATUS, PARENT_ID, UP_NUM,
-    DOWN_NUM,REPLY_ID,REPLY_NICK_NAME,REPLY_CONTENT
+    DOWN_NUM,REPLY_ID,REPLY_NICK_NAME,REPLY_CONTENT,REPLIED_NUM
   </sql>
   <sql id="Paging">
     <if test="paging != null and paging.StartIndex != null and paging.pageSize">
