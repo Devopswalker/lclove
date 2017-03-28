@@ -597,7 +597,7 @@ $(function(){
         	
             $("<div/>").addClass("loadMore").attr({"cnum": pageNum, "tnum": totalPage}).appendTo($(instance));
             
-            if(pageNum >= totalPage - 1 ){
+            if(pageNum == totalPage){
             	$(".loadMore").css("display", "none");
             }         
             scrollEvent();
@@ -937,7 +937,7 @@ $(function(){
             	var scrollT = $(window).scrollTop(); //滚动条top 
             	var pageH = $(document.body).height();
             	var scrollUrl = lclove.util.basePath + "ajax/getSurveyList.xhtml";
-                if (scrollT + winH > ($(".loadMore").offset().top + 100) && $(".loadMore").css("display") == "block" && ($(".loadMore").attr("cnum") < ($(".loadMore").attr("tnum") -1))) {
+                if (scrollT + winH > ($(".loadMore").offset().top + 100) && $(".loadMore").css("display") == "block" && ($(".loadMore").attr("cnum") < ($(".loadMore").attr("tnum")))) {
 					$(".loadMore").css("display","none");
 					scrollUrl += "&pageNo=" + (parseInt($(".loadMore").attr("cnum")) + 1);
                 	$.getData(scrollUrl, null, true, "POST", "json", true, appendList);
@@ -960,7 +960,7 @@ $(function(){
         var appendList = function(data){
         	fillData(data);
             var cPageNum = data.pageInfo.currentPage;
-            if(cPageNum == data.pageInfo.pageCount - 1){
+            if(cPageNum == data.pageInfo.pageCount){
             	$(".loadMore").css("display", "none");
             }else{
             	$(".loadMore").appendTo($(instance));
@@ -976,7 +976,7 @@ $(function(){
         	
             $("<div/>").addClass("loadMore").attr({"cnum": pageNum, "tnum": totalPage}).appendTo($(instance));
             
-            if(pageNum >= totalPage - 1 ){
+            if(pageNum == totalPage){
             	$(".loadMore").css("display", "none");
             }         
             scrollEvent();

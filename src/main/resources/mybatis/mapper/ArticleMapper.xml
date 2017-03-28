@@ -72,7 +72,7 @@
   <select id="selectTotalArticleSize" resultType="Integer">
     select
     COUNT(ID)
-    from article WHERE 1=1
+    from article WHERE ARTICLE_TYPE != 5
     <if test="queryPara != null and queryPara.articleType != null">
       AND ARTICLE_TYPE = #{queryPara.articleType}
     </if>
