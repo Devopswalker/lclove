@@ -28,7 +28,7 @@
                     <label>标题：</label>
                 </div>
                 <div class="field">
-                    <input type="text" class="input w50" id="title" name="title" value="$!survey.title" data-validate="required:请输入标题,length#<=30:长度最大30" />
+                    <input type="text" class="input w50" id="title" name="title" maxlength="100" value="$!survey.title" data-validate="required:请输入标题" />
                     <div class="tips"></div>
                 </div>
             </div>

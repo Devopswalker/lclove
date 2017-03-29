@@ -41,7 +41,7 @@
 				<!-- 列表 LEFT: BANNER -->
 				<div class="special_topic">
 					<div class="special_topic_head"><img src="${staticPath}images/topic_flower.png" /><div>Special恋の喵言喵语</div></div>
-					<div class="special_topic_desc_pic"><img width='580' height='225' class='radius-small' src="${staticPath}images/special_banner.png" /></div>
+					<div class="special_topic_desc_pic"><img width='594' height='225' class='radius-small' src="${staticPath}images/special_banner.png" /></div>
 				</div>
 				<div class="small_blank"></div>
 				
