@@ -29,16 +29,21 @@ public class ImageController extends AnnotationController{
     public ImageService imageService;
 
     @RequestMapping(value = "/admin/common/uploadImage", method= RequestMethod.POST)
-    public String uploadImage(@RequestParam(value = "file", required = false) MultipartFile file,
+    public String uploadImage(@RequestParam(value = "files", required = false) MultipartFile[] files,
                               ModelMap model){
-        String fileName = file.getOriginalFilename();
-        String uploadContext = new Config().getGlobalProp("uploadContext");
-        String uploadPath = new Config().getGlobalProp("uploadPath");
-        Image image = new Image();
-        image.setName(fileName);
-        image.setUrl(uploadContext);
-        imageService.saveUploadImage(image, file, uploadPath, uploadContext);
-
+        for (int i = 0; i < files.length; i++) {
+            MultipartFile file = files[i];
+            if (file.getSize() == 0){
+                continue;
+            }
+            String fileName = file.getOriginalFilename();
+            String uploadContext = new Config().getGlobalProp("uploadContext");
+            String uploadPath = new Config().getGlobalProp("uploadPath");
+            Image image = new Image();
+            image.setName(fileName);
+            image.setUrl(uploadContext);
+            imageService.saveUploadImage(image, file, uploadPath, uploadContext);
+        }
         return "redirect:/admin/common/imgList.xhtml";
 
     }
