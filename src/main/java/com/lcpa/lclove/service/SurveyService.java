@@ -111,6 +111,8 @@ public class SurveyService {
         surveyMapper.deleteByPrimaryKey(id);
         questionMapper.deleteBySurveyId(id);
         questionOptionMapper.deleteBySurveyId(id);
+        surveyAnswerMapper.deleteBySurveyId(id);
+        surveyAnswerDetailMapper.deleteBySurveyId(id);
     }
 
     /**
@@ -289,7 +291,13 @@ public class SurveyService {
         surveyAnswer.setDatetime(new Date());
         surveyAnswerMapper.insert(surveyAnswer);
 
-        surveyAnswerDetailMapper.insertAnswerDetails(surveyAnswerDetails);
+        for(SurveyAnswerDetail surveyAnswerDetail : surveyAnswerDetails){
+            if (surveyAnswerDetail.getOptionId() != null){
+                surveyAnswerDetail.setSurveyId(surveyId);
+                surveyAnswerDetailMapper.insert(surveyAnswerDetail);
+            }
+        }
+//        surveyAnswerDetailMapper.insertAnswerDetails(surveyAnswerDetails);
     }
 
     /**

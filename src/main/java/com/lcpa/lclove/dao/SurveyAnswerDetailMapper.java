@@ -24,4 +24,6 @@ public interface SurveyAnswerDetailMapper {
     List<SurveyAnswerDetail> selectByOptionId(Integer id);
 
     Integer selectCountByOptionId(Integer id);
+
+    void deleteBySurveyId(Integer id);
 }

@@ -25,6 +25,12 @@
     delete from survey_answer
     where ID = #{id,jdbcType=INTEGER}
   </delete>
+  <delete id="deleteBySurveyId" parameterType="java.lang.Integer">
+    delete from survey_answer
+    where SURVEY_ID = #{id,jdbcType=INTEGER}
+  </delete>
+
+
   <insert id="insert" parameterType="com.lcpa.lclove.model.SurveyAnswer">
     insert into survey_answer (ID, SURVEY_ID, ANSWERER, 
       DATETIME)

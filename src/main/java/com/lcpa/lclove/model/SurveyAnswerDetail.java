@@ -3,6 +3,8 @@ package com.lcpa.lclove.model;
 public class SurveyAnswerDetail {
     private Integer id;
 
+    private Integer surveyId;
+
     private Integer optionId;
 
     private String answerContent;
@@ -13,6 +15,14 @@ public class SurveyAnswerDetail {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Integer getSurveyId() {
+        return surveyId;
+    }
+
+    public void setSurveyId(Integer surveyId) {
+        this.surveyId = surveyId;
     }
 
     public Integer getOptionId() {
