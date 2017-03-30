@@ -51,7 +51,7 @@
     select
     count(cmt.ID) as COMMENT_NUM, a.*
     FROM article a LEFT JOIN comment cmt
-    ON a.ID = cmt.ARTICLE_ID WHERE ARTICLE_TYPE != 5
+    ON a.ID = cmt.ARTICLE_ID WHERE 1 = 1
     <if test="queryPara != null and queryPara.articleType != null">
        AND ARTICLE_TYPE = #{queryPara.articleType}
     </if>
@@ -72,7 +72,7 @@
   <select id="selectTotalArticleSize" resultType="Integer">
     select
     COUNT(ID)
-    from article WHERE ARTICLE_TYPE != 5
+    from article WHERE 1 = 1
     <if test="queryPara != null and queryPara.articleType != null">
       AND ARTICLE_TYPE = #{queryPara.articleType}
     </if>
