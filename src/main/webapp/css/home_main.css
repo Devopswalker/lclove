@@ -535,7 +535,7 @@ li{
 
 .amulet_topic_desc_pic{
 	float:left;
-	margin-left:10px;
+	/* margin-left:10px; */
 	margin-top:20px;
 }
 
@@ -566,7 +566,7 @@ li{
 
 .love_topic_desc_pic{
 	float:left;
-	margin-left:10px;
+	/* margin-left:10px; */
 	margin-top:20px;
 }
 
@@ -656,7 +656,7 @@ li{
 
 .comic_topic_desc_pic{
 	float:left;
-	margin-left:10px;
+	/* margin-left:10px; */
 	margin-top:20px;
 }
 
