@@ -168,10 +168,10 @@ public class LcLoveAjaxController extends AnnotationController{
 			pageNo = 1;
 		}
 		Integer rowsPerPage = 5;
-		List<Survey> surveys = surveyService.getSurveyList(pageNo, rowsPerPage, keyword);
+//		List<Survey> surveys = surveyService.getSurveyList(pageNo, rowsPerPage, keyword);
 
 		//TODO next line is new service method
-		List<Research> researchList = surveyService.getResearchList(pageNo, rowsPerPage, keyword);
+		List<Research> surveys = surveyService.getResearchList(pageNo, rowsPerPage, keyword);
 
 		PagingJsonVo page = new PagingJsonVo(surveys.size(), rowsPerPage, pageNo);
 		Map<String, Object> resultMap = new HashMap<String, Object>();

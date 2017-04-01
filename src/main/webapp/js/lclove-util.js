@@ -906,22 +906,45 @@ $(function(){
         var url = lclove.util.basePath + "ajax/getSurveyList.xhtml?pageNo="+lclove.params.pageNo +"&keyword=" + lclove.params.keyword;
         var itemTemplate = function(data){
             var sbHtml = new StringBuilder();
-            sbHtml.append("<div class='content_item'>");
-            sbHtml.append("<div class='content_item_pic'>");
-            sbHtml.append("  <a class='thumbnail' href='"+ lclove.util.basePath + "researchDetail.xhtml?navtype="+lclove.params.navtype+"&sortType=1&surveyId="+data.id+"'><img width='148' height='148' class='img-border radius-small' src='" + data.thumbnail + "'/></a>");
-            sbHtml.append("</div>");
-            sbHtml.append("<div class='content_item_text'>");
-            sbHtml.append("  <div class='content_item_text_head'>");
-            sbHtml.append("    <a href='"+ lclove.util.basePath + "researchDetail.xhtml?navtype="+lclove.params.navtype+"&sortType=1&surveyId="+data.id+"'><span>"+ data.title +"</span></a>"); //<img src='" + lclove.util.imgPath + "images/text_head_icon.png'/>
-            sbHtml.append("  </div>");
-            sbHtml.append("  <div class='mini_blank'></div>");
-            sbHtml.append("  <div class='separate'></div>");
-            sbHtml.append("  <div class='content_item_text_middle'> "+ data.description +"</div>");
-            sbHtml.append("  <div class='content_item_text_foot'>");
-            sbHtml.append("    <div class='date'>"+ data.pubDate +"</div>");
-            sbHtml.append("  </div>");
-            sbHtml.append("</div>");
-            sbHtml.append("</div>");
+            if (data.type ==1){
+                sbHtml.append("<div class='content_item'>");
+                sbHtml.append("<div class='content_item_pic'>");
+                sbHtml.append("  <a class='thumbnail' href='"+ lclove.util.basePath + "detail.xhtml?navtype="+lclove.params.navtype+"&sortType=1&aid="+data.article.id+"'><img width='148' height='148' class='img-border radius-small' src='" + data.article.thumbnail + "'/></a>");
+                sbHtml.append("</div>");
+                sbHtml.append("<div class='content_item_text'>");
+                sbHtml.append("  <div class='content_item_text_head'>");
+                sbHtml.append("    <a href='"+ lclove.util.basePath + "detail.xhtml?navtype="+lclove.params.navtype+"&sortType=1&aid="+data.article.id+"'><span>"+ data.article.title +"</span></a>"); //<img src='" + lclove.util.imgPath + "images/text_head_icon.png'/>
+                sbHtml.append("  </div>");
+                sbHtml.append("  <div class='mini_blank'></div>");
+                sbHtml.append("  <div class='separate'></div>");
+                sbHtml.append("  <div class='content_item_text_middle'> "+ data.article.description +"</div>");
+                sbHtml.append("  <div class='content_item_text_foot'>");
+                sbHtml.append("    <div class='date'>"+ data.article.pubDate +"</div>");
+                sbHtml.append("    <div class='comment'><img src='" + lclove.util.imgPath + "images/comment.png'/><div class='sum'>"+ data.article.commentNum +"</div></div>");
+                sbHtml.append("    <div class='love'><img width='20' height='20' class='radius-small' src='" + lclove.util.imgPath + "images/love.png'/><div class='sum'>"+ data.article.likeNum +"</div></div>");
+                sbHtml.append("    <div class='type'> "+ data.article.topic +" </div>");
+                sbHtml.append("  </div>");
+                sbHtml.append("</div>");
+                sbHtml.append("</div>");
+            }else if (data.type == 2){
+                sbHtml.append("<div class='content_item'>");
+                sbHtml.append("<div class='content_item_pic'>");
+                sbHtml.append("  <a class='thumbnail' href='"+ lclove.util.basePath + "researchDetail.xhtml?navtype="+lclove.params.navtype+"&sortType=1&surveyId="+data.survey.id+"'><img width='148' height='148' class='img-border radius-small' src='" + data.survey.thumbnail + "'/></a>");
+                sbHtml.append("</div>");
+                sbHtml.append("<div class='content_item_text'>");
+                sbHtml.append("  <div class='content_item_text_head'>");
+                sbHtml.append("    <a href='"+ lclove.util.basePath + "researchDetail.xhtml?navtype="+lclove.params.navtype+"&sortType=1&surveyId="+data.survey.id+"'><span>"+ data.survey.title +"</span></a>"); //<img src='" + lclove.util.imgPath + "images/text_head_icon.png'/>
+                sbHtml.append("  </div>");
+                sbHtml.append("  <div class='mini_blank'></div>");
+                sbHtml.append("  <div class='separate'></div>");
+                sbHtml.append("  <div class='content_item_text_middle'> "+ data.survey.description +"</div>");
+                sbHtml.append("  <div class='content_item_text_foot'>");
+                sbHtml.append("    <div class='date'>"+ data.survey.pubDate +"</div>");
+                sbHtml.append("  </div>");
+                sbHtml.append("</div>");
+                sbHtml.append("</div>");
+            }
+
             return $(sbHtml.toString());
         };
 
