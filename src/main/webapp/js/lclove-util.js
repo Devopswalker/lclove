@@ -1069,28 +1069,44 @@ $(function(){
 	        	var data = {};
 	        	data.surveyId = $(".search_head").attr("suveryid");
 	        	data.options = [];
+	        	var nums = 0;
 	        	$(".single_choose").each(function(){
 	        		var subData = {};
 	        		var subSurveyId = $(this).attr("id");
 	        		if($(this).find("input[type=radio]").length > 0){
 	        			subData.optionId = $('input[name="survey_' + subSurveyId + '"]:checked ').val();
+	        			if(subData.optionId == undefined || subData.optionId == null){
+	        				nums += 1;
+	        			}
 	        			data.options.push(subData);
 	        		}else if($(this).find("input[type=checkbox]").length > 0){
+	        			var checknum = 0;
 	        			$('input[name="survey_' + subSurveyId + '"]').each(function(){
 	        				if($(this).is(':checked')){
+	        					checknum += 1;
 	        					subData = {};
 	        					subData.optionId = $(this).val();
 	        					data.options.push(subData);
 	        				}
-	        			})	
+	        			})
+	        			if(checknum == 0){
+	        				nums += 1;
+	        			}
 	        		}else if($(this).find("textarea").length > 0){
 	        			var $tempObj = $('textarea[surveyid="' + subSurveyId + '"]');
+	        			if($tempObj.val() == undefined || $tempObj.val() == null){
+	        				nums += 1;
+	        			}
     					subData.optionId = $tempObj.attr("optionid");
     					subData.answerContent = $tempObj.val();
     					data.options.push(subData);
 	        			
 	        		}
 	        	});
+	        	if(nums > 0){
+	        		alert("您还有选项未填写！") ;
+    				return ;
+    			}
 	        	//console.log(data);
 	        	var url = lclove.util.basePath + "ajax/saveResearch.xhtml";
 	        	var optionDatas = JSON.stringify(data);
