@@ -55,6 +55,7 @@
                         <td><a class="button border-sub" href="${basePath}admin/research/questionList.xhtml?id=$survey.id"><span class="icon-qrcode"></span> 题库维护</a></td>
                         <td>
                             <div class="button-group">
+                                <a class="button border-sub" href="${basePath}researchResult.xhtml?surveyId=$survey.id" target="_blank"><span class="icon-home"></span> 前台</a>
                                 <a class="button border-main" href="${basePath}admin/research/editResearch.xhtml?id=$survey.id"><span class="icon-edit"></span> 修改</a>
                                 <a class="button border-red" href="javascript:void(0)" onclick="return deleteData($survey.id)"><span class="icon-trash-o"></span> 删除</a>
                             </div>
