@@ -21,6 +21,14 @@ public class Comment {
 
     private Integer downNum = 0;
 
+    private Integer replyId;  //被回复的评论 ID
+
+    private String replyName; //被回复的评论 人名字
+
+    private String replyContent; //被回复的评论 内容
+
+    private Integer repliedNumber = 0; // 该评论被回复的次数
+
     public Integer getId() {
         return id;
     }
@@ -99,5 +107,37 @@ public class Comment {
 
     public void setDownNum(Integer downNum) {
         this.downNum = downNum;
+    }
+
+    public Integer getReplyId() {
+        return replyId;
+    }
+
+    public void setReplyId(Integer replyId) {
+        this.replyId = replyId;
+    }
+
+    public String getReplyName() {
+        return replyName;
+    }
+
+    public void setReplyName(String replyName) {
+        this.replyName = replyName;
+    }
+
+    public String getReplyContent() {
+        return replyContent;
+    }
+
+    public void setReplyContent(String replyContent) {
+        this.replyContent = replyContent;
+    }
+
+    public Integer getRepliedNumber() {
+        return repliedNumber;
+    }
+
+    public void setRepliedNumber(Integer repliedNumber) {
+        this.repliedNumber = repliedNumber;
     }
 }

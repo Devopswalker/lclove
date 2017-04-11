@@ -27,15 +27,21 @@
 			<div style="overflow:hidden; position:absolute; left:-224px;">
 				<img src="/images/left_smoke.png" />
 			</div>
-			<div style="overflow:hidden; position:absolute; top: -200px; left:1050px;">
+			<div class="left_flower">
+				<img src="/images/left_flower.png" />
+			</div>
+			<div class="right_smoke" style="overflow:hidden; position:absolute; top: -200px; left:1050px;">
 				<img src="/images/right_smoke.png" />
+			</div>
+			<div class="right_flower">
+				<img src="/images/right_flower.png" />
 			</div>
 			<!-- 列表 LEFT: 内容列表 -->
 			<div class="content_left">
 				<!-- 列表 LEFT: BANNER -->
 				<div class="special_topic">
 					<div class="special_topic_head"><img src="${staticPath}images/topic_flower.png" /><div>Special恋の喵言喵语</div></div>
-					<div class="special_topic_desc_pic"><img width='594' height='228' class='radius-small' src="${staticPath}images/special_banner.png" /></div>
+					<div class="special_topic_desc_pic"><img width='594' height='225' class='radius-small' src="${staticPath}images/special_banner.png" /></div>
 				</div>
 				<div class="small_blank"></div>
 				
@@ -46,7 +52,7 @@
 				
 				<section class="specialBackNumber">
 					<h2 class="title">
-						<img src="${staticPath}images/specialbacknumber.gif" width="600" height="27" alt="Back Number 過去の特集">
+						<img src="${staticPath}images/specialbacknumber.png" width="600" height="27" alt="Back Number 過去特集">
 					</h2>
 					
 					<div class="specialBackNumberListBox"></div>

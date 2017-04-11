@@ -224,8 +224,8 @@ $.extend({
             sbHtml.append("        <ul>");
             sbHtml.append("            <li><div class='home_nav_icon' onClick='navClick(1)'></div><div class='icon_name' onClick='navClick(1)'>Home</div></li>");
             sbHtml.append("            <li id='secondary_nav'><div  class='normal_nav' onClick='navClick(2)'>恋の喵言喵语</div><div class='icon_name' onClick='navClick(2)'>Special</div></li>");
-            sbHtml.append("            <li><div class='normal_nav' onClick='navClick(3)'>恋の恋爱经</div><div class='icon_name' onClick='navClick(3)'>Love</div></li>");
             sbHtml.append("            <li><div class='normal_nav' onClick='navClick(4)'>恋の护身符</div><div class='icon_name' onClick='navClick(4)'>Body</div></li>");
+            sbHtml.append("            <li><div class='normal_nav' onClick='navClick(3)'>恋の恋爱经</div><div class='icon_name' onClick='navClick(3)'>Love</div></li>");
             sbHtml.append("            <li><div class='normal_nav' onClick='navClick(6)'>恋の梦剧场</div><div class='icon_name' onClick='navClick(6)'>Comic</div></li>");
             sbHtml.append("            <li><div class='normal_nav' onClick='navClick(5)'>恋の好奇心</div><div class='icon_name' onClick='navClick(5)'>Research</div></li>");
             sbHtml.append("            <li><img src='" + lclove.util.imgPath + "images/img_omamori.png'/></li>");
@@ -314,8 +314,8 @@ $(function(){
         var imgTemplate = function(data){
             var sbHtml = new StringBuilder();
             sbHtml.append("<div class='recommend_item'>");
-            sbHtml.append("  <a href='" + data.recommendUrl + "'><img width='301' height='116' class='radius-small' src='" + data.imgUrl + "'/></a>");
-            sbHtml.append("  <div>"+ data.description +"<br />"+ data.seq +"</div>");
+            sbHtml.append("  <a href='" + data.recommendUrl + "'><img width='300' height='115' class='radius-small' src='" + data.imgUrl + "'/></a>");
+            sbHtml.append("  <div>"+ data.description +"</div>");
             sbHtml.append("</div>");
             sbHtml.append("<div class='small_blank'></div>");
             return $(sbHtml.toString());
@@ -323,11 +323,11 @@ $(function(){
         
         var defaultTemplate = function(){
             var sbHtml = new StringBuilder();
-            sbHtml.append("<div class='recommend_item'><img width='301' height='116' class='radius-small' src='"+ lclove.util.imgPath + "images/recoommend1.png'/><div>微电影系列<br />Vol.1</div></div>");
+            sbHtml.append("<div class='recommend_item'><img width='300' height='115' class='radius-small' src='"+ lclove.util.imgPath + "images/recoommend1.png'/><div>微电影系列</div></div>");
             sbHtml.append("<div class='small_blank'></div>");
-            sbHtml.append("<div class='recommend_item'><img width='301' height='116' class='radius-small' src='"+ lclove.util.imgPath + "images/recoommend2.png'/><div>微电影系列<br />Vol.2</div></div>");
+            sbHtml.append("<div class='recommend_item'><img width='300' height='115' class='radius-small' src='"+ lclove.util.imgPath + "images/recoommend2.png'/><div>微电影系列</div></div>");
             sbHtml.append("<div class='small_blank'></div>");
-            sbHtml.append("<div class='recommend_item'><img width='301' height='116' class='radius-small' src='"+ lclove.util.imgPath + "images/recoommend3.png'/><div>微电影系列<br />Vol.3</div></div>");
+            sbHtml.append("<div class='recommend_item'><img width='300' height='115' class='radius-small' src='"+ lclove.util.imgPath + "images/recoommend3.png'/><div>微电影系列</div></div>");
             sbHtml.append("<div class='small_blank'></div>");
             return $(sbHtml.toString());
         };
@@ -506,7 +506,7 @@ $(function(){
             sbHtml.append("</div>");
             sbHtml.append("<div class='content_item_text'>");
             sbHtml.append("  <div class='content_item_text_head'>");
-            sbHtml.append("    <a href='"+ lclove.util.basePath + "detail.xhtml?navtype="+lclove.params.navtype+"&sortType=1&aid="+data.id+"'><img src='" + lclove.util.imgPath + "images/text_head_icon.png'/><div>"+ data.title +"</div></a>");
+            sbHtml.append("    <a href='"+ lclove.util.basePath + "detail.xhtml?navtype="+lclove.params.navtype+"&sortType=1&aid="+data.id+"'><span>"+ data.title +"</span></a>"); //<img src='" + lclove.util.imgPath + "images/text_head_icon.png'/>
             sbHtml.append("  </div>");
             sbHtml.append("  <div class='mini_blank'></div>");
             sbHtml.append("  <div class='separate'></div>");
@@ -555,8 +555,8 @@ $(function(){
             var scrollAdd = function(){
             	var scrollT = $(window).scrollTop(); //滚动条top 
             	var pageH = $(document.body).height();
-            	var scrollUrl = lclove.util.basePath + "ajax/getArticleList.xhtml?type="+lclove.params.navtype + "&keyword=" + lclove.params.keyword;
-                if (scrollT + winH > ($(".loadMore").offset().top + 100) && $(".loadMore").css("display") == "block" && ($(".loadMore").attr("cnum") < ($(".loadMore").attr("tnum") -1))) {
+            	var scrollUrl = lclove.util.basePath + "ajax/getArticleList.xhtml?navtype="+lclove.params.navtype + "&keyword=" + lclove.params.keyword;
+                if (scrollT + winH > ($(".loadMore").offset().top + 100) && $(".loadMore").css("display") == "block" && ($(".loadMore").attr("cnum") < ($(".loadMore").attr("tnum")))) {
 					$(".loadMore").css("display","none");
 					scrollUrl += "&pageNo=" + (parseInt($(".loadMore").attr("cnum")) + 1);
                 	$.getData(scrollUrl, null, true, "POST", "json", true, appendList);
@@ -582,11 +582,10 @@ $(function(){
         var appendList = function(data){
         	fillData(data);
             var cPageNum = data.pageInfo.currentPage;
-            if(cPageNum == data.pageInfo.pageCount - 1){
-            	$(".loadMore").css("display", "none");
+            if(cPageNum == data.pageInfo.pageCount){
+            		$(".loadMore").attr("cnum", cPageNum).css("display", "none").appendTo($(instance));
             }else{
-            	$(".loadMore").appendTo($(instance));
-                $(".loadMore").attr("cnum", cPageNum).css("display", "block");
+                $(".loadMore").attr("cnum", cPageNum).css("display", "block").appendTo($(instance));
             }
         };
         
@@ -598,7 +597,7 @@ $(function(){
         	
             $("<div/>").addClass("loadMore").attr({"cnum": pageNum, "tnum": totalPage}).appendTo($(instance));
             
-            if(pageNum >= totalPage - 1 ){
+            if(pageNum == totalPage){
             	$(".loadMore").css("display", "none");
             }         
             scrollEvent();
@@ -703,15 +702,24 @@ $(function(){
                  sbHtml.append("<div class='comments_title'><img src='"+lclove.util.imgPath+"images/comment.png'/><div> "+data.comments.length+" 条评论</div></div>");
                  $.each(data.comments, function(index, item){
                  	sbHtml.append("    <div class='one_comment'>");
-                 	sbHtml.append("        <div class='name'> "+item.nickName+" </div>");
+                 	sbHtml.append("        <div class='name' id='comment_name_"+item.id+"'> "+item.nickName+" </div>");
                  	sbHtml.append("        <div class='colon'>：</div>");
-                 	sbHtml.append("        <div class='comment_content'> "+item.content+" </div>");
-/*                 	sbHtml.append("        <img class='good_img' src='"+lclove.util.imgPath+"images/good.png'/>");
-                 	sbHtml.append("        <div class='good_count'> "+item.upNum+" </div>");
-                 	sbHtml.append("        <img class='bad_img'src='"+lclove.util.imgPath+"images/bad.png'/>");
-                 	sbHtml.append("        <div class='bad_count'> "+item.downNum+" </div>");*/
-                     sbHtml.append("    </div>");
-                     sbHtml.append("    <div class='solid_separate'></div>");
+                 	sbHtml.append("        <div class='comment_content' id='comment_content_"+item.id+"'> "+item.content+" </div>");
+                 	sbHtml.append("        <a ref='javascript:void(0)' onclick='replyComment("+item.id+");' >");
+                 	sbHtml.append("            <div class='reply_tag'>回复</div>");
+                 	sbHtml.append("        </a>");
+                 	sbHtml.append("        <a ref='javascript:void(0)' onclick='doPraiseOpration("+item.id+");' >");
+                 	sbHtml.append("            <img class='good_img' src='"+lclove.util.imgPath+"images/love.png'/> <div class='good_count' id='good_count"+item.id+"'> "+item.upNum+" </div>");
+                 	sbHtml.append("        </a>");
+                 	sbHtml.append("    </div>");
+                 	if(item.replyId != null){
+                 		sbHtml.append("     <div class='one_comment_r'>");
+                     	sbHtml.append("        <div class='name_r' id='comment_r_name_"+item.replyId+"'> "+item.replyName+" </div>");
+                     	sbHtml.append("        <div class='colon_r'>：</div>");
+                     	sbHtml.append("        <div class='comment_content_r' id='comment_r_content_"+item.replyId+"'> "+item.replyContent+" </div>");
+                 		sbHtml.append("    </div>");
+                 	}
+                 	sbHtml.append("    <div class='solid_separate'></div>");
                  });
                  sbHtml.append("</div>");
             }else{
@@ -722,14 +730,17 @@ $(function(){
             sbHtml.append("<div class='comment_submit'>");
             sbHtml.append("  <div class='publish'>发表评论</div>");
             sbHtml.append("  <form name='commentsForm' class='form-inline' method='post'");
+            sbHtml.append("     <input type='hidden' name='replyId' id='replyId' value=''>");
+            sbHtml.append("     <input type='hidden' name='replyName' id='replyName' value=''>");
+            sbHtml.append("     <input type='hidden' name='replyContent' id='replyContent' value=''>");
             sbHtml.append("     <div class='form-group'>");
             sbHtml.append("       <div class='field'>");
             sbHtml.append("         &nbsp;昵称<font color='red'>*</font>&nbsp;<input type='text' class='input' id='nickName' name='nickName' maxlength='12' style='width:240px;' size='30' />");
             sbHtml.append("         邮箱<font color='red'>*</font>&nbsp;<input type='text' class='input' id='email' name='email' maxlength='36' style='width:240px;' size='48' />");
             sbHtml.append("       </div>");
             sbHtml.append("     </div>");
-            sbHtml.append("     <div class='form-group' style='margin-top: 10px;margin-bottom: 10px;'>");
-            sbHtml.append("       <textarea class='input' rows='4' cols='50' placeholder='写下您的评论内容' maxlength='50' id='content' name='content' ></textarea>");
+            sbHtml.append("     <div class='form-group' style='margin-top: 10px;margin-bottom: 10px;margin-left: 5px;'>");
+            sbHtml.append("       <textarea class='input' rows='4' cols='74' placeholder='写下您的评论内容' maxlength='50' id='content' name='content' ></textarea>");
             sbHtml.append("     </div>");
             sbHtml.append("     <div class='clear'></div>");
             sbHtml.append("     <div id='submitBtn' class='confirm_comment'><img src='"+lclove.util.imgPath+"images/send.png'/></div>");
@@ -769,6 +780,9 @@ $(function(){
         	data.nickName = nickName;
         	data.email = email;
         	data.content = content;
+        	data.replyId = $('#replyId').val();
+        	data.replyName = $('#replyName').val();
+        	data.replyContent = $('#replyContent').val();
         	data.articleId = lclove.params.aid;
         	$.getData(url, data, true, "POST", "json", true, callBackComments);
         };
@@ -794,6 +808,38 @@ $(function(){
     $.fn.renderComment.defaults = {};
 });
 /*  Comment  */
+
+
+function replyComment(cid){
+	if(cid=='' || cid==null){
+		return;
+	}
+	var replyName = $('#comment_name_' + cid).html(); 
+	var replyContent = $('#comment_content_' + cid).html(); 
+	$('#replyId').val(cid);
+	$('#replyName').val(replyName);
+	$('#replyContent').val(replyContent);
+	$("#content").attr("placeholder","请填写回复 @"+replyName +"的内容");
+	$('#content').focus();
+	
+}
+
+/*  doPraise  */
+function doPraiseOpration(cid){
+	var url = lclove.util.basePath + "ajax/onTapToPraise.xhtml";
+	var data = {};
+	data.cid = cid;
+	$.getData(url, data, true, "POST", "json", true, callBackDoPraise);
+}
+
+function callBackDoPraise(result){
+	if(result.comment != null){
+		var curNum = result.comment.upNum;
+		$("#good_count"+result.comment.id).html(curNum);
+	}
+	
+}
+/*  doPraise  */
 
 /*  Recomment  */
 $(function(){
@@ -860,22 +906,45 @@ $(function(){
         var url = lclove.util.basePath + "ajax/getSurveyList.xhtml?pageNo="+lclove.params.pageNo +"&keyword=" + lclove.params.keyword;
         var itemTemplate = function(data){
             var sbHtml = new StringBuilder();
-            sbHtml.append("<div class='content_item'>");
-            sbHtml.append("<div class='content_item_pic'>");
-            sbHtml.append("  <a class='thumbnail' href='"+ lclove.util.basePath + "researchDetail.xhtml?navtype="+lclove.params.navtype+"&sortType=1&surveyId="+data.id+"'><img width='148' height='148' class='img-border radius-small' src='" + data.thumbnail + "'/></a>");
-            sbHtml.append("</div>");
-            sbHtml.append("<div class='content_item_text'>");
-            sbHtml.append("  <div class='content_item_text_head'>");
-            sbHtml.append("    <a href='"+ lclove.util.basePath + "researchDetail.xhtml?navtype="+lclove.params.navtype+"&sortType=1&surveyId="+data.id+"'><img src='" + lclove.util.imgPath + "images/text_head_icon.png'/><div>"+ data.title +"</div></a>");
-            sbHtml.append("  </div>");
-            sbHtml.append("  <div class='mini_blank'></div>");
-            sbHtml.append("  <div class='separate'></div>");
-            sbHtml.append("  <div class='content_item_text_middle'> "+ data.description +"</div>");
-            sbHtml.append("  <div class='content_item_text_foot'>");
-            sbHtml.append("    <div class='date'>"+ data.pubDate +"</div>");
-            sbHtml.append("  </div>");
-            sbHtml.append("</div>");
-            sbHtml.append("</div>");
+            if (data.type ==1){
+                sbHtml.append("<div class='content_item'>");
+                sbHtml.append("<div class='content_item_pic'>");
+                sbHtml.append("  <a class='thumbnail' href='"+ lclove.util.basePath + "detail.xhtml?navtype="+lclove.params.navtype+"&sortType=1&aid="+data.article.id+"'><img width='148' height='148' class='img-border radius-small' src='" + data.article.thumbnail + "'/></a>");
+                sbHtml.append("</div>");
+                sbHtml.append("<div class='content_item_text'>");
+                sbHtml.append("  <div class='content_item_text_head'>");
+                sbHtml.append("    <a href='"+ lclove.util.basePath + "detail.xhtml?navtype="+lclove.params.navtype+"&sortType=1&aid="+data.article.id+"'><span>"+ data.article.title +"</span></a>"); //<img src='" + lclove.util.imgPath + "images/text_head_icon.png'/>
+                sbHtml.append("  </div>");
+                sbHtml.append("  <div class='mini_blank'></div>");
+                sbHtml.append("  <div class='separate'></div>");
+                sbHtml.append("  <div class='content_item_text_middle'> "+ data.article.description +"</div>");
+                sbHtml.append("  <div class='content_item_text_foot'>");
+                sbHtml.append("    <div class='date'>"+ data.article.pubDate +"</div>");
+                sbHtml.append("    <div class='comment'><img src='" + lclove.util.imgPath + "images/comment.png'/><div class='sum'>"+ data.article.commentNum +"</div></div>");
+                sbHtml.append("    <div class='love'><img width='20' height='20' class='radius-small' src='" + lclove.util.imgPath + "images/love.png'/><div class='sum'>"+ data.article.likeNum +"</div></div>");
+                sbHtml.append("    <div class='type'> "+ data.article.topic +" </div>");
+                sbHtml.append("  </div>");
+                sbHtml.append("</div>");
+                sbHtml.append("</div>");
+            }else if (data.type == 2){
+                sbHtml.append("<div class='content_item'>");
+                sbHtml.append("<div class='content_item_pic'>");
+                sbHtml.append("  <a class='thumbnail' href='"+ lclove.util.basePath + "researchDetail.xhtml?navtype="+lclove.params.navtype+"&sortType=1&surveyId="+data.survey.id+"'><img width='148' height='148' class='img-border radius-small' src='" + data.survey.thumbnail + "'/></a>");
+                sbHtml.append("</div>");
+                sbHtml.append("<div class='content_item_text'>");
+                sbHtml.append("  <div class='content_item_text_head'>");
+                sbHtml.append("    <a href='"+ lclove.util.basePath + "researchDetail.xhtml?navtype="+lclove.params.navtype+"&sortType=1&surveyId="+data.survey.id+"'><span>"+ data.survey.title +"</span></a>"); //<img src='" + lclove.util.imgPath + "images/text_head_icon.png'/>
+                sbHtml.append("  </div>");
+                sbHtml.append("  <div class='mini_blank'></div>");
+                sbHtml.append("  <div class='separate'></div>");
+                sbHtml.append("  <div class='content_item_text_middle'> "+ data.survey.description +"</div>");
+                sbHtml.append("  <div class='content_item_text_foot'>");
+                sbHtml.append("    <div class='date'>"+ data.survey.pubDate +"</div>");
+                sbHtml.append("  </div>");
+                sbHtml.append("</div>");
+                sbHtml.append("</div>");
+            }
+
             return $(sbHtml.toString());
         };
 
@@ -891,7 +960,7 @@ $(function(){
             	var scrollT = $(window).scrollTop(); //滚动条top 
             	var pageH = $(document.body).height();
             	var scrollUrl = lclove.util.basePath + "ajax/getSurveyList.xhtml";
-                if (scrollT + winH > ($(".loadMore").offset().top + 100) && $(".loadMore").css("display") == "block" && ($(".loadMore").attr("cnum") < ($(".loadMore").attr("tnum") -1))) {
+                if (scrollT + winH > ($(".loadMore").offset().top + 100) && $(".loadMore").css("display") == "block" && ($(".loadMore").attr("cnum") < ($(".loadMore").attr("tnum")))) {
 					$(".loadMore").css("display","none");
 					scrollUrl += "&pageNo=" + (parseInt($(".loadMore").attr("cnum")) + 1);
                 	$.getData(scrollUrl, null, true, "POST", "json", true, appendList);
@@ -914,7 +983,7 @@ $(function(){
         var appendList = function(data){
         	fillData(data);
             var cPageNum = data.pageInfo.currentPage;
-            if(cPageNum == data.pageInfo.pageCount - 1){
+            if(cPageNum == data.pageInfo.pageCount){
             	$(".loadMore").css("display", "none");
             }else{
             	$(".loadMore").appendTo($(instance));
@@ -930,7 +999,7 @@ $(function(){
         	
             $("<div/>").addClass("loadMore").attr({"cnum": pageNum, "tnum": totalPage}).appendTo($(instance));
             
-            if(pageNum >= totalPage - 1 ){
+            if(pageNum == totalPage){
             	$(".loadMore").css("display", "none");
             }         
             scrollEvent();
@@ -957,7 +1026,7 @@ $(function(){
         var showResearch = function (data) {
             var sbHtml = new StringBuilder();
             sbHtml.append("<div class='search_head' suveryid='" + data.id + "'><img src='"+lclove.util.imgPath+"images/text_head_icon.png'/><div>" + data.title + "</div></div>");
-            sbHtml.append("<img width='550' height='60' class='radius-small' src='"+ data.headerImg + "'/>");
+            sbHtml.append("<img width='550' height='227' class='radius-small' src='"+ data.headerImg + "'/>");
             sbHtml.append("<div class='smallest_blank'></div>");
             $.each(data.questions, function(index, item){
                 sbHtml.append("<div id='" + item.id + "' class='single_choose'>");
@@ -1056,7 +1125,7 @@ $(function(){
         var showResearchResult = function (data) {
             var sbHtml = new StringBuilder();
             sbHtml.append("<div class='search_head'><img src='"+lclove.util.imgPath+"images/text_head_icon.png'/><div>" + data.title + "</div></div>");
-            sbHtml.append("<img width='550' height='60' class='radius-small' src='"+ data.headerImg + "'/>");
+            sbHtml.append("<img width='550' height='227' class='radius-small' src='"+ data.headerImg + "'/>");
             sbHtml.append("<div class='smallest_blank'></div>");
             $.each(data.questions, function(index, item){
             	if(item.inputType != "1"){
@@ -1148,58 +1217,58 @@ $(function(){
         var sbHtml = new StringBuilder();
         sbHtml.append("<div class='article_content_body'>");
         sbHtml.append("<p style='white-space: normal; background-color: rgb(255, 255, 255); text-align: center;'>");
-        sbHtml.append("    <span style='font-size: 20px; font-family: &quot;Adobe 明體 Std L&quot;, serif;'>「</span><span style='font-size: 20px; font-family: 宋体;'>新恋爱</span><span style='font-size: 20px; font-family: &quot;Adobe 明體 Std L&quot;, serif;'>」</span><span style='font-size: 20px; font-family: 宋体;'>时</span><span style='font-size: 20px; font-family: &quot;Adobe 明體 Std L&quot;, serif;'>代</span>");
+        sbHtml.append("    <span style='font-size: 20px; font-family: 宋体;'>「</span><span style='font-size: 20px; font-family: 宋体;'>新恋爱</span><span style='font-size: 20px; font-family: 宋体;'>」</span><span style='font-size: 20px; font-family: 宋体;'>时</span><span style='font-size: 20px; font-family: 宋体;'>代</span>");
         sbHtml.append("</p>");
         sbHtml.append("<p style='white-space: normal; background-color: rgb(255, 255, 255); text-align: center;'>");
-        sbHtml.append("    <span style='font-size: 20px; font-family: &quot;Adobe 明體 Std L&quot;, serif;'>我的</span><span style='font-size: 20px; font-family: 宋体;'>恋爱将</span><span style='font-size: 20px; font-family: &quot;Adobe 明體 Std L&quot;, serif;'>何去何从？</span>    ");
+        sbHtml.append("    <span style='font-size: 20px; font-family: 宋体;'>我的</span><span style='font-size: 20px; font-family: 宋体;'>恋爱将</span><span style='font-size: 20px; font-family: 宋体;'>何去何从？</span>    ");
         sbHtml.append("</p>");
         sbHtml.append("<p style='white-space: normal; background-color: rgb(255, 255, 255); text-align: center;'>");
-        sbHtml.append("    <span style='font-family: &quot;Adobe 明體 Std L&quot;, serif;'>&nbsp;</span>");
+        sbHtml.append("    <span style='font-family: 宋体;'>&nbsp;</span>");
         sbHtml.append("</p>");
         sbHtml.append("<p style='white-space: normal; background-color: rgb(255, 255, 255); text-align: center;'>");
-        sbHtml.append("    <span style='font-family: &quot;Adobe 明體 Std L&quot;, serif;'>想要靠近某个人</span>");
+        sbHtml.append("    <span style='font-family: 宋体;'>想要靠近某个人</span>");
         sbHtml.append("</p>");
         sbHtml.append("<p style='white-space: normal; background-color: rgb(255, 255, 255); text-align: center;'>");
-        sbHtml.append("    <span style='font-family: &quot;Adobe 明體 Std L&quot;, serif;'>想要好好去</span><span style='font-family: 宋体;'>爱</span>");
+        sbHtml.append("    <span style='font-family: 宋体;'>想要好好去</span><span style='font-family: 宋体;'>爱</span>");
         sbHtml.append("</p>");
         sbHtml.append("<p style='white-space: normal; background-color: rgb(255, 255, 255); text-align: center;'>");
-        sbHtml.append("    <span style='font-family: &quot;Adobe 明體 Std L&quot;, serif;'>&nbsp;</span>");
+        sbHtml.append("    <span style='font-family: 宋体;'>&nbsp;</span>");
         sbHtml.append("</p>");
         sbHtml.append("<p style='white-space: normal; background-color: rgb(255, 255, 255); text-align: center;'>");
-        sbHtml.append("    <span style='font-family: &quot;Adobe 明體 Std L&quot;, serif;'>想要珍惜身边的他</span>");
+        sbHtml.append("    <span style='font-family: 宋体;'>想要珍惜身边的他</span>");
         sbHtml.append("</p>");
         sbHtml.append("<p style='white-space: normal; background-color: rgb(255, 255, 255); text-align: center;'>");
-        sbHtml.append("    <span style='font-family: &quot;Adobe 明體 Std L&quot;, serif;'>想要</span><span style='font-family: 宋体;'>细</span><span style='font-family: &quot;Adobe 明體 Std L&quot;, serif;'>水长流走到最后</span>");
+        sbHtml.append("    <span style='font-family: 宋体;'>想要</span><span style='font-family: 宋体;'>细</span><span style='font-family: 宋体;'>水长流走到最后</span>");
         sbHtml.append("</p>");
         sbHtml.append("<p style='white-space: normal; background-color: rgb(255, 255, 255); text-align: center;'>");
-        sbHtml.append("    <span style='font-family: &quot;Adobe 明體 Std L&quot;, serif;'>&nbsp;</span>");
+        sbHtml.append("    <span style='font-family: 宋体;'>&nbsp;</span>");
         sbHtml.append("</p>");
         sbHtml.append("<p style='white-space: normal; background-color: rgb(255, 255, 255); text-align: center;'>");
-        sbHtml.append("    <span style='font-family: &quot;Adobe 明體 Std L&quot;, serif;'>最好的</span><span style='font-family: 宋体;'>爱</span><span style='font-family: &quot;Adobe 明體 Std L&quot;, serif;'>情</span>");
+        sbHtml.append("    <span style='font-family: 宋体;'>最好的</span><span style='font-family: 宋体;'>爱</span><span style='font-family: 宋体;'>情</span>");
         sbHtml.append("</p>");
         sbHtml.append("<p style='white-space: normal; background-color: rgb(255, 255, 255); text-align: center;'>");
-        sbHtml.append("    <span style='font-family: &quot;Adobe 明體 Std L&quot;, serif;'>就是「有未</span><span style='font-family: 宋体;'>来</span><span style='font-family: &quot;Adobe 明體 Std L&quot;, serif;'>」</span>");
+        sbHtml.append("    <span style='font-family: 宋体;'>就是「有未</span><span style='font-family: 宋体;'>来</span><span style='font-family: 宋体;'>」</span>");
         sbHtml.append("</p>");
         sbHtml.append("<p style='white-space: normal; background-color: rgb(255, 255, 255); text-align: center;'>");
-        sbHtml.append("    <span style='font-family: &quot;Adobe 明體 Std L&quot;, serif;'>&nbsp;</span>");
+        sbHtml.append("    <span style='font-family: 宋体;'>&nbsp;</span>");
         sbHtml.append("</p>");
         sbHtml.append("<p style='white-space: normal; background-color: rgb(255, 255, 255); text-align: center;'>");
-        sbHtml.append("    <span style='font-family: 宋体;'>为</span><span style='font-family: &quot;Adobe 明體 Std L&quot;, serif;'>所有想</span><span style='font-family: 宋体;'>爱</span><span style='font-family: &quot;Adobe 明體 Std L&quot;, serif;'>的女性</span>");
+        sbHtml.append("    <span style='font-family: 宋体;'>为</span><span style='font-family: 宋体;'>所有想</span><span style='font-family: 宋体;'>爱</span><span style='font-family: 宋体;'>的女性</span>");
         sbHtml.append("</p>");
         sbHtml.append("<p style='white-space: normal; background-color: rgb(255, 255, 255); text-align: center;'>");
-        sbHtml.append("    <span style='font-family: &quot;Adobe 明體 Std L&quot;, serif;'>提供去</span><span style='font-family: 宋体;'>爱</span><span style='font-family: &quot;Adobe 明體 Std L&quot;, serif;'>的精神力量</span>");
+        sbHtml.append("    <span style='font-family: 宋体;'>提供去</span><span style='font-family: 宋体;'>爱</span><span style='font-family: 宋体;'>的精神力量</span>");
         sbHtml.append("</p>");
         sbHtml.append("<p style='white-space: normal; background-color: rgb(255, 255, 255); text-align: center;'>");
-        sbHtml.append("    <span style='font-family: &quot;Adobe 明體 Std L&quot;, serif;'>支援大家走在</span><span style='font-family: 宋体;'>恋爱</span><span style='font-family: &quot;Adobe 明體 Std L&quot;, serif;'>成就的路上</span>");
+        sbHtml.append("    <span style='font-family: 宋体;'>支援大家走在</span><span style='font-family: 宋体;'>恋爱</span><span style='font-family: 宋体;'>成就的路上</span>");
         sbHtml.append("</p>");
         sbHtml.append("<p style='white-space: normal; background-color: rgb(255, 255, 255); text-align: center;'>");
-        sbHtml.append("    <span style='font-family: &quot;Adobe 明體 Std L&quot;, serif;'>&nbsp;</span>");
+        sbHtml.append("    <span style='font-family: 宋体;'>&nbsp;</span>");
         sbHtml.append("</p>");
         sbHtml.append("<p style='white-space: normal; background-color: rgb(255, 255, 255); text-align: center;'>");
-        sbHtml.append("    <span style='font-family: 宋体;'>这</span><span style='font-family: &quot;Adobe 明體 Std L&quot;, serif;'>就是「</span><span style='font-family: 宋体;'>恋</span><span style='font-family: &quot;Adobe 明體 Std L&quot;, serif;'>猫神社」存在意义</span>");
+        sbHtml.append("    <span style='font-family: 宋体;'>这</span><span style='font-family: 宋体;'>就是「</span><span style='font-family: 宋体;'>恋</span><span style='font-family: 宋体;'>猫神社」存在意义</span>");
         sbHtml.append("</p>");
         sbHtml.append("<p>");
-        sbHtml.append("    <span style='font-family: &quot;Adobe 明體 Std L&quot;, serif;'><br/></span>");
+        sbHtml.append("    <span style='font-family: 宋体;'><br/></span>");
         sbHtml.append("</p>");
         sbHtml.append("<p>");
         sbHtml.append("    <br/>");
@@ -1242,6 +1311,7 @@ $(function(){
     		sbHtml.append("			</div>");
     		sbHtml.append("			<div class='navbar-body nav-navicon' id='navbar-footer'>");
     		sbHtml.append("				<div class='navbar-text navbar-left hidden-s hidden-l'>版权所有 &copy; <a href='http://www.lclianmao.com/' target='_blank'>www.lclianmao.com</a> All Rights Reserved，沪ICP备10200855号-5</div>");
+            sbHtml.append("				<div class='navbar-text navbar-left hidden-s hidden-l'><a href='http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=31010402001468' target='_blank'><img src='/images/beian.png' style='float:left;' class=‘radius-small’/> 沪公网安备 31010402001468号</a></div>");
     		sbHtml.append("				<ul class='nav nav-inline navbar-right'>");
     		sbHtml.append("					<li><a href='" + lclove.util.basePath + "lianmao.xhtml' target='_blank'>关于恋猫</a></li>");
     		sbHtml.append("					<li><a href='" + lclove.util.basePath + "brand.xhtml' target='_blank'>关于LC品爱</a></li>");

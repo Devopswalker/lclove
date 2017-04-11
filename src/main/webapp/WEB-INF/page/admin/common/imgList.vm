@@ -104,7 +104,16 @@
                 </div>
                 <div class="field">
 ##                    <a class="button input-file" href="javascript:void(0);">+ 浏览文件<input size="100" type="file" id="file" name="file"/></a>
-                    <input type="file" id="file" name="file">
+                    <p><input type="file" name="files"></p>
+                    <p><input type="file" name="files"></p>
+                    <p><input type="file" name="files"></p>
+                    <p><input type="file" name="files"></p>
+                    <p><input type="file" name="files"></p>
+                    <p><input type="file" name="files"></p>
+                    <p><input type="file" name="files"></p>
+                    <p><input type="file" name="files"></p>
+                    <p><input type="file" name="files"></p>
+                    <p><input type="file" name="files"></p>
                     <div class="tips"></div>
                 </div>
             </div>

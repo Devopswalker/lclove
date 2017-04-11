@@ -6,6 +6,8 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.lcpa.lclove.model.*;
+import com.lcpa.lclove.vo.Paging;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,10 +15,6 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.lcpa.lclove.constant.CommConstant;
-import com.lcpa.lclove.model.Article;
-import com.lcpa.lclove.model.Comment;
-import com.lcpa.lclove.model.ImageRecommend;
-import com.lcpa.lclove.model.Survey;
 import com.lcpa.lclove.service.ArticleService;
 import com.lcpa.lclove.service.CommentService;
 import com.lcpa.lclove.service.RecommendService;
@@ -25,7 +23,6 @@ import com.lcpa.lclove.util.JsonUtils;
 import com.lcpa.lclove.util.WebUtils;
 import com.lcpa.lclove.vo.PagingJsonVo;
 import com.lcpa.lclove.vo.ResearchOptionsVo;
-
 
 @Controller
 public class LcLoveAjaxController extends AnnotationController{
@@ -69,16 +66,16 @@ public class LcLoveAjaxController extends AnnotationController{
 	 */
 	@RequestMapping("/ajax/getHotArticle.xhtml")
 	public String getHotArticle(Integer navtype, ModelMap model){
-		if(navtype == null){
-			navtype = CommConstant.ARTICLE_TYPE_HOME;
-		}
+//		if(navtype == null){
+//			navtype = CommConstant.ARTICLE_TYPE_HOME;
+//		}
 		List<Article> articleList = articleService.getTopRankArticlesByType(navtype, 6);
 		return showJsonSuccess(model, JsonUtils.writeObjectToJson(articleList));
 	}
 
 	/**
 	 *  Get Article dataList
-	 * @param type
+	 * @param navtype
 	 * @param pageNo
 	 * @param keyword
 	 * @param model
@@ -91,7 +88,8 @@ public class LcLoveAjaxController extends AnnotationController{
 		}
 		Integer rowsPerPage = 5;
 		List<Article> articleList = articleService.getAllArticles(pageNo, rowsPerPage, navtype, keyword);
-		PagingJsonVo page = new PagingJsonVo(articleList.size(), rowsPerPage, pageNo);
+		Integer totalSize = articleService.getTotalArticleSize(pageNo, rowsPerPage, navtype, keyword);
+		PagingJsonVo page = new PagingJsonVo(totalSize, rowsPerPage, pageNo);
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		resultMap.put("articles", articleList);
 		resultMap.put("pageInfo", page);
@@ -100,7 +98,7 @@ public class LcLoveAjaxController extends AnnotationController{
 	
 	/**
 	 * Get Article Details
-	 * @param id
+	 * @param aid
 	 * @param model
 	 * @return
 	 */
@@ -143,7 +141,7 @@ public class LcLoveAjaxController extends AnnotationController{
 	
 	@RequestMapping("/ajax/getComments.xhtml")
 	public String getComments(Integer aid, ModelMap model){
-		List<Comment> commentList = commentService.getCommentList(1, 10, aid);
+		List<Comment> commentList = commentService.getCommentList(1, 100, aid);
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		resultMap.put("comments", commentList);
 		return showJsonSuccess(model, JsonUtils.writeObjectToJson(resultMap));
@@ -170,7 +168,11 @@ public class LcLoveAjaxController extends AnnotationController{
 			pageNo = 1;
 		}
 		Integer rowsPerPage = 5;
-		List<Survey> surveys = surveyService.getSurveyList(pageNo, rowsPerPage, keyword);
+//		List<Survey> surveys = surveyService.getSurveyList(pageNo, rowsPerPage, keyword);
+
+		//TODO next line is new service method
+		List<Research> surveys = surveyService.getResearchList(pageNo, rowsPerPage, keyword);
+
 		PagingJsonVo page = new PagingJsonVo(surveys.size(), rowsPerPage, pageNo);
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		resultMap.put("surveys", surveys);
@@ -207,17 +209,13 @@ public class LcLoveAjaxController extends AnnotationController{
 	
 	/**
 	 *  Get BackNumber dataList
-	 * @param navtype
 	 * @param model
 	 * @return
 	 */
 	@RequestMapping("/ajax/getBackNumberList.xhtml")
-	public String getBackNumberList(Integer navtype, ModelMap model){
-		if(navtype == null){
-			navtype = 1;
-		}
+	public String getBackNumberList(ModelMap model){
 		Integer rowsPerPage = 12;
-		List<Article> articleList = articleService.getAllArticles(1, rowsPerPage, navtype, null);
+		List<Article> articleList = articleService.getAllLookBackArticles(rowsPerPage);
 		PagingJsonVo page = new PagingJsonVo(articleList.size(), rowsPerPage, 1);
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		resultMap.put("backNumbers", articleList);
@@ -260,6 +258,25 @@ public class LcLoveAjaxController extends AnnotationController{
 		Article article = articleService.getArticleById(sid);
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		resultMap.put("article", article);
+		return showJsonSuccess(model, JsonUtils.writeObjectToJson(resultMap));
+	}
+	
+	
+	/**
+	 * Get doPraise for Comment
+	 * @param cid
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("/ajax/onTapToPraise.xhtml")
+	public String onTapToPraise(Integer cid, ModelMap model){
+		if(cid == null){
+			return showJsonError(model, "Bad character in paramenters !");
+		}
+		commentService.updateUpNum(cid);
+		Comment comment = commentService.getCommentById(cid);
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		resultMap.put("comment", comment);
 		return showJsonSuccess(model, JsonUtils.writeObjectToJson(resultMap));
 	}
 

@@ -27,8 +27,14 @@
 			<div style="overflow:hidden; position:absolute; left:-224px;">
 				<img src="/images/left_smoke.png" />
 			</div>
-			<div style="overflow:hidden; position:absolute; top: -200px; left:1050px;">
+			<div class="left_flower">
+				<img src="/images/left_flower.png" />
+			</div>
+			<div class="right_smoke" style="overflow:hidden; position:absolute; top: -200px; left:1050px;">
 				<img src="/images/right_smoke.png" />
+			</div>
+			<div class="right_flower">
+				<img src="/images/right_flower.png" />
 			</div>
     <div class="content_left">
         <!-- 详情 LEFT: 内容详情 -->
@@ -36,42 +42,42 @@
 		<table style="display: inline-table;border-collapse: collapse;" bgcolor="#ffffff" border="0" cellpadding="0" cellspacing="0" width="600">
 			<tr>
 				<td><img name="brand_r1_c1"
-						 src="${staticPath}images/brand/brand_r1_c1.jpg" width="100%" height="100%"
+						 src="${staticPath}images/brand/brand_r1_c1.jpg" width="100%"
 						 border="0" id="brand_r1_c1" alt="" /></td>
 			</tr>
 			<tr>
 				<td><img name="brand_r2_c1"
-						 src="${staticPath}images/brand/brand_r2_c1.jpg" width="100%" height="100%"
+						 src="${staticPath}images/brand/brand_r2_c1.jpg" width="100%"
 						 border="0" id="brand_r2_c1" alt="" /></td>
 			</tr>
 			<tr>
 				<td><img name="brand_r3_c1"
-						 src="${staticPath}images/brand/brand_r3_c1.jpg" width="100%" height="100%"
+						 src="${staticPath}images/brand/brand_r3_c1.jpg" width="100%"
 						 border="0" id="brand_r3_c1" alt="" /></td>
 			</tr>
 			<tr>
 				<td><img name="brand_r4_c1"
-						 src="${staticPath}images/brand/brand_r4_c1.jpg" width="100%" height="100%"
+						 src="${staticPath}images/brand/brand_r4_c1.jpg" width="100%"
 						 border="0" id="brand_r4_c1" usemap="#m_brand_r4_c1" alt="" /></td>
 			</tr>
 			<tr>
 				<td><img name="brand_r5_c1"
-						 src="${staticPath}images/brand/brand_r5_c1.jpg" width="100%" height="100%"
+						 src="${staticPath}images/brand/brand_r5_c1.jpg" width="100%"
 						 border="0" id="brand_r5_c1" usemap="#m_brand_r5_c1" alt="" /></td>
 			</tr>
 			<tr>
 				<td><img name="brand_r6_c1"
-						 src="${staticPath}images/brand/brand_r6_c1.jpg" width="100%" height="100%"
+						 src="${staticPath}images/brand/brand_r6_c1.jpg" width="100%"
 						 border="0" id="brand_r6_c1" usemap="#m_brand_r6_c1" alt="" /></td>
 			</tr>
 			<tr>
 				<td><img name="brand_r7_c1"
-						 src="${staticPath}images/brand/brand_r7_c1.jpg" width="100%" height="100%"
+						 src="${staticPath}images/brand/brand_r7_c1.jpg" width="100%"
 						 border="0" id="brand_r7_c1" usemap="#m_brand_r7_c1" alt="" /></td>
 			</tr>
 			<tr>
 				<td><img name="brand_r8_c1"
-						 src="${staticPath}images/brand/brand_r8_c1.jpg" width="100%" height="100%"
+						 src="${staticPath}images/brand/brand_r8_c1.jpg" width="100%"
 						 border="0" id="brand_r8_c1" alt="" /></td>
 			</tr>
 		</table>

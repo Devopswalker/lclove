@@ -27,15 +27,21 @@
 			<div style="overflow:hidden; position:absolute; left:-224px;">
 				<img src="/images/left_smoke.png" />
 			</div>
-			<div style="overflow:hidden; position:absolute; top: -200px; left:1050px;">
+			<div class="left_flower">
+				<img src="/images/left_flower.png" />
+			</div>
+			<div class="right_smoke" style="overflow:hidden; position:absolute; top: -200px; left:1050px;">
 				<img src="/images/right_smoke.png" />
+			</div>
+			<div class="right_flower">
+				<img src="/images/right_flower.png" />
 			</div>
 			<!-- 列表 LEFT: 内容列表 -->
 			<div class="content_left">
 				<!-- 列表 LEFT: BANNER -->
 				<div class="amulet_topic">
 					<div class="amulet_topic_head"><img src="${staticPath}images/topic_flower.png"/><div>Body恋の护身符</div></div>
-					<div class="amulet_topic_desc_pic"><img width='570' height='228' class='radius-small' src="${staticPath}images/amulet_text.png"/></div>
+					<div class="amulet_topic_desc_pic"><img width='594' height='225' class='radius-small' src="${staticPath}images/body_header.jpg"/></div>
 				</div>
 				<div class="small_blank"></div>
 				

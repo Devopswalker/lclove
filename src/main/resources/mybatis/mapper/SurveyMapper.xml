@@ -12,8 +12,34 @@
     <result column="TOPIC" jdbcType="VARCHAR" property="topic" />
     <result column="THUMBNAIL" jdbcType="VARCHAR" property="thumbnail" />
     <result column="PUB_DATE" jdbcType="TIMESTAMP" property="pubDate" />
-
-
+  </resultMap>
+  <resultMap id="ResearchList" type="com.lcpa.lclove.model.Research">
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="TYPE" property="type"/>
+    <association property="article" javaType="com.lcpa.lclove.model.Article">
+      <id column="A_ID" jdbcType="INTEGER" property="id" />
+      <result column="PUB_DATE" jdbcType="TIMESTAMP" property="pubDate" />
+      <result column="A_TITLE" jdbcType="VARCHAR" property="title" />
+      <result column="A_LIKE_NUM" jdbcType="INTEGER" property="likeNum" />
+      <result column="A_SCAN_NUM" jdbcType="INTEGER" property="scanNum" />
+      <result column="A_ARTICLE_TYPE" jdbcType="INTEGER" property="articleType" />
+      <result column="A_DESCRIPTION" jdbcType="VARCHAR" property="description" />
+      <result column="A_TOPIC" jdbcType="VARCHAR" property="topic" />
+      <result column="A_EDITOR" jdbcType="VARCHAR" property="editor" />
+      <result column="A_STATE" jdbcType="INTEGER" property="state" />
+      <result column="A_THUMBNAIL" jdbcType="VARCHAR" property="thumbnail" />
+      <result column="A_IS_LOOK_BACK" jdbcType="VARCHAR" property="isLookBack" />
+    </association>
+    <association property="survey"  javaType="com.lcpa.lclove.model.Survey">
+      <id column="S_ID" jdbcType="INTEGER" property="id"/>
+      <result column="S_TITLE" jdbcType="VARCHAR" property="title" />
+      <result column="S_HEADER_IMG" jdbcType="VARCHAR" property="headerImg" />
+      <result column="S_DESCRIPTION" jdbcType="VARCHAR" property="description" />
+      <result column="S_STATE" jdbcType="INTEGER" property="state" />
+      <result column="S_TOPIC" jdbcType="VARCHAR" property="topic" />
+      <result column="S_THUMBNAIL" jdbcType="VARCHAR" property="thumbnail" />
+      <result column="PUB_DATE" jdbcType="TIMESTAMP" property="pubDate" />
+    </association>
   </resultMap>
   <sql id="Base_Column_List">
     ID, TITLE, PUB_DATE,THUMBNAIL,HEADER_IMG, DESCRIPTION, START_TIME, END_TIME, STATE, TOPIC
@@ -23,6 +49,64 @@
       LIMIT #{paging.startIndex},#{ paging.pageSize}
     </if>
   </sql>
+  <select id="selectResearch" parameterType="java.lang.Integer" resultMap="ResearchList">
+    Select
+      CONCAT("1_",ID) AS ID,
+      1 AS TYPE,
+      PUB_DATE AS PUB_DATE,
+      ID AS A_ID,
+      TITLE AS A_TITLE,
+      LIKE_NUM AS A_LIKE_NUM,
+      SCAN_NUM as A_SCAN_NUM,
+      ARTICLE_TYPE as A_ARTICLE_TYPE,
+      DESCRIPTION AS A_DESCRIPTION,
+      TOPIC as A_TOPIC,
+      EDITOR AS A_EDITOR,
+      STATE as A_STATE,
+      THUMBNAIL AS A_THUMBNAIL,
+      IS_LOOK_BACK AS A_IS_LOOK_BACK,
+      NULL AS S_ID,
+      NULL AS S_TITLE,
+      NULL AS S_HEADER_IMG,
+      NULL AS S_DESCRIPTION,
+      NULL AS S_STATE,
+      NULL AS S_TOPIC,
+      NULL AS S_THUMBNAIL
+    from article WHERE ARTICLE_TYPE = 5
+    <if test="queryPara != null and queryPara.keywords != null">
+      , AND TITLE LIKE CONCAT(CONCAT("%",#{queryPara.keywords}),"%")
+    </if>
+    Union
+    Select
+      CONCAT("2_",ID) AS ID,
+      2 AS TYPE,
+      PUB_DATE AS PUB_DATE,
+      NULL AS A_ID ,
+      NULL AS A_TITLE,
+      NULL AS A_LIKE_NUM,
+      NULL as A_SCAN_NUM,
+      NULL as A_ARTICLE_TYPE,
+      NULL AS A_DESCRIPTION,
+      NULL as A_TOPIC,
+      NULL AS A_EDITOR,
+      NULL as A_STATE,
+      NULL AS A_THUMBNAIL,
+      NULL AS A_IS_LOOK_BACK,
+      ID AS S_ID,
+      TITLE AS S_TITLE,
+      HEADER_IMG AS S_HEADER_IMG,
+      DESCRIPTION AS S_DESCRIPTION,
+      STATE AS S_STATE,
+      TOPIC AS S_TOPIC,
+      THUMBNAIL AS S_THUMBNAIL
+    from  survey WHERE STATE = 1
+    <if test="queryPara != null and queryPara.keywords != null">
+      , AND TITLE LIKE CONCAT(CONCAT("%",#{queryPara.keywords}),"%")
+    </if>
+    ORDER BY PUB_DATE DESC
+    <include refid="Paging"/>
+  </select>
+
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

@@ -27,14 +27,20 @@
 			<div style="overflow:hidden; position:absolute; left:-224px;">
 				<img src="/images/left_smoke.png" />
 			</div>
-			<div style="overflow:hidden; position:absolute; top: -200px; left:1050px;">
+			<div class="left_flower">
+				<img src="/images/left_flower.png" />
+			</div>
+			<div class="right_smoke" style="overflow:hidden; position:absolute; top: -200px; left:1050px;">
 				<img src="/images/right_smoke.png" />
+			</div>
+			<div class="right_flower">
+				<img src="/images/right_flower.png" />
 			</div>
 			<div class="content_left">
 				<!-- 列表 LEFT: BANNER -->
 				<div class="comic_topic">
 					<div class="comic_topic_head"><img src="${staticPath}images/topic_flower.png"/><div>Research恋の好奇心 </div></div>
-					<div class="comic_topic_desc_pic"><img width='570' height='228' class='radius-small' src="${staticPath}images/amulet_text.png"/></div>
+					<div class="comic_topic_desc_pic"><img width='594' height='225' class='radius-small' src="${staticPath}images/research_header.jpg"/></div>
 				</div>
 				<div class="small_blank"></div>
 				<!-- 列表 LEFT: DATALIST -->
@@ -71,7 +77,7 @@
 			lclove.params.sortType = '$!params.sortType';
             lclove.params.navtype = '$!params.navtype';
             lclove.params.isSurvey = true;
-			lclove.params.position = '2';
+			lclove.params.position = '7';
 			
 			//固定头部导航
 			$("#myHeader").topMenu();

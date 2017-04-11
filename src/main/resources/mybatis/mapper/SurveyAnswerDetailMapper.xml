@@ -24,10 +24,15 @@
     delete from survey_answer_detail
     where ID = #{id,jdbcType=INTEGER}
   </delete>
+  <delete id="deleteBySurveyId" parameterType="java.lang.Integer">
+    delete from survey_answer_detail
+    where SURVEY_ID = #{id,jdbcType=INTEGER}
+  </delete>
+
   <insert id="insert" parameterType="com.lcpa.lclove.model.SurveyAnswerDetail">
-    insert into survey_answer_detail (ID, OPTION_ID, ANSWER_CONTENT
+    insert into survey_answer_detail (ID, OPTION_ID, ANSWER_CONTENT, SURVEY_ID
       )
-    values (#{id,jdbcType=INTEGER}, #{optionId,jdbcType=INTEGER}, #{answerContent,jdbcType=VARCHAR}
+    values (#{id,jdbcType=INTEGER}, #{optionId,jdbcType=INTEGER}, #{answerContent,jdbcType=VARCHAR},#{surveyId,jdbcType=INTEGER}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.lcpa.lclove.model.SurveyAnswerDetail">

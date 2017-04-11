@@ -13,10 +13,12 @@
     <result column="EDITOR" jdbcType="VARCHAR" property="editor" />
     <result column="STATE" jdbcType="INTEGER" property="state" />
     <result column="THUMBNAIL" jdbcType="VARCHAR" property="thumbnail" />
+    <result column="IS_LOOK_BACK" jdbcType="VARCHAR" property="isLookBack" />
+    <result column="COMMENT_NUM" jdbcType="INTEGER" property="commentNum" />
   </resultMap>
   <sql id="Base_Column_List">
     ID, TITLE, THUMBNAIL, PUB_DATE, LIKE_NUM, SCAN_NUM, ARTICLE_TYPE, DESCRIPTION, TOPIC, EDITOR,
-    STATE
+    STATE,IS_LOOK_BACK
   </sql>
   <sql id="Paging">
     <if test="paging != null and paging.StartIndex != null and paging.pageSize">
@@ -47,16 +49,36 @@
   </select>
   <select id="selectAllArticles" resultMap="BaseResultMap">
     select
-    <include refid="Base_Column_List" />
-    from article WHERE 1=1
+    count(cmt.ID) as COMMENT_NUM, a.*
+    FROM article a LEFT JOIN comment cmt
+    ON a.ID = cmt.ARTICLE_ID WHERE 1 = 1
     <if test="queryPara != null and queryPara.articleType != null">
        AND ARTICLE_TYPE = #{queryPara.articleType}
     </if>
     <if test="queryPara != null and queryPara.keywords != null">
       AND TITLE LIKE CONCAT(CONCAT("%",#{queryPara.keywords}),"%")
     </if>
+    GROUP BY a.ID
     order by PUB_DATE desc
     <include refid="Paging"/>
+  </select>
+  <select id="selectAllLookBackArticles" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from article WHERE IS_LOOK_BACK=1
+    order by PUB_DATE desc
+    <include refid="Paging"/>
+  </select>
+  <select id="selectTotalArticleSize" resultType="Integer">
+    select
+    COUNT(ID)
+    from article WHERE 1 = 1
+    <if test="queryPara != null and queryPara.articleType != null">
+      AND ARTICLE_TYPE = #{queryPara.articleType}
+    </if>
+    <if test="queryPara != null and queryPara.keywords != null">
+      AND TITLE LIKE CONCAT(CONCAT("%",#{queryPara.keywords}),"%")
+    </if>
   </select>
   <select id="selectHomeArticle" resultMap="BaseResultMap">
     select
@@ -119,11 +141,11 @@
     insert into article (ID, TITLE, THUMBNAIL, PUB_DATE,
       LIKE_NUM, SCAN_NUM, ARTICLE_TYPE, 
       DESCRIPTION, TOPIC, EDITOR, 
-      STATE)
+      STATE,IS_LOOK_BACK)
     values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{thumbnail,jdbcType=VARCHAR},#{pubDate,jdbcType=TIMESTAMP},
       #{likeNum,jdbcType=INTEGER}, #{scanNum,jdbcType=INTEGER}, #{articleType,jdbcType=INTEGER}, 
       #{description,jdbcType=VARCHAR}, #{topic,jdbcType=VARCHAR}, #{editor,jdbcType=VARCHAR}, 
-      #{state,jdbcType=INTEGER})
+      #{state,jdbcType=INTEGER},#{isLookBack,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.lcpa.lclove.model.Article">
     insert into article
@@ -265,5 +287,12 @@
     set LIKE_NUM = LIKE_NUM + 1
     where ID = #{0}
   </update>
+  <update id="updateLookBack">
+    update article
+    set IS_LOOK_BACK = #{1}
+    where ID = #{0}
+  </update>
+
+
 
 </mapper>

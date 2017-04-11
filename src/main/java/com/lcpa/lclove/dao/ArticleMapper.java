@@ -16,6 +16,7 @@ public interface ArticleMapper {
 
     List<Article> selectAllArticles(QueryParameter queryParameter);
 
+
     List<Article> selectHomeArticle(QueryParameter queryParameter);
 
     List<Article> selectArticleByType(Integer articleType, Integer startIndex, Integer pageSize);
@@ -41,4 +42,10 @@ public interface ArticleMapper {
     List<Article> selectNextByScanNum(Article currentArticle);
 
     void increaseLoveNum(Integer articleId);
+
+    void updateLookBack(Integer id, Integer lookBack);
+
+    List<Article> selectAllLookBackArticles(QueryParameter queryParameter);
+
+    Integer selectTotalArticleSize(QueryParameter queryParameter);
 }

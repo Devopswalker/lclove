@@ -20,4 +20,6 @@ public interface SurveyAnswerMapper {
     List<SurveyAnswer> selectBySurveyID(Integer id);
 
     int selectCountBySurveyID(Integer id);
+
+    void deleteBySurveyId(Integer id);
 }

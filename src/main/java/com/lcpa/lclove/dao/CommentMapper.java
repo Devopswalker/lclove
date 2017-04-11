@@ -25,4 +25,6 @@ public interface CommentMapper {
     void increaseDownNum(Integer id);
 
     Integer selectTotalCommentNum(Integer articleId);
+
+    void increaseRepliedNum(Integer replyId);
 }

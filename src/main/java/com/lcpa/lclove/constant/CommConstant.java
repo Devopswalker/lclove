@@ -25,5 +25,6 @@ public abstract class CommConstant {
 	public static final int ARTICLE_TYPE_SPECIAL = 2;		// SPECIAL(恋の喵言喵语)
 	public static final int ARTICLE_TYPE_LOVES = 3;			// LOVES(恋の恋爱经)
 	public static final int ARTICLE_TYPE_AMULET = 4;		// AMULET(恋の护身符)
+	public static final int ARTICLE_TYPE_RESEARCH = 5;		// RESEARCH(问卷)
 
 }
