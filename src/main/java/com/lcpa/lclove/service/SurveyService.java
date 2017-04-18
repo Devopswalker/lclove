@@ -308,6 +308,7 @@ public class SurveyService {
     public Survey getSurveyResult(Integer id){
         Survey survey = surveyMapper.selectByPrimaryKey(id);
         Integer surveyAnswerTotalNum = surveyAnswerMapper.selectCountBySurveyID(id);
+        survey.setTotalAnswerNum(surveyAnswerTotalNum);
         List<Question> questions = questionMapper.selectBySurveyId(id);
 
         for (Question question : questions){

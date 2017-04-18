@@ -1043,6 +1043,11 @@ li{
 	font-weight:bold;
 	color:#333;
 }
+.search_head div span{
+	font-size:20px;
+	font-weight:normal;
+	color: #919191;
+}
 
 .single_choose{
 	float:left;

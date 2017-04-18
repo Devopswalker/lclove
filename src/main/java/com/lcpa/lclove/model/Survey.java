@@ -27,6 +27,16 @@ public class Survey {
 
     private List<Question> questions;
 
+    private Integer totalAnswerNum = 0;
+
+    public Integer getTotalAnswerNum() {
+        return totalAnswerNum;
+    }
+
+    public void setTotalAnswerNum(Integer totalAnswerNum) {
+        this.totalAnswerNum = totalAnswerNum;
+    }
+
     public Integer getId() {
         return id;
     }
