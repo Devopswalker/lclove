@@ -90,7 +90,8 @@ function navClick(index){
 		break;
 	}
 	if(url!=null){
-		document.location.href = lclove.util.basePath + url;
+		//document.location.href = ;
+        window.open(lclove.util.basePath + url,'_blank');
 	}
 }
 
@@ -332,7 +333,7 @@ $(function(){
         var imgTemplate = function(data){
             var sbHtml = new StringBuilder();
             sbHtml.append("<div class='recommend_item'>");
-            sbHtml.append("  <a href='" + data.recommendUrl + "'><img width='300' height='115' class='radius-small' src='" + data.imgUrl + "'/></a>");
+            sbHtml.append("  <a target='_blank' href='" + data.recommendUrl + "'><img width='300' height='115' class='radius-small' src='" + data.imgUrl + "'/></a>");
             sbHtml.append("  <div>"+ data.description +"</div>");
             sbHtml.append("</div>");
             sbHtml.append("<div class='small_blank'></div>");
@@ -388,9 +389,9 @@ $(function(){
         var itemTemplate = function(data){
             var sbHtml = new StringBuilder();
             sbHtml.append("<div class='hot_article_item'>");
-            sbHtml.append("  <div class='hot_article_pic'><a href='"+ lclove.util.basePath + "detail.xhtml?navtype="+lclove.params.navtype+"&sortType=2&aid="+data.id+"'><img width='100' height='100' class='radius-small' src='" + data.thumbnail + "'/></a></div>");
+            sbHtml.append("  <div class='hot_article_pic'><a target='_blank' href='"+ lclove.util.basePath + "detail.xhtml?navtype="+lclove.params.navtype+"&sortType=2&aid="+data.id+"'><img width='100' height='100' class='radius-small' src='" + data.thumbnail + "'/></a></div>");
             sbHtml.append("  <div class='hot_article_content'>");
-            sbHtml.append("    <div class='hot_article_desc'><a href='"+ lclove.util.basePath + "detail.xhtml?navtype="+lclove.params.navtype+"&sortType=2&aid="+data.id+"'>"+ data.title +"</a></div>");
+            sbHtml.append("    <div class='hot_article_desc'><a target='_blank' href='"+ lclove.util.basePath + "detail.xhtml?navtype="+lclove.params.navtype+"&sortType=2&aid="+data.id+"'>"+ data.title +"</a></div>");
             sbHtml.append("    <div class='hot_article_readed'> "+ data.scanNum +" 浏览</div>");
             sbHtml.append("  </div>");
             sbHtml.append("</div>");
@@ -402,9 +403,9 @@ $(function(){
         var defaultTemplate = function(){
             var sbHtml = new StringBuilder();
             sbHtml.append("<div class='hot_article_item'>");
-            sbHtml.append("  <div class='hot_article_pic'><a href='#'><img width='100' height='100' class='radius-small' src='" + lclove.util.imgPath + "images/article1.jpg'/></a></div>");
+            sbHtml.append("  <div class='hot_article_pic'><a target='_blank' href='#'><img width='100' height='100' class='radius-small' src='" + lclove.util.imgPath + "images/article1.jpg'/></a></div>");
             sbHtml.append("  <div class='hot_article_content'>");
-            sbHtml.append("    <div class='hot_article_desc'><a href='#'>乘务员教你如何在飞机上啪啪啪</a></div>");
+            sbHtml.append("    <div class='hot_article_desc'><a target='_blank' href='#'>乘务员教你如何在飞机上啪啪啪</a></div>");
             sbHtml.append("    <div class='hot_article_readed'> 99999 浏览</div>");
             sbHtml.append("  </div>");
             sbHtml.append("</div>");
@@ -463,10 +464,10 @@ $(function(){
         var defaultTemplate = function(){
             var sbHtml = new StringBuilder();
             sbHtml.append("<div class='item'>");
-            sbHtml.append("	<a href='http://www.baidu.com'><img src='" + lclove.util.imgPath + "images/banner.png'/></a>");
+            sbHtml.append("	<a target='_blank' href='http://www.baidu.com'><img src='" + lclove.util.imgPath + "images/banner.png'/></a>");
             sbHtml.append("</div>");
             sbHtml.append("<div class='item'>");
-            sbHtml.append("	<a href='http://www.baidu.com'><img src='" + lclove.util.imgPath + "images/banner.png'/></a>");
+            sbHtml.append("	<a target='_blank' href='http://www.baidu.com'><img src='" + lclove.util.imgPath + "images/banner.png'/></a>");
             sbHtml.append("</div>");
             return $(sbHtml.toString());
         };
@@ -520,11 +521,11 @@ $(function(){
             var sbHtml = new StringBuilder();
             sbHtml.append("<div class='content_item'>");
             sbHtml.append("<div class='content_item_pic'>");
-            sbHtml.append("  <a class='thumbnail' href='"+ lclove.util.basePath + "detail.xhtml?navtype="+lclove.params.navtype+"&sortType=1&aid="+data.id+"'><img width='148' height='148' class='img-border radius-small' src='" + data.thumbnail + "'/></a>");
+            sbHtml.append("  <a target='_blank' class='thumbnail' href='"+ lclove.util.basePath + "detail.xhtml?navtype="+lclove.params.navtype+"&sortType=1&aid="+data.id+"'><img width='148' height='148' class='img-border radius-small' src='" + data.thumbnail + "'/></a>");
             sbHtml.append("</div>");
             sbHtml.append("<div class='content_item_text'>");
             sbHtml.append("  <div class='content_item_text_head'>");
-            sbHtml.append("    <a href='"+ lclove.util.basePath + "detail.xhtml?navtype="+lclove.params.navtype+"&sortType=1&aid="+data.id+"'><span>"+ data.title +"</span></a>"); //<img src='" + lclove.util.imgPath + "images/text_head_icon.png'/>
+            sbHtml.append("    <a target='_blank' href='"+ lclove.util.basePath + "detail.xhtml?navtype="+lclove.params.navtype+"&sortType=1&aid="+data.id+"'><span>"+ data.title +"</span></a>"); //<img src='" + lclove.util.imgPath + "images/text_head_icon.png'/>
             sbHtml.append("  </div>");
             sbHtml.append("  <div class='mini_blank'></div>");
             sbHtml.append("  <div class='separate'></div>");
@@ -644,13 +645,13 @@ $(function(){
 
             if (data.lastArticle != null){
                 var lastUrl = lclove.util.basePath + "detail.xhtml?sortType="+lclove.params.sortType+"&aid=" + data.lastArticle.id +"&navtype="+lclove.params.navtype;
-                sbHtml.append("  <div class='head_left'><a href='"+lastUrl+"'>上一篇："+data.lastArticle.title+"</a></div>");
+                sbHtml.append("  <div class='head_left'><a target='_blank' href='"+lastUrl+"'>上一篇："+data.lastArticle.title+"</a></div>");
             }else{
                 //sbHtml.append("  <div class='head_left'>上一篇："+data.lastArticle.title+"</div>");
             }
             if (data.nextArticle != null){
                 var nextUrl = lclove.util.basePath + "detail.xhtml?sortType="+lclove.params.sortType+"&aid=" + data.nextArticle.id +"&navtype="+lclove.params.navtype;
-                sbHtml.append("  <div class='head_right'><a href='"+nextUrl+"'>下一篇："+data.nextArticle.title+"</a></div>");
+                sbHtml.append("  <div class='head_right'><a target='_blank' href='"+nextUrl+"'>下一篇："+data.nextArticle.title+"</a></div>");
             }else{
                 //sbHtml.append("  <div class='head_right'>下一篇："+data.nextArticle.title+"</div>");
             }
@@ -670,7 +671,7 @@ $(function(){
             sbHtml.append("  </div>");
             sbHtml.append("  <div class='mini_blank'></div>");
             sbHtml.append("  <div class='taplike'>");
-            sbHtml.append("    <a calss='taptolike' id='taptolike' ref='javascript:void(0)' onclick='tapToLike("+data.detail.id+");' ><img width='20' height='20' class='radius-small' src='" + lclove.util.imgPath + "images/love.png'/><div class='likenums' id='likenums'>&nbsp;"+ data.detail.likeNum +"</div></div>");
+            sbHtml.append("    <a target='_blank' calss='taptolike' id='taptolike' ref='javascript:void(0)' onclick='tapToLike("+data.detail.id+");' ><img width='20' height='20' class='radius-small' src='" + lclove.util.imgPath + "images/love.png'/><div class='likenums' id='likenums'>&nbsp;"+ data.detail.likeNum +"</div></div>");
             sbHtml.append("    </a>");
             sbHtml.append("  </div>");
             sbHtml.append("</div>");
@@ -873,7 +874,7 @@ $(function(){
                  sbHtml.append("  <div class='readingRecommendListBox'>");
                  $.each(data.readings, function(index, item){
                      sbHtml.append("<div class='readingRecommendList'>");
-                     sbHtml.append("  <a href='"+ lclove.util.basePath + "detail.xhtml?navtype="+lclove.params.navtype+"&sortType=2&aid="+item.id+"'>");
+                     sbHtml.append("  <a target='_blank' href='"+ lclove.util.basePath + "detail.xhtml?navtype="+lclove.params.navtype+"&sortType=2&aid="+item.id+"'>");
                      sbHtml.append("  <div>→"+item.title+"</div>");
                      sbHtml.append("  </a>");
                      sbHtml.append("</div>");
@@ -889,7 +890,7 @@ $(function(){
                 sbHtml.append("  <div class='hotRecommendListBox'>");
                 $.each(data.recommends, function(index, item){
                 	 sbHtml.append("<div class='hotRecommendList'>");
-                     sbHtml.append("  <a href='"+ lclove.util.basePath + "detail.xhtml?navtype="+lclove.params.navtype+"&sortType=2&aid="+item.id+"'><img width='183' height='160' class='radius-small' src='" + item.thumbnail + "'/>");
+                     sbHtml.append("  <a target='_blank' href='"+ lclove.util.basePath + "detail.xhtml?navtype="+lclove.params.navtype+"&sortType=2&aid="+item.id+"'><img width='183' height='160' class='radius-small' src='" + item.thumbnail + "'/>");
                      sbHtml.append("  </a>");
                      sbHtml.append("</div>");
                 });
@@ -927,11 +928,11 @@ $(function(){
             if (data.type ==1){
                 sbHtml.append("<div class='content_item'>");
                 sbHtml.append("<div class='content_item_pic'>");
-                sbHtml.append("  <a class='thumbnail' href='"+ lclove.util.basePath + "detail.xhtml?navtype="+lclove.params.navtype+"&sortType=1&aid="+data.article.id+"'><img width='148' height='148' class='img-border radius-small' src='" + data.article.thumbnail + "'/></a>");
+                sbHtml.append("  <a target='_blank' class='thumbnail' href='"+ lclove.util.basePath + "detail.xhtml?navtype="+lclove.params.navtype+"&sortType=1&aid="+data.article.id+"'><img width='148' height='148' class='img-border radius-small' src='" + data.article.thumbnail + "'/></a>");
                 sbHtml.append("</div>");
                 sbHtml.append("<div class='content_item_text'>");
                 sbHtml.append("  <div class='content_item_text_head'>");
-                sbHtml.append("    <a href='"+ lclove.util.basePath + "detail.xhtml?navtype="+lclove.params.navtype+"&sortType=1&aid="+data.article.id+"'><span>"+ data.article.title +"</span></a>"); //<img src='" + lclove.util.imgPath + "images/text_head_icon.png'/>
+                sbHtml.append("    <a target='_blank' href='"+ lclove.util.basePath + "detail.xhtml?navtype="+lclove.params.navtype+"&sortType=1&aid="+data.article.id+"'><span>"+ data.article.title +"</span></a>"); //<img src='" + lclove.util.imgPath + "images/text_head_icon.png'/>
                 sbHtml.append("  </div>");
                 sbHtml.append("  <div class='mini_blank'></div>");
                 sbHtml.append("  <div class='separate'></div>");
@@ -947,11 +948,11 @@ $(function(){
             }else if (data.type == 2){
                 sbHtml.append("<div class='content_item'>");
                 sbHtml.append("<div class='content_item_pic'>");
-                sbHtml.append("  <a class='thumbnail' href='"+ lclove.util.basePath + "researchDetail.xhtml?navtype="+lclove.params.navtype+"&sortType=1&surveyId="+data.survey.id+"'><img width='148' height='148' class='img-border radius-small' src='" + data.survey.thumbnail + "'/></a>");
+                sbHtml.append("  <a target='_blank' class='thumbnail' href='"+ lclove.util.basePath + "researchDetail.xhtml?navtype="+lclove.params.navtype+"&sortType=1&surveyId="+data.survey.id+"'><img width='148' height='148' class='img-border radius-small' src='" + data.survey.thumbnail + "'/></a>");
                 sbHtml.append("</div>");
                 sbHtml.append("<div class='content_item_text'>");
                 sbHtml.append("  <div class='content_item_text_head'>");
-                sbHtml.append("    <a href='"+ lclove.util.basePath + "researchDetail.xhtml?navtype="+lclove.params.navtype+"&sortType=1&surveyId="+data.survey.id+"'><span>"+ data.survey.title +"</span></a>"); //<img src='" + lclove.util.imgPath + "images/text_head_icon.png'/>
+                sbHtml.append("    <a target='_blank' href='"+ lclove.util.basePath + "researchDetail.xhtml?navtype="+lclove.params.navtype+"&sortType=1&surveyId="+data.survey.id+"'><span>"+ data.survey.title +"</span></a>"); //<img src='" + lclove.util.imgPath + "images/text_head_icon.png'/>
                 sbHtml.append("  </div>");
                 sbHtml.append("  <div class='mini_blank'></div>");
                 sbHtml.append("  <div class='separate'></div>");
@@ -1211,7 +1212,7 @@ $(function(){
         var itemTemplate = function(data){
             var sbHtml = new StringBuilder();
             sbHtml.append("<div class='specialBackNumberList'>");
-            sbHtml.append("  <a href='"+ lclove.util.basePath + "detail.xhtml?navtype="+lclove.params.navtype+"&sortType=2&aid="+data.id+"'><img width='140' height='140' class='radius-small' src='" + data.thumbnail + "'/>");
+            sbHtml.append("  <a target='_blank' href='"+ lclove.util.basePath + "detail.xhtml?navtype="+lclove.params.navtype+"&sortType=2&aid="+data.id+"'><img width='140' height='140' class='radius-small' src='" + data.thumbnail + "'/>");
             sbHtml.append("  </a>");
             sbHtml.append("</div>");
             return $(sbHtml.toString());
