@@ -315,8 +315,15 @@ public class SurveyService {
             List<QuestionOption> options = questionOptionMapper.selectOptionByQuestionId(question.getId());
 
             for (QuestionOption option : options){
+                if (surveyAnswerTotalNum == 0){
+                    option.setScore("0");
+                    continue;
+                }
                 Integer selectedNum = surveyAnswerDetailMapper.selectCountByOptionId(option.getId());
-
+                if (selectedNum == 0){
+                    option.setScore("0");
+                    continue;
+                }
                 NumberFormat numberFormat = NumberFormat.getInstance();
                 numberFormat.setMaximumFractionDigits(2);
                 String percentScore = numberFormat.format((float)selectedNum/(float)surveyAnswerTotalNum*100);

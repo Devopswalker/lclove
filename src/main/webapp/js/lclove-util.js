@@ -1045,9 +1045,9 @@ $(function(){
         var showResearch = function (data) {
             var sbHtml = new StringBuilder();
             sbHtml.append("<div class='search_head' suveryid='" + data.id + "'><img src='"+lclove.util.imgPath+"images/text_head_icon.png'/><div>" + data.title);
-            if (data.totalAnswerNum != 0){
-                sbHtml.append(" <span>("+data.totalAnswerNum+")</span>")
-            }
+            //if (data.totalAnswerNum != 0){
+            //    sbHtml.append(" <span>("+data.totalAnswerNum+")</span>")
+            //}
             sbHtml.append("</div></div>")
             sbHtml.append("<img width='550' height='227' class='radius-small' src='"+ data.headerImg + "'/>");
             sbHtml.append("<div class='smallest_blank'></div>");
@@ -1163,7 +1163,11 @@ $(function(){
         var url = lclove.util.basePath + "ajax/getResearchDetail.xhtml?surveyId=" + lclove.params.surveyId;
         var showResearchResult = function (data) {
             var sbHtml = new StringBuilder();
-            sbHtml.append("<div class='search_head'><img src='"+lclove.util.imgPath+"images/text_head_icon.png'/><div>" + data.title + "</div></div>");
+            sbHtml.append("<div class='search_head'><img src='"+lclove.util.imgPath+"images/text_head_icon.png'/><div>" + data.title);
+            if (data.totalAnswerNum != 0){
+                sbHtml.append(" <span>("+data.totalAnswerNum+")</span>")
+            }
+            sbHtml.append("</div></div>")
             sbHtml.append("<img width='550' height='227' class='radius-small' src='"+ data.headerImg + "'/>");
             sbHtml.append("<div class='smallest_blank'></div>");
             $.each(data.questions, function(index, item){
