@@ -33,13 +33,13 @@ public interface ArticleMapper {
 
     void updateScanNum(Integer id);
 
-    List<Article> selectLastByPubDate(Article currentArticle);
+    Article selectLastByPubDate(Article currentArticle);
 
-    List<Article> selectLastByScanNum(Article currentArticle);
+    Article selectLastByScanNum(Article currentArticle);
 
-    List<Article> selectNextByPubDate(Article currentArticle);
+    Article selectNextByPubDate(Article currentArticle);
 
-    List<Article> selectNextByScanNum(Article currentArticle);
+    Article selectNextByScanNum(Article currentArticle);
 
     void increaseLoveNum(Integer articleId);
 

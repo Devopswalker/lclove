@@ -645,13 +645,13 @@ $(function(){
 
             if (data.lastArticle != null){
                 var lastUrl = lclove.util.basePath + "detail.xhtml?sortType="+lclove.params.sortType+"&aid=" + data.lastArticle.id +"&navtype="+lclove.params.navtype;
-                sbHtml.append("  <div class='head_left'><a target='_blank' href='"+lastUrl+"'>上一篇："+data.lastArticle.title+"</a></div>");
+                sbHtml.append("  <div class='head_left' title='"+data.lastArticle.title+"'><a target='_blank' href='"+lastUrl+"'>上一篇："+data.lastArticle.title+"</a></div>");
             }else{
                 //sbHtml.append("  <div class='head_left'>上一篇："+data.lastArticle.title+"</div>");
             }
             if (data.nextArticle != null){
                 var nextUrl = lclove.util.basePath + "detail.xhtml?sortType="+lclove.params.sortType+"&aid=" + data.nextArticle.id +"&navtype="+lclove.params.navtype;
-                sbHtml.append("  <div class='head_right'><a target='_blank' href='"+nextUrl+"'>下一篇："+data.nextArticle.title+"</a></div>");
+                sbHtml.append("  <div class='head_right' title='"+data.nextArticle.title+"'><a target='_blank' href='"+nextUrl+"'>下一篇："+data.nextArticle.title+"</a></div>");
             }else{
                 //sbHtml.append("  <div class='head_right'>下一篇："+data.nextArticle.title+"</div>");
             }

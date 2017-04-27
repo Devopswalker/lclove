@@ -104,7 +104,7 @@
     <if test="articleType != null">
       AND ARTICLE_TYPE = #{articleType,jdbcType=INTEGER}
     </if>
-    ORDER BY PUB_DATE DESC
+    ORDER BY PUB_DATE ASC LIMIT 1,1
   </select>
   <select id="selectLastByScanNum" resultMap="BaseResultMap" parameterType="com.lcpa.lclove.model.Article">
     select
@@ -113,7 +113,7 @@
     <if test="articleType != null">
       AND ARTICLE_TYPE = #{articleType,jdbcType=INTEGER}
     </if>
-    ORDER BY SCAN_NUM DESC
+    ORDER BY SCAN_NUM ASC LIMIT 1,1
   </select>
   <select id="selectNextByPubDate" resultMap="BaseResultMap" parameterType="com.lcpa.lclove.model.Article">
     select
@@ -122,7 +122,7 @@
     <if test="articleType != null">
       AND ARTICLE_TYPE = #{articleType,jdbcType=INTEGER}
     </if>
-    ORDER BY PUB_DATE DESC
+    ORDER BY PUB_DATE DESC LIMIT 1,1
   </select>
   <select id="selectNextByScanNum" resultMap="BaseResultMap" parameterType="com.lcpa.lclove.model.Article">
     select
@@ -131,7 +131,7 @@
     <if test="articleType != null">
       AND ARTICLE_TYPE = #{articleType,jdbcType=INTEGER}
     </if>
-    ORDER BY SCAN_NUM DESC
+    ORDER BY SCAN_NUM DESC LIMIT 1,1
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from article
