@@ -1179,9 +1179,9 @@ $(function(){
                         sbHtml.append("  <div class='result_content'>" + subItem.content + "</div>");
     	                sbHtml.append("  <div class='progress'>");
     	                if(subItem.score != null && subItem.score != ""){
-    	                	sbHtml.append("    <div class='progress-bar' style='width: " + subItem.score + "%;'>" + subItem.score + "%</div>");
+    	                	sbHtml.append("    <div class='progress-bar' style='width: " + subItem.score + "%;' title='"+subItem.score+"%'>" + subItem.score + "%</div>");
     	                }else{
-    	                	sbHtml.append("    <div class='progress-bar' style='width: 0%;'></div>");
+    	                	sbHtml.append("    <div class='progress-bar' style='width: 0%;' title='"+subItem.score+"%'></div>");
     	                }
     	                sbHtml.append("  </div>");
     	                sbHtml.append("</div>");
