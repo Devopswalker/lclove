@@ -308,14 +308,22 @@ public class SurveyService {
     public Survey getSurveyResult(Integer id){
         Survey survey = surveyMapper.selectByPrimaryKey(id);
         Integer surveyAnswerTotalNum = surveyAnswerMapper.selectCountBySurveyID(id);
+        survey.setTotalAnswerNum(surveyAnswerTotalNum);
         List<Question> questions = questionMapper.selectBySurveyId(id);
 
         for (Question question : questions){
             List<QuestionOption> options = questionOptionMapper.selectOptionByQuestionId(question.getId());
 
             for (QuestionOption option : options){
+                if (surveyAnswerTotalNum == 0){
+                    option.setScore("0");
+                    continue;
+                }
                 Integer selectedNum = surveyAnswerDetailMapper.selectCountByOptionId(option.getId());
-
+                if (selectedNum == 0){
+                    option.setScore("0");
+                    continue;
+                }
                 NumberFormat numberFormat = NumberFormat.getInstance();
                 numberFormat.setMaximumFractionDigits(2);
                 String percentScore = numberFormat.format((float)selectedNum/(float)surveyAnswerTotalNum*100);

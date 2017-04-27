@@ -15,6 +15,15 @@
 		<link rel="stylesheet" type="text/css" href="${staticPath}css/navigation.css" />
 		<script src="${staticPath}js/jquery.js"></script>
 		<script src="${staticPath}js/lclove-util.js"></script>
+        <script>
+            var _hmt = _hmt || [];
+            (function() {
+                var hm = document.createElement("script");
+                hm.src = "https://hm.baidu.com/hm.js?f71d8403d067c86d7d439408ea8a1950";
+                var s = document.getElementsByTagName("script")[0];
+                s.parentNode.insertBefore(hm, s);
+            })();
+        </script>
 	</head>
 	
 	<body>
