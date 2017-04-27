@@ -661,7 +661,7 @@ $(function(){
             sbHtml.append("  <div class='row_1'>");
             sbHtml.append("  	<div class='row_1_left'>");
             sbHtml.append("  		<img src='"+lclove.util.imgPath+"images/text_head_icon.png'/>");
-            sbHtml.append("  	<div>"+data.detail.title+"</div></div>");
+            sbHtml.append("  	<div title='"+data.detail.title+"'>"+data.detail.title+"</div></div><br>");
             sbHtml.append("  	<div class='row_1_right'>"+data.detail.topic+"</div>");
             sbHtml.append("  </div>");
             sbHtml.append("  <div class='row_2'>"+data.detail.pubDate+" | 小编："+data.detail.editor+"</div>");
