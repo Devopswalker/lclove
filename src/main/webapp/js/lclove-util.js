@@ -575,7 +575,7 @@ $(function(){
             	var scrollT = $(window).scrollTop(); //滚动条top 
             	var pageH = $(document.body).height();
             	var scrollUrl = lclove.util.basePath + "ajax/getArticleList.xhtml?navtype="+lclove.params.navtype + "&keyword=" + lclove.params.keyword;
-                if (scrollT + winH > ($(".loadMore").offset().top + 100) && $(".loadMore").css("display") == "block" && ($(".loadMore").attr("cnum") < ($(".loadMore").attr("tnum")))) {
+                if (scrollT + winH > ($(".loadMore").offset().top + 100) && $(".loadMore").css("display") == "block" && (parseInt($(".loadMore").attr("cnum")) < (parseInt($(".loadMore").attr("tnum"))))) {
 					$(".loadMore").css("display","none");
 					scrollUrl += "&pageNo=" + (parseInt($(".loadMore").attr("cnum")) + 1);
                 	$.getData(scrollUrl, null, true, "POST", "json", true, appendList);
@@ -979,7 +979,7 @@ $(function(){
             	var scrollT = $(window).scrollTop(); //滚动条top 
             	var pageH = $(document.body).height();
             	var scrollUrl = lclove.util.basePath + "ajax/getSurveyList.xhtml";
-                if (scrollT + winH > ($(".loadMore").offset().top + 100) && $(".loadMore").css("display") == "block" && ($(".loadMore").attr("cnum") < ($(".loadMore").attr("tnum")))) {
+                if (scrollT + winH > ($(".loadMore").offset().top + 100) && $(".loadMore").css("display") == "block" && (parseInt($(".loadMore").attr("cnum")) < (parseInt($(".loadMore").attr("tnum"))))) {
 					$(".loadMore").css("display","none");
 					scrollUrl += "&pageNo=" + (parseInt($(".loadMore").attr("cnum")) + 1);
                 	$.getData(scrollUrl, null, true, "POST", "json", true, appendList);
