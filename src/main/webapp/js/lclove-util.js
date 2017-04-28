@@ -575,8 +575,8 @@ $(function(){
             	var scrollT = $(window).scrollTop(); //滚动条top 
             	var pageH = $(document.body).height();
             	var scrollUrl = lclove.util.basePath + "ajax/getArticleList.xhtml?navtype="+lclove.params.navtype + "&keyword=" + lclove.params.keyword;
-                if (scrollT + winH > ($(".loadMore").offset().top + 100) && $(".loadMore").css("display") == "block" && ($(".loadMore").attr("cnum") < ($(".loadMore").attr("tnum")))) {
-					$(".loadMore").css("display","none");
+            	if (scrollT + winH > ($(".loadMore").offset().top + 100) && $(".loadMore").css("display") == "block" && ($(".loadMore").attr("cnum") < ($(".loadMore").attr("tnum")))) {
+					//$(".loadMore").css("display","none");
 					scrollUrl += "&pageNo=" + (parseInt($(".loadMore").attr("cnum")) + 1);
                 	$.getData(scrollUrl, null, true, "POST", "json", true, appendList);
                 }
@@ -611,8 +611,8 @@ $(function(){
         var renderList = function(data){
         	var pageNum = data.pageInfo.currentPage;
             var totalPage = data.pageInfo.pageCount;
-            
-        	fillData(data);
+            console.log(pageNum+"-"+totalPage);
+        	//fillData(data);
         	
             $("<div/>").addClass("loadMore").attr({"cnum": pageNum, "tnum": totalPage}).appendTo($(instance));
             
