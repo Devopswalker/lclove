@@ -124,4 +124,12 @@ public class LcLovePhoneController extends AnnotationController{
         }
         return survey;
     }
+
+    @RequestMapping("/phone/getHomePageBanner")
+    public @ResponseBody Map<String, Object> getRecommendList(){
+        List<ImageRecommend> recommendList = recommendService.getRecommendImagesByPosition(1, 5);
+        Map<String, Object> resultMap = new HashMap<String, Object>();
+        resultMap.put("recommendList", recommendList);
+        return resultMap;
+    }
 }

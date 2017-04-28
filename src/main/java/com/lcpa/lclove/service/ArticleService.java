@@ -97,44 +97,42 @@ public class ArticleService{
     }
 
     public Article getLastArticle(Article article, Integer sortType){
-        List<Article> articles;
-        Article result = null;
+        Article result;
         if (sortType == 1){//sort by pub_date
-            articles = articleMapper.selectLastByPubDate(article);
+            result = articleMapper.selectLastByPubDate(article);
         }else if (sortType == 2){//sort by scan_num
-            articles = articleMapper.selectLastByScanNum(article);
+            result = articleMapper.selectLastByScanNum(article);
         }else{
-            articles = new ArrayList<>();
+            result = new Article();
         }
-        if (!articles.isEmpty()){
-            for (int i = 0; i < articles.size(); i ++){
-                Article temp = articles.get(i);
-                if (temp.getId() == article.getId() && i > 0){
-                    result = articles.get(i-1);
-                }
-            }
-        }
+//        if (!articles.isEmpty()){
+//            for (int i = 0; i < articles.size(); i ++){
+//                Article temp = articles.get(i);
+//                if (temp.getId() == article.getId() && i > 0){
+//                    result = articles.get(i-1);
+//                }
+//            }
+//        }
         return result;
 
     }
     public Article getNextArticle(Article article, Integer sortType){
-        List<Article> articles;
-        Article result = null;
+        Article result;
         if (sortType == 1){//sort by pub_date
-            articles = articleMapper.selectNextByPubDate(article);
+            result = articleMapper.selectNextByPubDate(article);
         }else if (sortType == 2){//sort by scan_num
-            articles = articleMapper.selectNextByScanNum(article);
+            result = articleMapper.selectNextByScanNum(article);
         }else{
-            articles = new ArrayList<>();
+            result = new Article();
         }
-        if (!articles.isEmpty()){
-            for (int i = 0; i < articles.size(); i ++){
-                Article temp = articles.get(i);
-                if (temp.getId() == article.getId() && i < articles.size()-1){
-                    result = articles.get(i+1);
-                }
-            }
-        }
+//        if (!articles.isEmpty()){
+//            for (int i = 0; i < articles.size(); i ++){
+//                Article temp = articles.get(i);
+//                if (temp.getId() == article.getId() && i < articles.size()-1){
+//                    result = articles.get(i+1);
+//                }
+//            }
+//        }
         return result;
     }
 

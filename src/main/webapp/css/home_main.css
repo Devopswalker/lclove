@@ -725,7 +725,8 @@ li{
 }
 
 .row_1_left div{
-	width: 400px;
+	width: 540px;
+	height: 25px;
 	float:left;
 	margin-left:10px;
 	font-size:20px;
@@ -738,6 +739,7 @@ li{
 
 .row_1_right{
 	float:right;
+	padding-top: 5px;
 	color:#FF0000;
 }
 

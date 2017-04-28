@@ -259,9 +259,6 @@ $.extend({
             $(".head_left_1").on("click", function(){
             	 window.location.href = lclove.util.basePath + "index.xhtml";
             });
-            //$(".header_right").on("click", function(){
-            //	 window.open(lclove.util.basePath + "brand.xhtml");
-            //});
         };
 
         return init();
@@ -542,30 +539,8 @@ $(function(){
         };
         
         var defaultTemplate = function(){
-            //var sbHtml = new StringBuilder();
-            //sbHtml.append("<div class='content_item'>");
-            //sbHtml.append("<div class='content_item_pic'>");
-            //sbHtml.append("  <a href='"+ lclove.util.basePath + "detail.xhtml?navtype="+lclove.params.navtype+"&sortType=1&aid=1'><img width='148' height='148' class='img-border radius-small' src='" + lclove.util.imgPath + "images/content_pic.jpg'/></a>");
-            //sbHtml.append("</div>");
-            //sbHtml.append("<div class='content_item_text'>");
-            //sbHtml.append("  <div class='content_item_text_head'>");
-            //sbHtml.append("    <a href='"+ lclove.util.basePath + "detail.xhtml?navtype="+lclove.params.navtype+"&sortType=1&aid=1'><img src='" + lclove.util.imgPath + "images/text_head_icon.png'/><div>LC品爱员工美丽小秘密</div></a>");
-            //sbHtml.append("  </div>");
-            //sbHtml.append("  <div class='mini_blank'></div>");
-            //sbHtml.append("  <div class='separate'></div>");
-            //sbHtml.append("  <div class='content_item_text_middle'>作为为大家解决身体&烦恼的LC品爱的员工，来看 看他们都有什么变美秘密呢？</div>");
-            //sbHtml.append("  <div class='content_item_text_foot'>");
-            //sbHtml.append("    <div class='date'>2017-01-04</div>");
-            //sbHtml.append("    <div class='comment'><img src='" + lclove.util.imgPath + "images/comment.png'/><div class='sum'>666</div></div>");
-            //sbHtml.append("    <div class='love'><img src='" + lclove.util.imgPath + "images/love.png'/><div class='sum'>888</div></div>");
-            //sbHtml.append("    <div class='type'> #新年快乐# </div>");
-            //sbHtml.append("  </div>");
-            //sbHtml.append("</div>");
-            //sbHtml.append("</div>");
             var sbHtml = new StringBuilder();
-            //sbHtml.append('<div class="no_data_container"><p>沒有查找結果，請重新輸入搜索條件</p></div>');
             sbHtml.append('<img class="no_data_img" src="/images/NO_DATA.jpg">');
-
             return $(sbHtml.toString());
         };
         
@@ -575,8 +550,9 @@ $(function(){
             	var scrollT = $(window).scrollTop(); //滚动条top 
             	var pageH = $(document.body).height();
             	var scrollUrl = lclove.util.basePath + "ajax/getArticleList.xhtml?navtype="+lclove.params.navtype + "&keyword=" + lclove.params.keyword;
-            	if (scrollT + winH > ($(".loadMore").offset().top + 100) && $(".loadMore").css("display") == "block" && ($(".loadMore").attr("cnum") < ($(".loadMore").attr("tnum")))) {
-					//$(".loadMore").css("display","none");
+                //TODO:复杂度优化
+            	if (scrollT + winH > ($(".loadMore").offset().top + 100) && $(".loadMore").css("display") == "block" && (parseInt($(".loadMore").attr("cnum")) < (parseInt($(".loadMore").attr("tnum"))))) {
+					$(".loadMore").css("display","none");
 					scrollUrl += "&pageNo=" + (parseInt($(".loadMore").attr("cnum")) + 1);
                 	$.getData(scrollUrl, null, true, "POST", "json", true, appendList);
                 }
@@ -591,10 +567,7 @@ $(function(){
             		$(".content_list").append(itemTemplate(item));
             	});
         	}else{
-        		//for (var i=0; i<4 ; i++)
-        		//{
         			$(".content_list").append(defaultTemplate());
-        		//}
         	}
         };
         
@@ -611,14 +584,11 @@ $(function(){
         var renderList = function(data){
         	var pageNum = data.pageInfo.currentPage;
             var totalPage = data.pageInfo.pageCount;
-            console.log(pageNum+"-"+totalPage);
-        	//fillData(data);
-        	
+        	fillData(data);
             $("<div/>").addClass("loadMore").attr({"cnum": pageNum, "tnum": totalPage}).appendTo($(instance));
-            
             if(pageNum == totalPage){
             	$(".loadMore").css("display", "none");
-            }         
+            }
             scrollEvent();
         };
 
@@ -645,13 +615,13 @@ $(function(){
 
             if (data.lastArticle != null){
                 var lastUrl = lclove.util.basePath + "detail.xhtml?sortType="+lclove.params.sortType+"&aid=" + data.lastArticle.id +"&navtype="+lclove.params.navtype;
-                sbHtml.append("  <div class='head_left'><a target='_blank' href='"+lastUrl+"'>上一篇："+data.lastArticle.title+"</a></div>");
+                sbHtml.append("  <div class='head_left' title='"+data.lastArticle.title+"'><a target='_blank' href='"+lastUrl+"'>上一篇："+data.lastArticle.title+"</a></div>");
             }else{
                 //sbHtml.append("  <div class='head_left'>上一篇："+data.lastArticle.title+"</div>");
             }
             if (data.nextArticle != null){
                 var nextUrl = lclove.util.basePath + "detail.xhtml?sortType="+lclove.params.sortType+"&aid=" + data.nextArticle.id +"&navtype="+lclove.params.navtype;
-                sbHtml.append("  <div class='head_right'><a target='_blank' href='"+nextUrl+"'>下一篇："+data.nextArticle.title+"</a></div>");
+                sbHtml.append("  <div class='head_right' title='"+data.nextArticle.title+"'><a target='_blank' href='"+nextUrl+"'>下一篇："+data.nextArticle.title+"</a></div>");
             }else{
                 //sbHtml.append("  <div class='head_right'>下一篇："+data.nextArticle.title+"</div>");
             }
@@ -661,7 +631,7 @@ $(function(){
             sbHtml.append("  <div class='row_1'>");
             sbHtml.append("  	<div class='row_1_left'>");
             sbHtml.append("  		<img src='"+lclove.util.imgPath+"images/text_head_icon.png'/>");
-            sbHtml.append("  	<div>"+data.detail.title+"</div></div>");
+            sbHtml.append("  	<div title='"+data.detail.title+"'>"+data.detail.title+"</div></div><br>");
             sbHtml.append("  	<div class='row_1_right'>"+data.detail.topic+"</div>");
             sbHtml.append("  </div>");
             sbHtml.append("  <div class='row_2'>"+data.detail.pubDate+" | 小编："+data.detail.editor+"</div>");
@@ -979,7 +949,7 @@ $(function(){
             	var scrollT = $(window).scrollTop(); //滚动条top 
             	var pageH = $(document.body).height();
             	var scrollUrl = lclove.util.basePath + "ajax/getSurveyList.xhtml";
-                if (scrollT + winH > ($(".loadMore").offset().top + 100) && $(".loadMore").css("display") == "block" && ($(".loadMore").attr("cnum") < ($(".loadMore").attr("tnum")))) {
+                if (scrollT + winH > ($(".loadMore").offset().top + 100) && $(".loadMore").css("display") == "block" && (parseInt($(".loadMore").attr("cnum")) < (parseInt($(".loadMore").attr("tnum"))))) {
 					$(".loadMore").css("display","none");
 					scrollUrl += "&pageNo=" + (parseInt($(".loadMore").attr("cnum")) + 1);
                 	$.getData(scrollUrl, null, true, "POST", "json", true, appendList);
@@ -1179,9 +1149,9 @@ $(function(){
                         sbHtml.append("  <div class='result_content'>" + subItem.content + "</div>");
     	                sbHtml.append("  <div class='progress'>");
     	                if(subItem.score != null && subItem.score != ""){
-    	                	sbHtml.append("    <div class='progress-bar' style='width: " + subItem.score + "%;'>" + subItem.score + "%</div>");
+    	                	sbHtml.append("    <div class='progress-bar' style='width: " + subItem.score + "%;' title='"+subItem.score+"%'>" + subItem.score + "%</div>");
     	                }else{
-    	                	sbHtml.append("    <div class='progress-bar' style='width: 0%;'></div>");
+    	                	sbHtml.append("    <div class='progress-bar' style='width: 0%;' title='"+subItem.score+"%'></div>");
     	                }
     	                sbHtml.append("  </div>");
     	                sbHtml.append("</div>");
