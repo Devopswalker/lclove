@@ -86,12 +86,54 @@ public class LcLovePhoneController extends AnnotationController{
         return article;
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     */
+    @RequestMapping("/phone/getLastArticle")
+    public @ResponseBody Article getLastArticleDetail(Integer id){
+        if(id == null){
+            return null;
+        }
+        Article queryArticle = articleService.updateGetArticleDetailsById(id);
+        if(queryArticle == null){
+            return null;
+        }
+        Article lastArticle = articleService.getLastArticle(queryArticle, 1);
+        return lastArticle;
+    }
+
+    /**
+     *
+     * @param id
+     * @return
+     */
+    @RequestMapping("/phone/getNextArticle")
+    public @ResponseBody Article getNextArticleDetail(Integer id){
+        if(id == null){
+            return null;
+        }
+        Article queryArticle = articleService.updateGetArticleDetailsById(id);
+        if(queryArticle == null){
+            return null;
+        }
+        Article nextArticle = articleService.getNextArticle(queryArticle, 1);
+        return nextArticle;
+    }
+
     @RequestMapping("/phone/getComments")
     public @ResponseBody Map<String, Object> getComments(Integer id){
         List<Comment> commentList = commentService.getCommentList(1, 100, id);
         Map<String, Object> resultMap = new HashMap<String, Object>();
         resultMap.put("comments", commentList);
         return resultMap;
+    }
+
+    @RequestMapping("/phone/saveComment")
+    public String saveComments(Comment comment){
+        commentService.saveComment(comment);
+        return "success";
     }
 
     /**
@@ -107,6 +149,7 @@ public class LcLovePhoneController extends AnnotationController{
         }
         Integer rowsPerPage = 5;
         List<Research> surveys = surveyService.getResearchList(pageNo, rowsPerPage, keyword);
+
         PagingJsonVo page = new PagingJsonVo(surveys.size(), rowsPerPage, pageNo);
         Map<String, Object> resultMap = new HashMap<String, Object>();
         resultMap.put("surveys", surveys);
@@ -126,7 +169,7 @@ public class LcLovePhoneController extends AnnotationController{
     }
 
     @RequestMapping("/phone/getHomePageBanner")
-    public @ResponseBody Map<String, Object> getRecommendList(){
+    public @ResponseBody Map<String, Object> getHomePageBanner(){
         List<ImageRecommend> recommendList = recommendService.getRecommendImagesByPosition(1, 5);
         Map<String, Object> resultMap = new HashMap<String, Object>();
         resultMap.put("recommendList", recommendList);
