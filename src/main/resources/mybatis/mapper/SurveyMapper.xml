@@ -74,14 +74,14 @@
       NULL AS S_THUMBNAIL
     from article WHERE ARTICLE_TYPE = 5
     <if test="queryPara != null and queryPara.keywords != null">
-      , AND TITLE LIKE CONCAT(CONCAT("%",#{queryPara.keywords}),"%")
+       AND TITLE LIKE CONCAT(CONCAT("%",#{queryPara.keywords}),"%")
     </if>
     Union
     Select
-      CONCAT("2_",ID) AS ID,
-      2 AS TYPE,
-      PUB_DATE AS PUB_DATE,
-      NULL AS A_ID ,
+    CONCAT("2_",ID) AS ID,
+    2 AS TYPE,
+    PUB_DATE AS PUB_DATE,
+    NULL AS A_ID ,
       NULL AS A_TITLE,
       NULL AS A_LIKE_NUM,
       NULL as A_SCAN_NUM,
@@ -101,7 +101,65 @@
       THUMBNAIL AS S_THUMBNAIL
     from  survey WHERE STATE = 1
     <if test="queryPara != null and queryPara.keywords != null">
-      , AND TITLE LIKE CONCAT(CONCAT("%",#{queryPara.keywords}),"%")
+       AND TITLE LIKE CONCAT(CONCAT("%",#{queryPara.keywords}),"%")
+    </if>
+    ORDER BY PUB_DATE DESC
+    <include refid="Paging"/>
+  </select>
+
+  <select id="selectAll" parameterType="java.lang.Integer" resultMap="ResearchList">
+    Select
+    CONCAT("1_",ID) AS ID,
+    1 AS TYPE,
+    PUB_DATE AS PUB_DATE,
+    ID AS A_ID,
+    TITLE AS A_TITLE,
+    LIKE_NUM AS A_LIKE_NUM,
+    SCAN_NUM as A_SCAN_NUM,
+    ARTICLE_TYPE as A_ARTICLE_TYPE,
+    DESCRIPTION AS A_DESCRIPTION,
+    TOPIC as A_TOPIC,
+    EDITOR AS A_EDITOR,
+    STATE as A_STATE,
+    THUMBNAIL AS A_THUMBNAIL,
+    IS_LOOK_BACK AS A_IS_LOOK_BACK,
+    NULL AS S_ID,
+    NULL AS S_TITLE,
+    NULL AS S_HEADER_IMG,
+    NULL AS S_DESCRIPTION,
+    NULL AS S_STATE,
+    NULL AS S_TOPIC,
+    NULL AS S_THUMBNAIL
+    from article WHERE 1=1
+    <if test="queryPara != null and queryPara.keywords != null">
+      AND TITLE LIKE CONCAT(CONCAT("%",#{queryPara.keywords}),"%")
+    </if>
+    Union
+    Select
+    CONCAT("2_",ID) AS ID,
+    2 AS TYPE,
+    PUB_DATE AS PUB_DATE,
+    NULL AS A_ID ,
+    NULL AS A_TITLE,
+    NULL AS A_LIKE_NUM,
+    NULL as A_SCAN_NUM,
+    NULL as A_ARTICLE_TYPE,
+    NULL AS A_DESCRIPTION,
+    NULL as A_TOPIC,
+    NULL AS A_EDITOR,
+    NULL as A_STATE,
+    NULL AS A_THUMBNAIL,
+    NULL AS A_IS_LOOK_BACK,
+    ID AS S_ID,
+    TITLE AS S_TITLE,
+    HEADER_IMG AS S_HEADER_IMG,
+    DESCRIPTION AS S_DESCRIPTION,
+    STATE AS S_STATE,
+    TOPIC AS S_TOPIC,
+    THUMBNAIL AS S_THUMBNAIL
+    from  survey WHERE STATE = 1
+    <if test="queryPara != null and queryPara.keywords != null">
+      AND TITLE LIKE CONCAT(CONCAT("%",#{queryPara.keywords}),"%")
     </if>
     ORDER BY PUB_DATE DESC
     <include refid="Paging"/>

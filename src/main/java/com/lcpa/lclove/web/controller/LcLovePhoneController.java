@@ -6,13 +6,16 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import com.lcpa.lclove.model.*;
 import com.lcpa.lclove.vo.Paging;
 import org.apache.commons.lang.StringUtils;
+import org.omg.CORBA.MARSHAL;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -25,6 +28,7 @@ import com.lcpa.lclove.util.JsonUtils;
 import com.lcpa.lclove.util.WebUtils;
 import com.lcpa.lclove.vo.PagingJsonVo;
 import com.lcpa.lclove.vo.ResearchOptionsVo;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class LcLovePhoneController extends AnnotationController{
@@ -68,7 +72,7 @@ public class LcLovePhoneController extends AnnotationController{
      * @return
      */
     @RequestMapping("/phone/getArticle")
-    public @ResponseBody Article getArticleDetail(Integer id){
+    public @ResponseBody Map<String, Object> getArticleDetail(Integer id, Integer navtype){
         if(id == null){
             return null;
         }
@@ -79,11 +83,15 @@ public class LcLovePhoneController extends AnnotationController{
         Map<String, Object> resultMap = new HashMap<String, Object>();
         Article queryArticle = new Article();
         queryArticle.setId(article.getId());
-//        queryArticle.setArticleType(navtype);
+        queryArticle.setArticleType(navtype);
         queryArticle.setPubDate(article.getPubDate());
         queryArticle.setScanNum(article.getScanNum());
-        resultMap.put("detail", article);
-        return article;
+        Article lastArticle = articleService.getLastArticle(queryArticle, 1);
+        Article nextArticle = articleService.getNextArticle(queryArticle, 1);
+        resultMap.put("article", article);
+        resultMap.put("lastArticle", lastArticle);
+        resultMap.put("nextArticle", nextArticle);
+        return resultMap;
     }
 
     /**
@@ -131,9 +139,13 @@ public class LcLovePhoneController extends AnnotationController{
     }
 
     @RequestMapping("/phone/saveComment")
-    public String saveComments(Comment comment){
-        commentService.saveComment(comment);
-        return "success";
+    public @ResponseBody Map<String, Object> saveComments(Comment comment){
+        if (comment != null){
+            commentService.saveComment(comment);
+        }
+        Map<String, Object> resultMap = new HashMap<String, Object>();
+        resultMap.put("success", 1);
+        return resultMap;
     }
 
     /**
@@ -144,7 +156,7 @@ public class LcLovePhoneController extends AnnotationController{
      */
     @RequestMapping("/phone/getSurveyList")
     public @ResponseBody Map<String, Object> getSurveyList(Integer pageNo, String keyword){
-        if(pageNo == null){
+         if(pageNo == null){
             pageNo = 1;
         }
         Integer rowsPerPage = 5;
@@ -157,15 +169,49 @@ public class LcLovePhoneController extends AnnotationController{
         return resultMap;
     }
 
+    @RequestMapping("/phone/getAllList")
+    public @ResponseBody Map<String, Object> getAllList(Integer pageNo, String keyword){
+        if(pageNo == null){
+            pageNo = 1;
+        }
+        Integer rowsPerPage = 5;
+        List<Research> surveys = surveyService.getAllList(pageNo, rowsPerPage, keyword);
+        Integer totalSize = articleService.getTotalArticleSize(pageNo, rowsPerPage, navtype, keyword);
+        PagingJsonVo page = new PagingJsonVo(surveys.size(), rowsPerPage, pageNo);
+        Map<String, Object> resultMap = new HashMap<String, Object>();
+        resultMap.put("surveys", surveys);
+        resultMap.put("pageInfo", page);
+        return resultMap;
+    }
+
+    @RequestMapping("/phone/goToResearchPage")
+    public String goToResearchPage(String keyword, HttpServletRequest request, ModelMap model){
+        HttpSession session = request.getSession();
+        session.setAttribute("keyword", keyword);
+        model.addAttribute("keyword", keyword);
+
+//        return new ModelAndView("redirect:/mobile/ResearchList.asp","keyword",keyword);
+       return "redirect:/mobile/ResearchList.asp";
+    }
+
     @RequestMapping("/phone/getResearchDetail")
-    public @ResponseBody Survey getResearchDetail(Integer id){
+    public @ResponseBody Survey getResearchDetail(Integer id) {
         Survey survey = null;
-        if(id != null){
+        if (id != null) {
             survey = surveyService.getSurveyResult(id);
-        }else{
+        } else {
             survey = surveyService.getSurveyDetail();
         }
         return survey;
+    }
+
+    @RequestMapping("/phone/saveResearch")
+    public @ResponseBody Map<String, Object> saveResearch(@RequestBody ResearchOptionsVo options, HttpServletRequest request){
+        String clientIp =  WebUtils.getRemoteIp(request);
+        surveyService.saveSurveyAnswer(options.getSurveyId(), clientIp, options.getOptions());
+        Map<String, Object> resultMap = new HashMap<String, Object>();
+        resultMap.put("success", 1);
+        return resultMap;
     }
 
     @RequestMapping("/phone/getHomePageBanner")
@@ -173,6 +219,16 @@ public class LcLovePhoneController extends AnnotationController{
         List<ImageRecommend> recommendList = recommendService.getRecommendImagesByPosition(1, 5);
         Map<String, Object> resultMap = new HashMap<String, Object>();
         resultMap.put("recommendList", recommendList);
+        return resultMap;
+    }
+
+
+    @RequestMapping("/phone/getTopRankArticleList")
+    public @ResponseBody Map<String, Object> getTopRankArticleList(){
+        Integer size = 6;
+        List<Article> articleList = articleService.getTopRankArticlesByType(null, size);
+        Map<String, Object> resultMap = new HashMap<String, Object>();
+        resultMap.put("articles", articleList);
         return resultMap;
     }
 }

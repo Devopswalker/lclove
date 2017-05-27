@@ -34,4 +34,7 @@ public interface SurveyMapper {
     List<Survey> selectAllSurveyOrderByDate(QueryParameter queryParameter);
 
     List<Research> selectResearch(QueryParameter queryParameter);
+
+    List<Research> selectAll(QueryParameter queryParameter);
+
 }
