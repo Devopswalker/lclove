@@ -37,4 +37,7 @@ public interface SurveyMapper {
 
     List<Research> selectAll(QueryParameter queryParameter);
 
+    Integer selectTotalResearchSize(QueryParameter queryParameter);
+
+    Integer getTotalAllSize(QueryParameter queryParameter);
 }

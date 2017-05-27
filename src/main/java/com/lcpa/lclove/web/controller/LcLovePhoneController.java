@@ -161,8 +161,8 @@ public class LcLovePhoneController extends AnnotationController{
         }
         Integer rowsPerPage = 5;
         List<Research> surveys = surveyService.getResearchList(pageNo, rowsPerPage, keyword);
-
-        PagingJsonVo page = new PagingJsonVo(surveys.size(), rowsPerPage, pageNo);
+        Integer totalSize = surveyService.getTotalResearchSize(keyword);
+        PagingJsonVo page = new PagingJsonVo(totalSize, rowsPerPage, pageNo);
         Map<String, Object> resultMap = new HashMap<String, Object>();
         resultMap.put("surveys", surveys);
         resultMap.put("pageInfo", page);
@@ -176,8 +176,8 @@ public class LcLovePhoneController extends AnnotationController{
         }
         Integer rowsPerPage = 5;
         List<Research> surveys = surveyService.getAllList(pageNo, rowsPerPage, keyword);
-        Integer totalSize = articleService.getTotalArticleSize(pageNo, rowsPerPage, navtype, keyword);
-        PagingJsonVo page = new PagingJsonVo(surveys.size(), rowsPerPage, pageNo);
+        Integer totalSize = surveyService.getTotalAllSize(keyword);
+        PagingJsonVo page = new PagingJsonVo(totalSize, rowsPerPage, pageNo);
         Map<String, Object> resultMap = new HashMap<String, Object>();
         resultMap.put("surveys", surveys);
         resultMap.put("pageInfo", page);

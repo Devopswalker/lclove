@@ -107,6 +107,41 @@
     <include refid="Paging"/>
   </select>
 
+
+  <select id="selectTotalResearchSize"  resultType="Integer">
+    Select COUNT(ID) FROM (Select
+    CONCAT("1_",ID) AS ID
+    from article WHERE ARTICLE_TYPE = 5
+    <if test="queryPara != null and queryPara.keywords != null">
+      AND TITLE LIKE CONCAT(CONCAT("%",#{queryPara.keywords}),"%")
+    </if>
+    Union
+    Select
+    CONCAT("2_",ID) AS ID
+    from survey WHERE STATE = 1
+    <if test="queryPara != null and queryPara.keywords != null">
+      AND TITLE LIKE CONCAT(CONCAT("%",#{queryPara.keywords}),"%")
+    </if>
+    ) as r
+  </select>
+
+  <select id="getTotalAllSize"  resultType="Integer">
+    Select COUNT(ID) FROM (Select
+    CONCAT("1_",ID) AS ID
+    from article WHERE 1=1
+    <if test="queryPara != null and queryPara.keywords != null">
+      AND TITLE LIKE CONCAT(CONCAT("%",#{queryPara.keywords}),"%")
+    </if>
+    Union
+    Select
+    CONCAT("2_",ID) AS ID
+    from survey WHERE STATE = 1
+    <if test="queryPara != null and queryPara.keywords != null">
+      AND TITLE LIKE CONCAT(CONCAT("%",#{queryPara.keywords}),"%")
+    </if>
+    ) as r
+  </select>
+
   <select id="selectAll" parameterType="java.lang.Integer" resultMap="ResearchList">
     Select
     CONCAT("1_",ID) AS ID,

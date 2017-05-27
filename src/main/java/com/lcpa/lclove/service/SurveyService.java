@@ -226,6 +226,16 @@ public class SurveyService {
         QueryParameter queryParameter = new QueryParameter(paging, map);
         return surveyMapper.selectResearch(queryParameter);
     }
+    public Integer getTotalResearchSize(String keywords){
+        Map map = new HashMap<>();
+        if (keywords != null && !keywords.equals("")){
+            map.put("keywords", keywords);
+        }
+        QueryParameter queryParameter = new QueryParameter(null,map);
+        Integer totalSize = surveyMapper.selectTotalResearchSize(queryParameter);
+
+        return totalSize;
+    }
 
     public List<Research>  getAllList(Integer pageNo, Integer pageSize, String keywords){
         Map map = new HashMap<>();
@@ -235,6 +245,17 @@ public class SurveyService {
         Paging paging = new Paging(pageNo, pageSize);
         QueryParameter queryParameter = new QueryParameter(paging, map);
         return surveyMapper.selectAll(queryParameter);
+    }
+
+    public Integer getTotalAllSize(String keywords){
+        Map map = new HashMap<>();
+        if (keywords != null && !keywords.equals("")){
+            map.put("keywords", keywords);
+        }
+        QueryParameter queryParameter = new QueryParameter(null,map);
+        Integer totalSize = surveyMapper.getTotalAllSize(queryParameter);
+
+        return totalSize;
     }
 
     /**
